@@ -1,0 +1,28 @@
+set nocompatible
+set autoindent
+set ruler
+set number
+set laststatus=2
+set nowrap
+
+if has('mouse')
+  set mouse=a
+endif
+
+
+call plug#begin('~/.vim/plugged')
+Plug 'https://github.com/jdkanani/vim-material-theme'
+Plug 'chriskempson/base16-vim'
+Plug 'scrooloose/nerdtree'
+call plug#end()
+
+if &t_Co > 2 || has("gui_running")
+  syntax enable
+  set hlsearch
+  set background=dark
+  if has("gui_running")
+    colorscheme material-theme
+  end
+endif
+
+

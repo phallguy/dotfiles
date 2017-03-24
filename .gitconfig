@@ -1,0 +1,66 @@
+[user]
+  name = Paul Alexander
+  email = palexander@twitter.com
+  signingkey = 218BD2A9
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+  rebase = auto
+  ui = true
+
+[alias]
+  st = status
+  co = checkout
+  br = checkout --no-track -b 
+  m = merge
+  rb = rebase
+  rbc = rebase --continue
+  f = fetch origin
+  boom = !git remote prune origin && git fetch origin && git reset --hard origin && git submodule update --recursive
+  dt = difftool
+  dtc = difftool --cached
+  srb = !git branch -D for_rebase 2> /dev/null || true && git checkout -b for_rebase
+  ca = commit --amend --no-edit
+  lg = log --graph --decorate
+
+[core]
+  autocrlf = false
+  excludesfile = /Users/palexander/.gitignore_global
+
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
+
+[difftool "sourcetree"]
+	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[mergetool "sourcetree"]
+	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustexitcode = true
+[merge]
+  tool = Kaleidoscope
+[difftool]
+  prompt = false
+[mergetool]
+  prompt = false
+[diff]
+  tool = Kaleidoscope
+  renames = true
+[filter "hawser"]
+  clean = git hawser clean %f
+  smudge = git hawser smudge %f
+  required = true
+[http]
+	postBuffer = 524288000
+[commit]
+  gpgsign = true
+[gpg]
+  program = gpg2
