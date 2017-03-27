@@ -65,7 +65,9 @@ alias v='vagrant'
 
 export GPG_TTY=$(tty)
 
-export EDITOR="/usr/local/bin/subl -wn"
+export EDITOR="vi"
+# export EDITOR="/usr/local/bin/subl -wn"
+
 export BUNDLER_EDITOR="/usr/local/bin/subl"
 export RAILS_ERRORS=1
 export NO_TIMEOUT=1
@@ -85,3 +87,6 @@ eval "$(/opt/twitter/bin/jenv init -)"
 
 source /opt/twitter/opt/autoenv/activate.sh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+export BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"

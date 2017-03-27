@@ -35,9 +35,11 @@ if has('mouse')
   set mouse=a
 endif
 
+nnoremap <leader>, :tabe $MYVIMRC<cr>
 
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-rails'
 Plug 'scrooloose/syntastic'    " Syntax error indicators
@@ -49,15 +51,23 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'chriskempson/base16-vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-scripts/Conque-Shell'         " Terminal in VIM
+Plug 'skwp/vim-ruby-conque'    " Spec helpers
 call plug#end()
 
 if &t_Co > 2 || has("gui_running")
   set t_Co=256
   let base16colorspace=256
   set hlsearch
+  "This unsets the "last search pattern" register by hitting return
+  nnoremap <CR> :noh<CR><CR>
   set background=dark
-  colorscheme base16-default-dark
   let g:airline_theme='powerlineish'
+
+  if filereadable(expand("~/.vimrc_background"))
+    source ~/.vimrc_background
+  endif
 endif
 
 filetype plugin indent on
@@ -71,11 +81,10 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
 
   " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  " let g:ctrlp_use_caching = 0
 
   if !exists(":Ag")
     command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    nnoremap \ :Ag<SPACE>
   endif
 endif
 
@@ -96,6 +105,23 @@ augroup TrailingWhitespace
   au BufWritePre * :call <SID>RemoveTrailingWhitespaces()
 augroup END
 
+
+augroup vimrcEx
+  autocmd!
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  " Set syntax highlighting for specific file types
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+augroup END
+
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
@@ -110,15 +136,27 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {"regex": "possibly useless use of a variable in void context"}
 
-" Toggle nerdtree with F10
-map <F10> :NERDTreeToggle<CR>
-" Current file in nerdtree
-map <F9> :NERDTreeFind<CR>
-let g:nerdtree_tabs_open_on_console_startup = 1
+augroup nerdTreeEx
+  autocmd!
+
+  " Toggle nerdtree with F10
+  map <F10> :NERDTreeToggle<CR>
+  " Current file in nerdtree
+  map <F9> :NERDTreeFind<CR>
+
+augroup END
 
 "key to insert mode with paste using F2 key
 map <F2> :set paste<CR>i
 " Leave paste mode on exit
 au InsertLeave * set nopaste
+" Use OSX clipboard
+set clipboard=unnamed
+vmap <C-c> "+y
 
-map <D-/> :TComment<cr>
+" Ctrl+P
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
+
