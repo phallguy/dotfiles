@@ -18,7 +18,7 @@ set nocursorline
 set nocursorcolumn
 set ttyfast
 set lazyredraw
-
+set autowriteall  " Save when switching buffers
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -31,6 +31,11 @@ set expandtab
 set number
 set numberwidth=5
 
+augroup reload_vimrc
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
 if has('mouse')
   set mouse=a
 endif
@@ -42,6 +47,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
 Plug 'scrooloose/syntastic'    " Syntax error indicators
 Plug 'tpope/vim-fugitive'      " Git integration
 Plug 'tpope/vim-surround'      " tags/quotes
@@ -63,7 +69,8 @@ if &t_Co > 2 || has("gui_running")
   "This unsets the "last search pattern" register by hitting return
   nnoremap <CR> :noh<CR><CR>
   set background=dark
-  let g:airline_theme='powerlineish'
+  let g:airline_powerline_fonts = 0
+  let g:airline_theme='lucius'
 
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
@@ -159,4 +166,5 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
+
 
