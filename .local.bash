@@ -68,7 +68,7 @@ export GPG_TTY=$(tty)
 export EDITOR="vi"
 # export EDITOR="/usr/local/bin/subl -wn"
 
-export BUNDLER_EDITOR="/usr/local/bin/subl"
+export BUNDLER_EDITOR="vi"
 export RAILS_ERRORS=1
 export NO_TIMEOUT=1
 export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH

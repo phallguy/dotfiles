@@ -2,8 +2,36 @@ set nocompatible
 set shell=/bin/bash
 runtime macros/matchit.vim
 
+let mapleader = "."
 
-let mapleader = ","
+call plug#begin('~/.vim/plugged')
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+Plug 'scrooloose/syntastic'     " Syntax error indicators
+Plug 'tpope/vim-fugitive'       " Git integration
+Plug 'tpope/vim-surround'       " tags/quotes
+Plug 'vim-ruby/vim-ruby'
+Plug 'thoughtbot/vim-rspec'
+Plug 'vim-scripts/tComment'     " Comment toggling
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'chriskempson/base16-vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-scripts/Conque-Shell' " Terminal in VIM
+Plug 'skwp/vim-ruby-conque'     " Spec helpers
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'joker1007/vim-ruby-heredoc-syntax'
+Plug 'kchmck/vim-coffee-script'
+Plug 'gcmt/taboo.vim'
+Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'Raimondi/delimitMate'
+call plug#end()
 
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
@@ -18,10 +46,14 @@ set autowrite     " Automatically :write before running commands
 set number        " Always show line numbers
 set nocursorline
 set nocursorcolumn
+set nostartofline " Keep the cursor on the same column
 set ttyfast
 set lazyredraw
 set nowrap
 set iskeyword-=_
+set autoread
+set switchbuf=usetab
+set spell
 
 " MacVim Tweaks
 set guioptions-=rL
@@ -33,7 +65,7 @@ set autowriteall  " Save when switching buffers
 augroup autosaveEx
   autocmd!
 
-  au FocusLost * :wa
+  au FocusLost,BufLeave * silent! :wa
 augroup END
 
 " Softtabs, 2 spaces
@@ -42,6 +74,12 @@ set shiftwidth=2
 set shiftround
 set expandtab
 set textwidth=80
+set formatoptions-=t
+if exists('&colorcolumn')
+  set colorcolumn=80,120
+  highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+  match OverLength /\%>121v.\+/
+endif
 
 " Numbers
 set number
@@ -56,29 +94,14 @@ if has('mouse')
   set mouse=a
 endif
 
-nnoremap <leader>, :tabe $MYVIMRC<cr>
+nnoremap <leader><leader> :tabe $MYVIMRC<cr>
+" Make it easy to move around in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-l> <C-o>l
 
-call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-bundler'
-Plug 'scrooloose/syntastic'     " Syntax error indicators
-Plug 'tpope/vim-fugitive'       " Git integration
-Plug 'tpope/vim-surround'       " tags/quotes
-Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/tComment'     " Comment toggling
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'chriskempson/base16-vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'vim-scripts/Conque-Shell' " Terminal in VIM
-Plug 'skwp/vim-ruby-conque'     " Spec helpers
-Plug 'junegunn/vim-easy-align'
-Plug 'Rykka/colorv.vim'         " Color picker
-call plug#end()
+let delimitMate_expand_space=1
 
 if &t_Co > 2 || has("gui_running")
   set t_Co=256
@@ -88,14 +111,16 @@ if &t_Co > 2 || has("gui_running")
   nnoremap <CR> :noh<CR><CR>
   set background=dark
   let g:airline_powerline_fonts = 0
-  let g:airline_theme='lucius'
 
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
   endif
+
+  " Light background "papercolor"
+  " set background=light
+  " colorscheme paperColor
 endif
 
-filetype plugin indent on
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -106,12 +131,6 @@ nmap ga <Plug>(EasyAlign)
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 
   if !exists(":Ag")
     command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
@@ -149,6 +168,7 @@ augroup vimrcEx
 
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile *.md set filetype=markdown
+  autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
 augroup END
 
@@ -171,11 +191,16 @@ augroup nerdTreeEx
 
   " Toggle nerdtree with F10
   map <F10> :NERDTreeToggle<CR>
-  " Current file in nerdtree
+
   map <F9> :NERDTreeFind<CR>
 
-  " let NERDTreeMapOpenInTab='<enter>'
+  let NERDTreeMapOpenInTab='<C-t>'
 augroup END
+
+" Snippets
+let g:UltiSnipsSnippetsDir='~/.vim/mysnippets'
+let g:UltiSnipsSnippetDirectories=["mysnippets"]
+let g:UltiSnipsExpandTrigger="<tab>"
 
 "key to insert mode with paste using F2 key
 map <F2> :set paste<CR>i
@@ -184,11 +209,24 @@ au InsertLeave * set nopaste
 " Use OSX clipboard
 set clipboard=unnamed
 
+" FZF
+nnoremap <leader>/ :BLines<CR>
+nnoremap <C-P> :FZF<CR>
+nnoremap <leader>, :Buffers<CR>
+let $FZF_DEFAULT_COMMAND='ag -g ""'
 
-" Ctrl+P
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-t>'],
-    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-    \ }
+" Ruby
+let g:ruby_indent_access_modifier_style = 'indent'
+let g:ruby_indent_block_style = 'do'
+let g:ruby_indent_assignment_style = 'hanging'
 
-nnoremap <leader>s :w<cr>
+" Rails
+map <leader>t :call RunCurrentSpecFile()<CR>
+map <leader>s :call RunNearestSpec()<CR>
+map <leader>l :call RunLastSpec()<CR>
+map <leader>a :call RunAllSpecs()<CR>
+
+let g:rspec_command = "!clear; ( cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; bin/rspec {spec})"
+
+filetype plugin indent on
+
