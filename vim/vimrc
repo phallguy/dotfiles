@@ -27,10 +27,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'joker1007/vim-ruby-heredoc-syntax'
 Plug 'kchmck/vim-coffee-script'
 Plug 'gcmt/taboo.vim'
-Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'Raimondi/delimitMate'
+
+
+Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 call plug#end()
 
 set backspace=2   " Backspace deletes like most programs in insert mode
@@ -100,6 +104,10 @@ inoremap <C-h> <C-o>h
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-l> <C-o>l
+" Keep selection after indenting
+vnoremap < <gv
+vnoremap > >gv
+nnoremap <C-a> ggVGG
 
 let delimitMate_expand_space=1
 
@@ -119,6 +127,10 @@ if &t_Co > 2 || has("gui_running")
   " Light background "papercolor"
   " set background=light
   " colorscheme paperColor
+
+  " Use the same color for closing tags as opening tags
+  highlight link xmlEndTag xmlTag
+  highlight Keyword cterm=bold
 endif
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -227,6 +239,9 @@ map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
 
 let g:rspec_command = "!clear; ( cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; bin/rspec {spec})"
+
+" Javascript
+let g:jsx_ext_required = 0
 
 filetype plugin indent on
 
