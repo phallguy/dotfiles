@@ -12,6 +12,7 @@ Plug 'tpope/vim-bundler'
 Plug 'scrooloose/syntastic'     " Syntax error indicators
 Plug 'tpope/vim-fugitive'       " Git integration
 Plug 'tpope/vim-surround'       " tags/quotes
+Plug 'tpope/vim-dispatch'
 Plug 'vim-ruby/vim-ruby'
 Plug 'thoughtbot/vim-rspec'
 Plug 'vim-scripts/tComment'     " Comment toggling
@@ -31,10 +32,10 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'Raimondi/delimitMate'
 
-
 Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'alexlafroscia/postcss-syntax.vim'
 call plug#end()
 
 set backspace=2   " Backspace deletes like most programs in insert mode
@@ -64,6 +65,31 @@ set guioptions-=rL
 set guifont=Source\ Code\ Pro\ Light:h14
 
 
+if &t_Co > 2 || has("gui_running")
+  set t_Co=256
+  let base16colorspace=256
+  set hlsearch
+  "This unsets the "last search pattern" register by hitting return
+  nnoremap <CR> :noh<CR><CR>
+  set background=dark
+  let g:airline_powerline_fonts = 0
+  let g:airline_theme='alduin'
+
+  if filereadable(expand("~/.vimrc_background"))
+    source ~/.vimrc_background
+  endif
+
+  " Light background "papercolor"
+  " set background=light
+  " colorscheme paperColor
+  " let g:airline_theme='papercolor'
+
+  " Use the same color for closing tags as opening tags
+  highlight link xmlEndTag xmlTag
+  highlight Keyword cterm=bold
+endif
+
+
 " Autosave
 set autowriteall  " Save when switching buffers
 augroup autosaveEx
@@ -80,9 +106,8 @@ set expandtab
 set textwidth=80
 set formatoptions-=t
 if exists('&colorcolumn')
-  set colorcolumn=80,120
-  highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-  match OverLength /\%>121v.\+/
+  let &colorcolumn="80,".join(range(120,999),",")
+  highlight ColorColumn ctermbg=18
 endif
 
 " Numbers
@@ -110,28 +135,6 @@ vnoremap > >gv
 nnoremap <C-a> ggVGG
 
 let delimitMate_expand_space=1
-
-if &t_Co > 2 || has("gui_running")
-  set t_Co=256
-  let base16colorspace=256
-  set hlsearch
-  "This unsets the "last search pattern" register by hitting return
-  nnoremap <CR> :noh<CR><CR>
-  set background=dark
-  let g:airline_powerline_fonts = 0
-
-  if filereadable(expand("~/.vimrc_background"))
-    source ~/.vimrc_background
-  endif
-
-  " Light background "papercolor"
-  " set background=light
-  " colorscheme paperColor
-
-  " Use the same color for closing tags as opening tags
-  highlight link xmlEndTag xmlTag
-  highlight Keyword cterm=bold
-endif
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -238,10 +241,11 @@ map <leader>s :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = "!clear; ( cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; bin/rspec {spec})"
+let g:rspec_command = "!clear; echo 'Finding spec folder for {spec}...'; ( cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec})"
 
 " Javascript
 let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers = ['$(npm bin)/eslint']
 
 filetype plugin indent on
 
