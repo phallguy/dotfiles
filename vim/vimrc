@@ -10,6 +10,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'scrooloose/syntastic'     " Syntax error indicators
+Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'tpope/vim-fugitive'       " Git integration
 Plug 'tpope/vim-surround'       " tags/quotes
 Plug 'tpope/vim-dispatch'
@@ -55,10 +56,10 @@ set nostartofline " Keep the cursor on the same column
 set ttyfast
 set lazyredraw
 set nowrap
-set iskeyword-=_
 set autoread
 set switchbuf=usetab
 set spell
+set iskeyword-=_
 
 " MacVim Tweaks
 set guioptions-=rL
@@ -73,7 +74,6 @@ if &t_Co > 2 || has("gui_running")
   nnoremap <CR> :noh<CR><CR>
   set background=dark
   let g:airline_powerline_fonts = 0
-  let g:airline_theme='alduin'
 
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
@@ -86,7 +86,6 @@ if &t_Co > 2 || has("gui_running")
 
   " Use the same color for closing tags as opening tags
   highlight link xmlEndTag xmlTag
-  highlight Keyword cterm=bold
 endif
 
 
@@ -121,6 +120,7 @@ augroup END
 
 if has('mouse')
   set mouse=a
+  set ttymouse=xterm2
 endif
 
 nnoremap <leader><leader> :tabe $MYVIMRC<cr>
@@ -133,8 +133,16 @@ inoremap <C-l> <C-o>l
 vnoremap < <gv
 vnoremap > >gv
 nnoremap <C-a> ggVGG
+" Quick window navigation
+let i = 1
+while i <= 9
+    execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
+    let i = i + 1
+endwhile
 
+" Expand spaces inside brackets/parens
 let delimitMate_expand_space=1
+
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -195,12 +203,6 @@ set splitbelow
 set splitright
 
 
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {"regex": "possibly useless use of a variable in void context"}
-
 augroup nerdTreeEx
   autocmd!
 
@@ -216,6 +218,8 @@ augroup END
 let g:UltiSnipsSnippetsDir='~/.vim/mysnippets'
 let g:UltiSnipsSnippetDirectories=["mysnippets"]
 let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 "key to insert mode with paste using F2 key
 map <F2> :set paste<CR>i
@@ -245,7 +249,20 @@ let g:rspec_command = "!clear; echo 'Finding spec folder for {spec}...'; ( cd $(
 
 " Javascript
 let g:jsx_ext_required = 0
-let g:syntastic_javascript_checkers = ['$(npm bin)/eslint']
+
+" GIT
+nnoremap <leader>d :Dispatch git dt %<CR>
 
 filetype plugin indent on
 
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntatsic_filetype_map = { "javascript.jsx": "javascript" }
+
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_eruby_ruby_quiet_messages =
+    \ {"regex": "possibly useless use of a variable in void context"}
+
+let g:syntastic_javascript_checkers = ["eslint"]

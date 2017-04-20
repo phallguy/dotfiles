@@ -1,11 +1,41 @@
 snippet #@!
-
 # @!attribute
 # @return [$1] $2
-  $0
+$0
+endsnippet
+
+snippet attr
+# @!attribute
+# @return [$2] $3
+attribute :$1
+$0
+endsnippet
+
+snippet attrd
+# @!attribute
+# @return [$2] $3
+attr_dependency :$1, $2
+$0
 endsnippet
 
 snippet pry "Insert a pry statement" i
 tap{ |o| binding.pry; o }
 endsnippet
 
+snippet #@!group
+# ============================================================================
+# @!group $1
+#
+
+${0:${VISUAL}}
+
+#
+# @!endgroup $1
+endsnippet
+
+snippet begin
+begin
+  ${0:${VISUAL}}
+rescue
+end
+endsnippet
