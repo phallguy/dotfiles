@@ -1,8 +1,10 @@
 set nocompatible
 set shell=/bin/bash
-runtime macros/matchit.vim
+set encoding=utf-8
 
 let mapleader = "."
+
+runtime macros/matchit.vim
 
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
@@ -18,11 +20,14 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'thoughtbot/vim-rspec'
 Plug 'vim-scripts/tComment'     " Comment toggling
 Plug 'vim-airline/vim-airline'
+Plug 'kana/vim-textobj-user'
+Plug 'glts/vim-textobj-comment' " Comments as text objects
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'vim-scripts/Conque-Shell' " Terminal in VIM
 Plug 'skwp/vim-ruby-conque'     " Spec helpers
+Plug 'vim-scripts/ruby-matchit'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -37,6 +42,9 @@ Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'alexlafroscia/postcss-syntax.vim'
+
+Plug 'vim-scripts/indentpython.vim'
+Plug 'nvie/vim-flake8'
 call plug#end()
 
 set backspace=2   " Backspace deletes like most programs in insert mode
@@ -60,6 +68,9 @@ set autoread
 set switchbuf=usetab
 set spell
 set iskeyword-=_
+set autoindent
+set smartindent
+set showmatch     " Show matching pair of [] () {}
 
 " MacVim Tweaks
 set guioptions-=rL
@@ -73,7 +84,8 @@ if &t_Co > 2 || has("gui_running")
   "This unsets the "last search pattern" register by hitting return
   nnoremap <CR> :noh<CR><CR>
   set background=dark
-  let g:airline_powerline_fonts = 0
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
 
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
@@ -98,20 +110,38 @@ augroup autosaveEx
 augroup END
 
 " Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
 set shiftround
 set expandtab
-set textwidth=80
+set textwidth=79
 set formatoptions-=t
 if exists('&colorcolumn')
   let &colorcolumn="80,".join(range(120,999),",")
   highlight ColorColumn ctermbg=18
 endif
 
+augroup formattingEx
+  autocmd!
+
+  " Using auto command to have per-language settings.
+  au BufNewFile,BufRead
+      \ set tabstop=2
+      \ set softtabstop=2
+      \ set shiftwidth=2
+
+augroup END
+
 " Numbers
 set number
 set numberwidth=5
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+" tell it to use an undo file
+set undofile
+" you:uuuuset a directory to store the undo history
+set undodir=$HOME/.vimundo/
 
 augroup reload_vimrc
   autocmd!
@@ -123,6 +153,7 @@ if has('mouse')
   set ttymouse=xterm2
 endif
 
+" Keyboard tweaks
 nnoremap <leader><leader> :tabe $MYVIMRC<cr>
 " Make it easy to move around in insert mode
 inoremap <C-h> <C-o>h
@@ -139,6 +170,7 @@ while i <= 9
     execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
     let i = i + 1
 endwhile
+nnoremap <leader>dab :bufdo bd<CR>
 
 " Expand spaces inside brackets/parens
 let delimitMate_expand_space=1
@@ -193,15 +225,19 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+
+  let &titlestring = getcwd()
+  if &term == "screen"
+    set t_ts=^[k
+    set t_fs=^[\
+  endif
+  if &term == "screen" || &term == "xterm" || &term == "xterm-256color"
+    set title
+  endif
 augroup END
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
 
 augroup nerdTreeEx
   autocmd!
@@ -245,7 +281,7 @@ map <leader>s :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = "!clear; echo 'Finding spec folder for {spec}...'; ( cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec})"
+let g:rspec_command = "!clear; echo 'Finding spec folder for {spec}...'; ( cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec --fail-fast {spec})"
 
 " Javascript
 let g:jsx_ext_required = 0
@@ -253,16 +289,32 @@ let g:jsx_ext_required = 0
 " GIT
 nnoremap <leader>d :Dispatch git dt %<CR>
 
-filetype plugin indent on
-
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntatsic_filetype_map = { "javascript.jsx": "javascript" }
+" let g:syntastic_debug = 33
+
 
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {"regex": "possibly useless use of a variable in void context"}
 
 let g:syntastic_javascript_checkers = ["eslint"]
+
+
+" Python
+let python_highlight_all=1
+augroup pythonEx
+  autocmd!
+
+  " https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
+  au BufNewFile,BufRead *.py
+      \ set tabstop=4
+      \ set softtabstop=4
+      \ set shiftwidth=4
+
+augroup END
+
+filetype plugin indent on

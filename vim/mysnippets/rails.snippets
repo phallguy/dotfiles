@@ -7,15 +7,13 @@ endsnippet
 snippet attr
 # @!attribute
 # @return [$2] $3
-attribute :$1
-$0
+attribute :$1 $0
 endsnippet
 
 snippet attrd
 # @!attribute
 # @return [$2] $3
-attr_dependency :$1, $2
-$0
+attr_dependency :$1, $2 $0
 endsnippet
 
 snippet pry "Insert a pry statement" i
@@ -26,7 +24,6 @@ snippet #@!group
 # ============================================================================
 # @!group $1
 #
-
 ${0:${VISUAL}}
 
 #
