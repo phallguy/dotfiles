@@ -100,8 +100,6 @@ if &t_Co > 2 || has("gui_running")
   highlight link xmlEndTag xmlTag
 endif
 
-" custom commands
-
 " Autosave
 set autowriteall  " Save when switching buffers
 augroup autosaveEx
