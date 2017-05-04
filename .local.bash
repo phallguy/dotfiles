@@ -62,6 +62,8 @@ alias beg='NO_TIMEOUT=1 be guard start -P rspec -c'
 alias d='docker'
 alias dc='docker-compose'
 alias v='vagrant'
+alias vi='nvim'
+alias nv='cd ~/workspace/niche/niche_web; vi'
 
 export GPG_TTY=$(tty)
 

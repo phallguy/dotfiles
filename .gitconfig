@@ -13,12 +13,12 @@
 [alias]
   st = status
   co = checkout
-  br = checkout --no-track -b 
+  br = checkout --no-track -b
   m = merge
   rb = rebase
   rbc = rebase --continue
   f = fetch origin
-  boom = !git remote prune origin && git fetch origin && git reset --hard origin && git submodule update --recursive
+  boom = !git remote prune origin && git fetch origin && git reset --hard origin/master && git submodule update --recursive
   dt = difftool
   dtc = difftool --cached
   srb = !git branch -D for_rebase 2> /dev/null || true && git checkout -b for_rebase

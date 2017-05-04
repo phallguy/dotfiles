@@ -10,6 +10,12 @@ snippet attr
 attribute :$1 $0
 endsnippet
 
+snippet attrr
+# @!attribute
+# @return [$2] $3
+attr_reader :$1$0
+endsnippet
+
 snippet attrd
 # @!attribute
 # @return [$2] $3
@@ -32,7 +38,19 @@ endsnippet
 
 snippet begin
 begin
-  ${0:${VISUAL}}
+	${0:${VISUAL}}
 rescue
+end
+endsnippet
+
+snippet describe
+describe "$1" do
+	${0:${VISUAL}}
+end
+endsnippet
+
+snippet context
+context "$1" do
+	${0:${VISUAL}}
 end
 endsnippet
