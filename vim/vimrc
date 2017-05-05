@@ -32,8 +32,6 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'joker1007/vim-ruby-heredoc-syntax'
 Plug 'vim-scripts/ruby-matchit'
-Plug 'vim-scripts/Conque-Shell' " Terminal in VIM
-Plug 'skwp/vim-ruby-conque'     " Spec helpers
 Plug 'vim-ruby/vim-ruby'
 Plug 'thoughtbot/vim-rspec'
 Plug 'jgdavey/vim-blockle'
@@ -273,7 +271,11 @@ map <leader>s :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
 
-let g:rspec_command = "bo 15split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec}\" ) | startinsert | stopinsert"
+if has('-nvim')
+  let g:rspec_command = "silent! bd! rspec-output | bo 25split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec}\" ) | set bufhidden=hide | file rspec-output"
+else
+  let g:rspec_command = "!cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec}"
+endif
 
 
 " Javascript
