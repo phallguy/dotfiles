@@ -23,10 +23,11 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'gcmt/taboo.vim'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'Raimondi/delimitMate'
+Plug 'terryma/vim-expand-region'
+Plug 'maxbrunsfeld/vim-yankstack'
 
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
@@ -43,6 +44,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'alexlafroscia/postcss-syntax.vim'
 Plug 'kchmck/vim-coffee-script'
+
+Plug 'junegunn/goyo.vim' " full screen writing
+Plug 'reedes/vim-pencil'
+
 call plug#end()
 
 set backspace=2   " Backspace deletes like most programs in insert mode
@@ -76,19 +81,26 @@ set guifont=Source\ Code\ Pro\ Light:h14
 
 
 if &t_Co > 2 || has("gui_running")
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+
   set t_Co=256
   let base16colorspace=256
   set hlsearch
   "This unsets the "last search pattern" register by hitting return
   nnoremap <CR> :noh<CR><CR>
   set background=dark
-  let g:airline_powerline_fonts = 1
-  let g:airline#extensions#tabline#enabled = 1
+  " let g:airline_powerline_fonts = 1
+  let g:airline_section_y = airline#section#create_right([ '# %{winnr()}' ])
+  let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
+  let g:airline_skip_empty_sections = 1
 
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
   endif
 
+  " Light background "mexico-light"
   " Light background "papercolor"
   " set background=light
   " colorscheme paperColor
@@ -111,21 +123,24 @@ set shiftround
 set expandtab
 set textwidth=79
 set formatoptions-=t
+set formatoptions+=2c
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-if exists('&colorcolumn')
-  let &colorcolumn="80,".join(range(120,999),",")
-  highlight ColorColumn ctermbg=18
-endif
+" if exists('&colorcolumn')
+"   let &colorcolumn="80,".join(range(120,999),",")
+"   highlight ColorColumn ctermbg=18
+" endif
 
 " Numbers
 set number
 set numberwidth=5
 
-" Open new split panes to right and bottom, which feels more natural
+" Window/tab management
 set splitbelow
 set splitright
+command! Qt :only|quit
+
 
 " tell it to use an undo file
 set undofile
@@ -160,6 +175,12 @@ while i <= 9
     let i = i + 1
 endwhile
 nnoremap <leader>dab :bufdo bd<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>o :only<CR>
+
+let g:yankstack_map_keys = 0
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 " Expand spaces inside brackets/parens
 let delimitMate_expand_space=1
@@ -213,7 +234,13 @@ augroup vimrcEx
 " Set syntax highlighting for specific file types
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
+autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+
+" Open markdown files with Chrome.
+autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Google Chrome.app" ''%:p''<CR>'
+command! Md Goyo | SoftPencil
+
 
 let &titlestring = getcwd()
 if &term == "screen"
@@ -270,12 +297,15 @@ map <leader>t :call RunCurrentSpecFile()<CR>
 map <leader>s :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
+map <leader>x :bd! .rspec-output<CR>
 
-if has('-nvim')
-  let g:rspec_command = "silent! bd! rspec-output | bo 25split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec}\" ) | set bufhidden=hide | file rspec-output"
+if has('nvim')
+  let g:rspec_command = "silent! bd! .rspec-output | bo 30split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP;  CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec); echo 'Running specs...'; cd ..; bin/rspec {spec}\" ) | set bufhidden=hide | file .rspec-output"
 else
   let g:rspec_command = "!cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec}"
 endif
+
+nnoremap <leader>c :silent! bd! .rails-console \| aboveleft 15split \| enew \| file .rails-console \| call termopen( "rattach api/server" )<CR>
 
 
 " Javascript
@@ -285,7 +315,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 let g:closetag_emptyTags_caseSensitive = 1
 
 " GIT
-nnoremap <leader>d :Dispatch git dt %<CR>
+nnoremap <leader>d :!cd %:h; git dt %:p<CR>
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -300,6 +330,7 @@ let g:syntastic_eruby_ruby_quiet_messages =
     \ {"regex": "possibly useless use of a variable in void context"}
 
 let g:syntastic_javascript_checkers = ["eslint"]
+let g:syntastic_ruby_checkers = [ 'rubocop' ]
 
 
 " Python
