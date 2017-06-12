@@ -1,7 +1,7 @@
 set shell=/bin/bash
 set encoding=utf-8
 
-let mapleader = "."
+let mapleader = " "
 
 runtime macros/matchit.vim
 
@@ -27,7 +27,7 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-expand-region'
-Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'MarcWeber/vim-addon-local-vimrc'
 
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
@@ -37,6 +37,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'thoughtbot/vim-rspec'
 Plug 'jgdavey/vim-blockle'
 Plug 'alvan/vim-closetag'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
 
@@ -75,11 +76,6 @@ set autoindent
 set smartindent
 set showmatch     " Show matching pair of [] () {}
 
-" MacVim Tweaks
-set guioptions-=rL
-set guifont=Source\ Code\ Pro\ Light:h14
-
-
 if &t_Co > 2 || has("gui_running")
   if (has("termguicolors"))
     set termguicolors
@@ -91,14 +87,19 @@ if &t_Co > 2 || has("gui_running")
   "This unsets the "last search pattern" register by hitting return
   nnoremap <CR> :noh<CR><CR>
   set background=dark
-  " let g:airline_powerline_fonts = 1
+
+  let g:airline_powerline_fonts = 0
+
   let g:airline_section_y = airline#section#create_right([ '# %{winnr()}' ])
   let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
   let g:airline_skip_empty_sections = 1
+  let g:airline#extensions#tabline#enabled = 0
 
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
   endif
+
+  " Dark background "oceanicnext"
 
   " Light background "mexico-light"
   " Light background "papercolor"
@@ -158,7 +159,7 @@ if has('mouse')
 endif
 
 " Keyboard tweaks
-nnoremap <leader><leader> :tabe $MYVIMRC<cr>
+nnoremap <leader>rc :tabe $MYVIMRC<cr>
 " Make it easy to move around in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-j> <C-o>j
@@ -174,13 +175,9 @@ while i <= 9
     execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
     let i = i + 1
 endwhile
-nnoremap <leader>dab :bufdo bd<CR>
+nnoremap <leader>dab :bufdo bd!<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>o :only<CR>
-
-let g:yankstack_map_keys = 0
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 " Expand spaces inside brackets/parens
 let delimitMate_expand_space=1
@@ -283,7 +280,7 @@ set clipboard=unnamed
 " FZF
 nnoremap <leader>/ :BLines<CR>
 nnoremap <C-P> :FZF<CR>
-nnoremap <leader>, :Buffers<CR>
+nnoremap , :Buffers<CR>
 let $FZF_DEFAULT_COMMAND='ag -g ""'
 
 " Ruby
@@ -298,6 +295,8 @@ map <leader>s :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
 map <leader>x :bd! .rspec-output<CR>
+map <space><space> :bd! .rspec-output<CR>
+map <leader>r :AV<CR>
 
 if has('nvim')
   let g:rspec_command = "silent! bd! .rspec-output | bo 30split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP;  CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec); echo 'Running specs...'; cd ..; bin/rspec {spec}\" ) | set bufhidden=hide | file .rspec-output"
@@ -305,7 +304,10 @@ else
   let g:rspec_command = "!cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec}"
 endif
 
-nnoremap <leader>c :silent! bd! .rails-console \| aboveleft 15split \| enew \| file .rails-console \| call termopen( "rattach api/server" )<CR>
+let g:rails_console_command = "echo no command set"
+nnoremap <leader>c :silent! bd! .rails-console \| bo 30split \| enew \| file .rails-console \| call termopen( g:rails_console_command ) \| set bufhidden=hide<CR>
+nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console \| term<CR>
+
 
 
 " Javascript
@@ -331,6 +333,7 @@ let g:syntastic_eruby_ruby_quiet_messages =
 
 let g:syntastic_javascript_checkers = ["eslint"]
 let g:syntastic_ruby_checkers = [ 'rubocop' ]
+let g:syntastic_ruby_rubocop_args = '-D'
 
 
 " Python
@@ -346,3 +349,7 @@ augroup pythonEx
 augroup END
 
 filetype plugin indent on
+
+" Support per-project .vimrc commands
+set exrc
+set secure

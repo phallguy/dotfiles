@@ -27,14 +27,52 @@ function title {
   printf "\033]0;%s\007" "$1"
 }
 
+function git_status_indicator {
+  local git_status="$(git status 2> /dev/null)"
+
+    # echo "\e[38;5;2m⎇  "
+
+  if [[ $git_status =~ "not staged for commit" ]]; then
+    echo "\e[38;5;1m ▪︎ "
+  elif [[ ! $git_status =~ "working directory clean" ]]; then
+    echo "\e[38;5;3m ✚ "
+  elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+    echo "\e[38;5;3m ● "
+  elif [[ $git_status =~ "nothing to commit" ]]; then
+    echo "\e[38;5;2m   "
+  fi
+}
+
 function my_git_ps1 {
-  PWD=$( pwd )
   # if ! [[ $PWD =~ /source(/|$) ]]; then
-    __git_ps1
+  __git_ps1 "  $( git_status_indicator )%s "
   # fi
 }
 
-export PS1='\r\n${debian_chroot:+($debian_chroot)}\[\e[1;32m\]\u\[\e[1;30m\]@\h\[\e[0m\]: \[\e[0;36m\]\w \033[31m\]$("my_git_ps1")\[\033[00m\] \e[1;30m\]${timer_show}s\r\n\[\e[1;36m\]\$ \[\e[0;37m\]'
+function current_dirname {
+  DIRNAME=$( dirname $( pwd ) )
+  [[ "$DIRNAME" =~ ^"$HOME" ]] && DIRNAME="~${DIRNAME#$HOME}"
+
+  if ! [[ "$DIRNAME" =~ ^/$ ]]; then
+    echo $DIRNAME
+  fi
+}
+
+function current_basename {
+  BASENAME=$( basename $( pwd ) )
+
+  if ! [[ "$BASENAME" =~ ^/$ ]]; then
+    echo /$BASENAME
+  else
+    echo /
+  fi
+}
+
+# export PS1='\r\n\[\e[1;32m\]\u\[\e[1;30m\]@\h\[\e[0m\]: \[\e[0;46m\]\[\e[97m\] \w \033[0;31m\]$("my_git_ps1")\[\033[00m\] \e[1;30m\]${timer_show}s\r\n\[\e[1;36m\]\$ \[\e[0;37m\]'
+# export PS1='\r\n\e[0;48;5;12;38;5;0m \e[0;48;5;19;38;5;20m  \w  \033[0;48;5;18;38;5;8m$( "my_git_ps1" )\e[0;38;5;19m ${timer_show}s\r\n\n\e[0;1;36m\$ \e[0m'
+# export PS1='\r\n\e[0;48;5;12;38;5;0m \e[0;48;5;19;38;5;20m  $( "current_dirname" )\e[38;5;16m$( current_basename )  \033[0;48;5;18;38;5;8m$( "my_git_ps1" )\e[0;38;5;19m ${timer_show}s\r\n\n\e[0;1;36m\$ \e[0m'
+export PS1='\r\n\r\n\[\e[0;48;5;10;38;5;18m\] \T \[\e[48;5;14m\] ${timer_show}s \[\e[0;48;5;18;38;5;15m\]  $( "current_dirname" )\[\e[38;5;16m\]$( current_basename )  \[\e[0;48;5;0;38;5;8m\]$( "my_git_ps1" )\[\e[0;38;5;19m\]\r\n\n\[\e[0;1;36m\]\$ \[\e[0m\]'
+
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -64,6 +102,9 @@ alias dc='docker-compose'
 alias v='vagrant'
 alias vi='nvim'
 alias nv='cd ~/workspace/niche/niche_web; vi'
+alias light='base16_mexico-light'
+alias dark='base16_oceanicnext'
+alias matrix='base16_greenscreen'
 
 export GPG_TTY=$(tty)
 
