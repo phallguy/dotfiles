@@ -9,10 +9,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'scrooloose/syntastic'     " Syntax error indicators
-Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'tpope/vim-fugitive'       " Git integration
-Plug 'tpope/vim-surround'       " tags/quotes
-Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-surround'       " tags/quote
 Plug 'vim-scripts/tComment'     " Comment toggling
 Plug 'vim-airline/vim-airline'
 Plug 'kana/vim-textobj-user'
@@ -29,6 +27,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-expand-region'
 Plug 'MarcWeber/vim-addon-local-vimrc'
 
+
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
 Plug 'joker1007/vim-ruby-heredoc-syntax'
@@ -41,10 +40,14 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 
 Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
 
+Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'alexlafroscia/postcss-syntax.vim'
 Plug 'kchmck/vim-coffee-script'
+Plug 'poetic/vim-textobj-javascript'
+
+Plug 'jparise/vim-graphql'
 
 Plug 'junegunn/goyo.vim' " full screen writing
 Plug 'reedes/vim-pencil'
@@ -56,7 +59,6 @@ set nobackup
 set nowritebackup
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set history=50
-set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
@@ -71,10 +73,10 @@ set nowrap
 set autoread
 set switchbuf=usetab
 set spell
-" set iskeyword-=_
 set autoindent
 set smartindent
 set showmatch     " Show matching pair of [] () {}
+set scrolloff=10
 
 if &t_Co > 2 || has("gui_running")
   if (has("termguicolors"))
@@ -82,6 +84,8 @@ if &t_Co > 2 || has("gui_running")
   endif
 
   set t_Co=256
+  set t_AB=^[[48;5;%dm
+  set t_AF=^[[38;5;%dm
   let base16colorspace=256
   set hlsearch
   "This unsets the "last search pattern" register by hitting return
@@ -90,6 +94,7 @@ if &t_Co > 2 || has("gui_running")
 
   let g:airline_powerline_fonts = 0
 
+  let g:airline_section_a = airline#section#create(['mode'])
   let g:airline_section_y = airline#section#create_right([ '# %{winnr()}' ])
   let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
   let g:airline_skip_empty_sections = 1
@@ -100,12 +105,7 @@ if &t_Co > 2 || has("gui_running")
   endif
 
   " Dark background "oceanicnext"
-
   " Light background "mexico-light"
-  " Light background "papercolor"
-  " set background=light
-  " colorscheme paperColor
-  " let g:airline_theme='papercolor'
 
   " Use the same color for closing tags as opening tags
   highlight link xmlEndTag xmlTag
@@ -128,10 +128,6 @@ set formatoptions+=2c
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-" if exists('&colorcolumn')
-"   let &colorcolumn="80,".join(range(120,999),",")
-"   highlight ColorColumn ctermbg=18
-" endif
 
 " Numbers
 set number
@@ -140,7 +136,6 @@ set numberwidth=5
 " Window/tab management
 set splitbelow
 set splitright
-command! Qt :only|quit
 
 
 " tell it to use an undo file
@@ -158,26 +153,28 @@ if has('mouse')
   " set ttymouse=xterm2
 endif
 
-" Keyboard tweaks
 nnoremap <leader>rc :tabe $MYVIMRC<cr>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>o :only<CR>
+nnoremap <leader>n :cn<CR>
+
 " Make it easy to move around in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-l> <C-o>l
+
 " Keep selection after indenting
 vnoremap < <gv
 vnoremap > >gv
 nnoremap <C-a> ggVGG
+
 " Quick window navigation
 let i = 1
 while i <= 9
     execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
     let i = i + 1
 endwhile
-nnoremap <leader>dab :bufdo bd!<CR>
-nnoremap <leader>q :q<CR>
-nnoremap <leader>o :only<CR>
 
 " Expand spaces inside brackets/parens
 let delimitMate_expand_space=1
@@ -194,10 +191,19 @@ if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 
-  if !exists(":Ag")
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-  endif
+  command! -nargs=+ -complete=file Ag silent! grep! <args>|cwindow|redraw!
 endif
+
+augroup nerdTreeEx
+  autocmd!
+
+  " Toggle nerdtree with F10
+  map <F10> :NERDTreeToggle<CR>
+
+  map <F9> :NERDTreeFind<CR>
+
+  let NERDTreeMapOpenInTab='<C-t>'
+augroup END
 
 augroup TrailingWhitespace
   autocmd!
@@ -228,40 +234,29 @@ augroup vimrcEx
   \   exe "normal g`\"" |
   \ endif
 
-" Set syntax highlighting for specific file types
-autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
-autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
-autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+  " Set syntax highlighting for specific file types
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
+  autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
+  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
 
-" Open markdown files with Chrome.
-autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Google Chrome.app" ''%:p''<CR>'
-command! Md Goyo | SoftPencil
+  " Open markdown files with Chrome.
+  autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Google Chrome.app" ''%:p''<CR>'
+  command! Md Goyo | SoftPencil
 
 
-let &titlestring = getcwd()
-if &term == "screen"
-  set t_ts=^[k
-  set t_fs=^[\
-endif
-if &term == "screen" || &term == "xterm" || &term == "xterm-256color" || &term == "nvim"
-  set title
-endif
+  let &titlestring = getcwd()
+  if &term == "screen"
+    set t_ts=^[k
+    set t_fs=^[\
+  endif
+  if &term == "screen" || &term == "xterm" || &term == "xterm-256color" || &term == "nvim"
+    set title
+  endif
 augroup END
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
-
-augroup nerdTreeEx
-autocmd!
-
-" Toggle nerdtree with F10
-map <F10> :NERDTreeToggle<CR>
-
-map <F9> :NERDTreeFind<CR>
-
-let NERDTreeMapOpenInTab='<C-t>'
-augroup END
 
 " Snippets
 let g:UltiSnipsSnippetsDir='~/.vim/mysnippets'
@@ -306,7 +301,7 @@ endif
 
 let g:rails_console_command = "echo no command set"
 nnoremap <leader>c :silent! bd! .rails-console \| bo 30split \| enew \| file .rails-console \| call termopen( g:rails_console_command ) \| set bufhidden=hide<CR>
-nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console \| term<CR>
+nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console \| term bash -l<CR>
 
 
 
@@ -316,24 +311,43 @@ let g:jsx_ext_required = 0
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 let g:closetag_emptyTags_caseSensitive = 1
 
+augroup jsSyntastic
+  autocmd!
+
+  function! FindEsLint()
+    let a:src = expand( '%:p' )
+    let a:cmd = 'cd $( find `( SPEC=''' . a:src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type d -name node_modules ); pwd'
+    let a:node_modules = StrTrim( system( a:cmd ) )
+
+    let b:syntastic_javascript_eslint_exec = a:node_modules . '/.bin/eslint'
+  endfunction
+
+  function! StrTrim(txt)
+    return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+  endfunction
+
+  autocmd FileType javascript call FindEsLint()
+augroup END
+
 " GIT
 nnoremap <leader>d :!cd %:h; git dt %:p<CR>
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntatsic_filetype_map = { "javascript.jsx": "javascript" }
-" let g:syntastic_debug = 33
-
+" let g:syntastic_debug = 63
+" let g:syntastic_debug_file = "~/syntastic.log"
 
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {"regex": "possibly useless use of a variable in void context"}
 
 let g:syntastic_javascript_checkers = ["eslint"]
+
 let g:syntastic_ruby_checkers = [ 'rubocop' ]
-let g:syntastic_ruby_rubocop_args = '-D'
+let g:syntastic_ruby_rubocop_args = '-D -S'
 
 
 " Python
