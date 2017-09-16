@@ -13,9 +13,9 @@ Plug 'tpope/vim-fugitive'       " Git integration
 Plug 'tpope/vim-surround'       " tags/quote
 Plug 'vim-scripts/tComment'     " Comment toggling
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-comment' " Comments as text objects
-Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align'
@@ -26,7 +26,6 @@ Plug 'SirVer/ultisnips'
 Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-expand-region'
 Plug 'MarcWeber/vim-addon-local-vimrc'
-
 
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
@@ -46,6 +45,7 @@ Plug 'mxw/vim-jsx'
 Plug 'alexlafroscia/postcss-syntax.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'poetic/vim-textobj-javascript'
+Plug 'ruanyl/vim-fixmyjs'
 
 Plug 'jparise/vim-graphql'
 
@@ -79,6 +79,9 @@ set showmatch     " Show matching pair of [] () {}
 set scrolloff=10
 
 if &t_Co > 2 || has("gui_running")
+  " Dark background "oceanicnext"
+  " Light background "mexico-light"
+
   if (has("termguicolors"))
     set termguicolors
   endif
@@ -94,8 +97,8 @@ if &t_Co > 2 || has("gui_running")
 
   let g:airline_powerline_fonts = 0
 
-  let g:airline_section_a = airline#section#create(['mode'])
-  let g:airline_section_y = airline#section#create_right([ '# %{winnr()}' ])
+  let g:airline_section_a = airline#section#create([ 'mode', ' #%{winnr()}' ])
+  let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
   let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
   let g:airline_skip_empty_sections = 1
   let g:airline#extensions#tabline#enabled = 0
@@ -103,9 +106,6 @@ if &t_Co > 2 || has("gui_running")
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
   endif
-
-  " Dark background "oceanicnext"
-  " Light background "mexico-light"
 
   " Use the same color for closing tags as opening tags
   highlight link xmlEndTag xmlTag
@@ -177,7 +177,7 @@ while i <= 9
 endwhile
 
 " Expand spaces inside brackets/parens
-let delimitMate_expand_space=1
+let delimitMate_expand_space=0
 
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -189,7 +189,7 @@ nmap ga <Plug>(EasyAlign)
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --path-to-ignore\ .agignore
 
   command! -nargs=+ -complete=file Ag silent! grep! <args>|cwindow|redraw!
 endif
@@ -276,7 +276,7 @@ set clipboard=unnamed
 nnoremap <leader>/ :BLines<CR>
 nnoremap <C-P> :FZF<CR>
 nnoremap , :Buffers<CR>
-let $FZF_DEFAULT_COMMAND='ag -g ""'
+let $FZF_DEFAULT_COMMAND='ag -g "" --path-to-ignore .agignore'
 
 " Ruby
 let g:ruby_indent_access_modifier_style = 'indent'
@@ -311,6 +311,7 @@ let g:jsx_ext_required = 0
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 let g:closetag_emptyTags_caseSensitive = 1
 
+
 augroup jsSyntastic
   autocmd!
 
@@ -319,7 +320,10 @@ augroup jsSyntastic
     let a:cmd = 'cd $( find `( SPEC=''' . a:src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type d -name node_modules ); pwd'
     let a:node_modules = StrTrim( system( a:cmd ) )
 
+    let g:node_modules_path = a:node_modules
     let b:syntastic_javascript_eslint_exec = a:node_modules . '/.bin/eslint'
+    let g:fixmyjs_executable = a:node_modules . '/.bin/eslint'
+    let g:fixmyjs_rc_path = a:node_modules . '/../.eslintrc.js'
   endfunction
 
   function! StrTrim(txt)
@@ -349,6 +353,7 @@ let g:syntastic_javascript_checkers = ["eslint"]
 let g:syntastic_ruby_checkers = [ 'rubocop' ]
 let g:syntastic_ruby_rubocop_args = '-D -S'
 
+let g:fixmyjs_rc_filename = ['.eslintrc', '.eslintrc.js']
 
 " Python
 let python_highlight_all=1

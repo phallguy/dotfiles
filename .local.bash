@@ -102,15 +102,17 @@ alias dc='docker-compose'
 alias v='vagrant'
 alias vi='nvim'
 alias nv='cd ~/workspace/niche/niche_web; vi'
+alias nd='cd ~/workspace/niche/niche_web'
 alias lv='cd ~/workspace/phallguy/lactastic; vi'
+alias ld='cd ~/workspace/phallguy/lactastic;'
 alias light='base16_mexico-light'
 alias dark='base16_oceanicnext'
 alias matrix='base16_greenscreen'
 
 export GPG_TTY=$(tty)
 
-export EDITOR="vi"
-export BUNDLER_EDITOR="vi"
+export EDITOR="nvim"
+export BUNDLER_EDITOR="nvim"
 export NO_TIMEOUT=1
 
 export RUBY_GC_HEAP_INIT_SLOTS=500000
