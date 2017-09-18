@@ -6,51 +6,55 @@ let mapleader = " "
 runtime macros/matchit.vim
 
 call plug#begin('~/.vim/plugged')
+Plug 'chriskempson/base16-vim'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'scrooloose/syntastic'     " Syntax error indicators
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'terryma/vim-multiple-cursors'
+
 Plug 'tpope/vim-fugitive'       " Git integration
 Plug 'tpope/vim-surround'       " tags/quote
 Plug 'vim-scripts/tComment'     " Comment toggling
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'kana/vim-textobj-user'
-Plug 'glts/vim-textobj-comment' " Comments as text objects
-Plug 'chriskempson/base16-vim'
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'glts/vim-textobj-comment' " Comments as text objects
+"
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-expand-region'
 Plug 'MarcWeber/vim-addon-local-vimrc'
 
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-bundler'
 Plug 'joker1007/vim-ruby-heredoc-syntax'
 Plug 'vim-scripts/ruby-matchit'
-Plug 'vim-ruby/vim-ruby'
 Plug 'thoughtbot/vim-rspec'
-Plug 'jgdavey/vim-blockle'
+" Plug 'jgdavey/vim-blockle'
 Plug 'alvan/vim-closetag'
 Plug 'nelstrom/vim-textobj-rubyblock'
 
-Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
+" Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
 
-Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'pangloss/vim-javascript'
+" Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'mxw/vim-jsx'
-Plug 'alexlafroscia/postcss-syntax.vim'
+" Plug 'alexlafroscia/postcss-syntax.vim'
 Plug 'kchmck/vim-coffee-script'
-Plug 'poetic/vim-textobj-javascript'
 Plug 'ruanyl/vim-fixmyjs'
 
 Plug 'jparise/vim-graphql'
 
 Plug 'junegunn/goyo.vim' " full screen writing
 Plug 'reedes/vim-pencil'
+Plug 'vim-scripts/loremipsum'
 
 call plug#end()
 
@@ -68,14 +72,14 @@ set nocursorline
 set nocursorcolumn
 set nostartofline " Keep the cursor on the same column
 set ttyfast
-set lazyredraw
+" set lazyredraw
 set nowrap
 set autoread
 set switchbuf=usetab
 set spell
 set autoindent
 set smartindent
-set showmatch     " Show matching pair of [] () {}
+" set showmatch     " Show matching pair of [] () {}
 set scrolloff=10
 
 if &t_Co > 2 || has("gui_running")
@@ -158,16 +162,16 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>o :only<CR>
 nnoremap <leader>n :cn<CR>
 
-" Make it easy to move around in insert mode
-inoremap <C-h> <C-o>h
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
-inoremap <C-l> <C-o>l
-
 " Keep selection after indenting
 vnoremap < <gv
 vnoremap > >gv
 nnoremap <C-a> ggVGG
+
+" Move lines up/down
+nnoremap <C-k> :m-2<CR>==
+nnoremap <C-j> :m+<CR>==
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Quick window navigation
 let i = 1
@@ -245,14 +249,14 @@ augroup vimrcEx
   command! Md Goyo | SoftPencil
 
 
-  let &titlestring = getcwd()
-  if &term == "screen"
-    set t_ts=^[k
-    set t_fs=^[\
-  endif
-  if &term == "screen" || &term == "xterm" || &term == "xterm-256color" || &term == "nvim"
-    set title
-  endif
+  " let &titlestring = getcwd()
+  " if &term == "screen"
+  "   set t_ts=^[k
+  "   set t_fs=^[\
+  " endif
+  " if &term == "screen" || &term == "xterm" || &term == "xterm-256color" || &term == "nvim"
+  "   set title
+  " endif
 augroup END
 
 " Treat <li> and <p> tags like the block tags they are
@@ -265,8 +269,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 
-"key to insert mode with paste using F2 key
-map <F2> :set paste<CR>i
 " Leave paste mode on exit
 au InsertLeave * set nopaste
 " Use OSX clipboard
@@ -284,7 +286,6 @@ let g:ruby_indent_block_style = 'do'
 let g:ruby_indent_assignment_style = 'hanging'
 
 " Rails
-
 map <leader>t :call RunCurrentSpecFile()<CR>
 map <leader>s :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
