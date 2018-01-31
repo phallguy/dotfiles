@@ -1,9 +1,12 @@
 export BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+source /opt/twitter/opt/autoenv/activate.sh
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-NPM_GLOBAL='/opt/twitter_mde/package/nodejs/b7c2b80f58d1d2481dbda9cc3fd274ae5505edfa9b53d88533f4a757fa03272f/bin'
+NPM_GLOBAL='/opt/twitter_mde/package/nodejs/current/bin'
 export PATH="$HOME/.yarn/bin:$NPM_GLOBAL:$PATH"
 
 unset GIT_PS1_SHOWDIRTYSTATE
@@ -102,12 +105,27 @@ alias dc='docker-compose'
 alias v='vagrant'
 alias vi='nvim'
 alias nv='cd ~/workspace/niche/niche_web; vi'
-alias nd='cd ~/workspace/niche/niche_web'
 alias lv='cd ~/workspace/phallguy/lactastic; vi'
-alias ld='cd ~/workspace/phallguy/lactastic;'
 alias light='base16_mexico-light'
-alias dark='base16_oceanicnext'
+# alias dark='base16_oceanicnext'
+alias dark='base16_material-darker'
 alias matrix='base16_greenscreen'
+
+lactasticDir() {
+  cd ~/workspace/phallguy/lactastic
+  [[ ! -z "$1" ]] && cd "$1" || return
+}
+alias ld='lactasticDir'
+
+nd() {
+  cd ~/workspace/niche/niche_web
+  [[ ! -z "$1" ]] && cd "$1" || return
+}
+
+nd2() {
+  cd ~/workspace/niche/niche_web2
+  [[ ! -z "$1" ]] && cd "$1" || return
+}
 
 export GPG_TTY=$(tty)
 
@@ -121,7 +139,5 @@ unset RAILS_ENV
 unset CC
 unset VERSION
 
-source /opt/twitter/opt/autoenv/activate.sh
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 

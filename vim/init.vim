@@ -16,13 +16,14 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'terryma/vim-multiple-cursors'
+" Plug 'machakann/vim-highlightedyank'
 
 Plug 'tpope/vim-fugitive'       " Git integration
 Plug 'tpope/vim-surround'       " tags/quote
 Plug 'vim-scripts/tComment'     " Comment toggling
 Plug 'kana/vim-textobj-user'
-" Plug 'glts/vim-textobj-comment' " Comments as text objects
-"
+Plug 'glts/vim-textobj-comment' " Comments as text objects
+
 Plug 'junegunn/vim-easy-align'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
@@ -50,11 +51,15 @@ Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
 Plug 'ruanyl/vim-fixmyjs'
 
+Plug 'leafgarland/typescript-vim'
+
 Plug 'jparise/vim-graphql'
 
 Plug 'junegunn/goyo.vim' " full screen writing
 Plug 'reedes/vim-pencil'
 Plug 'vim-scripts/loremipsum'
+
+Plug 'mzlogin/vim-markdown-toc'
 
 call plug#end()
 
@@ -65,7 +70,7 @@ set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitigno
 set history=50
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
-set laststatus=2  " Always display the status line
+" set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set number        " Always show line numbers
 set nocursorline
@@ -78,9 +83,13 @@ set autoread
 set switchbuf=usetab
 set spell
 set autoindent
-set smartindent
 " set showmatch     " Show matching pair of [] () {}
 set scrolloff=10
+hi NonText cterm=NONE ctermfg=NONE
+
+" https://stackoverflow.com/a/25276429/76456
+" Make regex for ruby syntax faster
+" set re=1
 
 if &t_Co > 2 || has("gui_running")
   " Dark background "oceanicnext"
@@ -99,6 +108,8 @@ if &t_Co > 2 || has("gui_running")
   nnoremap <CR> :noh<CR><CR>
   set background=dark
 
+  let g:airline_theme = 'kolor'
+  " let g:airline_theme = 'powerlineish'
   let g:airline_powerline_fonts = 0
 
   let g:airline_section_a = airline#section#create([ 'mode', ' #%{winnr()}' ])
@@ -168,10 +179,10 @@ vnoremap > >gv
 nnoremap <C-a> ggVGG
 
 " Move lines up/down
-nnoremap <C-k> :m-2<CR>==
-nnoremap <C-j> :m+<CR>==
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+nnoremap <C-k> :m-2<CR>
+nnoremap <C-j> :m+<CR>
+vnoremap <C-j> :m '>+1<CR>gv
+vnoremap <C-k> :m '<-2<CR>gv
 
 " Quick window navigation
 let i = 1
