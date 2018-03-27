@@ -49,7 +49,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 " Plug 'alexlafroscia/postcss-syntax.vim'
 Plug 'kchmck/vim-coffee-script'
-Plug 'ruanyl/vim-fixmyjs'
+" Plug 'ruanyl/vim-fixmyjs'
+Plug 'sbdchd/neoformat'
 
 Plug 'leafgarland/typescript-vim'
 
@@ -59,7 +60,10 @@ Plug 'junegunn/goyo.vim' " full screen writing
 Plug 'reedes/vim-pencil'
 Plug 'vim-scripts/loremipsum'
 
+Plug 'plasticboy/vim-markdown'
 Plug 'mzlogin/vim-markdown-toc'
+
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
@@ -67,6 +71,7 @@ set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set backupcopy=yes
 set history=50
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
@@ -253,21 +258,13 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
   autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
+  autocmd BufRead,BufNewFile Dockerfile.erb set filetype=dockerfile
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+  autocmd BufRead,BufNewFile *.aurora set filetype=python
 
   " Open markdown files with Chrome.
   autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Google Chrome.app" ''%:p''<CR>'
   command! Md Goyo | SoftPencil
-
-
-  " let &titlestring = getcwd()
-  " if &term == "screen"
-  "   set t_ts=^[k
-  "   set t_fs=^[\
-  " endif
-  " if &term == "screen" || &term == "xterm" || &term == "xterm-256color" || &term == "nvim"
-  "   set title
-  " endif
 augroup END
 
 " Treat <li> and <p> tags like the block tags they are
@@ -307,6 +304,14 @@ map <leader>r :AV<CR>
 
 if has('nvim')
   let g:rspec_command = "silent! bd! .rspec-output | bo 30split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP;  CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec); echo 'Running specs...'; cd ..; bin/rspec {spec}\" ) | set bufhidden=hide | file .rspec-output"
+let g:rails_console_command = "kattach api -c rails"
+let g:rspec_command = "silent! bd! .rspec-output | bo 30split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP;  CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec); echo 'Running specs...'; cd ..; bin/rspec {spec}\" ) | set bufhidden=hide | file .rspec-output"
+
+" augroup jsFixmyjs
+"   autocmd!
+"
+"   autocmd BufWritePre *.js,*.json Fixmyjs
+" augroup END
 else
   let g:rspec_command = "!cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec}"
 endif
@@ -334,8 +339,6 @@ augroup jsSyntastic
 
     let g:node_modules_path = a:node_modules
     let b:syntastic_javascript_eslint_exec = a:node_modules . '/.bin/eslint'
-    let g:fixmyjs_executable = a:node_modules . '/.bin/eslint'
-    let g:fixmyjs_rc_path = a:node_modules . '/../.eslintrc.js'
   endfunction
 
   function! StrTrim(txt)
@@ -380,6 +383,13 @@ augroup pythonEx
 augroup END
 
 filetype plugin indent on
+
+" Git commit messages
+augroup gitEx
+  autocmd!
+
+  au FileType gitcommit set tw=100
+augroup END
 
 " Support per-project .vimrc commands
 set exrc

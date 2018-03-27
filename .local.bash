@@ -1,10 +1,20 @@
+export RUBY_GC_HEAP_INIT_SLOTS=500000
+unset RUBY_HEAP_MIN_SLOTS
+unset RAILS_ENV
+unset CC
+unset VERSION
+
+
 export BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+source /opt/twitter/opt/asdf/asdf.sh
 source /opt/twitter/opt/autoenv/activate.sh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source ~/.minikube-completion
 
 NPM_GLOBAL='/opt/twitter_mde/package/nodejs/current/bin'
 export PATH="$HOME/.yarn/bin:$NPM_GLOBAL:$PATH"
@@ -83,6 +93,11 @@ function my_prompt {
 }
 export PROMPT_COMMAND="my_prompt; timer_stop"
 
+# function for setting terminal titles in OSX
+function title {
+  printf "\033]0;%s\007" "$1"
+}
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -101,11 +116,15 @@ alias srails='spring rails'
 alias srake='spring rake'
 alias spec='spring rspec'
 alias d='docker'
-alias dc='docker-compose'
 alias v='vagrant'
 alias vi='nvim'
 alias nv='cd ~/workspace/niche/niche_web; vi'
 alias lv='cd ~/workspace/phallguy/lactastic; vi'
+alias k='kubectl'
+alias mk='minikube'
+alias mkd='minikube dashboard'
+alias t='terraform'
+alias a='atlas'
 alias light='base16_mexico-light'
 # alias dark='base16_oceanicnext'
 alias dark='base16_material-darker'
@@ -133,11 +152,12 @@ export EDITOR="nvim"
 export BUNDLER_EDITOR="nvim"
 export NO_TIMEOUT=1
 
-export RUBY_GC_HEAP_INIT_SLOTS=500000
-unset RUBY_HEAP_MIN_SLOTS
-unset RAILS_ENV
-unset CC
-unset VERSION
 
 
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/google-cloud-sdk/path.bash.inc' ]; then source '/usr/local/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/google-cloud-sdk/completion.bash.inc' ]; then source '/usr/local/google-cloud-sdk/completion.bash.inc'; fi
