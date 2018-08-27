@@ -16,9 +16,6 @@ source /opt/twitter/opt/autoenv/activate.sh
 
 source ~/.minikube-completion
 
-NPM_GLOBAL='/opt/twitter_mde/package/nodejs/current/bin'
-export PATH="$HOME/.yarn/bin:$NPM_GLOBAL:$PATH"
-
 unset GIT_PS1_SHOWDIRTYSTATE
 
 function timer_start {
@@ -89,7 +86,7 @@ function my_prompt {
     fi
   fi
 
-  PS1="\r\n\n${CURRENT_TIME}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\r\n\n${PROMPT}"
+  PS1="\r\n\n${CURRENT_TIME}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
 }
 export PROMPT_COMMAND="my_prompt; timer_stop"
 
@@ -126,8 +123,9 @@ alias mkd='minikube dashboard'
 alias t='terraform'
 alias a='atlas'
 alias light='base16_mexico-light'
-# alias dark='base16_oceanicnext'
-alias dark='base16_material-darker'
+alias dark='base16_oceanicnext'
+# alias dark='base16_material-darker'
+# alias dark='base16_default-dark'
 alias matrix='base16_greenscreen'
 
 lactasticDir() {

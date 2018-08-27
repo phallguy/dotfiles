@@ -12,11 +12,12 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'     " Syntax error indicators
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'machakann/vim-highlightedyank'
 
 Plug 'tpope/vim-fugitive'       " Git integration
 Plug 'tpope/vim-surround'       " tags/quote
@@ -24,33 +25,26 @@ Plug 'vim-scripts/tComment'     " Comment toggling
 Plug 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-comment' " Comments as text objects
 
+Plug 'sbdchd/neoformat'
 Plug 'junegunn/vim-easy-align'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
-" Plug 'Raimondi/delimitMate'
-" Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-expand-region'
 Plug 'MarcWeber/vim-addon-local-vimrc'
 
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-" Plug 'tpope/vim-bundler'
 Plug 'joker1007/vim-ruby-heredoc-syntax'
 Plug 'vim-scripts/ruby-matchit'
 Plug 'thoughtbot/vim-rspec'
-" Plug 'jgdavey/vim-blockle'
 Plug 'alvan/vim-closetag'
 Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
 
 Plug 'pangloss/vim-javascript'
-" Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'mxw/vim-jsx'
-" Plug 'alexlafroscia/postcss-syntax.vim'
 Plug 'kchmck/vim-coffee-script'
-" Plug 'ruanyl/vim-fixmyjs'
-Plug 'sbdchd/neoformat'
 
 Plug 'leafgarland/typescript-vim'
 
@@ -61,7 +55,9 @@ Plug 'reedes/vim-pencil'
 Plug 'vim-scripts/loremipsum'
 
 Plug 'plasticboy/vim-markdown'
+Plug 'rhysd/vim-gfm-syntax'
 Plug 'mzlogin/vim-markdown-toc'
+Plug 'JamshedVesuna/vim-markdown-preview'
 
 Plug 'hashivim/vim-terraform'
 
@@ -75,14 +71,13 @@ set backupcopy=yes
 set history=50
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
-" set laststatus=2  " Always display the status line
+set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
-set number        " Always show line numbers
-set nocursorline
-set nocursorcolumn
+" set nocursorline
+" set nocursorcolumn
 set nostartofline " Keep the cursor on the same column
 set ttyfast
-" set lazyredraw
+set lazyredraw
 set nowrap
 set autoread
 set switchbuf=usetab
@@ -94,12 +89,11 @@ hi NonText cterm=NONE ctermfg=NONE
 
 " https://stackoverflow.com/a/25276429/76456
 " Make regex for ruby syntax faster
-" set re=1
+set re=1
+
+set guifont="D2Coding for Powerline":h18
 
 if &t_Co > 2 || has("gui_running")
-  " Dark background "oceanicnext"
-  " Light background "mexico-light"
-
   if (has("termguicolors"))
     set termguicolors
   endif
@@ -113,22 +107,22 @@ if &t_Co > 2 || has("gui_running")
   nnoremap <CR> :noh<CR><CR>
   set background=dark
 
-  let g:airline_theme = 'kolor'
-  " let g:airline_theme = 'powerlineish'
-  let g:airline_powerline_fonts = 0
-
-  let g:airline_section_a = airline#section#create([ 'mode', ' #%{winnr()}' ])
-  let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
-  let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
-  let g:airline_skip_empty_sections = 1
-  let g:airline#extensions#tabline#enabled = 0
-
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
   endif
 
   " Use the same color for closing tags as opening tags
   highlight link xmlEndTag xmlTag
+endif
+
+augroup reload_vimrc
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+if has('mouse')
+  set mouse=a
+  " set ttymouse=xterm2
 endif
 
 " Autosave
@@ -149,8 +143,8 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
-" Numbers
-set number
+" Line Numbers
+set number        " Always show line numbers
 set numberwidth=5
 
 " Window/tab management
@@ -160,18 +154,8 @@ set splitright
 
 " tell it to use an undo file
 set undofile
-" you:uuuuset a directory to store the undo history
+" use a directory to store the undo history
 set undodir=$HOME/.vimundo/
-
-augroup reload_vimrc
-  autocmd!
-  autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
-
-if has('mouse')
-  set mouse=a
-  " set ttymouse=xterm2
-endif
 
 nnoremap <leader>rc :tabe $MYVIMRC<cr>
 nnoremap <leader>q :q<CR>
@@ -194,11 +178,13 @@ let i = 1
 while i <= 9
     execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
     let i = i + 1
-endwhile
+endwhi
 
-" Expand spaces inside brackets/parens
-let delimitMate_expand_space=0
-
+" Disable arrow movement, resize splits instead.
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize -2<CR>
+nnoremap <Right> :vertical resize +2<CR>le
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -223,6 +209,8 @@ augroup nerdTreeEx
   map <F9> :NERDTreeFind<CR>
 
   let NERDTreeMapOpenInTab='<C-t>'
+  let NERDTreeMinimalUI=1
+  let NERDTreeDirArrows=1
 augroup END
 
 augroup TrailingWhitespace
@@ -255,16 +243,11 @@ augroup vimrcEx
   \ endif
 
   " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
   autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
   autocmd BufRead,BufNewFile Dockerfile.erb set filetype=dockerfile
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
   autocmd BufRead,BufNewFile *.aurora set filetype=python
-
-  " Open markdown files with Chrome.
-  autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Google Chrome.app" ''%:p''<CR>'
-  command! Md Goyo | SoftPencil
 augroup END
 
 " Treat <li> and <p> tags like the block tags they are
@@ -302,16 +285,8 @@ map <leader>x :bd! .rspec-output<CR>
 map <space><space> :bd! .rspec-output<CR>
 map <leader>r :AV<CR>
 
-if has('nvim')
-  let g:rspec_command = "silent! bd! .rspec-output | bo 30split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP;  CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec); echo 'Running specs...'; cd ..; bin/rspec {spec}\" ) | set bufhidden=hide | file .rspec-output"
-let g:rails_console_command = "kattach api -c rails"
-let g:rspec_command = "silent! bd! .rspec-output | bo 30split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP;  CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec); echo 'Running specs...'; cd ..; bin/rspec {spec}\" ) | set bufhidden=hide | file .rspec-output"
-
-" augroup jsFixmyjs
-"   autocmd!
-"
-"   autocmd BufWritePre *.js,*.json Fixmyjs
-" augroup END
+if has('nvim') || exists("g:gui_oni")
+  let g:rspec_command = "silent! bd! .rspec-output | bo 30split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP;  CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec); echo 'Running specs...'; cd ..; ([ -x bin/rspec_runner ] && bundle exec bin/rspec_runner {spec}) || bundle exec bin/rspec {spec}\" ) | set bufhidden=hide | file .rspec-output"
 else
   let g:rspec_command = "!cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec}"
 endif
@@ -320,14 +295,11 @@ let g:rails_console_command = "echo no command set"
 nnoremap <leader>c :silent! bd! .rails-console \| bo 30split \| enew \| file .rails-console \| call termopen( g:rails_console_command ) \| set bufhidden=hide<CR>
 nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console \| term bash -l<CR>
 
-
-
 " Javascript
 let g:jsx_ext_required = 0
 
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx,*.ts,*.tsx"
 let g:closetag_emptyTags_caseSensitive = 1
-
 
 augroup jsSyntastic
   autocmd!
@@ -339,6 +311,7 @@ augroup jsSyntastic
 
     let g:node_modules_path = a:node_modules
     let b:syntastic_javascript_eslint_exec = a:node_modules . '/.bin/eslint'
+    let b:syntastic_typescript_tslint_exec = a:node_modules . '/.bin/tslint'
   endfunction
 
   function! StrTrim(txt)
@@ -346,6 +319,7 @@ augroup jsSyntastic
   endfunction
 
   autocmd FileType javascript call FindEsLint()
+  autocmd FileType typescript call FindEsLint()
 augroup END
 
 " GIT
@@ -364,11 +338,75 @@ let g:syntastic_eruby_ruby_quiet_messages =
     \ {"regex": "possibly useless use of a variable in void context"}
 
 let g:syntastic_javascript_checkers = ["eslint"]
+let g:syntastic_typescript_checkers = ["tslint"]
 
 let g:syntastic_ruby_checkers = [ 'rubocop' ]
 let g:syntastic_ruby_rubocop_args = '-D -S'
 
 let g:fixmyjs_rc_filename = ['.eslintrc', '.eslintrc.js']
+
+augroup syntasticEx
+  autocmd!
+
+  function! SyntasticCheckHook(errors)
+    checktime
+  endfunction
+augroup END
+
+" Neoformat
+" let g:neoformat_verbose = 0
+
+augroup jsNeoformat
+  autocmd!
+
+  function! FindPrettier()
+    let a:src = expand( '%:p' )
+    let a:cmd = 'cd $( find `( SPEC=''' . a:src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type d -name node_modules ); pwd'
+    let a:node_modules = StrTrim( system( a:cmd ) )
+
+    let g:neoformat_javascript_prettier = {
+            \ 'exe': a:node_modules . '/.bin/prettier',
+            \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
+            \ 'stdin': 1,
+            \ }
+
+    let g:neoformat_typescript_prettier = {
+            \ 'exe': a:node_modules . '/.bin/prettier',
+            \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
+            \ 'stdin': 1,
+            \ }
+  endfunction
+
+  function! StrTrim(txt)
+    return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+  endfunction
+
+  autocmd FileType javascript call FindPrettier()
+  autocmd FileType typescript call FindPrettier()
+augroup END
+
+
+" Markdown
+let g:vim_markdown_folding_disabled = 1
+let vim_markdown_preview_github=1
+let vim_markdown_preview_toggle=1
+let g:goyo_width = 120
+let vim_markdown_preview_hotkey='<F5>'
+
+
+
+augroup markdownEx
+  autocmd!
+
+  " Set syntax highlighting for specific file types
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+  " Open markdown files with Chrome.
+  " autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Google Chrome.app" ''%:p''<CR>'
+  " autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Markoff.app" ''%:p''<CR>'
+  command! Md Goyo | SoftPencil
+augroup END
+
 
 " Python
 let python_highlight_all=1
@@ -382,7 +420,6 @@ augroup pythonEx
 
 augroup END
 
-filetype plugin indent on
 
 " Git commit messages
 augroup gitEx
@@ -390,6 +427,8 @@ augroup gitEx
 
   au FileType gitcommit set tw=100
 augroup END
+
+filetype plugin indent on
 
 " Support per-project .vimrc commands
 set exrc

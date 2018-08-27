@@ -1,6 +1,6 @@
 [user]
 	name = Paul Alexander
-	email = paul@phallguy.com
+	email = palexander@twitter.com
   signingkey = 218BD2A9
 
 [color]
@@ -15,13 +15,12 @@
   co = checkout
   br = checkout --no-track -b
   m = merge
+  mn = merge --no-ff --no-commit
   rb = rebase
   rbc = rebase --continue
-  f = fetch origin
-  boom = !git remote prune origin && git fetch origin && git reset --hard origin/master && git submodule update --recursive
+  boom = !git remote prune origin && git fetch origin && git reset --hard origin/$( git rev-parse --abbrev-ref HEAD ) && git submodule update --recursive
   dt = difftool
   dtc = difftool --cached
-  srb = !git branch -D for_rebase 2> /dev/null || true && git checkout -b for_rebase
   ca = commit --amend --no-edit
   lg = log --graph --decorate
 
@@ -35,7 +34,7 @@
 
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 
 [mergetool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot

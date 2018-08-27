@@ -1,4 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/Users/palexander/.dotfiles/vim'
 let g:netrw_dirhist_2='/Users/palexander/workspace/phallguy/lactastic/clients/app-ui/src/components/ui-Form'
+let g:netrw_dirhist_3='/Users/palexander/.dotfiles/vim'
+let g:netrw_dirhist_4='/Users/palexander/.dotfiles/vim/autoload'
+let g:netrw_dirhist_5='/Users/palexander/workspace/niche/niche_web'
+let g:netrw_dirhist_6='/Users/palexander/workspace/niche'
