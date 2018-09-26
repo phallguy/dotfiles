@@ -12,14 +12,15 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'     " Syntax error indicators
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
 
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'tpope/vim-fugitive'       " Git integration
+Plug 'tpope/vim-rhubarb'        " More GitHub integration
 Plug 'tpope/vim-surround'       " tags/quote
 Plug 'vim-scripts/tComment'     " Comment toggling
 Plug 'kana/vim-textobj-user'
@@ -71,7 +72,7 @@ set backupcopy=yes
 set history=50
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
-set laststatus=2  " Always display the status line
+" set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 " set nocursorline
 " set nocursorcolumn
@@ -97,6 +98,13 @@ if &t_Co > 2 || has("gui_running")
   if (has("termguicolors"))
     set termguicolors
   endif
+
+  let g:airline_powerline_fonts=0
+
+  let g:airline_section_a = airline#section#create([ 'mode' ])
+  let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
+  let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
+  let g:airline_skip_empty_sections = 1
 
   set t_Co=256
   set t_AB=^[[48;5;%dm
@@ -211,6 +219,15 @@ augroup nerdTreeEx
   let NERDTreeMapOpenInTab='<C-t>'
   let NERDTreeMinimalUI=1
   let NERDTreeDirArrows=1
+  let NERDTreeIgnore=['node_modules']
+augroup END
+
+augroup sourcesession
+        autocmd!
+        autocmd VimEnter * nested
+        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
+        \   source Session.vim |
+        \ endif
 augroup END
 
 augroup TrailingWhitespace
@@ -248,6 +265,8 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Dockerfile.erb set filetype=dockerfile
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
   autocmd BufRead,BufNewFile *.aurora set filetype=python
+  autocmd BufRead,BufNewFile tsconfig.json set filetype=typescript
+
 augroup END
 
 " Treat <li> and <p> tags like the block tags they are
@@ -298,7 +317,7 @@ nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console 
 " Javascript
 let g:jsx_ext_required = 0
 
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx,*.ts,*.tsx"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx,*.tsx"
 let g:closetag_emptyTags_caseSensitive = 1
 
 augroup jsSyntastic
@@ -312,6 +331,7 @@ augroup jsSyntastic
     let g:node_modules_path = a:node_modules
     let b:syntastic_javascript_eslint_exec = a:node_modules . '/.bin/eslint'
     let b:syntastic_typescript_tslint_exec = a:node_modules . '/.bin/tslint'
+    " let g:syntastic_typescript_tslint_args = [ '--config', a:node_modules . '/../tslint.json', '--project', a:node_modules . '/../tsconfig.json' ]
   endfunction
 
   function! StrTrim(txt)
@@ -338,7 +358,7 @@ let g:syntastic_eruby_ruby_quiet_messages =
     \ {"regex": "possibly useless use of a variable in void context"}
 
 let g:syntastic_javascript_checkers = ["eslint"]
-let g:syntastic_typescript_checkers = ["tslint"]
+let g:syntastic_typescript_checkers = ["tslint", "tsc"]
 
 let g:syntastic_ruby_checkers = [ 'rubocop' ]
 let g:syntastic_ruby_rubocop_args = '-D -S'

@@ -1,137 +1,25 @@
-set shell=/bin/bash
 set encoding=utf-8
+set shell=/bin/bash
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Editing Experience
+"
 let mapleader = " "
 
-runtime macros/matchit.vim
-
-call plug#begin('~/.vim/plugged')
-Plug 'chriskempson/base16-vim'
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'     " Syntax error indicators
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-
-Plug 'terryma/vim-multiple-cursors'
-
-Plug 'tpope/vim-fugitive'       " Git integration
-Plug 'tpope/vim-surround'       " tags/quote
-Plug 'vim-scripts/tComment'     " Comment toggling
-Plug 'kana/vim-textobj-user'
-Plug 'glts/vim-textobj-comment' " Comments as text objects
-
-Plug 'sbdchd/neoformat'
-Plug 'junegunn/vim-easy-align'
-Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'terryma/vim-expand-region'
-Plug 'MarcWeber/vim-addon-local-vimrc'
-
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'joker1007/vim-ruby-heredoc-syntax'
-Plug 'vim-scripts/ruby-matchit'
-Plug 'thoughtbot/vim-rspec'
-Plug 'alvan/vim-closetag'
-Plug 'nelstrom/vim-textobj-rubyblock'
-
-" Plug 'nginx/nginx', { 'rtp': 'contrib/vim' }
-
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'kchmck/vim-coffee-script'
-
-Plug 'leafgarland/typescript-vim'
-
-Plug 'jparise/vim-graphql'
-
-Plug 'junegunn/goyo.vim' " full screen writing
-Plug 'reedes/vim-pencil'
-Plug 'vim-scripts/loremipsum'
-
-Plug 'plasticboy/vim-markdown'
-Plug 'rhysd/vim-gfm-syntax'
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'JamshedVesuna/vim-markdown-preview'
-
-Plug 'hashivim/vim-terraform'
-
-call plug#end()
-
-set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
-set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set backupcopy=yes
-set history=50
-set showcmd       " display incomplete commands
-set incsearch     " do incremental searching
-set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
-" set nocursorline
-" set nocursorcolumn
+set noswapfile     " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set backupcopy=yes " Overwrite existing file so file watchers can detect changes
+
+set hlsearch
+set incsearch
+"This unsets the "last search pattern" register by hitting return
+nnoremap <CR> :noh<CR><CR>
+
+set showcmd
 set nostartofline " Keep the cursor on the same column
-set ttyfast
-set lazyredraw
+set lazyredraw    " Don't redraw screen while executing macros and such.
 set nowrap
-set autoread
-set switchbuf=usetab
-set spell
-set autoindent
-" set showmatch     " Show matching pair of [] () {}
-set scrolloff=10
-hi NonText cterm=NONE ctermfg=NONE
-
-" https://stackoverflow.com/a/25276429/76456
-" Make regex for ruby syntax faster
-set re=1
-
-set guifont="D2Coding for Powerline":h18
-
-if &t_Co > 2 || has("gui_running")
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-
-  set t_Co=256
-  set t_AB=^[[48;5;%dm
-  set t_AF=^[[38;5;%dm
-  let base16colorspace=256
-  set hlsearch
-  "This unsets the "last search pattern" register by hitting return
-  nnoremap <CR> :noh<CR><CR>
-  set background=dark
-
-  if filereadable(expand("~/.vimrc_background"))
-    source ~/.vimrc_background
-  endif
-
-  " Use the same color for closing tags as opening tags
-  highlight link xmlEndTag xmlTag
-endif
-
-augroup reload_vimrc
-  autocmd!
-  autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
-
-if has('mouse')
-  set mouse=a
-  " set ttymouse=xterm2
-endif
-
-" Autosave
-set autowriteall  " Save when switching buffers
-augroup autosaveEx
-  autocmd!
-
-  au FocusLost,BufLeave * silent! :wa
-augroup END
 
 " Softtabs, 2 spaces
 set shiftround
@@ -147,31 +35,114 @@ set shiftwidth=2
 set number        " Always show line numbers
 set numberwidth=5
 
+" https://stackoverflow.com/a/25276429/76456
+" Make regex for ruby syntax faster
+set re=1
+
+set undofile                " tell it to use an undo file
+set undodir=$HOME/.vimundo/ " use a directory to store the undo history
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"
+call plug#begin('~/.vim/plugged')
+  Plug 'MarcWeber/vim-addon-local-vimrc' " import .vimrc from CWD when launching
+
+  " Visual experience
+  Plug 'chriskempson/base16-vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
+  " General editing
+  Plug 'vim-scripts/tComment'     " Comment toggling
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'junegunn/vim-easy-align'  " Multi-line bock alignment
+  Plug 'tpope/vim-surround'       " change surrounding tags/quotes/parens
+  Plug 'SirVer/ultisnips'         " Code snippets
+  Plug 'terryma/vim-expand-region'
+
+  " Searching & navigation
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'scrooloose/nerdtree'
+
+  " Git/status
+  Plug 'tpope/vim-fugitive'       " Git integration
+  Plug 'tpope/vim-rhubarb'        " More GitHub integration
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Language support
+  "
+  Plug 'kana/vim-textobj-user'    " Custom 'object' targeting for movements
+  Plug 'glts/vim-textobj-comment' " Comments as text objects
+
+  " Ruby/rails
+  Plug 'thoughtbot/vim-rspec'
+  Plug 'nelstrom/vim-textobj-rubyblock'
+
+call plug#end()
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntax highlighting and visual styling
+"
+if &t_Co > 2 || has("gui_running")
+
+  " Support 24-bit colors if possible
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+
+  set background=dark
+
+  if filereadable(expand("~/.vimrc_background"))
+    source ~/.vimrc_background
+  endif
+
+  " let g:airline_powerline_fonts=0
+  "
+  " let g:airline_section_a = airline#section#create([ 'mode' ])
+  " let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
+  " let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
+  " let g:airline_skip_empty_sections = 1
+  let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+
+  let g:airline_highlighting_cache = 1
+  let g:airline#extensions#whitespace#enabled = 0
+
+endif
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Window/navigation
+"
+
 " Window/tab management
 set splitbelow
 set splitright
 
+set scrolloff=10     " Keep 10 lines at top/bottom of window when scrolling
 
-" tell it to use an undo file
-set undofile
-" use a directory to store the undo history
-set undodir=$HOME/.vimundo/
+" Leave paste mode on exit
+au InsertLeave * set nopaste
 
+" Alias shortcuts for common tasks
 nnoremap <leader>rc :tabe $MYVIMRC<cr>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>o :only<CR>
 nnoremap <leader>n :cn<CR>
 
-" Keep selection after indenting
-vnoremap < <gv
-vnoremap > >gv
-nnoremap <C-a> ggVGG
+" Disable arrow movement, resize splits instead.
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Right> :vertical resize +2<CR>le
+nnoremap <Left>  :vertical resize -2<CR>
 
-" Move lines up/down
-nnoremap <C-k> :m-2<CR>
-nnoremap <C-j> :m+<CR>
-vnoremap <C-j> :m '>+1<CR>gv
-vnoremap <C-k> :m '<-2<CR>gv
+" Cliboards
+set clipboard=unnamed " Use OSX clipboard
 
 " Quick window navigation
 let i = 1
@@ -180,25 +151,8 @@ while i <= 9
     let i = i + 1
 endwhi
 
-" Disable arrow movement, resize splits instead.
-nnoremap <Up>    :resize +2<CR>
-nnoremap <Down>  :resize -2<CR>
-nnoremap <Left>  :vertical resize -2<CR>
-nnoremap <Right> :vertical resize +2<CR>le
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor\ --path-to-ignore\ .agignore
-
-  command! -nargs=+ -complete=file Ag silent! grep! <args>|cwindow|redraw!
-endif
+" Autosave
+set autowriteall  " Save when switching buffers
 
 augroup nerdTreeEx
   autocmd!
@@ -211,6 +165,48 @@ augroup nerdTreeEx
   let NERDTreeMapOpenInTab='<C-t>'
   let NERDTreeMinimalUI=1
   let NERDTreeDirArrows=1
+  let NERDTreeIgnore=['node_modules']
+augroup END
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General editing commands.
+"
+
+" Move lines up/down
+nnoremap <C-k> :m-2<CR>
+nnoremap <C-j> :m+<CR>
+vnoremap <C-j> :m '>+1<CR>gv
+vnoremap <C-k> :m '<-2<CR>gv
+
+" Keep selection after indenting
+vnoremap < <gv
+vnoremap > >gv
+nnoremap <C-a> ggVGG
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Session management
+augroup sourcesession
+
+  " Reload previously saved session on startup
+  autocmd!
+  autocmd VimEnter * nested
+  \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
+  \   source Session.vim |
+  \ endif
+
+  " " When editing a file, always jump to the last known cursor position.
+  " " Don't do it for commit messages, when the position is invalid, or when
+  " " inside an event handler (happens when dropping a file on gvim).
+  " autocmd BufReadPost *
+  " \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+  " \   exe "normal g`\"" |
+  " \ endif
 augroup END
 
 augroup TrailingWhitespace
@@ -231,39 +227,18 @@ augroup TrailingWhitespace
 augroup END
 
 
-augroup vimrcEx
-  autocmd!
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-  \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g`\"" |
-  \ endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Searching & file navigation
+"
 
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
-  autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
-  autocmd BufRead,BufNewFile Dockerfile.erb set filetype=dockerfile
-  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-  autocmd BufRead,BufNewFile *.aurora set filetype=python
-augroup END
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor\ --path-to-ignore\ .agignore
 
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
-
-" Snippets
-let g:UltiSnipsSnippetsDir='~/.vim/mysnippets'
-let g:UltiSnipsSnippetDirectories=["mysnippets"]
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-
-" Leave paste mode on exit
-au InsertLeave * set nopaste
-" Use OSX clipboard
-set clipboard=unnamed
+  command! -nargs=+ -complete=file Ag silent! grep! <args>|cwindow|redraw!
+endif
 
 " FZF
 nnoremap <leader>/ :BLines<CR>
@@ -271,11 +246,48 @@ nnoremap <C-P> :FZF<CR>
 nnoremap , :Buffers<CR>
 let $FZF_DEFAULT_COMMAND='ag -g "" --path-to-ignore .agignore'
 
-" Ruby
-let g:ruby_indent_access_modifier_style = 'indent'
-let g:ruby_indent_block_style = 'do'
-let g:ruby_indent_assignment_style = 'hanging'
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Per file/syntax customization
+"
+
+augroup syntaxOverrides
+  autocmd!
+
+  autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
+  autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
+  autocmd BufRead,BufNewFile Dockerfile.erb set filetype=dockerfile
+  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+  autocmd BufRead,BufNewFile *.aurora set filetype=python
+  autocmd BufRead,BufNewFile tsconfig.json set filetype=typescript
+
+augroup END
+
+" Use the same color for closing tags as opening tags
+highlight link xmlEndTag xmlTag
+
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
+
+
+" Git commit messages
+augroup gitEx
+  autocmd!
+
+  au FileType gitcommit set tw=100
+augroup END
+
+" Show diff of current file in external tool
+nnoremap <leader>d :!cd %:h; git dt %:p<CR>
+
+" VIMRC
+augroup reload_vimrc
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+" Ruby/Rails
 " Rails
 map <leader>t :call RunCurrentSpecFile()<CR>
 map <leader>s :call RunNearestSpec()<CR>
@@ -295,141 +307,8 @@ let g:rails_console_command = "echo no command set"
 nnoremap <leader>c :silent! bd! .rails-console \| bo 30split \| enew \| file .rails-console \| call termopen( g:rails_console_command ) \| set bufhidden=hide<CR>
 nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console \| term bash -l<CR>
 
-" Javascript
-let g:jsx_ext_required = 0
-
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx,*.ts,*.tsx"
-let g:closetag_emptyTags_caseSensitive = 1
-
-augroup jsSyntastic
-  autocmd!
-
-  function! FindEsLint()
-    let a:src = expand( '%:p' )
-    let a:cmd = 'cd $( find `( SPEC=''' . a:src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type d -name node_modules ); pwd'
-    let a:node_modules = StrTrim( system( a:cmd ) )
-
-    let g:node_modules_path = a:node_modules
-    let b:syntastic_javascript_eslint_exec = a:node_modules . '/.bin/eslint'
-    let b:syntastic_typescript_tslint_exec = a:node_modules . '/.bin/tslint'
-  endfunction
-
-  function! StrTrim(txt)
-    return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-  endfunction
-
-  autocmd FileType javascript call FindEsLint()
-  autocmd FileType typescript call FindEsLint()
-augroup END
-
-" GIT
-nnoremap <leader>d :!cd %:h; git dt %:p<CR>
-
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntatsic_filetype_map = { "javascript.jsx": "javascript" }
-" let g:syntastic_debug = 63
-" let g:syntastic_debug_file = "~/syntastic.log"
-
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {"regex": "possibly useless use of a variable in void context"}
-
-let g:syntastic_javascript_checkers = ["eslint"]
-let g:syntastic_typescript_checkers = ["tslint"]
-
-let g:syntastic_ruby_checkers = [ 'rubocop' ]
-let g:syntastic_ruby_rubocop_args = '-D -S'
-
-let g:fixmyjs_rc_filename = ['.eslintrc', '.eslintrc.js']
-
-augroup syntasticEx
-  autocmd!
-
-  function! SyntasticCheckHook(errors)
-    checktime
-  endfunction
-augroup END
-
-" Neoformat
-" let g:neoformat_verbose = 0
-
-augroup jsNeoformat
-  autocmd!
-
-  function! FindPrettier()
-    let a:src = expand( '%:p' )
-    let a:cmd = 'cd $( find `( SPEC=''' . a:src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type d -name node_modules ); pwd'
-    let a:node_modules = StrTrim( system( a:cmd ) )
-
-    let g:neoformat_javascript_prettier = {
-            \ 'exe': a:node_modules . '/.bin/prettier',
-            \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
-            \ 'stdin': 1,
-            \ }
-
-    let g:neoformat_typescript_prettier = {
-            \ 'exe': a:node_modules . '/.bin/prettier',
-            \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
-            \ 'stdin': 1,
-            \ }
-  endfunction
-
-  function! StrTrim(txt)
-    return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-  endfunction
-
-  autocmd FileType javascript call FindPrettier()
-  autocmd FileType typescript call FindPrettier()
-augroup END
-
-
-" Markdown
-let g:vim_markdown_folding_disabled = 1
-let vim_markdown_preview_github=1
-let vim_markdown_preview_toggle=1
-let g:goyo_width = 120
-let vim_markdown_preview_hotkey='<F5>'
-
-
-
-augroup markdownEx
-  autocmd!
-
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-
-  " Open markdown files with Chrome.
-  " autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Google Chrome.app" ''%:p''<CR>'
-  " autocmd BufEnter *.md exe 'noremap <F5> :!open -a "Markoff.app" ''%:p''<CR>'
-  command! Md Goyo | SoftPencil
-augroup END
-
-
-" Python
-let python_highlight_all=1
-augroup pythonEx
-  autocmd!
-
-  " https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/
-  au FileType python set tabstop=4
-  au FileType python set softtabstop=4
-  au FileType python set shiftwidth=4
-
-augroup END
-
-
-" Git commit messages
-augroup gitEx
-  autocmd!
-
-  au FileType gitcommit set tw=100
-augroup END
-
-filetype plugin indent on
 
 " Support per-project .vimrc commands
 set exrc
 set secure
+
