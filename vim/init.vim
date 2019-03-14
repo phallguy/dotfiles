@@ -9,7 +9,18 @@ let mapleader = " "
 set nobackup
 set nowritebackup
 set noswapfile     " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set backupcopy=yes " Overwrite existing file so file watchers can detect changes
+" set backupcopy=yes " Overwrite existing file so file watchers can detect changes
+set noendofline     " Don't automatically add newline
+set nofixendofline
+set nofoldenable    " don't use folding
+
+set cursorline      " Makes vim refresh much slower
+set nocursorcolumn
+
+" set synmaxcol=192   " Limit some of the impact of complex syntax regex
+set foldmethod=indent
+set regexpengine=1
+set redrawtime=500
 
 set hlsearch
 set incsearch
@@ -30,6 +41,7 @@ set formatoptions+=2c
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+set preserveindent
 
 " Line Numbers
 set number        " Always show line numbers
@@ -48,6 +60,7 @@ set undodir=$HOME/.vimundo/ " use a directory to store the undo history
 "
 call plug#begin('~/.vim/plugged')
   Plug 'MarcWeber/vim-addon-local-vimrc' " import .vimrc from CWD when launching
+  Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
 
   " Visual experience
   Plug 'chriskempson/base16-vim'
@@ -61,6 +74,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'       " change surrounding tags/quotes/parens
   Plug 'SirVer/ultisnips'         " Code snippets
   Plug 'terryma/vim-expand-region'
+  Plug 'ervandew/supertab'
 
   " Searching & navigation
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -78,8 +92,21 @@ call plug#begin('~/.vim/plugged')
   Plug 'glts/vim-textobj-comment' " Comments as text objects
 
   " Ruby/rails
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'tpope/vim-rails'
   Plug 'thoughtbot/vim-rspec'
   Plug 'nelstrom/vim-textobj-rubyblock'
+
+  " Javasript
+  Plug 'sbdchd/neoformat'         " prettier/eslint formatting rules
+  Plug 'leafgarland/typescript-vim'
+
+  " Markdown
+  Plug 'mzlogin/vim-markdown-toc'
+
+  " Arduino
+  Plug 'sudar/vim-arduino-syntax'
+  Plug 'sudar/vim-arduino-snippets'
 
 call plug#end()
 
@@ -101,12 +128,11 @@ if &t_Co > 2 || has("gui_running")
     source ~/.vimrc_background
   endif
 
-  " let g:airline_powerline_fonts=0
-  "
-  " let g:airline_section_a = airline#section#create([ 'mode' ])
-  " let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
-  " let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
-  " let g:airline_skip_empty_sections = 1
+  let g:airline_powerline_fonts = 0
+  let g:airline_section_a = airline#section#create([ 'mode' ])
+  let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
+  let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
+  let g:airline_skip_empty_sections = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
   let g:airline_highlighting_cache = 1
@@ -125,6 +151,7 @@ set splitbelow
 set splitright
 
 set scrolloff=10     " Keep 10 lines at top/bottom of window when scrolling
+set sidescrolloff=10
 
 " Leave paste mode on exit
 au InsertLeave * set nopaste
@@ -141,18 +168,12 @@ nnoremap <Down>  :resize -2<CR>
 nnoremap <Right> :vertical resize +2<CR>le
 nnoremap <Left>  :vertical resize -2<CR>
 
-" Cliboards
-set clipboard=unnamed " Use OSX clipboard
-
 " Quick window navigation
 let i = 1
 while i <= 9
     execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
     let i = i + 1
 endwhi
-
-" Autosave
-set autowriteall  " Save when switching buffers
 
 augroup nerdTreeEx
   autocmd!
@@ -172,6 +193,9 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General editing commands.
 "
+
+" Cliboards
+set clipboard=unnamedplus " Use OSX clipboard
 
 " Move lines up/down
 nnoremap <C-k> :m-2<CR>
@@ -200,13 +224,13 @@ augroup sourcesession
   \   source Session.vim |
   \ endif
 
-  " " When editing a file, always jump to the last known cursor position.
-  " " Don't do it for commit messages, when the position is invalid, or when
-  " " inside an event handler (happens when dropping a file on gvim).
-  " autocmd BufReadPost *
-  " \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-  " \   exe "normal g`\"" |
-  " \ endif
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+  \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal g`\"" |
+  \ endif
 augroup END
 
 augroup TrailingWhitespace
@@ -226,7 +250,20 @@ augroup TrailingWhitespace
   au BufWritePre * :call <SID>RemoveTrailingWhitespaces()
 augroup END
 
+set autowriteall    " Save when switching buffers
 
+augroup autosaveEx
+  autocmd!
+
+  au FocusLost,BufLeave * silent! update
+augroup END
+
+" Snippets
+let g:UltiSnipsSnippetsDir='~/.vim/mysnippets'
+let g:UltiSnipsSnippetDirectories=["mysnippets"]
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching & file navigation
@@ -247,6 +284,12 @@ nnoremap , :Buffers<CR>
 let $FZF_DEFAULT_COMMAND='ag -g "" --path-to-ignore .agignore'
 
 
+augroup buffersEx
+  autocmd!
+
+
+  command! CloseBuffers %bd|e#
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Per file/syntax customization
@@ -255,12 +298,15 @@ let $FZF_DEFAULT_COMMAND='ag -g "" --path-to-ignore .agignore'
 augroup syntaxOverrides
   autocmd!
 
-  autocmd BufRead,BufNewFile Atlasfile set filetype=ruby
+  autocmd BufRead,BufNewFile Jakefile,*.jake,*.ejs set filetype=javascript
   autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
   autocmd BufRead,BufNewFile Dockerfile.erb set filetype=dockerfile
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
   autocmd BufRead,BufNewFile *.aurora set filetype=python
   autocmd BufRead,BufNewFile tsconfig.json set filetype=typescript
+
+  " https://stackoverflow.com/a/34153085/76456
+  let ruby_no_expensive=1
 
 augroup END
 
@@ -276,6 +322,7 @@ augroup gitEx
   autocmd!
 
   au FileType gitcommit set tw=100
+  au FileType gitcommit set nonumber
 augroup END
 
 " Show diff of current file in external tool
@@ -308,7 +355,54 @@ nnoremap <leader>c :silent! bd! .rails-console \| bo 30split \| enew \| file .ra
 nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console \| term bash -l<CR>
 
 
+" JavaScript
+
+" let g:neoformat_verbose = 0
+
+augroup jsNeoformat
+  autocmd!
+
+  function! FindPrettier()
+    let a:src = expand( '%:p' )
+    let a:cmd = 'cd $( find `( SPEC=''' . a:src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type d -name node_modules ); pwd'
+    let a:node_modules = StrTrim( system( a:cmd ) )
+
+    let g:neoformat_javascript_prettier = {
+            \ 'exe': a:node_modules . '/.bin/prettier',
+            \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
+            \ 'stdin': 1,
+            \ }
+
+    let g:neoformat_typescript_prettier = {
+            \ 'exe': a:node_modules . '/.bin/prettier',
+            \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
+            \ 'stdin': 1,
+            \ }
+  endfunction
+
+  function! StrTrim(txt)
+    return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+  endfunction
+
+  autocmd FileType javascript call FindPrettier()
+  autocmd FileType typescript call FindPrettier()
+
+  autocmd BufWritePre *.ts Neoformat
+  autocmd BufWritePre *.js Neoformat
+  autocmd BufWritePre *.jsx Neoformat
+
+augroup END
+
+
+" Adrduino
+
+augroup ArduinoEx
+  autocmd!
+
+
+  command! Amake lcd %:p:h|make upload
+augroup END
+
 " Support per-project .vimrc commands
 set exrc
 set secure
-

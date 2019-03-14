@@ -3,20 +3,22 @@ unset RUBY_HEAP_MIN_SLOTS
 unset RAILS_ENV
 unset CC
 unset VERSION
-
+export RUBYOPT="-W0"
 
 export BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-source /opt/twitter/opt/asdf/asdf.sh
-source /opt/twitter/opt/autoenv/activate.sh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+source ~/.asdf/asdf.sh
+source ~/.asdf/completions/asdf.bash
+# source /opt/twitter/opt/autoenv/activate.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 source ~/.minikube-completion
 
-unset GIT_PS1_SHOWDIRTYSTATE
+export GIT_PS1_SHOWDIRTYSTATE=
+export GIT_PS1_SHOWUNTRACKEDFILES=
 
 function timer_start {
   timer=${timer:-$SECONDS}
@@ -32,12 +34,10 @@ trap 'timer_start' DEBUG
 function git_status_indicator {
   local git_status="$(git status 2> /dev/null)"
 
-    # echo "\e[38;5;2m⎇  "
-
   if [[ $git_status =~ "not staged for commit" ]]; then
     echo "\e[38;5;1m ▪︎ "
   elif [[ ! $git_status =~ "working directory clean" ]]; then
-    echo "\e[38;5;3m ✚ "
+    echo "\e[38;5;3m ⦿ "
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
     echo "\e[38;5;3m ● "
   elif [[ $git_status =~ "nothing to commit" ]]; then
@@ -50,7 +50,7 @@ function my_git_ps1 {
 }
 
 function current_dirname {
-  DIRNAME=$( dirname $( pwd ) )
+  DIRNAME=$( dirname "$( pwd )" )
   [[ "$DIRNAME" =~ ^"$HOME" ]] && DIRNAME="~${DIRNAME#$HOME}"
 
   if ! [[ "$DIRNAME" =~ ^/$ ]]; then
@@ -59,7 +59,7 @@ function current_dirname {
 }
 
 function current_basename {
-  BASENAME=$( basename $( pwd ) )
+  BASENAME=$( basename "$( pwd )" )
 
   if ! [[ "$BASENAME" =~ ^/$ ]]; then
     echo /$BASENAME
@@ -88,7 +88,8 @@ function my_prompt {
 
   PS1="\r\n\n${CURRENT_TIME}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
 }
-export PROMPT_COMMAND="my_prompt; timer_stop"
+export PROMPT_COMMAND="history -a; my_prompt; timer_stop"
+shopt -s histappend
 
 # function for setting terminal titles in OSX
 function title {
@@ -121,12 +122,13 @@ alias k='kubectl'
 alias mk='minikube'
 alias mkd='minikube dashboard'
 alias t='terraform'
-alias a='atlas'
 alias light='base16_mexico-light'
-alias dark='base16_oceanicnext'
-# alias dark='base16_material-darker'
+# alias dark='base16_eighties'
+# alias dark='base16_oceanicnext'
+alias dark='base16_material'
 # alias dark='base16_default-dark'
 alias matrix='base16_greenscreen'
+alias psql='pgcli'
 
 lactasticDir() {
   cd ~/workspace/phallguy/lactastic
@@ -147,15 +149,19 @@ nd2() {
 export GPG_TTY=$(tty)
 
 export EDITOR="nvim"
+export VISUAL="nvim"
 export BUNDLER_EDITOR="nvim"
 export NO_TIMEOUT=1
-
-
-
-
+export LESS=R
+export HISTCONTROL=ignoreboth:erasedups
+# Don't list every path/var change on every prompt
+export DIRENV_LOG_FORMAT=
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/google-cloud-sdk/path.bash.inc' ]; then source '/usr/local/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/usr/local/google-cloud-sdk/completion.bash.inc' ]; then source '/usr/local/google-cloud-sdk/completion.bash.inc'; fi
+
+eval "$(direnv hook bash)"
+

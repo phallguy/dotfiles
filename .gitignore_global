@@ -4,5 +4,8 @@
 *.sublime-workspace
 *.env
 .nvmrc
+.vimrc
 .jsbeautifyrc
 *.orig
+Session.vim
+*.envrc

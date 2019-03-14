@@ -1,9 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/palexander/.dotfiles/vim'
-let g:netrw_dirhist_2='/Users/palexander/workspace/phallguy/lactastic/clients/app-ui/src/components/ui-Form'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/palexander/.byobu/bin'
+let g:netrw_dirhist_2='/Users/palexander/.byobu'
 let g:netrw_dirhist_3='/Users/palexander/.dotfiles/vim'
-let g:netrw_dirhist_4='/Users/palexander/.dotfiles/vim/autoload'
-let g:netrw_dirhist_5='/Users/palexander/workspace/niche/niche_web'
-let g:netrw_dirhist_6='/Users/palexander/workspace/niche'
-let g:netrw_dirhist_7='/Users/palexander/workspace/niche/niche_web/niche-co/app/services/audits/streams'
+let g:netrw_dirhist_4='/opt/twitter_mde/package/twitter_dev_homebrew/658eb521e07b6650372a4960edf431c5d44bbe46fb2e305c4b0a4b2b088f5e0d/Cellar/imagemagick/7.0.7-28/etc/ImageMagick-7'
