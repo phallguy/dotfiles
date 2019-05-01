@@ -60,7 +60,7 @@ set undodir=$HOME/.vimundo/ " use a directory to store the undo history
 "
 call plug#begin('~/.vim/plugged')
   Plug 'MarcWeber/vim-addon-local-vimrc' " import .vimrc from CWD when launching
-  Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
+  " Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
 
   " Visual experience
   Plug 'chriskempson/base16-vim'
@@ -357,7 +357,7 @@ nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console 
 
 " JavaScript
 
-" let g:neoformat_verbose = 0
+" let g:neoformat_verbose = 1
 
 augroup jsNeoformat
   autocmd!
@@ -378,6 +378,19 @@ augroup jsNeoformat
             \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
             \ 'stdin': 1,
             \ }
+
+    let g:neoformat_less_prettier = {
+            \ 'exe': a:node_modules . '/.bin/prettier',
+            \ 'args': ['--stdin', '--stdin-filepath', '%:p', '--parser', 'css'],
+            \ 'stdin': 1,
+            \ }
+
+    let g:neoformat_css_prettier = {
+            \ 'exe': a:node_modules . '/.bin/prettier',
+            \ 'args': ['--stdin', '--stdin-filepath', '%:p', '--parser', 'css'],
+            \ 'stdin': 1,
+            \ }
+
   endfunction
 
   function! StrTrim(txt)
@@ -386,10 +399,8 @@ augroup jsNeoformat
 
   autocmd FileType javascript call FindPrettier()
   autocmd FileType typescript call FindPrettier()
-
-  autocmd BufWritePre *.ts Neoformat
-  autocmd BufWritePre *.js Neoformat
-  autocmd BufWritePre *.jsx Neoformat
+  autocmd FileType less call FindPrettier()
+  autocmd FileType css call FindPrettier()
 
 augroup END
 

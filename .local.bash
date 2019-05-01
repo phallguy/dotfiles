@@ -114,10 +114,10 @@ alias srails='spring rails'
 alias srake='spring rake'
 alias spec='spring rspec'
 alias d='docker'
-alias v='vagrant'
 alias vi='nvim'
 alias nv='cd ~/workspace/niche/niche_web; vi'
 alias lv='cd ~/workspace/phallguy/lactastic; vi'
+alias av='cd ~/workspace/niche/arthouse; vi'
 alias k='kubectl'
 alias mk='minikube'
 alias mkd='minikube dashboard'
@@ -143,6 +143,11 @@ nd() {
 
 nd2() {
   cd ~/workspace/niche/niche_web2
+  [[ ! -z "$1" ]] && cd "$1" || return
+}
+
+ad() {
+  cd ~/workspace/niche/arthouse
   [[ ! -z "$1" ]] && cd "$1" || return
 }
 
