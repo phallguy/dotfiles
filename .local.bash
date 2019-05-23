@@ -3,19 +3,27 @@ unset RUBY_HEAP_MIN_SLOTS
 unset RAILS_ENV
 unset CC
 unset VERSION
-export RUBYOPT="-W0"
+# export RUBYOPT="-W0"
+
+# Make sure brew executables are in path
+export PATH="/usr/local/sbin:$PATH"
+
+export CLICOLOR=1
+export LSCOLORS=gxfxFxdxbxDxDxBxBxExEx
 
 export BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-source ~/.asdf/asdf.sh
-source ~/.asdf/completions/asdf.bash
-# source /opt/twitter/opt/autoenv/activate.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.minikube-completion ] && source ~/.minikube-completion
+[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
 
-source ~/.minikube-completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion || {
+    # if not found in /usr/local/etc, try the brew --prefix location
+    [ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ] && \
+        . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+}
 
 export GIT_PS1_SHOWDIRTYSTATE=
 export GIT_PS1_SHOWUNTRACKEDFILES=
@@ -36,12 +44,12 @@ function git_status_indicator {
 
   if [[ $git_status =~ "not staged for commit" ]]; then
     echo "\e[38;5;1m ▪︎ "
+  elif [[ $git_status =~ "nothing to commit" ]]; then
+    echo "\e[38;5;2m   "
   elif [[ ! $git_status =~ "working directory clean" ]]; then
     echo "\e[38;5;3m ⦿ "
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
     echo "\e[38;5;3m ● "
-  elif [[ $git_status =~ "nothing to commit" ]]; then
-    echo "\e[38;5;2m   "
   fi
 }
 
@@ -88,8 +96,9 @@ function my_prompt {
 
   PS1="\r\n\n${CURRENT_TIME}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
 }
-export PROMPT_COMMAND="history -a; my_prompt; timer_stop"
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r; my_prompt; timer_stop"
 shopt -s histappend
+export HISTCONTROL=ignoreboth:erasedups
 
 # function for setting terminal titles in OSX
 function title {
@@ -110,45 +119,26 @@ fi
 alias ll='ls -lFh'
 alias la='ls -A'
 alias be='bundle exec'
-alias srails='spring rails'
-alias srake='spring rake'
-alias spec='spring rspec'
 alias d='docker'
+alias dcl='docker-compose -f docker-compose.yml.local'
 alias vi='nvim'
-alias nv='cd ~/workspace/niche/niche_web; vi'
-alias lv='cd ~/workspace/phallguy/lactastic; vi'
-alias av='cd ~/workspace/niche/arthouse; vi'
 alias k='kubectl'
-alias mk='minikube'
-alias mkd='minikube dashboard'
 alias t='terraform'
-alias light='base16_mexico-light'
-# alias dark='base16_eighties'
-# alias dark='base16_oceanicnext'
-alias dark='base16_material'
-# alias dark='base16_default-dark'
-alias matrix='base16_greenscreen'
+alias light_theme='base16_mexico-light'
+alias dark_theme='base16_material'
+alias matrix_theme='base16_greenscreen'
+alias admin_theme='base16_material-palenight'
 alias psql='pgcli'
 
-lactasticDir() {
-  cd ~/workspace/phallguy/lactastic
-  [[ ! -z "$1" ]] && cd "$1" || return
-}
-alias ld='lactasticDir'
-
-nd() {
-  cd ~/workspace/niche/niche_web
-  [[ ! -z "$1" ]] && cd "$1" || return
-}
-
-nd2() {
-  cd ~/workspace/niche/niche_web2
-  [[ ! -z "$1" ]] && cd "$1" || return
-}
-
-ad() {
-  cd ~/workspace/niche/arthouse
-  [[ ! -z "$1" ]] && cd "$1" || return
+bd() {
+  cd ~/workspace/bark
+  if [[ ! -z "$1" ]]; then
+    TARGET_DIR=$1
+    if ! [ -f "$TARGET_DIR" ]; then
+      TARGET_DIR=bark-$TARGET_DIR
+    fi
+    cd "$TARGET_DIR" || return
+  fi
 }
 
 export GPG_TTY=$(tty)
@@ -157,10 +147,9 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export BUNDLER_EDITOR="nvim"
 export NO_TIMEOUT=1
-export LESS=R
-export HISTCONTROL=ignoreboth:erasedups
+export LESS=FRX
 # Don't list every path/var change on every prompt
-export DIRENV_LOG_FORMAT=
+# export DIRENV_LOG_FORMAT=
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/google-cloud-sdk/path.bash.inc' ]; then source '/usr/local/google-cloud-sdk/path.bash.inc'; fi
@@ -170,3 +159,5 @@ if [ -f '/usr/local/google-cloud-sdk/completion.bash.inc' ]; then source '/usr/l
 
 eval "$(direnv hook bash)"
 
+# Make sure its last so that we don't get a PATH warning all the time
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

@@ -9,3 +9,5 @@
 *.orig
 Session.vim
 *.envrc
+.ruby-version
+docker-compose.yml.local

@@ -60,7 +60,7 @@ set undodir=$HOME/.vimundo/ " use a directory to store the undo history
 "
 call plug#begin('~/.vim/plugged')
   Plug 'MarcWeber/vim-addon-local-vimrc' " import .vimrc from CWD when launching
-  " Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
+  Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
 
   " Visual experience
   Plug 'chriskempson/base16-vim'
@@ -95,11 +95,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-ruby/vim-ruby'
   Plug 'tpope/vim-rails'
   Plug 'thoughtbot/vim-rspec'
+  Plug 'janko/vim-test'
   Plug 'nelstrom/vim-textobj-rubyblock'
 
   " Javasript
   Plug 'sbdchd/neoformat'         " prettier/eslint formatting rules
   Plug 'leafgarland/typescript-vim'
+  Plug 'kchmck/vim-coffee-script'
 
   " Markdown
   Plug 'mzlogin/vim-markdown-toc'
@@ -128,7 +130,7 @@ if &t_Co > 2 || has("gui_running")
     source ~/.vimrc_background
   endif
 
-  let g:airline_powerline_fonts = 0
+  let g:airline_powerline_fonts = 1
   let g:airline_section_a = airline#section#create([ 'mode' ])
   let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
   let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
@@ -340,7 +342,6 @@ map <leader>t :call RunCurrentSpecFile()<CR>
 map <leader>s :call RunNearestSpec()<CR>
 map <leader>l :call RunLastSpec()<CR>
 map <leader>a :call RunAllSpecs()<CR>
-map <leader>x :bd! .rspec-output<CR>
 map <space><space> :bd! .rspec-output<CR>
 map <leader>r :AV<CR>
 
@@ -354,6 +355,9 @@ let g:rails_console_command = "echo no command set"
 nnoremap <leader>c :silent! bd! .rails-console \| bo 30split \| enew \| file .rails-console \| call termopen( g:rails_console_command ) \| set bufhidden=hide<CR>
 nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console \| term bash -l<CR>
 
+if has('nvim')
+  let test#strategy = "neovim"
+end
 
 " JavaScript
 
@@ -401,7 +405,9 @@ augroup jsNeoformat
   autocmd FileType typescript call FindPrettier()
   autocmd FileType less call FindPrettier()
   autocmd FileType css call FindPrettier()
+  autocmd FileType scss call FindPrettier()
 
+  autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
 
@@ -409,7 +415,6 @@ augroup END
 
 augroup ArduinoEx
   autocmd!
-
 
   command! Amake lcd %:p:h|make upload
 augroup END
