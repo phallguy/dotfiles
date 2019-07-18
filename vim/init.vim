@@ -45,7 +45,8 @@ set preserveindent
 
 " Line Numbers
 set number        " Always show line numbers
-set numberwidth=5
+" set relativenumber
+set numberwidth=3
 
 " https://stackoverflow.com/a/25276429/76456
 " Make regex for ruby syntax faster
@@ -66,6 +67,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'chriskempson/base16-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'chrisbra/Colorizer'
 
   " General editing
   Plug 'vim-scripts/tComment'     " Comment toggling
@@ -80,28 +82,30 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   Plug 'scrooloose/nerdtree'
+  Plug 'yssl/QFEnter'
 
   " Git/status
   Plug 'tpope/vim-fugitive'       " Git integration
   Plug 'tpope/vim-rhubarb'        " More GitHub integration
+  " Plug 'airblade/vim-gitgutter'
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Language support
   "
   Plug 'kana/vim-textobj-user'    " Custom 'object' targeting for movements
   Plug 'glts/vim-textobj-comment' " Comments as text objects
+  Plug 'w0rp/ale'                 " Code formatting
 
   " Ruby/rails
   Plug 'vim-ruby/vim-ruby'
   Plug 'tpope/vim-rails'
-  Plug 'thoughtbot/vim-rspec'
   Plug 'janko/vim-test'
   Plug 'nelstrom/vim-textobj-rubyblock'
 
   " Javasript
-  Plug 'sbdchd/neoformat'         " prettier/eslint formatting rules
   Plug 'leafgarland/typescript-vim'
   Plug 'kchmck/vim-coffee-script'
+  Plug 'dunckr/js_alternate.vim'   " Switch to tests files like rails
 
   " Markdown
   Plug 'mzlogin/vim-markdown-toc'
@@ -129,9 +133,10 @@ if &t_Co > 2 || has("gui_running")
   if filereadable(expand("~/.vimrc_background"))
     source ~/.vimrc_background
   endif
-
   let g:airline_powerline_fonts = 1
+  let g:airline_theme='base16_vim'
   let g:airline_section_a = airline#section#create([ 'mode' ])
+  let g:airline#extensions#branch#format = 2
   let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
   let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
   let g:airline_skip_empty_sections = 1
@@ -139,9 +144,9 @@ if &t_Co > 2 || has("gui_running")
 
   let g:airline_highlighting_cache = 1
   let g:airline#extensions#whitespace#enabled = 0
+  let g:airline#extensions#ale#enabled = 1
 
 endif
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -180,9 +185,7 @@ endwhi
 augroup nerdTreeEx
   autocmd!
 
-  " Toggle nerdtree with F10
   map <F10> :NERDTreeToggle<CR>
-
   map <F9> :NERDTreeFind<CR>
 
   let NERDTreeMapOpenInTab='<C-t>'
@@ -267,6 +270,28 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 
+" Code formatting
+"
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'json': ['prettier'],
+\   'css': ['prettier'],
+\   'ruby': ['rubocop']
+\}
+
+let g:ale_linters = {
+\   'ruby': ['rubocop']
+\}
+
+let g:ale_ruby_rubocop_options = '--extra-details --display-style-guide'
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%severity%] %code: %%s [%linter%]'
+
+map <leader>f :ALEFix<CR>
+map <leader>a :ALELint<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching & file navigation
 "
@@ -285,30 +310,28 @@ nnoremap <C-P> :FZF<CR>
 nnoremap , :Buffers<CR>
 let $FZF_DEFAULT_COMMAND='ag -g "" --path-to-ignore .agignore'
 
+let g:qfenter_keymap = {
+\   "vopen": ['<C-v>'],
+\   "topen": ['<C-t>'],
+\}
 
-augroup buffersEx
-  autocmd!
-
-
-  command! CloseBuffers %bd|e#
-augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Per file/syntax customization
-"
+" _er file/syntax customization
 
 augroup syntaxOverrides
   autocmd!
 
   autocmd BufRead,BufNewFile Jakefile,*.jake,*.ejs set filetype=javascript
   autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
-  autocmd BufRead,BufNewFile Dockerfile.erb set filetype=dockerfile
+  autocmd BufRead,BufNewFile Dockerfile.ejs set filetype=dockerfile
+  autocmd BufRead,BufNewFile *.yaml.ejs set filetype=yaml
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
   autocmd BufRead,BufNewFile *.aurora set filetype=python
   autocmd BufRead,BufNewFile tsconfig.json set filetype=typescript
 
   " https://stackoverflow.com/a/34153085/76456
-  let ruby_no_expensive=1
+  " let ruby_no_expensive=1
 
 augroup END
 
@@ -336,88 +359,42 @@ augroup reload_vimrc
   autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
 
+" Markdown
+
 " Ruby/Rails
-" Rails
-map <leader>t :call RunCurrentSpecFile()<CR>
-map <leader>s :call RunNearestSpec()<CR>
-map <leader>l :call RunLastSpec()<CR>
-map <leader>a :call RunAllSpecs()<CR>
-map <space><space> :bd! .rspec-output<CR>
+map <leader>t :TestFile<CR>
+map <leader>s :TestNearest<CR>
+map <leader>l :TestLast<CR>
 map <leader>r :AV<CR>
-
-if has('nvim') || exists("g:gui_oni")
-  let g:rspec_command = "silent! bd! .rspec-output | bo 30split | enew | call termopen( \"cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \\\"$CP\\\" ] ; do echo $CP;  CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec); echo 'Running specs...'; cd ..; ([ -x bin/rspec_runner ] && bundle exec bin/rspec_runner {spec}) || bundle exec bin/rspec {spec}\" ) | set bufhidden=hide | file .rspec-output"
-else
-  let g:rspec_command = "!cd $(find `( SPEC='{spec}'; CP=${SPEC\\%/*}; while [ -n \"$CP\" ] ; do echo $CP; CP=${CP\\%/*}; done; echo / ) ` -mindepth 1 -maxdepth 1 -type d -name spec)/..; echo 'Running specs...'; bin/rspec {spec}"
-endif
-
-let g:rails_console_command = "echo no command set"
-nnoremap <leader>c :silent! bd! .rails-console \| bo 30split \| enew \| file .rails-console \| call termopen( g:rails_console_command ) \| set bufhidden=hide<CR>
-nnoremap <leader>m :silent! bd! .console \| bo 30split \| enew \| file .console \| term bash -l<CR>
 
 if has('nvim')
   let test#strategy = "neovim"
 end
 
-" JavaScript
-
-" let g:neoformat_verbose = 1
-
-augroup jsNeoformat
+augroup testProjectRoot
   autocmd!
 
-  function! FindPrettier()
+  " For mono-repo projects, dynamically look for package.json or Gemfile to
+  " find the 'root' to run tests from
+
+  function! SetTestRoot()
     let a:src = expand( '%:p' )
-    let a:cmd = 'cd $( find `( SPEC=''' . a:src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type d -name node_modules ); pwd'
-    let a:node_modules = StrTrim( system( a:cmd ) )
-
-    let g:neoformat_javascript_prettier = {
-            \ 'exe': a:node_modules . '/.bin/prettier',
-            \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
-            \ 'stdin': 1,
-            \ }
-
-    let g:neoformat_typescript_prettier = {
-            \ 'exe': a:node_modules . '/.bin/prettier',
-            \ 'args': ['--stdin', '--stdin-filepath', '%:p'],
-            \ 'stdin': 1,
-            \ }
-
-    let g:neoformat_less_prettier = {
-            \ 'exe': a:node_modules . '/.bin/prettier',
-            \ 'args': ['--stdin', '--stdin-filepath', '%:p', '--parser', 'css'],
-            \ 'stdin': 1,
-            \ }
-
-    let g:neoformat_css_prettier = {
-            \ 'exe': a:node_modules . '/.bin/prettier',
-            \ 'args': ['--stdin', '--stdin-filepath', '%:p', '--parser', 'css'],
-            \ 'stdin': 1,
-            \ }
-
+    let a:cmd = 'dirname $( find `( SPEC=''' . a:src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type f -name Gemfile -o -name package.json | head -n 1 )'
+    let g:test#project_root = StrTrim( system( a:cmd ) )
   endfunction
 
   function! StrTrim(txt)
     return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
   endfunction
 
-  autocmd FileType javascript call FindPrettier()
-  autocmd FileType typescript call FindPrettier()
-  autocmd FileType less call FindPrettier()
-  autocmd FileType css call FindPrettier()
-  autocmd FileType scss call FindPrettier()
-
-  autocmd BufWritePre * undojoin | Neoformat
+  autocmd FileType javascript call SetTestRoot()
+  autocmd FileType typescript call SetTestRoot()
+  autocmd FileType ruby call SetTestRoot()
 augroup END
 
+" JavaScript
 
-" Adrduino
-
-augroup ArduinoEx
-  autocmd!
-
-  command! Amake lcd %:p:h|make upload
-augroup END
+nnoremap <leader>j :call js_alternate#run()<cr>
 
 " Support per-project .vimrc commands
 set exrc

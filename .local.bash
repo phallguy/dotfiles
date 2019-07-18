@@ -11,13 +11,14 @@ export PATH="/usr/local/sbin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=gxfxFxdxbxDxDxBxBxExEx
 
+# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
 export BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.minikube-completion ] && source ~/.minikube-completion
-[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion || {
     # if not found in /usr/local/etc, try the brew --prefix location
@@ -151,13 +152,14 @@ export LESS=FRX
 # Don't list every path/var change on every prompt
 # export DIRENV_LOG_FORMAT=
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/google-cloud-sdk/path.bash.inc' ]; then source '/usr/local/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/google-cloud-sdk/completion.bash.inc' ]; then source '/usr/local/google-cloud-sdk/completion.bash.inc'; fi
-
 eval "$(direnv hook bash)"
 
 # Make sure its last so that we don't get a PATH warning all the time
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/palexander/google-cloud-sdk/path.bash.inc' ]; then . '/Users/palexander/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/palexander/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/palexander/google-cloud-sdk/completion.bash.inc'; fi

@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# You need to configure vim to load .git/tags (or install Fugitive.vim).
+#
+
+EXCLUDE='' # --exclude=config --exclude=db --exclude=test --exclude=node_modules --exclude=public --exclude=webpack --exclude=script --exclude=app/assets --exclude=jenkins --exclude=vendor --exclude=coverage --exclude=package\*.json'
+
+mkdir .git/tags_lock 2>/dev/null || exit 0
+echo "Started ctags process..."
+
+(
+  trap "rmdir .git/tags_lock; rm -f tags.tmp" EXIT ;
+  command -v ripper-tags >/dev/null || gem install ripper-tags ;
+  ripper-tags -R --force --tag-relative $EXCLUDE -f tags.tmp ;
+  mv tags.tmp tags
+) &
+

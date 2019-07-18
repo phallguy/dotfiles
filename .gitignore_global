@@ -10,4 +10,8 @@
 Session.vim
 *.envrc
 .ruby-version
+.rubocop.yml
+.rufo
 docker-compose.yml.local
+tags
+chromedriver
