@@ -15,3 +15,5 @@ Session.vim
 docker-compose.yml.local
 tags
 chromedriver
+.agignore
+.ctags

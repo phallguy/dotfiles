@@ -87,25 +87,28 @@ call plug#begin('~/.vim/plugged')
   " Git/status
   Plug 'tpope/vim-fugitive'       " Git integration
   Plug 'tpope/vim-rhubarb'        " More GitHub integration
-  " Plug 'airblade/vim-gitgutter'
+  Plug 'airblade/vim-gitgutter'
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Language support
   "
   Plug 'kana/vim-textobj-user'    " Custom 'object' targeting for movements
   Plug 'glts/vim-textobj-comment' " Comments as text objects
-  Plug 'w0rp/ale'                 " Code formatting
+  Plug 'dense-analysis/ale'       " Code formatting
 
   " Ruby/rails
   Plug 'vim-ruby/vim-ruby'
   Plug 'tpope/vim-rails'
   Plug 'janko/vim-test'
   Plug 'nelstrom/vim-textobj-rubyblock'
+  Plug 'joker1007/vim-ruby-heredoc-syntax'
 
   " Javasript
   Plug 'leafgarland/typescript-vim'
-  Plug 'kchmck/vim-coffee-script'
+  " Plug 'kchmck/vim-coffee-script'
   Plug 'dunckr/js_alternate.vim'   " Switch to tests files like rails
+  Plug 'pangloss/vim-javascript'
+  Plug 'MaxMEllon/vim-jsx-pretty'
 
   " Markdown
   Plug 'mzlogin/vim-markdown-toc'
@@ -274,13 +277,16 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 "
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'html': ['prettier'],
 \   'json': ['prettier'],
 \   'css': ['prettier'],
-\   'ruby': ['rubocop']
+\   'scss': ['prettier'],
+\   'ruby': ['rubocop', 'rufo']
 \}
 
 let g:ale_linters = {
-\   'ruby': ['rubocop']
+\   'ruby': ['rubocop', 'rufo']
 \}
 
 let g:ale_ruby_rubocop_options = '--extra-details --display-style-guide'
@@ -329,6 +335,7 @@ augroup syntaxOverrides
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
   autocmd BufRead,BufNewFile *.aurora set filetype=python
   autocmd BufRead,BufNewFile tsconfig.json set filetype=typescript
+  autocmd BufRead,BufNewFile .envrc set filetype=sh
 
   " https://stackoverflow.com/a/34153085/76456
   " let ruby_no_expensive=1
@@ -340,6 +347,8 @@ highlight link xmlEndTag xmlTag
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
+let g:html_indent_inctags = 'html,body,head,tbody,p'
+
 
 
 " Git commit messages
@@ -391,6 +400,8 @@ augroup testProjectRoot
   autocmd FileType typescript call SetTestRoot()
   autocmd FileType ruby call SetTestRoot()
 augroup END
+
+let g:closetag_filetypes = 'html,xhtml,phtml,eruby'
 
 " JavaScript
 
