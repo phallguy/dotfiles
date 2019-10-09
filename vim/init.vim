@@ -105,7 +105,7 @@ call plug#begin('~/.vim/plugged')
 
   " Javasript
   Plug 'leafgarland/typescript-vim'
-  " Plug 'kchmck/vim-coffee-script'
+  Plug 'kchmck/vim-coffee-script'
   Plug 'dunckr/js_alternate.vim'   " Switch to tests files like rails
   Plug 'pangloss/vim-javascript'
   Plug 'MaxMEllon/vim-jsx-pretty'
@@ -277,6 +277,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 "
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
+\   'coffee': ['prettier'],
 \   'typescript': ['prettier'],
 \   'html': ['prettier'],
 \   'json': ['prettier'],
@@ -376,21 +377,27 @@ map <leader>s :TestNearest<CR>
 map <leader>l :TestLast<CR>
 map <leader>r :AV<CR>
 
+let g:test#preserve_screen = 1
+let test#filename_modifier = ':p'
+
 if has('nvim')
   let test#strategy = "neovim"
 end
 
-augroup testProjectRoot
+augroup subProjectRoot
   autocmd!
 
   " For mono-repo projects, dynamically look for package.json or Gemfile to
-  " find the 'root' to run tests from
-
+  " find the 'root' to run tests and ale linters from
   function! SetTestRoot()
-    let a:src = expand( '%:p' )
-    let a:cmd = 'dirname $( find `( SPEC=''' . a:src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type f -name Gemfile -o -name package.json | head -n 1 )'
-    let g:test#project_root = StrTrim( system( a:cmd ) )
+    let src = expand( '%:p' )
+    let cmd = 'dirname $( find `( SPEC=''' . src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type f -name Gemfile -o -name package.json | head -n 1 )'
+    let g:test#project_root = StrTrim( system( cmd ) )
+    let g:project_root = StrTrim( system( cmd ) )
+    let g:ale_command_wrapper = 'cd ' . g:project_root . '; '
   endfunction
+
+  " let g:test#ruby#rspec#executable = 'bundle install; bundle exec rspec'
 
   function! StrTrim(txt)
     return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
@@ -399,6 +406,7 @@ augroup testProjectRoot
   autocmd FileType javascript call SetTestRoot()
   autocmd FileType typescript call SetTestRoot()
   autocmd FileType ruby call SetTestRoot()
+
 augroup END
 
 let g:closetag_filetypes = 'html,xhtml,phtml,eruby'

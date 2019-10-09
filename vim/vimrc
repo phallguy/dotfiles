@@ -1,5 +1,5 @@
-set encoding=utf-8
 set shell=/bin/bash
+set encoding=utf-8
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing Experience
@@ -63,7 +63,7 @@ if &t_Co > 2 || has("gui_running")
 
   set background=dark
 
-  if filereadable(expand("~/.vimrc_background"))
+  if filereadable(expand("~/.vimrc_background")) && !has("gui_running")
     source ~/.vimrc_background
   endif
 

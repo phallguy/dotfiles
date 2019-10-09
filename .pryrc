@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 begin
-  require 'awesome_print'
-  AwesomePrint.pry!
+  require 'rails/console/app'
+  extend Rails::ConsoleMethods
 rescue LoadError
-  puts 'no awesome_print :('
 end
 
 # Pry.config.correct_indent = false
