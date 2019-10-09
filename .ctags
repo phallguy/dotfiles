@@ -1,0 +1,4 @@
+--exclude=.git
+--exclude=log
+--exclude=tmp
+--options=/Users/palexander/dotfiles/ctags-patterns-for-javascript/ctagsrc
