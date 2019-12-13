@@ -60,62 +60,62 @@ set undodir=$HOME/.vimundo/ " use a directory to store the undo history
 " Plugins
 "
 call plug#begin('~/.vim/plugged')
-  Plug 'MarcWeber/vim-addon-local-vimrc' " import .vimrc from CWD when launching
-  Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
+Plug 'MarcWeber/vim-addon-local-vimrc' " import .vimrc from CWD when launching
+Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
 
-  " Visual experience
-  Plug 'chriskempson/base16-vim'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'chrisbra/Colorizer'
+" Visual experience
+Plug 'chriskempson/base16-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'lilydjwg/colorizer'
 
-  " General editing
-  Plug 'vim-scripts/tComment'     " Comment toggling
-  Plug 'terryma/vim-multiple-cursors'
-  Plug 'junegunn/vim-easy-align'  " Multi-line bock alignment
-  Plug 'tpope/vim-surround'       " change surrounding tags/quotes/parens
-  Plug 'SirVer/ultisnips'         " Code snippets
-  Plug 'terryma/vim-expand-region'
-  Plug 'ervandew/supertab'
+" General editing
+Plug 'vim-scripts/tComment'     " Comment toggling
+Plug 'terryma/vim-multiple-cursors'
+Plug 'junegunn/vim-easy-align'  " Multi-line bock alignment
+Plug 'tpope/vim-surround'       " change surrounding tags/quotes/parens
+Plug 'SirVer/ultisnips'         " Code snippets
+Plug 'terryma/vim-expand-region'
+Plug 'ervandew/supertab'
+Plug 'reedes/vim-pencil'
 
-  " Searching & navigation
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'scrooloose/nerdtree'
-  Plug 'yssl/QFEnter'
+" Searching & navigation
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'yssl/QFEnter'
 
-  " Git/status
-  Plug 'tpope/vim-fugitive'       " Git integration
-  Plug 'tpope/vim-rhubarb'        " More GitHub integration
-  Plug 'airblade/vim-gitgutter'
+" Git/status
+Plug 'tpope/vim-fugitive'       " Git integration
+Plug 'tpope/vim-rhubarb'        " More GitHub integration
+Plug 'airblade/vim-gitgutter'
 
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Language support
-  "
-  Plug 'kana/vim-textobj-user'    " Custom 'object' targeting for movements
-  Plug 'glts/vim-textobj-comment' " Comments as text objects
-  Plug 'dense-analysis/ale'       " Code formatting
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Language support
+"
+Plug 'janko/vim-test'
+Plug 'kana/vim-textobj-user'    " Custom 'object' targeting for movements
+Plug 'glts/vim-textobj-comment' " Comments as text objects
+Plug 'dense-analysis/ale'       " Code formatting
 
-  " Ruby/rails
-  Plug 'vim-ruby/vim-ruby'
-  Plug 'tpope/vim-rails'
-  Plug 'janko/vim-test'
-  Plug 'nelstrom/vim-textobj-rubyblock'
-  Plug 'joker1007/vim-ruby-heredoc-syntax'
+" Ruby/rails
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'joker1007/vim-ruby-heredoc-syntax'
 
-  " Javasript
-  Plug 'leafgarland/typescript-vim'
-  Plug 'kchmck/vim-coffee-script'
-  Plug 'dunckr/js_alternate.vim'   " Switch to tests files like rails
-  Plug 'pangloss/vim-javascript'
-  Plug 'MaxMEllon/vim-jsx-pretty'
+" Javasript
+Plug 'leafgarland/typescript-vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'pangloss/vim-javascript'
+Plug 'MaxMEllon/vim-jsx-pretty'
 
-  " Markdown
-  Plug 'mzlogin/vim-markdown-toc'
+" Markdown
+" Plug 'mzlogin/vim-markdown-toc'
 
-  " Arduino
-  Plug 'sudar/vim-arduino-syntax'
-  Plug 'sudar/vim-arduino-snippets'
+" Arduino
+" Plug 'sudar/vim-arduino-syntax'
+" Plug 'sudar/vim-arduino-snippets'
 
 call plug#end()
 
@@ -134,12 +134,14 @@ if &t_Co > 2 || has("gui_running")
   set background=dark
 
   if filereadable(expand("~/.vimrc_background"))
+    let base16colorspace=256  " Access colors present in 256 colorspace
     source ~/.vimrc_background
   endif
   let g:airline_powerline_fonts = 1
   let g:airline_theme='base16_vim'
   let g:airline_section_a = airline#section#create([ 'mode' ])
   let g:airline#extensions#branch#format = 2
+  let g:airline#extensions#branch#displayed_head_limit = 16
   let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
   let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
   let g:airline_skip_empty_sections = 1
@@ -148,7 +150,7 @@ if &t_Co > 2 || has("gui_running")
   let g:airline_highlighting_cache = 1
   let g:airline#extensions#whitespace#enabled = 0
   let g:airline#extensions#ale#enabled = 1
-
+  let g:colorizer_startup = 0
 endif
 
 
@@ -178,11 +180,15 @@ nnoremap <Down>  :resize -2<CR>
 nnoremap <Right> :vertical resize +2<CR>le
 nnoremap <Left>  :vertical resize -2<CR>
 
+" " Move through soft wrapped lines like regular lines
+" nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+" nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+
 " Quick window navigation
 let i = 1
 while i <= 9
-    execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
-    let i = i + 1
+  execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
+  let i = i + 1
 endwhi
 
 augroup nerdTreeEx
@@ -228,17 +234,17 @@ augroup sourcesession
   " Reload previously saved session on startup
   autocmd!
   autocmd VimEnter * nested
-  \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
-  \   source Session.vim |
-  \ endif
+        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
+        \   source Session.vim |
+        \ endif
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
-  \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g`\"" |
-  \ endif
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
 augroup END
 
 augroup TrailingWhitespace
@@ -273,22 +279,26 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 
+" Word wrapping
+let g:pencil#wrapModeDefault = 'soft'
+
 " Code formatting
 "
 let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'coffee': ['prettier'],
-\   'typescript': ['prettier'],
-\   'html': ['prettier'],
-\   'json': ['prettier'],
-\   'css': ['prettier'],
-\   'scss': ['prettier'],
-\   'ruby': ['rubocop', 'rufo']
-\}
+      \   'javascript': ['prettier'],
+      \   'javascriptreact': ['prettier'],
+      \   'coffee': ['prettier'],
+      \   'typescript': ['prettier'],
+      \   'html': ['prettier'],
+      \   'json': ['prettier'],
+      \   'css': ['prettier'],
+      \   'scss': ['prettier'],
+      \   'ruby': ['rubocop']
+      \}
 
 let g:ale_linters = {
-\   'ruby': ['rubocop', 'rufo']
-\}
+      \   'ruby': ['rubocop'],
+      \}
 
 let g:ale_ruby_rubocop_options = '--extra-details --display-style-guide'
 
@@ -298,6 +308,10 @@ let g:ale_echo_msg_format = '[%severity%] %code: %%s [%linter%]'
 
 map <leader>f :ALEFix<CR>
 map <leader>a :ALELint<CR>
+
+" Re-indent entire file
+map <leader>g mygg=G`y
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching & file navigation
@@ -318,9 +332,9 @@ nnoremap , :Buffers<CR>
 let $FZF_DEFAULT_COMMAND='ag -g "" --path-to-ignore .agignore'
 
 let g:qfenter_keymap = {
-\   "vopen": ['<C-v>'],
-\   "topen": ['<C-t>'],
-\}
+      \   "vopen": ['<C-v>'],
+      \   "topen": ['<C-t>'],
+      \}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -350,14 +364,13 @@ highlight link xmlEndTag xmlTag
 let g:html_indent_tags = 'li\|p'
 let g:html_indent_inctags = 'html,body,head,tbody,p'
 
-
-
 " Git commit messages
 augroup gitEx
   autocmd!
 
-  au FileType gitcommit set tw=100
-  au FileType gitcommit set nonumber
+  au FileType gitcommit set tw
+  au FileType gitcommit set spell
+  au FileType gitcommit PencilSoft
 augroup END
 
 " Show diff of current file in external tool
@@ -384,6 +397,27 @@ if has('nvim')
   let test#strategy = "neovim"
 end
 
+let g:rails_projections = {
+      \  "app/controllers/*_controller.rb": {
+      \      "test": [
+      \        "spec/requests/{}_controller_spec.rb",
+      \        "spec/controllers/{}_controller_spec.rb",
+      \        "test/controllers/{}_controller_test.rb"
+      \      ],
+      \      "alternate": [
+      \        "spec/requests/{}_controller_spec.rb",
+      \        "spec/controllers/{}_controller_spec.rb",
+      \        "test/controllers/{}_controller_test.rb"
+      \      ],
+      \   },
+      \   "spec/requests/*_spec.rb": {
+      \      "command": "request",
+      \      "alternate": "app/controllers/{}.rb",
+      \      "template": "require 'rails_helper'\n\n" .
+      \        "RSpec.describe '{}' do\nend",
+      \   },
+      \ }
+
 augroup subProjectRoot
   autocmd!
 
@@ -395,6 +429,8 @@ augroup subProjectRoot
     let g:test#project_root = StrTrim( system( cmd ) )
     let g:project_root = StrTrim( system( cmd ) )
     let g:ale_command_wrapper = 'cd ' . g:project_root . '; '
+
+    echo g:project_root
   endfunction
 
   " let g:test#ruby#rspec#executable = 'bundle install; bundle exec rspec'
@@ -403,9 +439,9 @@ augroup subProjectRoot
     return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
   endfunction
 
-  autocmd FileType javascript call SetTestRoot()
-  autocmd FileType typescript call SetTestRoot()
-  autocmd FileType ruby call SetTestRoot()
+  autocmd BufEnter,BufWinEnter,FileType javascript call SetTestRoot()
+  autocmd BufEnter,BufWinEnter,FileType typescript call SetTestRoot()
+  autocmd BufEnter,BufWinEnter,FileType ruby call SetTestRoot()
 
 augroup END
 

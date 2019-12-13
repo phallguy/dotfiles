@@ -1,4 +1,4 @@
-export RUBY_GC_HEAP_INIT_SLOTS=500000
+# export RUBY_GC_HEAP_INIT_SLOTS=500000
 unset RUBY_HEAP_MIN_SLOTS
 unset RAILS_ENV
 unset CC
@@ -6,7 +6,7 @@ unset VERSION
 # export RUBYOPT="-W0"
 
 # Make sure brew executables are in path
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:~/Library/Python/3.7/bin:$PATH"
 
 export CLICOLOR=1
 export LSCOLORS=gxfxFxdxbxDxDxBxBxExEx
@@ -80,10 +80,15 @@ function current_basename {
 function my_prompt {
   LAST_EXIT=$?
 
+  # Base16 Colors
   WORKING_DIR='\[\e[0;48;5;18;38;5;15m\]  $( "current_dirname" )\[\e[38;5;16m\]$( current_basename )  '
   GIT='\[\e[0;48;5;0;38;5;8m\]$( my_git_ps1 )'
   CURRENT_TIME='\[\e[0;48;5;10;38;5;18m\] \@ '
   PROMPT='\[\e[0;1;36m\]\$ \[\e[0m\]'
+
+  # "Natural" Colors
+  # WORKING_DIR='\[\e[0;48;5;18;38;5;15m\]  $( "current_dirname" )\[\e[1;35;16m\]$( current_basename )  '
+  # GIT='\[\e[0m\]$( my_git_ps1 )'
 
   if [ "$LAST_EXIT" == "0" ]; then
     EXECUTION_RESULT='\[\e[48;5;14m\] ${timer_show}s '
@@ -126,10 +131,12 @@ alias vi='nvim'
 alias k='kubectl'
 alias t='terraform'
 alias light_theme='base16_mexico-light'
+alias dark_theme='base16_material-darker'
 alias dark_theme='base16_material'
 alias matrix_theme='base16_greenscreen'
 alias admin_theme='base16_material-palenight'
 alias psql='pgcli'
+alias v='vagrant'
 
 bd() {
   cd ~/workspace/bark
@@ -157,9 +164,12 @@ eval "$(direnv hook bash)"
 # Make sure its last so that we don't get a PATH warning all the time
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+eval "$(rbenv init -)"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/palexander/google-cloud-sdk/path.bash.inc' ]; then . '/Users/palexander/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/palexander/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/palexander/google-cloud-sdk/completion.bash.inc'; fi
+
+dark_theme
