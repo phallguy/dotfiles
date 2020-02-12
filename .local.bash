@@ -3,7 +3,7 @@ unset RUBY_HEAP_MIN_SLOTS
 unset RAILS_ENV
 unset CC
 unset VERSION
-# export RUBYOPT="-W0"
+export RUBYOPT="-W0"
 
 # Make sure brew executables are in path
 export PATH="/usr/local/sbin:~/Library/Python/3.7/bin:$PATH"
