@@ -1,4 +1,5 @@
-# export RUBY_GC_HEAP_INIT_SLOTS=500000
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 unset RUBY_HEAP_MIN_SLOTS
 unset RAILS_ENV
 unset CC
@@ -132,19 +133,28 @@ alias k='kubectl'
 alias t='terraform'
 alias light_theme='base16_mexico-light'
 alias dark_theme='base16_material-darker'
-alias dark_theme='base16_material'
+alias dark_theme='base16_material-palenight'
 alias matrix_theme='base16_greenscreen'
-alias admin_theme='base16_material-palenight'
+alias admin_theme='base16_heetch'
 alias psql='pgcli'
 alias v='vagrant'
 
 bd() {
   cd ~/workspace/bark
+
   if [[ ! -z "$1" ]]; then
     TARGET_DIR=$1
-    if ! [ -f "$TARGET_DIR" ]; then
-      TARGET_DIR=bark-$TARGET_DIR
+
+    if ! [ -d "$TARGET_DIR" ]; then
+      if [ -d "bark-$TARGET_DIR" ]; then
+        TARGET_DIR=bark-$TARGET_DIR
+      fi
+
+      if [ -d "trl-$TARGET_DIR" ]; then
+        TARGET_DIR=trl-$TARGET_DIR
+      fi
     fi
+
     cd "$TARGET_DIR" || return
   fi
 }

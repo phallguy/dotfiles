@@ -330,6 +330,7 @@ nnoremap <leader>/ :BLines<CR>
 nnoremap <C-P> :FZF<CR>
 nnoremap , :Buffers<CR>
 let $FZF_DEFAULT_COMMAND='ag -g "" --path-to-ignore .agignore'
+let g:fzf_preview_window = ''
 
 let g:qfenter_keymap = {
       \   "vopen": ['<C-v>'],
@@ -392,6 +393,7 @@ map <leader>r :AV<CR>
 
 let g:test#preserve_screen = 1
 let test#filename_modifier = ':p'
+let g:ruby_indent_access_modifier_style="indent"
 
 if has('nvim')
   let test#strategy = "neovim"

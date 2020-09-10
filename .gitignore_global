@@ -18,3 +18,4 @@ tags.tmp
 chromedriver
 .agignore
 .ctags
+bin/up
