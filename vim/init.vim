@@ -20,7 +20,7 @@ set nocursorcolumn
 " set synmaxcol=192   " Limit some of the impact of complex syntax regex
 set foldmethod=indent
 set regexpengine=1
-set redrawtime=500
+set redrawtime=1000
 
 set hlsearch
 set incsearch
@@ -78,6 +78,8 @@ Plug 'SirVer/ultisnips'         " Code snippets
 Plug 'terryma/vim-expand-region'
 Plug 'ervandew/supertab'
 Plug 'reedes/vim-pencil'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'mbbill/undotree'
 
 " Searching & navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -203,6 +205,9 @@ augroup nerdTreeEx
   let NERDTreeIgnore=['node_modules']
 augroup END
 
+augroup undooTreeEx
+  map <F5> :UndotreeToggle<CR>
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General editing commands.

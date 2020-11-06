@@ -19,3 +19,4 @@ chromedriver
 .agignore
 .ctags
 bin/up
+.pryrc

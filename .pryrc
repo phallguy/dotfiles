@@ -6,6 +6,12 @@ begin
 rescue LoadError
 end
 
+begin
+  require 'active_support/testing/time_helpers'
+  include ActiveSupport::Testing::TimeHelpers
+rescue LoadError
+end
+
 # Pry.config.correct_indent = false
 # Pry.config.auto_indent = false
 
@@ -22,6 +28,6 @@ rescue LoadError => e
   puts e
 end
 
-Pry::Commands.command(/^$/, 'repeat last command')do
+Pry::Commands.command(/^$/, 'repeat last command') do
   _pry_.run_command Pry.history.to_a.last
 end
