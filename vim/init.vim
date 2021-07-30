@@ -13,6 +13,7 @@ set noswapfile     " http://robots.thoughtbot.com/post/18739402579/global-gitign
 set noendofline     " Don't automatically add newline
 set nofixendofline
 set nofoldenable    " don't use folding
+set title
 
 set cursorline      " Makes vim refresh much slower
 set nocursorcolumn
@@ -75,7 +76,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align'  " Multi-line bock alignment
 Plug 'tpope/vim-surround'       " change surrounding tags/quotes/parens
 Plug 'SirVer/ultisnips'         " Code snippets
-Plug 'terryma/vim-expand-region'
+" Plug 'terryma/vim-expand-region'
 Plug 'ervandew/supertab'
 Plug 'reedes/vim-pencil'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -90,7 +91,7 @@ Plug 'yssl/QFEnter'
 " Git/status
 Plug 'tpope/vim-fugitive'       " Git integration
 Plug 'tpope/vim-rhubarb'        " More GitHub integration
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language support
@@ -112,12 +113,18 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
 
+" Dart
+Plug 'dart-lang/dart-vim-plugin'
+
 " Markdown
 " Plug 'mzlogin/vim-markdown-toc'
 
 " Arduino
 " Plug 'sudar/vim-arduino-syntax'
 " Plug 'sudar/vim-arduino-snippets'
+
+" iOS
+" Plug 'keith/swift.vim'
 
 call plug#end()
 
@@ -176,38 +183,6 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>o :only<CR>
 nnoremap <leader>n :cn<CR>
 
-" Disable arrow movement, resize splits instead.
-nnoremap <Up>    :resize +2<CR>
-nnoremap <Down>  :resize -2<CR>
-nnoremap <Right> :vertical resize +2<CR>le
-nnoremap <Left>  :vertical resize -2<CR>
-
-" " Move through soft wrapped lines like regular lines
-" nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-" nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-
-" Quick window navigation
-let i = 1
-while i <= 9
-  execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
-  let i = i + 1
-endwhi
-
-augroup nerdTreeEx
-  autocmd!
-
-  map <F10> :NERDTreeToggle<CR>
-  map <F9> :NERDTreeFind<CR>
-
-  let NERDTreeMapOpenInTab='<C-t>'
-  let NERDTreeMinimalUI=1
-  let NERDTreeDirArrows=1
-  let NERDTreeIgnore=['node_modules']
-augroup END
-
-augroup undooTreeEx
-  map <F5> :UndotreeToggle<CR>
-augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General editing commands.
@@ -290,15 +265,16 @@ let g:pencil#wrapModeDefault = 'soft'
 " Code formatting
 "
 let g:ale_fixers = {
-      \   'javascript': ['prettier'],
-      \   'javascriptreact': ['prettier'],
-      \   'coffee': ['prettier'],
-      \   'typescript': ['prettier'],
+      \   'javascript': ['prettier', 'eslint'],
+      \   'javascriptreact': ['prettier', 'eslint'],
+      \   'coffee': ['prettier', 'eslint'],
+      \   'typescript': ['prettier', 'eslint'],
       \   'html': ['prettier'],
-      \   'json': ['prettier'],
+      \   'json': ['prettier', 'eslint'],
       \   'css': ['prettier'],
       \   'scss': ['prettier'],
-      \   'ruby': ['rubocop']
+      \   'ruby': ['rubocop'],
+      \   'dart': ['dartfmt'],
       \}
 
 let g:ale_linters = {
@@ -342,6 +318,38 @@ let g:qfenter_keymap = {
       \   "topen": ['<C-t>'],
       \}
 
+" Disable arrow movement, resize splits instead.
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Right> :vertical resize +2<CR>le
+nnoremap <Left>  :vertical resize -2<CR>
+
+" " Move through soft wrapped lines like regular lines
+" nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+" nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+
+" Quick window navigation
+let i = 1
+while i <= 9
+  execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
+  let i = i + 1
+endwhi
+
+augroup nerdTreeEx
+  autocmd!
+
+  map <F10> :NERDTreeToggle<CR>
+  map <F9> :NERDTreeFind<CR>
+
+  let NERDTreeMapOpenInTab='<C-t>'
+  let NERDTreeMinimalUI=1
+  let NERDTreeDirArrows=1
+  let NERDTreeIgnore=['node_modules']
+augroup END
+
+augroup undooTreeEx
+  map <F5> :UndotreeToggle<CR>
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " _er file/syntax customization
@@ -402,6 +410,7 @@ let g:ruby_indent_access_modifier_style="indent"
 
 if has('nvim')
   let test#strategy = "neovim"
+  let test#neovim#term_position = "botright 35"
 end
 
 let g:rails_projections = {
@@ -439,8 +448,6 @@ augroup subProjectRoot
 
     echo g:project_root
   endfunction
-
-  " let g:test#ruby#rspec#executable = 'bundle install; bundle exec rspec'
 
   function! StrTrim(txt)
     return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')

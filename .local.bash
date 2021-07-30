@@ -103,7 +103,7 @@ function my_prompt {
 
   PS1="\r\n\n${CURRENT_TIME}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
 }
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; my_prompt; timer_stop"
+export PROMPT_COMMAND="my_prompt; history -n; history -w; history -c; history -r; timer_stop"
 shopt -s histappend
 export HISTCONTROL=ignoreboth:erasedups
 
@@ -132,8 +132,9 @@ alias vi='nvim'
 alias k='kubectl'
 alias t='terraform'
 alias light_theme='base16_mexico-light'
-alias dark_theme='base16_material-darker'
+# alias dark_theme='base16_material-darker'
 alias dark_theme='base16_material-palenight'
+# alias dark_theme='base16_woodland'
 alias matrix_theme='base16_greenscreen'
 alias admin_theme='base16_heetch'
 alias psql='pgcli'
@@ -176,10 +177,10 @@ eval "$(direnv hook bash)"
 
 eval "$(rbenv init -)"
 
+dark_theme
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/palexander/google-cloud-sdk/path.bash.inc' ]; then . '/Users/palexander/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/palexander/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/palexander/google-cloud-sdk/completion.bash.inc'; fi
-
-dark_theme

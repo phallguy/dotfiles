@@ -1,4 +1,5 @@
 *~
+
 .DS_Store
 *.sublime-project
 *.sublime-workspace
@@ -7,6 +8,8 @@
 .vimrc
 .jsbeautifyrc
 *.orig
+.fseventsd
+.metadata_never_index
 Session.vim
 *.envrc
 .ruby-version
