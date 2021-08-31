@@ -69,14 +69,13 @@ Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lilydjwg/colorizer'
-
 " General editing
 Plug 'vim-scripts/tComment'     " Comment toggling
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 Plug 'junegunn/vim-easy-align'  " Multi-line bock alignment
 Plug 'tpope/vim-surround'       " change surrounding tags/quotes/parens
 Plug 'SirVer/ultisnips'         " Code snippets
-" Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-expand-region'
 Plug 'ervandew/supertab'
 Plug 'reedes/vim-pencil'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -404,6 +403,7 @@ map <leader>s :TestNearest<CR>
 map <leader>l :TestLast<CR>
 map <leader>r :AV<CR>
 
+let test#ruby#use_spring_binstub = 1
 let g:test#preserve_screen = 1
 let test#filename_modifier = ':p'
 let g:ruby_indent_access_modifier_style="indent"

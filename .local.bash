@@ -184,3 +184,5 @@ if [ -f '/Users/palexander/google-cloud-sdk/path.bash.inc' ]; then . '/Users/pal
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/palexander/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/palexander/google-cloud-sdk/completion.bash.inc'; fi
+
+source /Users/palexander/.config/broot/launcher/bash/br
