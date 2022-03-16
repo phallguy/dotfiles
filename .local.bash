@@ -4,7 +4,7 @@ unset RUBY_HEAP_MIN_SLOTS
 unset RAILS_ENV
 unset CC
 unset VERSION
-export RUBYOPT="-W0"
+# export RUBYOPT="-W0"
 
 # Make sure brew executables are in path
 export PATH="/usr/local/sbin:~/Library/Python/3.7/bin:$PATH"
@@ -103,8 +103,7 @@ function my_prompt {
 
   PS1="\r\n\n${CURRENT_TIME}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
 }
-export PROMPT_COMMAND="my_prompt; history -n; history -w; history -c; history -r; timer_stop"
-shopt -s histappend
+export PROMPT_COMMAND="my_prompt; timer_stop"
 export HISTCONTROL=ignoreboth:erasedups
 
 # function for setting terminal titles in OSX
@@ -139,6 +138,7 @@ alias matrix_theme='base16_greenscreen'
 alias admin_theme='base16_heetch'
 alias psql='pgcli'
 alias v='vagrant'
+alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 bd() {
   cd ~/workspace/bark

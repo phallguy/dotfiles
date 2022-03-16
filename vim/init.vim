@@ -22,6 +22,7 @@ set nocursorcolumn
 set foldmethod=indent
 set regexpengine=1
 set redrawtime=1000
+set updatetime=300
 
 set hlsearch
 set incsearch
@@ -69,6 +70,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lilydjwg/colorizer'
+
 " General editing
 Plug 'vim-scripts/tComment'     " Comment toggling
 Plug 'mg979/vim-visual-multi'
@@ -90,7 +92,6 @@ Plug 'yssl/QFEnter'
 " Git/status
 Plug 'tpope/vim-fugitive'       " Git integration
 Plug 'tpope/vim-rhubarb'        " More GitHub integration
-" Plug 'airblade/vim-gitgutter'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language support
@@ -113,10 +114,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
 
 " Dart
-Plug 'dart-lang/dart-vim-plugin'
+" Plug 'dart-lang/dart-vim-plugin'
 
 " Markdown
-" Plug 'mzlogin/vim-markdown-toc'
 
 " Arduino
 " Plug 'sudar/vim-arduino-syntax'
@@ -124,6 +124,11 @@ Plug 'dart-lang/dart-vim-plugin'
 
 " iOS
 " Plug 'keith/swift.vim'
+"
+
+" Python
+Plug 'vim-scripts/indentpython.vim'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 call plug#end()
 
@@ -274,6 +279,7 @@ let g:ale_fixers = {
       \   'scss': ['prettier'],
       \   'ruby': ['rubocop'],
       \   'dart': ['dartfmt'],
+      \   'python': ['autopep8'],
       \}
 
 let g:ale_linters = {
@@ -291,6 +297,7 @@ map <leader>a :ALELint<CR>
 
 " Re-indent entire file
 map <leader>g mygg=G`y
+autocmd FileType eruby nnoremap <buffer> <leader>g :!htmlbeautifier -b 2 %<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -343,7 +350,7 @@ augroup nerdTreeEx
   let NERDTreeMapOpenInTab='<C-t>'
   let NERDTreeMinimalUI=1
   let NERDTreeDirArrows=1
-  let NERDTreeIgnore=['node_modules']
+  let NERDTreeIgnore=['node_modules', '__snapshots__']
 augroup END
 
 augroup undooTreeEx
@@ -396,6 +403,11 @@ augroup reload_vimrc
 augroup END
 
 " Markdown
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
 
 " Ruby/Rails
 map <leader>t :TestFile<CR>
@@ -410,7 +422,7 @@ let g:ruby_indent_access_modifier_style="indent"
 
 if has('nvim')
   let test#strategy = "neovim"
-  let test#neovim#term_position = "botright 35"
+  let test#neovim#term_position = "botright 30"
 end
 
 let g:rails_projections = {
@@ -454,6 +466,7 @@ augroup subProjectRoot
   endfunction
 
   autocmd BufEnter,BufWinEnter,FileType javascript call SetTestRoot()
+  autocmd BufEnter,BufWinEnter,FileType javascriptreact call SetTestRoot()
   autocmd BufEnter,BufWinEnter,FileType typescript call SetTestRoot()
   autocmd BufEnter,BufWinEnter,FileType ruby call SetTestRoot()
 
@@ -464,6 +477,22 @@ let g:closetag_filetypes = 'html,xhtml,phtml,eruby'
 " JavaScript
 
 nnoremap <leader>j :call js_alternate#run()<cr>
+
+" Python
+augroup pythonsettings
+  autocmd!
+
+  au BufNewFile,BufRead *.py
+      \ set tabstop=4 |
+      \ set softtabstop=4 |
+      \ set shiftwidth=4 |
+      \ set textwidth=99 |
+      \ set expandtab |
+      \ set autoindent |
+      \ set fileformat=unix
+augroup END
+
+let python_highlight_all=1
 
 " Support per-project .vimrc commands
 set exrc
