@@ -20,7 +20,7 @@ set nocursorcolumn
 
 " set synmaxcol=192   " Limit some of the impact of complex syntax regex
 set foldmethod=indent
-set regexpengine=1
+" set regexpengine=1
 set redrawtime=1000
 set updatetime=300
 
@@ -52,7 +52,7 @@ set numberwidth=3
 
 " https://stackoverflow.com/a/25276429/76456
 " Make regex for ruby syntax faster
-set re=1
+" set re=1
 
 set undofile                " tell it to use an undo file
 set undodir=$HOME/.vimundo/ " use a directory to store the undo history
@@ -63,13 +63,14 @@ set undodir=$HOME/.vimundo/ " use a directory to store the undo history
 "
 call plug#begin('~/.vim/plugged')
 Plug 'MarcWeber/vim-addon-local-vimrc' " import .vimrc from CWD when launching
-Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
+" Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
 
 " Visual experience
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lilydjwg/colorizer'
+Plug 'kevinhwang91/nvim-bqf'
 
 " General editing
 Plug 'vim-scripts/tComment'     " Comment toggling
@@ -86,7 +87,8 @@ Plug 'mbbill/undotree'
 " Searching & navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
 Plug 'yssl/QFEnter'
 
 " Git/status
@@ -96,6 +98,7 @@ Plug 'tpope/vim-rhubarb'        " More GitHub integration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language support
 "
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'janko/vim-test'
 Plug 'kana/vim-textobj-user'    " Custom 'object' targeting for movements
 Plug 'glts/vim-textobj-comment' " Comments as text objects
@@ -150,22 +153,55 @@ if &t_Co > 2 || has("gui_running")
     let base16colorspace=256  " Access colors present in 256 colorspace
     source ~/.vimrc_background
   endif
+
+  let g:airline_extensions = ['fugitiveline', 'ale', 'fzf']
   let g:airline_powerline_fonts = 1
   let g:airline_theme='base16_vim'
   let g:airline_section_a = airline#section#create([ 'mode' ])
   let g:airline#extensions#branch#format = 2
-  let g:airline#extensions#branch#displayed_head_limit = 16
-  let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
-  let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
+  let g:airline#extensions#branch#displayed_head_limit = 24
+  " let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
+  " let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
+  let g:airline_section_y = ""
+  let g:airline_section_z = ""
   let g:airline_skip_empty_sections = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
   let g:airline_highlighting_cache = 1
   let g:airline#extensions#whitespace#enabled = 0
   let g:airline#extensions#ale#enabled = 1
+
   let g:colorizer_startup = 0
 endif
 
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "ruby", "javascript", "markdown" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+
+  incremental_selection = {
+    enable = true
+  },
+
+  indent = {
+    enable = false
+  }
+}
+EOF
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Window/navigation
@@ -341,16 +377,25 @@ while i <= 9
   let i = i + 1
 endwhi
 
-augroup nerdTreeEx
+" augroup nerdTreeEx
+"   autocmd!
+"
+"   map <F10> :NERDTreeToggle<CR>
+"   map <F9> :NERDTreeFind<CR>
+"
+"   let NERDTreeMapOpenInTab='<C-t>'
+"   let NERDTreeMinimalUI=1
+"   let NERDTreeDirArrows=1
+"   let NERDTreeIgnore=['node_modules', '__snapshots__']
+" augroup END
+
+augroup netwr
   autocmd!
 
-  map <F10> :NERDTreeToggle<CR>
-  map <F9> :NERDTreeFind<CR>
+  map <F9> :Explore<CR>
+  map <F10> :Vexplore<CR>
 
-  let NERDTreeMapOpenInTab='<C-t>'
-  let NERDTreeMinimalUI=1
-  let NERDTreeDirArrows=1
-  let NERDTreeIgnore=['node_modules', '__snapshots__']
+  let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 augroup END
 
 augroup undooTreeEx
