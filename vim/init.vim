@@ -19,8 +19,6 @@ set cursorline      " Makes vim refresh much slower
 set nocursorcolumn
 
 set foldmethod=indent
-" set redrawtime=1000
-" set updatetime=300
 
 set hlsearch
 set incsearch
@@ -45,7 +43,6 @@ set preserveindent
 
 " Line Numbers
 set number        " Always show line numbers
-" set relativenumber
 set numberwidth=3
 
 set undofile                " tell it to use an undo file
@@ -57,7 +54,6 @@ set undodir=$HOME/.vimundo/ " use a directory to store the undo history
 "
 call plug#begin('~/.vim/plugged')
 Plug 'MarcWeber/vim-addon-local-vimrc' " import .vimrc from CWD when launching
-" Plug 'tpope/vim-obsession'    " Save and restore window/etc sessions
 
 " Visual experience
 Plug 'chriskempson/base16-vim'
@@ -81,7 +77,6 @@ Plug 'mbbill/undotree'
 " Searching & navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-vinegar'
 Plug 'yssl/QFEnter'
 
@@ -101,8 +96,9 @@ Plug 'dense-analysis/ale'       " Code formatting
 " Ruby/rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'nelstrom/vim-textobj-rubyblock'
+" Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'joker1007/vim-ruby-heredoc-syntax'
+Plug 'andymass/vim-matchup'
 
 " Javasript
 Plug 'leafgarland/typescript-vim'
@@ -153,7 +149,9 @@ if &t_Co > 2 || has("gui_running")
     call Base16hi("LineNr", g:base16_gui02, g:base16_gui00, g:base16_cterm02, g:base16_cterm00, "none", "")
     call Base16hi("CursorLineNr", g:base16_gui04, g:base16_gui02, g:base16_cterm02, g:base16_cterm00, "none", "")
     call Base16hi("CursorLine",    "", g:base16_gui02, "", g:base16_cterm02, "none", "")
+    call Base16hi("MatchParen",    "", g:base16_gui01, "", g:base16_cterm01, "none", "")
   endif
+
 
   let g:airline_extensions = ['fugitiveline', 'ale', 'fzf']
   let g:airline_powerline_fonts = 1
@@ -192,6 +190,11 @@ require'nvim-treesitter.configs'.setup {
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
+  },
+
+  matchup = {
+    enable = true,
+    disable = {},
   },
 
   incremental_selection = {
@@ -251,14 +254,6 @@ nmap ga <Plug>(EasyAlign)
 
 " Session management
 augroup sourcesession
-
-  " Reload previously saved session on startup
-  autocmd!
-  autocmd VimEnter * nested
-        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') |
-        \   source Session.vim |
-        \ endif
-
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -271,7 +266,7 @@ augroup END
 augroup TrailingWhitespace
   autocmd!
 
-  " Remove trailing whitespace on save for ruby files.
+  " Remove trailing whitespace on save
   function! s:RemoveTrailingWhitespaces()
     "Save last cursor position
     let l = line(".")
@@ -362,7 +357,6 @@ let g:qfenter_keymap = {
       \   "topen": ['<C-t>'],
       \}
 
-
 " BQF - Better Quick Fix
 
 lua <<EOF
@@ -422,6 +416,10 @@ require('bqf').setup({
 })
 EOF
 
+" Matchup
+let g:matchup_matchparen_offscreen = {'method': 'popup'}
+
+
 " Disable arrow movement, resize splits instead.
 nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
@@ -443,10 +441,6 @@ augroup netwr
   autocmd!
 
   let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-augroup END
-
-augroup undooTreeEx
-  map <F5> :UndotreeToggle<CR>
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -471,6 +465,7 @@ highlight link xmlEndTag xmlTag
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 let g:html_indent_inctags = 'html,body,head,tbody,p'
+let g:closetag_filetypes = 'html,xhtml,phtml,eruby'
 
 " Git commit messages
 augroup gitEx
@@ -561,8 +556,6 @@ augroup subProjectRoot
   autocmd BufEnter,BufWinEnter,FileType ruby call SetTestRoot()
 
 augroup END
-
-let g:closetag_filetypes = 'html,xhtml,phtml,eruby'
 
 " JavaScript
 
