@@ -18,11 +18,9 @@ set title
 set cursorline      " Makes vim refresh much slower
 set nocursorcolumn
 
-" set synmaxcol=192   " Limit some of the impact of complex syntax regex
 set foldmethod=indent
-" set regexpengine=1
-set redrawtime=1000
-set updatetime=300
+" set redrawtime=1000
+" set updatetime=300
 
 set hlsearch
 set incsearch
@@ -49,10 +47,6 @@ set preserveindent
 set number        " Always show line numbers
 " set relativenumber
 set numberwidth=3
-
-" https://stackoverflow.com/a/25276429/76456
-" Make regex for ruby syntax faster
-" set re=1
 
 set undofile                " tell it to use an undo file
 set undodir=$HOME/.vimundo/ " use a directory to store the undo history
@@ -133,6 +127,9 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 
+" Terraform
+Plug 'hashivim/vim-terraform'
+
 call plug#end()
 
 
@@ -152,6 +149,10 @@ if &t_Co > 2 || has("gui_running")
   if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256  " Access colors present in 256 colorspace
     source ~/.vimrc_background
+    call Base16hi("SignColumn", g:base16_gui03, g:base16_gui00, g:base16_cterm03, g:base16_cterm00, "none", "")
+    call Base16hi("LineNr", g:base16_gui02, g:base16_gui00, g:base16_cterm02, g:base16_cterm00, "none", "")
+    call Base16hi("CursorLineNr", g:base16_gui04, g:base16_gui02, g:base16_cterm02, g:base16_cterm00, "none", "")
+    call Base16hi("CursorLine",    "", g:base16_gui02, "", g:base16_cterm02, "none", "")
   endif
 
   let g:airline_extensions = ['fugitiveline', 'ale', 'fzf']
@@ -177,7 +178,7 @@ endif
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "ruby", "javascript", "markdown" },
+  ensure_installed = { "ruby", "javascript", "markdown", "hcl", "json" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -194,7 +195,7 @@ require'nvim-treesitter.configs'.setup {
   },
 
   incremental_selection = {
-    enable = true
+    enable = false
   },
 
   indent = {
@@ -352,6 +353,7 @@ endif
 nnoremap <leader>/ :BLines<CR>
 nnoremap <C-P> :FZF<CR>
 nnoremap , :Buffers<CR>
+nnoremap <leader>, <C-6>
 let $FZF_DEFAULT_COMMAND='ag -g "" --path-to-ignore .agignore'
 let g:fzf_preview_window = ''
 
@@ -359,6 +361,66 @@ let g:qfenter_keymap = {
       \   "vopen": ['<C-v>'],
       \   "topen": ['<C-t>'],
       \}
+
+
+" BQF - Better Quick Fix
+
+lua <<EOF
+local fn = vim.fn
+
+function _G.qftf(info)
+    local items
+    local ret = {}
+    if info.quickfix == 1 then
+        items = fn.getqflist({id = info.id, items = 0}).items
+    else
+        items = fn.getloclist(info.winid, {id = info.id, items = 0}).items
+    end
+    local limit = 45
+    local fnameFmt1, fnameFmt2 = '%-' .. limit .. 's', '…%.' .. (limit - 1) .. 's'
+    local validFmt = '%s │%5d:%-3d│%s %s'
+    for i = info.start_idx, info.end_idx do
+        local e = items[i]
+        local fname = ''
+        local str
+        if e.valid == 1 then
+            if e.bufnr > 0 then
+                fname = fn.bufname(e.bufnr)
+                if fname == '' then
+                    fname = '[No Name]'
+                else
+                    fname = fname:gsub('^' .. vim.env.HOME, '~')
+                end
+                -- char in fname may occur more than 1 width, ignore this issue in order to keep performance
+                if #fname <= limit then
+                    fname = fnameFmt1:format(fname)
+                else
+                    fname = fnameFmt2:format(fname:sub(1 - limit))
+                end
+            end
+            local lnum = e.lnum > 99999 and -1 or e.lnum
+            local col = e.col > 999 and -1 or e.col
+            local qtype = e.type == '' and '' or ' ' .. e.type:sub(1, 1):upper()
+            str = validFmt:format(fname, lnum, col, qtype, e.text)
+        else
+            str = e.text
+        end
+        table.insert(ret, str)
+    end
+    return ret
+end
+
+vim.o.qftf = '{info -> v:lua._G.qftf(info)}'
+
+-- Adapt fzf's delimiter in nvim-bqf
+require('bqf').setup({
+    filter = {
+        fzf = {
+            extra_opts = {'--bind', 'ctrl-o:toggle-all', '--delimiter', '│'}
+        }
+    }
+})
+EOF
 
 " Disable arrow movement, resize splits instead.
 nnoremap <Up>    :resize +2<CR>
@@ -377,23 +439,8 @@ while i <= 9
   let i = i + 1
 endwhi
 
-" augroup nerdTreeEx
-"   autocmd!
-"
-"   map <F10> :NERDTreeToggle<CR>
-"   map <F9> :NERDTreeFind<CR>
-"
-"   let NERDTreeMapOpenInTab='<C-t>'
-"   let NERDTreeMinimalUI=1
-"   let NERDTreeDirArrows=1
-"   let NERDTreeIgnore=['node_modules', '__snapshots__']
-" augroup END
-
 augroup netwr
   autocmd!
-
-  map <F9> :Explore<CR>
-  map <F10> :Vexplore<CR>
 
   let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 augroup END
@@ -416,10 +463,6 @@ augroup syntaxOverrides
   autocmd BufRead,BufNewFile *.aurora set filetype=python
   autocmd BufRead,BufNewFile tsconfig.json set filetype=typescript
   autocmd BufRead,BufNewFile .envrc set filetype=sh
-
-  " https://stackoverflow.com/a/34153085/76456
-  " let ruby_no_expensive=1
-
 augroup END
 
 " Use the same color for closing tags as opening tags
@@ -469,6 +512,8 @@ if has('nvim')
   let test#strategy = "neovim"
   let test#neovim#term_position = "botright 30"
 end
+
+let g:splitjoin_ruby_hanging_args=0
 
 let g:rails_projections = {
       \  "app/controllers/*_controller.rb": {
