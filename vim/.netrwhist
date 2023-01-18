@@ -1,6 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/palexander/.byobu/bin'
-let g:netrw_dirhist_2='/Users/palexander/.byobu'
-let g:netrw_dirhist_3='/Users/palexander/.dotfiles/vim'
-let g:netrw_dirhist_4='/opt/twitter_mde/package/twitter_dev_homebrew/658eb521e07b6650372a4960edf431c5d44bbe46fb2e305c4b0a4b2b088f5e0d/Cellar/imagemagick/7.0.7-28/etc/ImageMagick-7'
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/palexander/workspace/bark/bark-www/app/models'
+let g:netrw_dirhist_2='/Users/palexander/workspace/bark/bark-www/app'
+let g:netrw_dirhist_1='/Users/palexander/workspace/bark/bark-www'

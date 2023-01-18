@@ -12,13 +12,17 @@ set noswapfile     " http://robots.thoughtbot.com/post/18739402579/global-gitign
 " set backupcopy=yes " Overwrite existing file so file watchers can detect changes
 set noendofline     " Don't automatically add newline
 set nofixendofline
-set nofoldenable    " don't use folding
 set title
 
 set cursorline      " Makes vim refresh much slower
 set nocursorcolumn
+set laststatus=2
+set foldmethod=marker
 
-set foldmethod=indent
+" https://neovim.io/news/2022/04#filetypelua
+let g:do_filetype_lua = 1
+"let g:did_load_filetypes = 0
+
 
 set hlsearch
 set incsearch
@@ -61,18 +65,19 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lilydjwg/colorizer'
 Plug 'kevinhwang91/nvim-bqf'
+Plug 'blueyed/vim-qf_resize'
 
 " General editing
-Plug 'vim-scripts/tComment'     " Comment toggling
+Plug 'tpope/vim-commentary'
 Plug 'mg979/vim-visual-multi'
 Plug 'junegunn/vim-easy-align'  " Multi-line bock alignment
 Plug 'tpope/vim-surround'       " change surrounding tags/quotes/parens
 Plug 'SirVer/ultisnips'         " Code snippets
-Plug 'terryma/vim-expand-region'
 Plug 'ervandew/supertab'
 Plug 'reedes/vim-pencil'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'mbbill/undotree'
+Plug 'vim-scripts/LargeFile'
 
 " Searching & navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -89,6 +94,7 @@ Plug 'tpope/vim-rhubarb'        " More GitHub integration
 "
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'janko/vim-test'
+Plug 'tpope/vim-dispatch'       " Async test runner to quick fix
 Plug 'kana/vim-textobj-user'    " Custom 'object' targeting for movements
 Plug 'glts/vim-textobj-comment' " Comments as text objects
 Plug 'dense-analysis/ale'       " Code formatting
@@ -96,7 +102,7 @@ Plug 'dense-analysis/ale'       " Code formatting
 " Ruby/rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-" Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'joker1007/vim-ruby-heredoc-syntax'
 Plug 'andymass/vim-matchup'
 
@@ -110,24 +116,29 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 " Plug 'dart-lang/dart-vim-plugin'
 
 " Markdown
+Plug 'preservim/vim-markdown'
 
 " Arduino
 " Plug 'sudar/vim-arduino-syntax'
 " Plug 'sudar/vim-arduino-snippets'
 
 " iOS
-" Plug 'keith/swift.vim'
+Plug 'keith/swift.vim'
 "
 
 " Python
-Plug 'vim-scripts/indentpython.vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
+" Plug 'vim-scripts/indentpython.vim'
+" Plug 'Glench/Vim-Jinja2-Syntax'
 
 " Terraform
 Plug 'hashivim/vim-terraform'
 
+" Android
+Plug 'udalov/kotlin-vim'
+
 call plug#end()
 
+filetype on
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -146,10 +157,23 @@ if &t_Co > 2 || has("gui_running")
     let base16colorspace=256  " Access colors present in 256 colorspace
     source ~/.vimrc_background
     call Base16hi("SignColumn", g:base16_gui03, g:base16_gui00, g:base16_cterm03, g:base16_cterm00, "none", "")
-    call Base16hi("LineNr", g:base16_gui02, g:base16_gui00, g:base16_cterm02, g:base16_cterm00, "none", "")
+    call Base16hi("LineNr", g:base16_gui01, g:base16_gui00, g:base16_cterm01, g:base16_cterm00, "none", "")
     call Base16hi("CursorLineNr", g:base16_gui04, g:base16_gui02, g:base16_cterm02, g:base16_cterm00, "none", "")
     call Base16hi("CursorLine",    "", g:base16_gui02, "", g:base16_cterm02, "none", "")
     call Base16hi("MatchParen",    "", g:base16_gui01, "", g:base16_cterm01, "none", "")
+
+    call Base16hi("Folded", g:base16_gui0C, "", g:base16_cterm03, g:base16_cterm02, "none", "")
+
+    call Base16hi("BqfPreviewBorder", g:base16_gui0B, g:base16_gui00, g:base16_cterm0B, g:base16_cterm00, "none", "")
+
+    call Base16hi("QuickFixLine", g:base16_gui07, g:base16_gui0D, g:base16_cterm0B, g:base16_cterm00, "none", "")
+    call Base16hi("qfSeparator", g:base16_gui01, g:base16_gui00, g:base16_cterm01, g:base16_cterm00, "none", "")
+
+    com! CheckHighlightUnderCursor echo {l,c,n ->
+          \   'hi<'    . synIDattr(synID(l, c, 1), n)             . '> '
+          \  .'trans<' . synIDattr(synID(l, c, 0), n)             . '> '
+          \  .'lo<'    . synIDattr(synIDtrans(synID(l, c, 1)), n) . '> '
+          \ }(line("."), col("."), "name")
   endif
 
 
@@ -189,23 +213,28 @@ require'nvim-treesitter.configs'.setup {
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
+    additional_vim_regex_highlighting = true,
+    },
 
   matchup = {
     enable = true,
     disable = {},
-  },
+    },
 
   incremental_selection = {
-    enable = false
-  },
+    enable = true
+    },
 
   indent = {
     enable = false
+    }
   }
-}
 EOF
+
+nnoremap + :lua require'nvim-treesitter.incremental_selection'.init_selection()<CR>
+xnoremap + :lua require'nvim-treesitter.incremental_selection'.node_incremental()<CR>
+xnoremap _ :lua require'nvim-treesitter.incremental_selection'.node_decremental()<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Window/navigation
@@ -224,9 +253,27 @@ au InsertLeave * set nopaste
 " Alias shortcuts for common tasks
 nnoremap <leader>rc :tabe $MYVIMRC<cr>
 nnoremap <leader>q :q<CR>
-nnoremap <leader>o :only<CR>
+nnoremap <leader>o :only<CR>:set cmdheight=1<CR>
+nnoremap <leader>O :w\|%bd\|e#\|bd#<CR>\'"
 nnoremap <leader>n :cn<CR>
+nnoremap <leader>p :cp<CR>
+nnoremap <leader>c :cw<CR>
 
+lua <<EOF
+require('bqf').setup({
+auto_enable = true,
+preview = {
+  win_height = 15,
+  win_vheight = 15,
+  delay_syntax = 80,
+  show_title = false,
+  }
+})
+EOF
+
+let g:qf_resize_max_ratio=0.25
+let g:qf_resize_max_height=30
+let g:qf_resize_min_height=5
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General editing commands.
@@ -323,6 +370,10 @@ let g:ale_ruby_rubocop_options = '--extra-details --display-style-guide'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%severity%] %code: %%s [%linter%]'
+let g:ale_detail_to_floating_preview = 1
+let g:ale_floating_preview = 1
+let g:ale_virtualtext_cursor = 0
+
 
 map <leader>f :ALEFix<CR>
 map <leader>a :ALELint<CR>
@@ -330,6 +381,12 @@ map <leader>a :ALELint<CR>
 " Re-indent entire file
 map <leader>g mygg=G`y
 autocmd FileType eruby nnoremap <buffer> <leader>g :!htmlbeautifier -b 2 %<CR>
+autocmd FileType svg nnoremap <buffer> <leader>g :!htmlbeautifier -b 2 %<CR>
+
+
+" Toggle comments
+nnoremap <C-_><C-_> :Commentary<CR>
+vnoremap <C-_><C-_> <Plug>Commentary \| gv
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -356,65 +413,6 @@ let g:qfenter_keymap = {
       \   "vopen": ['<C-v>'],
       \   "topen": ['<C-t>'],
       \}
-
-" BQF - Better Quick Fix
-
-lua <<EOF
-local fn = vim.fn
-
-function _G.qftf(info)
-    local items
-    local ret = {}
-    if info.quickfix == 1 then
-        items = fn.getqflist({id = info.id, items = 0}).items
-    else
-        items = fn.getloclist(info.winid, {id = info.id, items = 0}).items
-    end
-    local limit = 45
-    local fnameFmt1, fnameFmt2 = '%-' .. limit .. 's', '…%.' .. (limit - 1) .. 's'
-    local validFmt = '%s │%5d:%-3d│%s %s'
-    for i = info.start_idx, info.end_idx do
-        local e = items[i]
-        local fname = ''
-        local str
-        if e.valid == 1 then
-            if e.bufnr > 0 then
-                fname = fn.bufname(e.bufnr)
-                if fname == '' then
-                    fname = '[No Name]'
-                else
-                    fname = fname:gsub('^' .. vim.env.HOME, '~')
-                end
-                -- char in fname may occur more than 1 width, ignore this issue in order to keep performance
-                if #fname <= limit then
-                    fname = fnameFmt1:format(fname)
-                else
-                    fname = fnameFmt2:format(fname:sub(1 - limit))
-                end
-            end
-            local lnum = e.lnum > 99999 and -1 or e.lnum
-            local col = e.col > 999 and -1 or e.col
-            local qtype = e.type == '' and '' or ' ' .. e.type:sub(1, 1):upper()
-            str = validFmt:format(fname, lnum, col, qtype, e.text)
-        else
-            str = e.text
-        end
-        table.insert(ret, str)
-    end
-    return ret
-end
-
-vim.o.qftf = '{info -> v:lua._G.qftf(info)}'
-
--- Adapt fzf's delimiter in nvim-bqf
-require('bqf').setup({
-    filter = {
-        fzf = {
-            extra_opts = {'--bind', 'ctrl-o:toggle-all', '--delimiter', '│'}
-        }
-    }
-})
-EOF
 
 " Matchup
 let g:matchup_matchparen_offscreen = {'method': 'popup'}
@@ -467,17 +465,18 @@ let g:html_indent_tags = 'li\|p'
 let g:html_indent_inctags = 'html,body,head,tbody,p'
 let g:closetag_filetypes = 'html,xhtml,phtml,eruby'
 
-" Git commit messages
+" Git
 augroup gitEx
   autocmd!
 
   au FileType gitcommit set tw
   au FileType gitcommit set spell
   au FileType gitcommit PencilSoft
+  au FileType git setlocal foldmethod=syntax
 augroup END
 
 " Show diff of current file in external tool
-nnoremap <leader>d :!cd %:h; git dt %:p<CR>
+nnoremap <leader>gd :!cd %:h; git dt %:p<CR>
 
 " VIMRC
 augroup reload_vimrc
@@ -496,40 +495,48 @@ augroup END
 map <leader>t :TestFile<CR>
 map <leader>s :TestNearest<CR>
 map <leader>l :TestLast<CR>
+map <leader>d :cclose<CR>:TestNearest -strategy=neovim<CR>
 map <leader>r :AV<CR>
 
-let test#ruby#use_spring_binstub = 1
-let g:test#preserve_screen = 1
+let test#ruby#use_spring_binstub = 0
+let g:test#preserve_screen = 0
+let g:test#neovim#start_normal = 0
+let g:test#echo_command = 0
 let test#filename_modifier = ':p'
-let g:ruby_indent_access_modifier_style="indent"
 
 if has('nvim')
-  let test#strategy = "neovim"
+  let test#strategy = "dispatch"
   let test#neovim#term_position = "botright 30"
 end
 
+let g:ruby_indent_access_modifier_style="indent"
+let g:splitjoin_ruby_curly_braces = 0
 let g:splitjoin_ruby_hanging_args=0
+let g:splitjoin_ruby_trailing_comma=1
+let g:splitjoin_normalize_whitespace=1
+let g:splitjoin_align=1
+let g:splitjoin_ruby_options_as_arguments=1
 
 let g:rails_projections = {
-      \  "app/controllers/*_controller.rb": {
-      \      "test": [
-      \        "spec/requests/{}_controller_spec.rb",
-      \        "spec/controllers/{}_controller_spec.rb",
-      \        "test/controllers/{}_controller_test.rb"
-      \      ],
-      \      "alternate": [
-      \        "spec/requests/{}_controller_spec.rb",
-      \        "spec/controllers/{}_controller_spec.rb",
-      \        "test/controllers/{}_controller_test.rb"
-      \      ],
-      \   },
-      \   "spec/requests/*_spec.rb": {
-      \      "command": "request",
-      \      "alternate": "app/controllers/{}.rb",
-      \      "template": "require 'rails_helper'\n\n" .
-      \        "RSpec.describe '{}' do\nend",
-      \   },
-      \ }
+\  "app/controllers/*_controller.rb": {
+\      "test": [
+\        "spec/requests/{}_controller_spec.rb",
+\        "spec/controllers/{}_controller_spec.rb",
+\        "test/controllers/{}_controller_test.rb"
+\      ],
+\      "alternate": [
+\        "spec/requests/{}_controller_spec.rb",
+\        "spec/controllers/{}_controller_spec.rb",
+\        "test/controllers/{}_controller_test.rb"
+\      ],
+\   },
+\   "spec/requests/*_spec.rb": {
+\      "command": "request",
+\      "alternate": "app/controllers/{}.rb",
+\      "template": "require 'rails_helper'\n\n" .
+\        "RSpec.describe '{}' do\nend",
+\   },
+\ }
 
 augroup subProjectRoot
   autocmd!
@@ -553,7 +560,7 @@ augroup subProjectRoot
   autocmd BufEnter,BufWinEnter,FileType javascript call SetTestRoot()
   autocmd BufEnter,BufWinEnter,FileType javascriptreact call SetTestRoot()
   autocmd BufEnter,BufWinEnter,FileType typescript call SetTestRoot()
-  autocmd BufEnter,BufWinEnter,FileType ruby call SetTestRoot()
+"    autocmd BufEnter,BufWinEnter,FileType ruby call SetTestRoot()
 
 augroup END
 
@@ -566,13 +573,13 @@ augroup pythonsettings
   autocmd!
 
   au BufNewFile,BufRead *.py
-      \ set tabstop=4 |
-      \ set softtabstop=4 |
-      \ set shiftwidth=4 |
-      \ set textwidth=99 |
-      \ set expandtab |
-      \ set autoindent |
-      \ set fileformat=unix
+        \ set tabstop=4 |
+        \ set softtabstop=4 |
+        \ set shiftwidth=4 |
+        \ set textwidth=99 |
+        \ set expandtab |
+        \ set autoindent |
+        \ set fileformat=unix
 augroup END
 
 let python_highlight_all=1

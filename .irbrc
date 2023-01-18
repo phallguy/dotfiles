@@ -5,6 +5,7 @@ IRB.conf[:SHOW_FRAMES] = 0
 IRB.conf[:SHOW_SRC_LINES] = 25
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:AUTO_INDENT] = true
+IRB.conf[:USE_MULTILINE] = true
 
 ### START debundle.rb ###
 
