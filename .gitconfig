@@ -12,13 +12,15 @@
 
 [alias]
   st = status
-  co = checkout
+  co = checkout --recurse-submodules
   br = checkout --no-track -b
   m = merge
   mn = merge --no-ff --no-commit
   rb = rebase
   rbc = rebase --continue
   boom = !git remote prune origin && git fetch origin && git reset --hard origin/$( git rev-parse --abbrev-ref HEAD ) && git submodule update --recursive
+  bam = !git co master && git boom && (git branch --format '%(refname:short)' --merged | egrep -v "^master" | xargs git branch -d)  && git checkout -
+  bamm = !git co master && git boom && (git branch --format '%(refname:short)' --merged | egrep -v "^master" | xargs git branch -d)
   dt = difftool
   dtc = difftool --cached
   ca = commit --amend --no-edit --no-verify
@@ -41,20 +43,13 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[difftool "Kaleidoscope"]
-  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   trustexitcode = true
-[merge]
-	tool = Kaleidoscope
-[difftool]
-  prompt = false
-[mergetool]
-  prompt = false
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
 [diff]
-  tool = Kaleidoscope
   renames = true
+	tool = Kaleidoscope
 [filter "hawser"]
   clean = git hawser clean %f
   smudge = git hawser smudge %f
@@ -64,6 +59,7 @@
 [commit]
   gpgsign = true
 	template = /Users/palexander/dotfiles/.gitcommit.template
+	cleanup = scissors
 [gpg]
   program = gpg
 [filter "lfs"]
@@ -73,3 +69,17 @@
 	required = true
 [init]
 	defaultBranch = master
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[merge]
+	tool = Kaleidoscope
+[mergetool]
+	prompt = false
+[maintenance]
+	repo = /Users/palexander/workspace/bark/bark-desktop
+	repo = /Users/palexander/workspace/bark/bark-www
+	repo = /Users/palexander/workspace/bark/bark-admin
+[rebase]
+	updateRefs = true
