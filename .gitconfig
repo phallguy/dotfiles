@@ -30,7 +30,7 @@
 
 [core]
   autocrlf = false
-	excludesfile = /Users/palexander/.gitignore_global
+	excludesfile = /Users/paulalexander/.gitignore_global
 
 [filter "media"]
   clean = git-media-clean %f
@@ -58,7 +58,7 @@
 	postBuffer = 524288000
 [commit]
   gpgsign = true
-	template = /Users/palexander/dotfiles/.gitcommit.template
+	template = /Users/paulalexander/dotfiles/.gitcommit.template
 	cleanup = scissors
 [gpg]
   program = gpg
@@ -78,8 +78,8 @@
 [mergetool]
 	prompt = false
 [maintenance]
-	repo = /Users/palexander/workspace/bark/bark-desktop
-	repo = /Users/palexander/workspace/bark/bark-www
-	repo = /Users/palexander/workspace/bark/bark-admin
+	repo = /Users/paulalexander/workspace/bark/bark-desktop
+	repo = /Users/paulalexander/workspace/bark/bark-www
+	repo = /Users/paulalexander/workspace/bark/bark-admin
 [rebase]
 	updateRefs = true
