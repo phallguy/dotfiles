@@ -1,6 +1,8 @@
 set encoding=utf-8
 set shell=/bin/bash
 
+let g:loaded_perl_provider = 0
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing Experience
 "

@@ -6,6 +6,9 @@ unset CC
 unset VERSION
 export RUBYOPT="-W0"
 
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Make sure brew executables are in path
 export PATH="/usr/local/sbin:~/Library/Python/3.7/bin:$PATH"
 
@@ -21,6 +24,8 @@ export BASE16_SHELL="$HOME/.config/base16-shell/"
         source "$BASE16_SHELL/profile_helper.sh"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion || {
     # if not found in /usr/local/etc, try the brew --prefix location
