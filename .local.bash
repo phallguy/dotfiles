@@ -5,6 +5,16 @@ unset RAILS_ENV
 unset CC
 unset VERSION
 export RUBYOPT="-W0"
+export BAT_THEME="Monokai Extended"
+LESSOPEN="|/opt/homebrew/Cellar/bat-extras/2022.07.27/bin/batpipe %s";
+export LESSOPEN;
+unset LESSCLOSE;
+
+# The following will enable colors when using batpipe with less:
+LESS="$LESS -FRX";
+BATPIPE="color";
+export LESS;
+export BATPIPE;
 
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -32,6 +42,9 @@ export BASE16_SHELL="$HOME/.config/base16-shell/"
     [ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ] && \
         . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 }
+
+[ -f "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh" ] && \
+  . $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
 
 export GIT_PS1_SHOWDIRTYSTATE=
 export GIT_PS1_SHOWUNTRACKEDFILES=
@@ -172,7 +185,6 @@ export GPG_TTY=$(tty)
 export EDITOR="nvim"
 export VISUAL="nvim"
 export BUNDLER_EDITOR="nvim"
-export LESS=FRX
 # Don't list every path/var change on every prompt
 # export DIRENV_LOG_FORMAT=
 

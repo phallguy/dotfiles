@@ -1,3 +1,4 @@
+set nocompatible
 set encoding=utf-8
 set shell=/bin/bash
 
@@ -14,6 +15,7 @@ set noswapfile     " http://robots.thoughtbot.com/post/18739402579/global-gitign
 " set backupcopy=yes " Overwrite existing file so file watchers can detect changes
 set noendofline     " Don't automatically add newline
 set nofixendofline
+set updatecount=0
 set title
 
 set cursorline      " Makes vim refresh much slower
@@ -155,9 +157,12 @@ if &t_Co > 2 || has("gui_running")
 
   set background=dark
 
-  if filereadable(expand("~/.vimrc_background"))
+if exists('$BASE16_THEME')
+      \ && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
+    let base16colorspace=256
+    colorscheme base16-$BASE16_THEME
+
     let base16colorspace=256  " Access colors present in 256 colorspace
-    source ~/.vimrc_background
     call Base16hi("SignColumn", g:base16_gui03, g:base16_gui00, g:base16_cterm03, g:base16_cterm00, "none", "")
     call Base16hi("LineNr", g:base16_gui01, g:base16_gui00, g:base16_cterm01, g:base16_cterm00, "none", "")
     call Base16hi("CursorLineNr", g:base16_gui04, g:base16_gui02, g:base16_cterm02, g:base16_cterm00, "none", "")
@@ -568,7 +573,6 @@ augroup END
 
 " JavaScript
 
-nnoremap <leader>j :call js_alternate#run()<cr>
 
 " Python
 augroup pythonsettings

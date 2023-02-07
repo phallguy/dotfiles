@@ -1,6 +1,6 @@
 [user]
 	name = Paul Alexander
-	email = paul@bark.us
+	email = paul@phallguy.com
   signingkey = 218BD2A9
 
 [color]
@@ -31,6 +31,7 @@
 [core]
   autocrlf = false
 	excludesfile = /Users/paulalexander/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [filter "media"]
   clean = git-media-clean %f
@@ -83,3 +84,5 @@
 	repo = /Users/paulalexander/workspace/bark/bark-admin
 [rebase]
 	updateRefs = true
+[interactive]
+	diffFilter = diff-so-fancy --patch
