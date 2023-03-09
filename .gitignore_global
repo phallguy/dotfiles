@@ -14,6 +14,7 @@ Session.vim
 *.envrc
 .ruby-version
 .rubocop.yml
+.solargraph.yml
 .rufo
 docker-compose.yml.local
 tags
@@ -24,3 +25,6 @@ chromedriver
 bin/up
 .pryrc
 BqfPreviewBorder
+.vimspector.json
+Gemfile.local
+.codespellrc

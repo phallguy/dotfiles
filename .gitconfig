@@ -32,18 +32,14 @@
   autocrlf = false
 	excludesfile = /Users/paulalexander/.gitignore_global
 	pager = diff-so-fancy | less --tabs=4 -RFX
+  preloadIndex = false
+  fsmonitor = true
+  untrackedcache = true
 
 [filter "media"]
   clean = git-media-clean %f
   smudge = git-media-smudge %f
 
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [mergetool "Kaleidoscope"]
   trustexitcode = true
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
@@ -86,3 +82,9 @@
 	updateRefs = true
 [interactive]
 	diffFilter = diff-so-fancy --patch
+
+
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+[mergetool "vscode"]
+  cmd = code --wait $MERGED

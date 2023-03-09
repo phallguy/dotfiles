@@ -7,6 +7,8 @@ IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_MULTILINE] = true
 
+ARGV.concat [ "--readline", "--prompt-mode", "simple" ]
+
 ### START debundle.rb ###
 
 # MIT License

@@ -16,18 +16,18 @@ BATPIPE="color";
 export LESS;
 export BATPIPE;
 
+export CPU_ARCH=$(uname -a)
+
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Make sure brew executables are in path
-export PATH="/usr/local/sbin:~/Library/Python/3.7/bin:$PATH"
+export PATH="/usr/local/sbin:~/Library/Python/3.7/bin:$PATH:~/.local/bin"
 
 export CLICOLOR=1
-export LSCOLORS=gxfxFxdxbxDxDxBxBxExEx
+#export LSCOLORS=gxfxFxdxbxDxDxBxBxExEx
 
-# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-# Base16 Shell
+# # Base16 Shell
 export BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
@@ -116,16 +116,17 @@ function my_prompt {
     fi
   fi
 
-  PS1="\r\n\n${CURRENT_TIME}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
+  if [[ $CPU_ARCH =~ x86_64 ]]; then
+    CURRENT_ARCH="\[\e[48;5;16;38;5;18m\] x86_64 "
+  else
+    CURRENT_ARCH=""
+  fi
+
+  PS1="\r\n\n${CURRENT_TIME}${CURRENT_ARCH}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
 }
 export PROMPT_COMMAND="my_prompt; history -a; timer_stop"
 shopt -s histappend
 export HISTCONTROL=ignoreboth:erasedups
-
-function href {
-  history -a
-  history -n
-}
 
 # function for setting terminal titles in OSX
 function title {
@@ -143,12 +144,13 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -lFh'
+# alias ll='ls -lFh'
+alias ll='exa -l --icons --git'
 alias la='ls -A'
 alias be='bundle exec'
 alias d='docker'
 alias dcl='docker-compose -f docker-compose.yml.local'
-alias vi='nvim'
+alias vi='lvim'
 alias k='kubectl'
 alias t='terraform'
 alias light_theme='base16_mexico-light'
@@ -182,9 +184,9 @@ bd() {
 
 export GPG_TTY=$(tty)
 
-export EDITOR="nvim"
-export VISUAL="nvim"
-export BUNDLER_EDITOR="nvim"
+export EDITOR="${HOME}/.local/bin/lvim"
+export VISUAL="${HOME}/.local/bin/lvim"
+export BUNDLER_EDITOR="${HOME}/.local/bin/lvim"
 # Don't list every path/var change on every prompt
 # export DIRENV_LOG_FORMAT=
 
@@ -193,9 +195,11 @@ eval "$(direnv hook bash)"
 eval "$(rbenv init -)"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/palexander/google-cloud-sdk/path.bash.inc' ]; then . '/Users/palexander/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/Users/paulalexander/google-cloud-sdk/path.bash.inc' ]; then . '/Users/paulalexander/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/palexander/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/palexander/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/Users/paulalexander/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/paulalexander/google-cloud-sdk/completion.bash.inc'; fi
 
 dark_theme
+
+. "$HOME/.cargo/env"

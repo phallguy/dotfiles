@@ -1,7 +1,3 @@
-set nocompatible
-set encoding=utf-8
-set shell=/bin/bash
-
 let g:loaded_perl_provider = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -21,12 +17,11 @@ set title
 set cursorline      " Makes vim refresh much slower
 set nocursorcolumn
 set laststatus=2
-set foldmethod=marker
+"set foldmethod=marker
 
 " https://neovim.io/news/2022/04#filetypelua
 let g:do_filetype_lua = 1
 "let g:did_load_filetypes = 0
-
 
 set hlsearch
 set incsearch
@@ -56,17 +51,22 @@ set numberwidth=3
 set undofile                " tell it to use an undo file
 set undodir=$HOME/.vimundo/ " use a directory to store the undo history
 
+let g:vimspector_enable_mappings = 'HUMAN'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 "
 call plug#begin('~/.vim/plugged')
-Plug 'MarcWeber/vim-addon-local-vimrc' " import .vimrc from CWD when launching
+Plug 'embear/vim-localvimrc' " import .vimrc from CWD when launching
 
 " Visual experience
-Plug 'chriskempson/base16-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'chriskempson/base16-vim'
+" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'marko-cerovac/material.nvim'
+
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'lilydjwg/colorizer'
 Plug 'kevinhwang91/nvim-bqf'
 Plug 'blueyed/vim-qf_resize'
@@ -96,38 +96,41 @@ Plug 'tpope/vim-rhubarb'        " More GitHub integration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language support
 "
+Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/playground'
 Plug 'janko/vim-test'
 Plug 'tpope/vim-dispatch'       " Async test runner to quick fix
 Plug 'kana/vim-textobj-user'    " Custom 'object' targeting for movements
 Plug 'glts/vim-textobj-comment' " Comments as text objects
 Plug 'dense-analysis/ale'       " Code formatting
+" Plug 'puremourning/vimspector'
 
 " Ruby/rails
-Plug 'vim-ruby/vim-ruby'
+" Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'joker1007/vim-ruby-heredoc-syntax'
+" Plug 'nelstrom/vim-textobj-rubyblock'
+" Plug 'joker1007/vim-ruby-heredoc-syntax'
 Plug 'andymass/vim-matchup'
 
 " Javasript
-Plug 'leafgarland/typescript-vim'
-Plug 'kchmck/vim-coffee-script'
-Plug 'pangloss/vim-javascript'
-Plug 'MaxMEllon/vim-jsx-pretty'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'pangloss/vim-javascript'
+" Plug 'MaxMEllon/vim-jsx-pretty'
 
 " Dart
 " Plug 'dart-lang/dart-vim-plugin'
 
 " Markdown
-Plug 'preservim/vim-markdown'
+" Plug 'preservim/vim-markdown'
 
 " Arduino
 " Plug 'sudar/vim-arduino-syntax'
 " Plug 'sudar/vim-arduino-snippets'
 
 " iOS
-Plug 'keith/swift.vim'
+" Plug 'keith/swift.vim'
 "
 
 " Python
@@ -135,20 +138,21 @@ Plug 'keith/swift.vim'
 " Plug 'Glench/Vim-Jinja2-Syntax'
 
 " Terraform
-Plug 'hashivim/vim-terraform'
+" Plug 'hashivim/vim-terraform'
 
 " Android
-Plug 'udalov/kotlin-vim'
+" Plug 'udalov/kotlin-vim'
 
 call plug#end()
 
 filetype on
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntax highlighting and visual styling
 "
 if &t_Co > 2 || has("gui_running")
+
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
   " Support 24-bit colors if possible
   if (has("termguicolors"))
@@ -157,57 +161,48 @@ if &t_Co > 2 || has("gui_running")
 
   set background=dark
 
-if exists('$BASE16_THEME')
-      \ && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
-    let base16colorspace=256
-    colorscheme base16-$BASE16_THEME
-
-    let base16colorspace=256  " Access colors present in 256 colorspace
-    call Base16hi("SignColumn", g:base16_gui03, g:base16_gui00, g:base16_cterm03, g:base16_cterm00, "none", "")
-    call Base16hi("LineNr", g:base16_gui01, g:base16_gui00, g:base16_cterm01, g:base16_cterm00, "none", "")
-    call Base16hi("CursorLineNr", g:base16_gui04, g:base16_gui02, g:base16_cterm02, g:base16_cterm00, "none", "")
-    call Base16hi("CursorLine",    "", g:base16_gui02, "", g:base16_cterm02, "none", "")
-    call Base16hi("MatchParen",    "", g:base16_gui01, "", g:base16_cterm01, "none", "")
-
-    call Base16hi("Folded", g:base16_gui0C, "", g:base16_cterm03, g:base16_cterm02, "none", "")
-
-    call Base16hi("BqfPreviewBorder", g:base16_gui0B, g:base16_gui00, g:base16_cterm0B, g:base16_cterm00, "none", "")
-
-    call Base16hi("QuickFixLine", g:base16_gui07, g:base16_gui0D, g:base16_cterm0B, g:base16_cterm00, "none", "")
-    call Base16hi("qfSeparator", g:base16_gui01, g:base16_gui00, g:base16_cterm01, g:base16_cterm00, "none", "")
-
-    com! CheckHighlightUnderCursor echo {l,c,n ->
-          \   'hi<'    . synIDattr(synID(l, c, 1), n)             . '> '
-          \  .'trans<' . synIDattr(synID(l, c, 0), n)             . '> '
-          \  .'lo<'    . synIDattr(synIDtrans(synID(l, c, 1)), n) . '> '
-          \ }(line("."), col("."), "name")
-  endif
-
-
-  let g:airline_extensions = ['fugitiveline', 'ale', 'fzf']
-  let g:airline_powerline_fonts = 1
-  let g:airline_theme='base16_vim'
-  let g:airline_section_a = airline#section#create([ 'mode' ])
-  let g:airline#extensions#branch#format = 2
-  let g:airline#extensions#branch#displayed_head_limit = 24
-  " let g:airline_section_y = airline#section#create_right([ '#%{winnr()}' ])
-  " let g:airline_section_z = "%M %#__accent_bold#%4l/%L%#__restore__# %{g:airline_symbols.linenr} %3v"
-  let g:airline_section_y = ""
-  let g:airline_section_z = ""
-  let g:airline_skip_empty_sections = 1
-  let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-
-  let g:airline_highlighting_cache = 1
-  let g:airline#extensions#whitespace#enabled = 0
-  let g:airline#extensions#ale#enabled = 1
+  lua << END
+  vim.g.material_style = "palenight"
+  vim.cmd 'colorscheme material'
+END
 
   let g:colorizer_startup = 0
 endif
 
+lua << END
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'material'
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {},
+    lualine_c = {{'filename', path = 1}},
+    lualine_x = {'filetype'},
+    lualine_y = {{
+      'diagnostics',
+      sources = { 'ale', 'nvim_diagnostic' },
+      colored = true
+    }},
+    lualine_z = { 'vim.fn.winnr()' }
+  },
+  inactive_sections = {
+
+    lualine_a = {''},
+    lualine_b = {},
+    lualine_c = {{'filename', path = 1}},
+    lualine_x = {'filetype'},
+    lualine_y = {},
+    lualine_z = { 'vim.fn.winnr()' }
+  }
+}
+END
+
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "ruby", "javascript", "markdown", "hcl", "json" },
+  ensure_installed = { "ruby", "javascript", "typescript", "markdown", "hcl", "json", "query" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -220,22 +215,41 @@ require'nvim-treesitter.configs'.setup {
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = true,
-    },
+    additional_vim_regex_highlighting = false,
+  },
 
   matchup = {
     enable = true,
     disable = {},
-    },
+  },
 
   incremental_selection = {
     enable = true
-    },
+  },
 
   indent = {
     enable = false
-    }
+  },
+
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = 'o',
+      toggle_hl_groups = 'i',
+      toggle_injected_languages = 't',
+      toggle_anonymous_nodes = 'a',
+      toggle_language_display = 'I',
+      focus_language = 'f',
+      unfocus_language = 'F',
+      update = 'R',
+      goto_node = '<cr>',
+      show_help = '?',
+    },
   }
+}
 EOF
 
 nnoremap + :lua require'nvim-treesitter.incremental_selection'.init_selection()<CR>
@@ -265,17 +279,20 @@ nnoremap <leader>O :w\|%bd\|e#\|bd#<CR>\'"
 nnoremap <leader>n :cn<CR>
 nnoremap <leader>p :cp<CR>
 nnoremap <leader>c :cw<CR>
+nnoremap <leader>an :ALENext<CR>
+nnoremap <leader>ap :ALEPrevious<CR>
 
 lua <<EOF
-require('bqf').setup({
-auto_enable = true,
-preview = {
-  win_height = 15,
-  win_vheight = 15,
-  delay_syntax = 80,
-  show_title = false,
-  }
-})
+  require('bqf').setup({
+    auto_enable = true,
+    auto_resize_height = true,
+    preview = {
+      win_height = 15,
+      win_vheight = 15,
+      delay_syntax = 80,
+      show_title = false
+    }
+  })
 EOF
 
 let g:qf_resize_max_ratio=0.25
@@ -383,6 +400,7 @@ let g:ale_virtualtext_cursor = 0
 
 
 map <leader>f :ALEFix<CR>
+map <leader>fo :ALEOrganizeImports<CR>
 map <leader>a :ALELint<CR>
 
 " Re-indent entire file
@@ -394,6 +412,8 @@ autocmd FileType svg nnoremap <buffer> <leader>g :!htmlbeautifier -b 2 %<CR>
 " Toggle comments
 nnoremap <C-_><C-_> :Commentary<CR>
 vnoremap <C-_><C-_> <Plug>Commentary \| gv
+nnoremap <C-/><C-/> :Commentary<CR>
+vnoremap <C-/><C-/> <Plug>Commentary \| gv
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -448,8 +468,65 @@ augroup netwr
   let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 augroup END
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" _er file/syntax customization
+" Testing
+
+
+map <leader>t :TestFile<CR>
+map <leader>s :TestNearest<CR>
+map <leader>d :cclose<CR>:TestNearest -strategy=bufferterm<CR>
+map <leader>l :TestLast<CR>
+map <leader>r :AV<CR>
+map <leader>de :VimspectorReset<CR>
+
+let g:test#preserve_screen = 0
+let g:test#neovim#start_normal = 0
+let g:test#echo_command = 0
+let test#filename_modifier = ':p'
+
+if has('nvim')
+  let test#strategy = "dispatch"
+  let test#neovim#term_position = "botright 30"
+end
+
+augroup TestTerminal
+  function! BufferTermStrategy(cmd)
+    exec 'te ' . a:cmd
+  endfunction
+
+  let g:test#custom_strategies = {'bufferterm': function('BufferTermStrategy')}
+augroup END
+
+
+augroup subProjectRoot
+  autocmd!
+
+  " For mono-repo projects, dynamically look for package.json or Gemfile to
+  " find the 'root' to run tests and ale linters from
+  function! SetTestRoot()
+    let src = expand( '%:p' )
+    let cmd = 'dirname $( find `( SPEC=''' . src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type f -name Gemfile -o -name package.json | head -n 1 )'
+    let g:test#project_root = StrTrim( system( cmd ) )
+    let g:project_root = StrTrim( system( cmd ) )
+    let g:ale_command_wrapper = 'cd ' . g:project_root . '; '
+
+    echo g:project_root
+  endfunction
+
+  function! StrTrim(txt)
+    return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+  endfunction
+
+  autocmd BufEnter,BufWinEnter,FileType javascript call SetTestRoot()
+  autocmd BufEnter,BufWinEnter,FileType javascriptreact call SetTestRoot()
+  autocmd BufEnter,BufWinEnter,FileType typescript call SetTestRoot()
+  "    autocmd BufEnter,BufWinEnter,FileType ruby call SetTestRoot()
+
+augroup END
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" file/syntax customization
 
 augroup syntaxOverrides
   autocmd!
@@ -499,22 +576,29 @@ augroup pencil
 augroup END
 
 " Ruby/Rails
-map <leader>t :TestFile<CR>
-map <leader>s :TestNearest<CR>
-map <leader>l :TestLast<CR>
-map <leader>d :cclose<CR>:TestNearest -strategy=neovim<CR>
-map <leader>r :AV<CR>
 
 let test#ruby#use_spring_binstub = 0
-let g:test#preserve_screen = 0
-let g:test#neovim#start_normal = 0
-let g:test#echo_command = 0
-let test#filename_modifier = ':p'
 
-if has('nvim')
-  let test#strategy = "dispatch"
-  let test#neovim#term_position = "botright 30"
-end
+let g:rails_projections = {
+  \  "app/controllers/*_controller.rb": {
+  \      "test": [
+  \        "test/controllers/{}_controller_test.rb",
+  \        "spec/requests/{}_controller_spec.rb",
+  \        "spec/controllers/{}_controller_spec.rb"
+  \      ],
+  \      "alternate": [
+  \        "test/controllers/{}_controller_test.rb",
+  \        "spec/requests/{}_controller_spec.rb",
+  \        "spec/controllers/{}_controller_spec.rb"
+  \      ],
+  \   },
+  \   "spec/requests/*_spec.rb": {
+  \      "command": "request",
+  \      "alternate": "app/controllers/{}.rb",
+  \      "template": "require 'rails_helper'\n\n" .
+  \        "RSpec.describe '{}' do\nend",
+  \   },
+  \ }
 
 let g:ruby_indent_access_modifier_style="indent"
 let g:splitjoin_ruby_curly_braces = 0
@@ -524,54 +608,7 @@ let g:splitjoin_normalize_whitespace=1
 let g:splitjoin_align=1
 let g:splitjoin_ruby_options_as_arguments=1
 
-let g:rails_projections = {
-\  "app/controllers/*_controller.rb": {
-\      "test": [
-\        "spec/requests/{}_controller_spec.rb",
-\        "spec/controllers/{}_controller_spec.rb",
-\        "test/controllers/{}_controller_test.rb"
-\      ],
-\      "alternate": [
-\        "spec/requests/{}_controller_spec.rb",
-\        "spec/controllers/{}_controller_spec.rb",
-\        "test/controllers/{}_controller_test.rb"
-\      ],
-\   },
-\   "spec/requests/*_spec.rb": {
-\      "command": "request",
-\      "alternate": "app/controllers/{}.rb",
-\      "template": "require 'rails_helper'\n\n" .
-\        "RSpec.describe '{}' do\nend",
-\   },
-\ }
-
-augroup subProjectRoot
-  autocmd!
-
-  " For mono-repo projects, dynamically look for package.json or Gemfile to
-  " find the 'root' to run tests and ale linters from
-  function! SetTestRoot()
-    let src = expand( '%:p' )
-    let cmd = 'dirname $( find `( SPEC=''' . src . '''; CP=${SPEC%/*}; while [ -n "$CP" ] ; do echo $CP; CP=${CP%/*}; done; echo / )` -mindepth 1 -maxdepth 1 -type f -name Gemfile -o -name package.json | head -n 1 )'
-    let g:test#project_root = StrTrim( system( cmd ) )
-    let g:project_root = StrTrim( system( cmd ) )
-    let g:ale_command_wrapper = 'cd ' . g:project_root . '; '
-
-    echo g:project_root
-  endfunction
-
-  function! StrTrim(txt)
-    return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-  endfunction
-
-  autocmd BufEnter,BufWinEnter,FileType javascript call SetTestRoot()
-  autocmd BufEnter,BufWinEnter,FileType javascriptreact call SetTestRoot()
-  autocmd BufEnter,BufWinEnter,FileType typescript call SetTestRoot()
-"    autocmd BufEnter,BufWinEnter,FileType ruby call SetTestRoot()
-
-augroup END
-
-" JavaScript
+" JavaScript / TypeScript
 
 
 " Python
@@ -591,5 +628,8 @@ augroup END
 let python_highlight_all=1
 
 " Support per-project .vimrc commands
-set exrc
-set secure
+" set exrc
+" set secure
+let g:localvimrc_name = ['.lvimrc', '.vimrc']
+let g:localvimrc_sandbox = 0
+let g:localvimrc_persistent = 2
