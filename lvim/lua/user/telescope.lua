@@ -105,6 +105,7 @@ lvim.builtin.telescope.defaults.mappings = {
         ["?"] = actions.which_key,
   }
 }
+
 require("telescope").load_extension("live_grep_args")
 local lga_actions = require("telescope-live-grep-args.actions")
 
@@ -119,3 +120,7 @@ lvim.builtin.telescope.extensions.live_grep_args = {
     },
   },
 }
+
+lvim.builtin.telescope.on_config_done = function(telescope)
+  pcall(telescope.load_extension, "live_grep_args")
+end

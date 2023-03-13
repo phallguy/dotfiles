@@ -5,6 +5,7 @@ unset RAILS_ENV
 unset CC
 unset VERSION
 export RUBYOPT="-W0"
+export RIPGREP_CONFIG_PATH="/Users/paulalexander/.ripgreprc"
 export BAT_THEME="Monokai Extended"
 LESSOPEN="|/opt/homebrew/Cellar/bat-extras/2022.07.27/bin/batpipe %s";
 export LESSOPEN;

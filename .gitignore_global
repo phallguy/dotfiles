@@ -28,3 +28,4 @@ BqfPreviewBorder
 .vimspector.json
 Gemfile.local
 .codespellrc
+.ripgreprc

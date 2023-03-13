@@ -6,7 +6,7 @@ lvim.plugins = {
   { 'embear/vim-localvimrc' }, -- import .vimrc from CWD when launching
   { 'tpope/vim-vinegar' },     -- netwr support
   { 'tpope/vim-fugitive' },    -- Git magic
-  { 'tpope/vim-rhubarb' }, -- Even more git magic
+  { 'tpope/vim-rhubarb' },     -- Even more git magic
 
   -- editing
   { 'mg979/vim-visual-multi' },
@@ -17,7 +17,7 @@ lvim.plugins = {
   { 'mbbill/undotree' },
   { 'kevinhwang91/nvim-bqf' },
   { 'norcalli/nvim-colorizer.lua' },
-  { 'ziontee113/color-picker.nvim' },
+  { 'KabbAmine/vCoolor.vim' },
 
   -- treesitter
   { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Change comment string based on embedded lang (eg ERB)
@@ -25,14 +25,53 @@ lvim.plugins = {
   { 'windwp/nvim-ts-autotag' },                      -- Auto close/rename html like tags
 
   -- Telescope / completion
-  -- { '/onsails/lspkind.nvim' },                        -- Icons in LSP suggestions
   { 'nvim-telescope/telescope-live-grep-args.nvim' }, -- refine live grep
   { 'glepnir/lspsaga.nvim' },
+  { 'ray-x/lsp_signature.nvim' },
 
   -- Color schemes
   {
     -- https://github.com/marko-cerovac/material.nvim
     "marko-cerovac/material.nvim",
+    config = function()
+      local colors = require 'material.colors'
+      require('material').setup({
+        contrast = {
+          cursor_line = true,
+          floating_windows = true,
+          sidebars = true,
+          terminal = true,
+        },
+        styles = {
+          functions = { bold = true },
+        },
+        plugins = { -- Uncomment the plugins that you use to highlight them
+          -- Available plugins:
+          -- "dap",
+          -- "dashboard",
+          "gitsigns",
+          -- "hop",
+          -- "indent-blankline",
+          "lspsaga",
+          -- "mini",
+          -- "neogit",
+          -- "neorg",
+          "nvim-cmp",
+          -- "nvim-navic",
+          -- "nvim-tree",
+          "nvim-web-devicons",
+          -- "sneak",
+          "telescope",
+          -- "trouble",
+          "which-key",
+        },
+        custom_highlights = {
+          IndentBlanklineChar = { fg = colors.editor.line_numbers },
+          IndentBlanklineContextChar = { fg = "#63698a" },
+        },
+        lualine_style = "stealth",
+      })
+    end
   },
 
   -- General testing
@@ -51,45 +90,8 @@ lvim.plugins = {
   { "jose-elias-alvarez/typescript.nvim" } -- Extra typescript love
 }
 
-local colors = require 'material.colors'
-require('material').setup({
-  contrast = {
-    cursor_line = true,
-    floating_windows = true,
-    sidebars = true,
-    terminal = true,
-  },
-  styles = {
-    functions = { bold = true },
-  },
-  plugins = { -- Uncomment the plugins that you use to highlight them
-    -- Available plugins:
-    -- "dap",
-    -- "dashboard",
-    "gitsigns",
-    -- "hop",
-    -- "indent-blankline",
-    "lspsaga",
-    -- "mini",
-    -- "neogit",
-    -- "neorg",
-    "nvim-cmp",
-    -- "nvim-navic",
-    -- "nvim-tree",
-    "nvim-web-devicons",
-    -- "sneak",
-    "telescope",
-    -- "trouble",
-    "which-key",
-  },
-  custom_highlights = {
-    IndentBlanklineChar = { fg = colors.editor.line_numbers },
-    IndentBlanklineContextChar = { fg = "#63698a" },
-  },
-  lualine_style = "stealth",
-})
 
-lvim.builtin.indentlines.options.show_trailing_blankline_indent = true
+-- lvim.builtin.indentlines.options.show_trailing_blankline_indent = true
 
 
 vim.g.material_style = "palenight"
@@ -102,12 +104,18 @@ lvim.builtin.bufferline.active = false
 lvim.builtin.breadcrumbs.active = false
 lvim.builtin.illuminate.active = false
 lvim.builtin.project.active = false
--- lvim.builtin.gitsigns.active = false
 lvim.builtin.alpha.active = false
 
 lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.diagnostics.document_higlight = true
 -- lvim.format_on_save = true
+--
+
+-- lvim.log.level = "debug"
+-- lvim.lsp.null_ls.setup.debug = true
+lvim.lsp.automatic_servers_installation = false
+
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "tailwindcss" })
 
 -- Support per-project .vimrc commands
 vim.g["localvimrc_name"] = { '.lvimrc', '.vimrc' }
@@ -120,35 +128,11 @@ require 'colorizer'.setup({
   css = true
 })
 
-require("color-picker").setup()
-
 lvim.builtin.cmp.active = true
 lvim.builtin.cmp.completion.keyword_length = 1
 lvim.builtin.cmp.experimental.ghost_text = true
 lvim.builtin.cmp.view = { native = true }
 
-
--- Wait before showing the cmpletion window
--- local cmp = require('cmp')
--- cmp.setup {
---   completion = {
---     autocomplete = false
---   }
--- }
-
--- vim.cmd([[
--- let s:timer = 0
--- autocmd TextChangedI * call s:on_text_changed()
--- function! s:on_text_changed() abort
---   call timer_stop(s:timer)
---   let s:timer = timer_start(200, function('s:complete'))
--- endfunction
--- function! s:complete(...) abort
---   lua require('cmp').complete({ reason = require('cmp').ContextReason.Auto })
--- endfunction
--- ]])
---
---
 require "user.options"
 require "user.telescope"
 require "user.treesitter"

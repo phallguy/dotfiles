@@ -9,8 +9,8 @@ augroup gitEx
 augroup END
 ]])
 
-lvim.builtin.gitsigns.active = false
-lvim.builtin.gitsigns.opts.signcolumn = false
+-- lvim.builtin.gitsigns.active = false
+-- lvim.builtin.gitsigns.opts.signcolumn = false
 
 lvim.builtin.which_key.mappings["g"] = {
   s = { "<cmd>Telescope git_status<cr>", "Status" },
