@@ -11,9 +11,12 @@
           floating_windows = true,
           sidebars = true,
           terminal = true,
+          non_current_windows = false,
         },
         styles = {
           functions = { bold = true },
+          types = { bold = true },
+          comments = { italic = true },
         },
         plugins = { -- Uncomment the plugins that you use to highlight them
           -- Available plugins:
@@ -44,4 +47,7 @@
 
       vim.cmd.colorscheme "material"
     end,
+    dependencies = {
+      "glepnir/lspsaga.nvim"
+    }
   }

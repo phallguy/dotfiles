@@ -2,9 +2,6 @@ vim.cmd([[
 augroup gitEx
   autocmd!
 
-  au FileType gitcommit set tw
-  au FileType gitcommit set spell
-  au FileType gitcommit PencilSoft
   au FileType git setlocal foldmethod=syntax
 
   au FileType DiffviewFiles nnoremap <leader>c :DiffviewClose<CR>

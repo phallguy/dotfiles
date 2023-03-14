@@ -1,15 +1,4 @@
 -- https://github.com/nvim-telescope/telescope.nvim
---
-vim.keymap.set("n", ",", ":Telescope buffers<CR>", { desc = "Buffers" })
-vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>", { desc = "Find files" })
-
-vim.keymap.set("n", "<leader>/", ":Telescope current_buffer_fuzzy_find<CR>", { desc = "Find in buffer" })
-
-vim.keymap.set("n", "<leader>ag", ":Telescope live_grep_args<CR>", { desc = "Live grep" })
-vim.keymap.set("n", "<leader>af", ":Telescope find_files<CR>", { desc = "Find files" })
-vim.keymap.set("n", "<leader>ar", ":Telescope resume<CR>", { desc = "Resume search" })
-vim.keymap.set("n", "<leader>ae", ":Telescope registers<CR>", { desc = "Registers" })
-
 return {
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -21,6 +10,17 @@ return {
       -- See `:help telescope` and `:help telescope.setup()`
       local _, actions = pcall(require, "telescope.actions")
       local lga_actions = require("telescope-live-grep-args.actions")
+
+      vim.keymap.set("n", ",", require('telescope.builtin').buffers, { desc = "Buffers" })
+      vim.keymap.set("n", "<C-p>", require('telescope.builtin').find_files, { desc = "Find files" })
+      vim.keymap.set("n", "<CS-P>", require('telescope.builtin').oldfiles, { desc = "Recent files" })
+
+      vim.keymap.set("n", "<leader>/", require('telescope.builtin').current_buffer_fuzzy_find, { desc = "Find in buffer" })
+
+      vim.keymap.set("n", "<leader>ag", require("telescope").extensions.live_grep_args.live_grep_args,  { desc = "Live grep" })
+      vim.keymap.set("n", "<leader>af", require('telescope.builtin').find_files, { desc = "Find files" })
+      vim.keymap.set("n", "<leader>ar", require('telescope.builtin').resume, { desc = "Resume search" })
+      vim.keymap.set("n", "<leader>ae", require('telescope.builtin').registers, { desc = "Registers" })
 
       require('telescope').setup {
         defaults = {
@@ -53,6 +53,11 @@ return {
             sort_lastused = true,
           },
           find_files = {
+            theme = "ivy",
+            previewer = false,
+            sort_lastused = true,
+          },
+          oldfiles = {
             theme = "ivy",
             previewer = false,
             sort_lastused = true,

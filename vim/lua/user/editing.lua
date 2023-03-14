@@ -22,15 +22,15 @@ vim.keymap.set("n", "[q", ":cp<CR>", { desc = "Prev qf" })
 vim.keymap.set("n", "]q", ":cn<CR>", { desc = "Next qf" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>c", ":bn<CR>:bd#<CR>", { desc = "Close" })
+vim.keymap.set("n", "<leader>c", ":bp<CR>:bd#<CR>", { desc = "Close" })
 vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 
 -- Comments
-vim.keymap.set("n", "<C-/><C-/>", "<Plug>(comment_toggle_linewise_current)", { desc = "Toggle comment" })
-vim.keymap.set("n", "<C-_><C-_>", "<Plug>(comment_toggle_linewise_current)", { desc = "Toggle comment" })
-
-vim.keymap.set("v", "<C-/><C-/>", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle comment" })
-vim.keymap.set("v", "<C-_><C-_>", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle comment" })
+-- vim.keymap.set("n", "<C-/><C-/>", "<Plug>(comment_toggle_linewise_current)", { desc = "Toggle comment" })
+-- vim.keymap.set("n", "<C-_><C-_>", "<Plug>(comment_toggle_linewise_current)", { desc = "Toggle comment" })
+--
+-- vim.keymap.set("v", "<C-/><C-/>", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle comment" })
+-- vim.keymap.set("v", "<C-_><C-_>", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle comment" })
 
 vim.keymap.set("n", "<leader>o", ":only<CR>:set cmdheight=1<CR>", { desc = "Close all but this" })
 vim.keymap.set("n", "<leader>O", [[:only|%bd|e#|bd#<CR>]], { desc = "Hard Close all but this" })
