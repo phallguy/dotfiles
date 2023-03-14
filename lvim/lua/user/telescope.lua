@@ -1,5 +1,5 @@
 lvim.keys.normal_mode[","] = ":Telescope buffers<CR>"
-lvim.keys.normal_mode["<C-p>"] = ":Telescope git_files<CR>"
+lvim.keys.normal_mode["<C-p>"] = ":Telescope find_files<CR>"
 
 lvim.builtin.which_key.mappings["/"] = { ":Telescope current_buffer_fuzzy_find<CR>", "Find in buffer" }
 
@@ -34,8 +34,8 @@ lvim.builtin.telescope.pickers.git_files = {
 }
 
 lvim.builtin.telescope.pickers.find_files = {
-  theme = "ivy",
-  previewer = true,
+  theme = "dropdown",
+  previewer = false,
   initial_mode = "insert",
   hidden = false,
   sort_lastused = true,

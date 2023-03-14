@@ -29,3 +29,5 @@ BqfPreviewBorder
 Gemfile.local
 .codespellrc
 .ripgreprc
+config/definitions.rb
+

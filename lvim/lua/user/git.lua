@@ -6,6 +6,8 @@ augroup gitEx
   au FileType gitcommit set spell
   au FileType gitcommit PencilSoft
   au FileType git setlocal foldmethod=syntax
+
+  au FileType DiffviewFiles nnoremap <leader>c :DiffviewClose<CR>
 augroup END
 ]])
 
@@ -13,9 +15,10 @@ augroup END
 -- lvim.builtin.gitsigns.opts.signcolumn = false
 
 lvim.builtin.which_key.mappings["g"] = {
-  s = { "<cmd>Telescope git_status<cr>", "Status" },
+  s = { "<cmd>DiffviewOpen<cr>", "Status" },
+  S = { "<cmd>DiffviewOpen head~<cr>", "Status (head~)" },
   d = {
-    "<cmd>Gdiff<cr>",
+    "<cmd>DiffviewOpen -- %<cr>",
     "Diff",
   },
   b = { "<CMD>G blame<CR>", "Blame" },
@@ -24,3 +27,6 @@ lvim.builtin.which_key.mappings["g"] = {
   T = { "<CMD>silent !git difftool<CR>", "Diff tool all", silent = true },
   c = { "<C-w>h<C-w>c", "Close diff" }
 }
+
+-- https://github.com/pwntester/octo.nvim
+require"octo".setup({})

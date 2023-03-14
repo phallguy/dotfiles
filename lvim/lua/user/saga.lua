@@ -56,7 +56,7 @@ typescript.setup({
     capabilities = cmp_nvim_lsp.capabilities,
   },
 })
-require "lsp_signature".setup()
+
 require("lspsaga").setup({
   request_timeout = 30000,
   symbol_in_winbar = {

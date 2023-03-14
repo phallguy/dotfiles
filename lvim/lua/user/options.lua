@@ -27,6 +27,7 @@ vim.opt.numberwidth  = 3
 vim.opt.timeoutlen   = 300
 vim.opt.autoindent   = true
 vim.opt.smartindent  = true
+vim.opt.breakindent  = true
 
 vim.opt.endofline    = false -- Don't automatically add newline
 vim.opt.fixendofline = false

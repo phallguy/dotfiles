@@ -1,4 +1,4 @@
--- lvim.builtin.which_key.operators = nil
+lvim.builtin.which_key.operators = nil
 lvim.builtin.which_key.mappings["e"] = nil -- disable file exploreer
 lvim.builtin.which_key.mappings["h"] = nil -- disable no highlight
 lvim.builtin.which_key.mappings["f"] = nil -- disable find files, use Ctl-p instead
@@ -48,9 +48,10 @@ lvim.keys.normal_mode["<Left>"] = ":vertical resize -2<CR>"
 
 -- Alias shortcuts for common tasks
 lvim.builtin.which_key.mappings["o"] = { ":only<CR>:set cmdheight=1<CR>", "Close all but this" }
-vim.cmd([[
-  nnoremap <leader>O :w\|%bd\|e#\|bd#<CR>\'"
-]])
+lvim.builtin.which_key.mappings["O"] = { ":only<CR>:set cmdheight=1<CR>:w<CR>:%bd<CR>:e#<CR>:bd#<CR>", "Close all but this" }
+-- vim.cmd([[
+--   nnoremap <leader>O :w\|%bd\|e#\|bd#<CR>\'"
+-- ]])
 
 lvim.keys.visual_mode["p"] = '"_dP' -- don't yank into clipboard when pasting
 lvim.keys.normal_mode["x"] = '"_x'  -- when deleting a single character don't clobber clipboard

@@ -7,6 +7,8 @@ lvim.plugins = {
   { 'tpope/vim-vinegar' },     -- netwr support
   { 'tpope/vim-fugitive' },    -- Git magic
   { 'tpope/vim-rhubarb' },     -- Even more git magic
+  { 'pwntester/octo.nvim' },   -- Github magic
+  { 'sindrets/diffview.nvim' },
 
   -- editing
   { 'mg979/vim-visual-multi' },
@@ -27,7 +29,6 @@ lvim.plugins = {
   -- Telescope / completion
   { 'nvim-telescope/telescope-live-grep-args.nvim' }, -- refine live grep
   { 'glepnir/lspsaga.nvim' },
-  { 'ray-x/lsp_signature.nvim' },
 
   -- Color schemes
   {
@@ -35,6 +36,7 @@ lvim.plugins = {
     "marko-cerovac/material.nvim",
     config = function()
       local colors = require 'material.colors'
+
       require('material').setup({
         contrast = {
           cursor_line = true,
@@ -51,7 +53,7 @@ lvim.plugins = {
           -- "dashboard",
           "gitsigns",
           -- "hop",
-          -- "indent-blankline",
+          "indent-blankline",
           "lspsaga",
           -- "mini",
           -- "neogit",
@@ -65,6 +67,9 @@ lvim.plugins = {
           -- "trouble",
           "which-key",
         },
+        custom_colors = function(c)
+          -- c.git.added = "#596B3D"
+        end,
         custom_highlights = {
           IndentBlanklineChar = { fg = colors.editor.line_numbers },
           IndentBlanklineContextChar = { fg = "#63698a" },
