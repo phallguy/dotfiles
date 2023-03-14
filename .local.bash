@@ -151,7 +151,7 @@ alias la='ls -A'
 alias be='bundle exec'
 alias d='docker'
 alias dcl='docker-compose -f docker-compose.yml.local'
-alias vi='lvim'
+alias vi='nvim'
 alias k='kubectl'
 alias t='terraform'
 alias light_theme='base16_mexico-light'
@@ -185,9 +185,9 @@ bd() {
 
 export GPG_TTY=$(tty)
 
-export EDITOR="${HOME}/.local/bin/lvim"
-export VISUAL="${HOME}/.local/bin/lvim"
-export BUNDLER_EDITOR="${HOME}/.local/bin/lvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export BUNDLER_EDITOR="nvim"
 # Don't list every path/var change on every prompt
 # export DIRENV_LOG_FORMAT=
 
