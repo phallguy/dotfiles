@@ -4,22 +4,41 @@ vim.keymap.set("n", "gd", function()
 	require("lspsaga.definition"):goto_definition(1)
 end, { desc = "Definition" })
 vim.keymap.set("n", "gu", function()
-	require("lspsaga.finder"):lsp_finder(1)
+	require("lspsaga.command").load_command("lsp_finder")
 end, { desc = "Usage" })
 vim.keymap.set("n", "<leader>lrs", function()
 	require("lspsaga.rename"):lsp_rename()
 end, { desc = "[R]ename [s]ymbol" })
-vim.keymap.set("n", "<leader>lca", function()
+
+vim.keymap.set("n", "<leader>lrf", "<CMD>TypescriptRenameFile<CR>", { desc = "[R]ename [f]ile" })
+vim.keymap.set("n", "<leader>la", function()
 	require("lspsaga.codeaction"):code_action()
-end, { desc = "[C]ode [a]ction" })
+end, { desc = "Code [a]ction" })
 vim.keymap.set("n", "<leader>ll", function()
 	require("lspsaga.command").load_command("show_line_diagnostics")
 end, { desc = "[L]ine diagnostics" })
+vim.keymap.set("n", "<leader>ld", function()
+	require("lspsaga.command").load_command("peek_definition")
+end, { desc = "Peek [d]efinition" })
+vim.keymap.set("n", "<leader>lg", function()
+	require("lspsaga.command").load_command("goto_definition")
+end, { desc = "[G]o to definition" })
 
 vim.keymap.set("n", "K", function()
 	require("lspsaga.command").load_command("hover_doc")
 end, { desc = "Hover Documentation" })
 vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+
+vim.keymap.set("n", "<leader>lb", require("telescope.builtin").diagnostics, { desc = "Resume search" })
+vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "Buffer quickfix" })
+
+-- t = {
+--   name = "Typescript",
+--   a = { "<CMD>TypescriptAddMissingImports<CR>", "Add missing imports" },
+--   u = { "<CMD>TypescriptRemoveUnused<CR>", "Remove unused" },
+--   f = { "<CMD>TypescriptFixAll<CR>", "Fix all" },
+--   i = { "<CMD>TypescriptOrganizeImports<CR>", "Organize imports" },
+-- }
 
 local diagnostics = {
 	underline = true,
@@ -28,9 +47,9 @@ local diagnostics = {
 		active = true,
 		values = {
 			{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-			{ name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
-			{ name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
-			{ name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
+			{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
+			{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
+			{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
 		},
 	},
 }
@@ -60,8 +79,8 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 -- Setup mason so it can manage external tooling
 require("mason").setup({
 	ui = {
-		border = "rounded"
-	}
+		border = "rounded",
+	},
 })
 
 -- Ensure the servers above are installed
@@ -138,10 +157,29 @@ end
 local null_ls = require("null-ls")
 
 null_ls.setup({
+	debug = true,
+	ui = {
+		border = "rounded"
+	},
 	sources = {
-		null_ls.builtins.formatting.stylua,
+		-- Diagnostics
 		null_ls.builtins.diagnostics.eslint,
-		-- null_ls.builtins.completion.spell,
+		null_ls.builtins.diagnostics.codespell,
+		-- null_ls.builtins.diagnostics.erb_lint,
+		null_ls.builtins.diagnostics.rubocop,
+		null_ls.builtins.diagnostics.stylelint,
+		null_ls.builtins.diagnostics.yamllint,
+
+		-- Fixes
+		null_ls.builtins.code_actions.eslint,
+		-- null_ls.builtins.code_actions.gitsigns,
+
+		-- Formatting
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.prettierd,
+		-- null_ls.builtins.formatting.erb_lint,
+		null_ls.builtins.formatting.fixjson,
+		null_ls.builtins.formatting.rubocop,
 	},
 })
 

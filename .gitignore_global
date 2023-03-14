@@ -30,4 +30,6 @@ Gemfile.local
 .codespellrc
 .ripgreprc
 config/definitions.rb
+.erb-lint.yml
+
 

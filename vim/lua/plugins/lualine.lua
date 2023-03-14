@@ -14,7 +14,7 @@
         lualine_b = {},
         lualine_c = { { 'filename', path = 1 } },
         lualine_x = { 'filetype' },
-        lualine_y = {},
+        lualine_y = { 'location' },
         lualine_z = { {
           'diagnostics',
           sources = { 'ale', 'nvim_diagnostic' },

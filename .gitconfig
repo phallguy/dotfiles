@@ -1,6 +1,6 @@
 [user]
-	name = Paul Alexander
-	email = paul@phallguy.com
+  name = Paul Alexander
+  email = paul@phallguy.com
   signingkey = 218BD2A9
 
 [color]
@@ -30,8 +30,8 @@
 
 [core]
   autocrlf = false
-	excludesfile = /Users/paulalexander/.gitignore_global
-	pager = diff-so-fancy | less --tabs=4 -RFX
+  excludesfile = /Users/paulalexander/.gitignore_global
+  pager = diff-so-fancy | less --tabs=4 -RFX
   preloadIndex = false
   fsmonitor = false
   untrackedcache = false
@@ -42,49 +42,50 @@
 
 [mergetool "Kaleidoscope"]
   trustexitcode = true
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
 [diff]
   renames = true
-	tool = Kaleidoscope
+  tool = nvimdiff
 [filter "hawser"]
   clean = git hawser clean %f
   smudge = git hawser smudge %f
   required = true
 [http]
-	postBuffer = 524288000
+  postBuffer = 524288000
 [commit]
   gpgsign = true
-	template = /Users/paulalexander/dotfiles/.gitcommit.template
-	cleanup = scissors
+  template = /Users/paulalexander/dotfiles/.gitcommit.template
+  cleanup = scissors
 [gpg]
   program = gpg
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [init]
-	defaultBranch = master
+  defaultBranch = master
 [difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
-	prompt = false
+  prompt = false
 [merge]
-	tool = Kaleidoscope
+  tool = settle
 [mergetool]
-	prompt = false
+  prompt = false
 [maintenance]
-	repo = /Users/paulalexander/workspace/bark/bark-desktop
-	repo = /Users/paulalexander/workspace/bark/bark-www
-	repo = /Users/paulalexander/workspace/bark/bark-admin
+  repo = /Users/paulalexander/workspace/bark/bark-desktop
+  repo = /Users/paulalexander/workspace/bark/bark-www
+  repo = /Users/paulalexander/workspace/bark/bark-admin
 [rebase]
-	updateRefs = true
+  updateRefs = true
 [interactive]
-	diffFilter = diff-so-fancy --patch
+  diffFilter = diff-so-fancy --patch
 
 
 [difftool "vscode"]
   cmd = code --wait --diff $LOCAL $REMOTE
+
 [mergetool "vscode"]
   cmd = code --wait $MERGED

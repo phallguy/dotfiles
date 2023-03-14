@@ -101,4 +101,15 @@ return {
 			enable = true,
 		},
 	}, -- Show function/scope in windowbar
+
+	{
+		"m-demare/hlargs.nvim",
+		opts = {
+			enable = false,
+			enabled = false,
+			extras = {
+				named_parameters = true,
+			},
+		},
+	}, -- Highlight method args separately
 }
