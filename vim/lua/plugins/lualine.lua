@@ -13,7 +13,7 @@
         lualine_a = { 'mode' },
         lualine_b = {},
         lualine_c = { { 'filename', path = 1 } },
-        lualine_x = { 'filetype' },
+        lualine_x = { 'branch', 'filetype' },
         lualine_y = { 'location' },
         lualine_z = { {
           'diagnostics',

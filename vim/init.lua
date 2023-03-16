@@ -1,3 +1,4 @@
+-- Old vim https://github.com/phallguy/dotfiles/blob/6f512c6a40be13df2a27a9df0d6c4af28cd82c0b/vim/init.vim
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -32,9 +33,6 @@ require("lazy").setup({
 
 	"embear/vim-localvimrc", -- import .vimrc from CWD when launching
 
-	-- Detect tabstop and shiftwidth automatically
-	"tpope/vim-sleuth",
-
 	{
 		-- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
@@ -45,7 +43,21 @@ require("lazy").setup({
 
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{ "j-hui/fidget.nvim", opts = {} },
+			{
+				"j-hui/fidget.nvim",
+				opts = {
+					text = {
+						spinner = "dots",
+					},
+					timer = {
+						fidget_decay = 0,
+						task_decay = 0,
+					},
+					fmt = {
+						task = function() end,
+					},
+				},
+			},
 
 			-- Additional lua configuration, makes nvim stuff amazing!
 			"folke/neodev.nvim",
@@ -55,13 +67,26 @@ require("lazy").setup({
 	{
 		-- Autocompletion
 		"hrsh7th/nvim-cmp",
-		dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
 	},
 
 	{ import = "plugins" },
 }, {
 	ui = {
 		border = "rounded",
+	},
+	checker = {
+		enabled = true,
+	},
+	change_detection = {
+		enabled = false,
+		notify = false,
 	},
 })
 
@@ -70,6 +95,7 @@ require("user.session")
 require("user.netwr")
 require("user.hilight_on_yank")
 require("user.git")
+require("user.testing")
 
 require("user.html")
 require("user.ruby")

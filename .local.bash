@@ -201,6 +201,8 @@ if [ -f '/Users/paulalexander/google-cloud-sdk/path.bash.inc' ]; then . '/Users/
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/paulalexander/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/paulalexander/google-cloud-sdk/completion.bash.inc'; fi
 
-dark_theme
-
 . "$HOME/.cargo/env"
+
+if command -v wezterm &> /dev/null; then
+  eval "$(wezterm shell-completion --shell bash)"
+fi

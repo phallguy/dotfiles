@@ -35,4 +35,6 @@ return {
 		end,
 	},
 	{ "KabbAmine/vCoolor.vim" },
+
+  { 'sheerun/vim-polyglot' },
 }

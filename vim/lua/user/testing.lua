@@ -1,9 +1,13 @@
-vim.keymap.set("n", "<leader>;f", ":TestFile<CR>", { desc = "File" })
-vim.keymap.set("n", "<leader>;c", ":TestNearest<CR>", { desc = "Current" })
-vim.keymap.set("n", "<leader>;d", ":cclose<CR>:TestNearest -strategy=bufferterm<CR>", { desc = "Current terminal" })
-vim.keymap.set("n", "<leader>;l", ":TestLast<CR>", { desc = "Last" })
+vim.keymap.set("n", "<leader>tf", "<CMD>TestFile<CR>", { desc = "File" })
+vim.keymap.set("n", "<leader>tc", "<CMD>TestNearest<CR>", { desc = "Current" })
+vim.keymap.set("n", "<leader>td", "<CMD>cclose<CR>:TestNearest -strategy=bufferterm<CR>", { desc = "Current terminal" })
+vim.keymap.set("n", "<leader>tl", "<CMD>TestLast<CR>", { desc = "Last" })
+vim.keymap.set("n", "<leader>tt", "<CMD>TestVisit<CR>", { desc = "Goto last test" })
 
-vim.keymap.set("n", "<leader>r", ":AV<CR>", { desc = "Alternate file" })
+vim.keymap.set("n", "<leader>r", "<CMD>R<CR>", { desc = "Related file (same window)" })
+vim.keymap.set("n", "<leader>R", "<CMD>RV<CR>", { desc = "Related file (V split)" })
+vim.keymap.set("n", "<leader>a", "<CMD>A<CR>", { desc = "Alternate file (same window)" })
+vim.keymap.set("n", "<leader>A", "<CMD>AV<CR>", { desc = "Alternate file (V split)" })
 
 vim.g["test#preserve_screen"] = 0
 vim.g["test#neovim#start_normal"] = 1

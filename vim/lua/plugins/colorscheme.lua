@@ -5,9 +5,10 @@
       vim.g.material_style = "palenight"
       local colors = require 'material.colors'
 
-      colors.git.added = "#2f3742"
-      colors.git.deleted = "#333042"
-      colors.git.modified = "#2b3348"
+      colors.git.added = "#3e4949"
+      colors.git.deleted = "#483647"
+      colors.git.modified = "#2e3851"
+      colors.git.untracked = "#546653"
 
       require('material').setup({
         contrast = {
@@ -15,6 +16,7 @@
           floating_windows = true,
           sidebars = true,
           non_current_windows = false,
+          terminal = true,
         },
         styles = {
           functions = { bold = true },
@@ -48,12 +50,14 @@
           DiffDelete = { bg = colors.git.deleted },
           DiffChange = { bg = colors.git.modified },
           DiffviewDiffAddAsDelete = { bg = colors.git.deleted },
-          DiffText = { bg = "#52533b" },
+          DiffText = { bg = "#484443" },
 
           SagaNormal = { bg = colors.editor.bg_alt },
 
           Hlargs = { fg = colors.main.darkorange },
           HlargsNamedParams = { fg = colors.main.darkorange },
+
+          GitSignsUntracked = { fg = colors.git.untracked },
         },
         lualine_style = "stealth",
       })

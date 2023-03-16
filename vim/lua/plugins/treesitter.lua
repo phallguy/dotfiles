@@ -25,8 +25,11 @@ return {
 				},
 				-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 				auto_install = true,
-				highlight = { enable = true },
-				indent = { enable = true, disable = { "python" } },
+				highlight = {
+					enable = true,
+					disable = { "eruby", "embedded_template" },
+				},
+				indent = { enable = true, disable = { "python", "ruby" } },
 				incremental_selection = {
 					enable = true,
 					keymaps = {
@@ -51,6 +54,7 @@ return {
 							["if"] = "@function.inner",
 							["ac"] = "@class.outer",
 							["ic"] = "@class.inner",
+							["ar"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
 						},
 					},
 					move = {
@@ -105,8 +109,6 @@ return {
 	{
 		"m-demare/hlargs.nvim",
 		opts = {
-			enable = false,
-			enabled = false,
 			extras = {
 				named_parameters = true,
 			},

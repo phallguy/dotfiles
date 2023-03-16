@@ -63,7 +63,7 @@ local servers = {
 	tsserver = {},
 	lua_ls = {
 		Lua = {
-			workspace = { checkThirdParty = false },
+			-- workspace = { checkThirdParty = false },
 			telemetry = { enable = false },
 		},
 	},
@@ -101,9 +101,15 @@ mason_lspconfig.setup_handlers({
 
 -- nvim-cmp setup
 local cmp = require("cmp")
+local cmp_buffer = require("cmp_buffer")
 local luasnip = require("luasnip")
 
 luasnip.config.setup({})
+
+-- command! LuaSnipEdit :lua require("luasnip.loaders").edit_snippet_files()
+vim.api.nvim_create_user_command("LuaSnipEdit", function(_)
+	require("luasnip.loaders").edit_snippet_files({})
+end, { desc = "Edit snippets" })
 
 cmp.setup({
 	snippet = {
@@ -115,10 +121,10 @@ cmp.setup({
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete({}),
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
+		-- ["<CR>"] = cmp.mapping.confirm({
+		-- 	behavior = cmp.ConfirmBehavior.Replace,
+		-- 	select = true,
+		-- }),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -139,9 +145,24 @@ cmp.setup({
 		end, { "i", "s" }),
 	}),
 	sources = {
-		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
+		{
+			name = "buffer",
+			option = {
+				keyword_length = 3,
+				get_bufnrs = function()
+					return vim.api.nvim_list_bufs()
+				end,
+			},
+		},
+		{ name = "nvim_lsp" },
+		{ name = "path" },
 	},
+  sorting = {
+    comparators = {
+      function(...) return cmp_buffer:compare_locality(...) end,
+    }
+  }
 })
 
 local typescript_setup, typescript = pcall(require, "typescript")
@@ -159,14 +180,14 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	debug = true,
 	ui = {
-		border = "rounded"
+		border = "rounded",
 	},
 	sources = {
 		-- Diagnostics
 		null_ls.builtins.diagnostics.eslint,
 		null_ls.builtins.diagnostics.codespell,
 		-- null_ls.builtins.diagnostics.erb_lint,
-		null_ls.builtins.diagnostics.rubocop,
+		-- null_ls.builtins.diagnostics.rubocop,
 		null_ls.builtins.diagnostics.stylelint,
 		null_ls.builtins.diagnostics.yamllint,
 

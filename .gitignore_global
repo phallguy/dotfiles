@@ -31,5 +31,7 @@ Gemfile.local
 .ripgreprc
 config/definitions.rb
 .erb-lint.yml
+.yamllint
+
 
 

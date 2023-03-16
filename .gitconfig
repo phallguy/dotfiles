@@ -24,6 +24,7 @@
   dt = difftool
   dtc = difftool --cached
   ca = commit --amend --no-edit --no-verify
+  cam = commit --amend
   lg = log --graph --decorate
   pushf = push origin HEAD -f --no-verify
   pusho = push origin HEAD
@@ -43,7 +44,7 @@
 [mergetool "Kaleidoscope"]
   trustexitcode = true
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-  trustExitCode = true
+  prompt = false
 [diff]
   renames = true
   tool = nvimdiff
@@ -70,8 +71,9 @@
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
   prompt = false
+  trustExitCode = true
 [merge]
-  tool = settle
+  tool = Kaleidoscope
 [mergetool]
   prompt = false
 [maintenance]
@@ -89,3 +91,11 @@
 
 [mergetool "vscode"]
   cmd = code --wait $MERGED
+
+[difftool "nvimdiff"]
+  trustExitCode = true
+  prompt = true
+
+[mergetool "nvimdiff"]
+  trustExitCode = true
+  prompt = true
