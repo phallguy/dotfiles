@@ -51,11 +51,10 @@ opt.foldmethod = "marker"
 opt.foldenable = true
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevel= 0
-opt.foldlevelstart = 0
+opt.foldopen:append "jump"
 opt.endofline = false -- Don't automatically add newline
 opt.fixendofline = false
 opt.startofline = false -- Keep the cursor on the same column
-opt.lazyredraw = true
 opt.history = 20 -- Max 'previous' items in search/command/buffer/etc
 opt.title = true
 

@@ -19,7 +19,7 @@ return {
 			local oldfiles = function()
 				builtin.oldfiles({ only_cwd = true })
 			end
-			vim.keymap.set("n", "<CM-P>", oldfiles, { desc = "Recent files" })
+			vim.keymap.set("n", "<CS-P>", oldfiles, { desc = "Recent files" })
 
 			vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Find in buffer" })
 
@@ -34,6 +34,12 @@ return {
 			vim.keymap.set("n", "<leader>fe", builtin.registers, { desc = "Registers" })
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
 			vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })
+
+			local show_notifications = function()
+				require("telescope").extensions.notify.notify()
+			end
+
+			vim.keymap.set("n", "<leader>fn", show_notifications, { desc = "Notifications" })
 
 			require("telescope").setup({
 				defaults = {

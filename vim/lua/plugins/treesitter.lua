@@ -27,7 +27,7 @@ return {
 				auto_install = true,
 				highlight = {
 					enable = true,
-					disable = { "eruby", "embedded_template" },
+					-- disable = { "eruby", "embedded_template" },
 				},
 				indent = { enable = true, disable = { "python", "ruby" } },
 				incremental_selection = {

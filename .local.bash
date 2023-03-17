@@ -123,7 +123,7 @@ function my_prompt {
     CURRENT_ARCH=""
   fi
 
-  PS1="\r\n\n${CURRENT_TIME}${CURRENT_ARCH}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
+  PS1="\r\n\n$(title $(current_basename))${CURRENT_TIME}${CURRENT_ARCH}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
 }
 export PROMPT_COMMAND="my_prompt; history -a; timer_stop"
 shopt -s histappend

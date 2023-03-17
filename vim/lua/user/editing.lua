@@ -1,4 +1,9 @@
+-- Better save
 vim.keymap.set("n", "<leader>s", "<CMD>w<CR>", { desc = "Save" })
+vim.keymap.set("n", "<leader>sa", ":saveas %:h/", { desc = "Save as" })
+
+
+-- Better paste
 vim.keymap.set("v", "p", '"_dP') -- don't yank into clipboard when pasting
 vim.keymap.set("n", "x", '"_x') -- when deleting a single character don't clobber clipboard
 vim.keymap.set("n", "p", "p=`]") -- reindent on paste
@@ -47,7 +52,7 @@ end, { expr = true, desc= "Prev diff hunk" })
 vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR><CMD>bp<CR>:bd#<CR>", { desc = "Close" })
 vim.keymap.set("n", "<leader>q", "<CMD>DiffviewClose<CR><CMD>q<CR>", { desc = "Quit" })
 
-vim.keymap.set("n", "<leader>o", "<CMD>only<CR>:set cmdheight=1<CR>", { desc = "Close all but this" })
+vim.keymap.set("n", "<leader>o", "<CMD>only<CR><CMD>set cmdheight=1<CR>", { desc = "Close all but this" })
 vim.keymap.set("n", "<leader>O", [[<CMD>only|%bd|e#|bd#<CR>]], { desc = "Hard Close all but this" })
 
 -- -- Keep selection after indenting
@@ -71,11 +76,11 @@ vim.keymap.set("n", "<leader>lf", function()
 	vim.lsp.buf.format()
 end, { desc = "Format" })
 
-vim.cmd([[
-autocmd FileType eruby nnoremap <buffer> <leader>lf :silent !htmlbeautifier -b 2 %<CR>
-autocmd FileType svg nnoremap <buffer> <leader>lf :silent !htmlbeautifier -b 2 %<CR>
-]])
-
+-- vim.cmd([[
+-- autocmd FileType eruby nnoremap <buffer> <leader>lf :silent !htmlbeautifier -b 2 %<CR>
+-- autocmd FileType svg nnoremap <buffer> <leader>lf :silent !htmlbeautifier -b 2 %<CR>
+-- ]])
+--
 -- Open file in VS Code
 vim.keymap.set(
 	"n",

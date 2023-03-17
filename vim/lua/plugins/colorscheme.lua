@@ -53,6 +53,9 @@
           DiffText = { bg = "#484443" },
 
           SagaNormal = { bg = colors.editor.bg_alt },
+          SagaLightBulb = { fg = colors.main.yellow },
+          FloatBorder = { bg = colors.editor.bg_alt, fg = colors.editor.border },
+          -- SagaBorder = { bg = colors.editor.bg_alt, fg = colors.main.yellow },
 
           Hlargs = { fg = colors.main.darkorange },
           HlargsNamedParams = { fg = colors.main.darkorange },

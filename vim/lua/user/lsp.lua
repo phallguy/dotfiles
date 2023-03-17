@@ -6,6 +6,7 @@ end, { desc = "Definition" })
 vim.keymap.set("n", "gu", function()
 	require("lspsaga.command").load_command("lsp_finder")
 end, { desc = "Usage" })
+
 vim.keymap.set("n", "<leader>lrs", function()
 	require("lspsaga.rename"):lsp_rename()
 end, { desc = "[R]ename [s]ymbol" })
@@ -23,6 +24,10 @@ end, { desc = "Peek [d]efinition" })
 vim.keymap.set("n", "<leader>lg", function()
 	require("lspsaga.command").load_command("goto_definition")
 end, { desc = "[G]o to definition" })
+
+vim.keymap.set("n", "<leader>lu", function()
+	require("lspsaga.command").load_command("lsp_finder")
+end, { desc = "Usage" })
 
 vim.keymap.set("n", "K", function()
 	require("lspsaga.command").load_command("hover_doc")
@@ -158,11 +163,13 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "path" },
 	},
-  sorting = {
-    comparators = {
-      function(...) return cmp_buffer:compare_locality(...) end,
-    }
-  }
+	sorting = {
+		comparators = {
+			function(...)
+				return cmp_buffer:compare_locality(...)
+			end,
+		},
+	},
 })
 
 local typescript_setup, typescript = pcall(require, "typescript")
@@ -179,12 +186,16 @@ local null_ls = require("null-ls")
 
 null_ls.setup({
 	debug = true,
-	ui = {
-		border = "rounded",
-	},
+	border = "rounded",
+	debounce = 1000,
+	should_attach = function(bufnr)
+		local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+
+		return not ft == "log"
+	end,
 	sources = {
 		-- Diagnostics
-		null_ls.builtins.diagnostics.eslint,
+		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.diagnostics.codespell,
 		-- null_ls.builtins.diagnostics.erb_lint,
 		-- null_ls.builtins.diagnostics.rubocop,
@@ -201,6 +212,14 @@ null_ls.setup({
 		-- null_ls.builtins.formatting.erb_lint,
 		null_ls.builtins.formatting.fixjson,
 		null_ls.builtins.formatting.rubocop,
+		null_ls.builtins.formatting.htmlbeautifier.with({
+			extra_args = {
+				"-b",
+				"2",
+				"-t",
+				"2",
+			},
+		}),
 	},
 })
 

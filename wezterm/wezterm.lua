@@ -15,12 +15,36 @@ return {
 	freetype_load_target = "Light",
 	freetype_render_target = "Light",
 	color_scheme = "Material Palenight (base16)",
+	window_frame = {
+		font = wezterm.font_with_fallback({
+			-- <built-in>, BuiltIn
+			{ family = "Roboto",                         weight = "Medium" },
+
+			-- /Users/paulalexander/Library/Fonts/JetBrains Mono NL Light Nerd Font Complete Mono.ttf, CoreText
+			{ family = "JetBrainsMonoNL Nerd Font Mono", weight = "Light" },
+
+			-- /Users/paulalexander/Library/Fonts/JetBrainsMono-Regular.ttf, CoreText
+			"JetBrains Mono",
+
+			-- <built-in>, BuiltIn
+			-- Assumed to have Emoji Presentation
+			-- Pixel sizes: [128]
+			"Noto Color Emoji",
+
+			-- <built-in>, BuiltIn
+			"Symbols Nerd Font Mono",
+
+		}),
+		font_size = 12,
+		active_titlebar_bg = "#202331",
+	},
 	colors = {
 		tab_bar = {
 			background = "#202331",
+			inactive_tab_edge = "#444267",
 			active_tab = {
 				bg_color = "#292D3E",
-				fg_color = "#414863",
+				fg_color = "#515772",
 			},
 			inactive_tab = {
 				bg_color = "#202331",
@@ -39,12 +63,15 @@ return {
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,
 	initial_rows = 40,
-	use_fancy_tab_bar = false,
+	-- Tabs
+	use_fancy_tab_bar = true,
 	-- show_tabs_in_tab_bar = false,
 	show_new_tab_button_in_tab_bar = false,
 	tab_bar_style = {},
 	enable_tab_bar = true,
+	tab_max_width = 48,
 	hide_tab_bar_if_only_one_tab = true,
+	--
 	scrollback_lines = 3000,
 	cursor_blink_ease_in = "Constant",
 	cursor_blink_ease_out = "Constant",
