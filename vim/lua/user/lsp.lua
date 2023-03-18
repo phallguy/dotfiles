@@ -126,10 +126,10 @@ cmp.setup({
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete({}),
-		-- ["<CR>"] = cmp.mapping.confirm({
-		-- 	behavior = cmp.ConfirmBehavior.Replace,
-		-- 	select = true,
-		-- }),
+		["<S-CR>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		}),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -185,13 +185,13 @@ end
 local null_ls = require("null-ls")
 
 null_ls.setup({
-	debug = true,
+	-- debug = true,
 	border = "rounded",
 	debounce = 1000,
 	should_attach = function(bufnr)
 		local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
-		return not ft == "log"
+		return ft ~= "log"
 	end,
 	sources = {
 		-- Diagnostics

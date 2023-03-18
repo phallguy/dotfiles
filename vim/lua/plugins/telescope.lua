@@ -20,6 +20,7 @@ return {
 				builtin.oldfiles({ only_cwd = true })
 			end
 			vim.keymap.set("n", "<CS-P>", oldfiles, { desc = "Recent files" })
+			vim.keymap.set("n", "<MS-P>", oldfiles, { desc = "Recent files" }) -- sloppy keys
 
 			vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Find in buffer" })
 
@@ -74,37 +75,37 @@ return {
 						theme = "dropdown",
 						previewer = false,
 						initial_mode = "insert",
-						sort_lastused = true,
+						-- sort_lastused = true,
 					},
 					live_grep = {
 						theme = "ivy",
-						sort_lastused = true,
+						-- sort_lastused = true,
 					},
 					live_grep_args = {
 						theme = "ivy",
-						sort_lastused = true,
+						-- sort_lastused = true,
 					},
 					find_files = {
 						theme = "ivy",
 						previewer = false,
-						sort_lastused = true,
+						-- sort_lastused = true,
 					},
 					oldfiles = {
 						theme = "ivy",
 						previewer = false,
-						sort_lastused = true,
+						-- sort_lastused = true,
 					},
 					current_buffer_fuzzy_find = {
 						theme = "ivy",
 						initial_mode = "insert",
-						sort_lastused = true,
+						-- sort_lastused = true,
 					},
 				},
 				extensions = {
 					live_grep_args = {
 						auto_quoting = true, -- enable/disable auto-quoting
 						layout_strategy = "vertical",
-						sort_lastused = true,
+						-- sort_lastused = true,
 						-- define mappings, e.g.
 						mappings = {
 							-- extend mappings

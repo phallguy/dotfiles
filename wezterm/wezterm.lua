@@ -69,7 +69,7 @@ return {
 	show_new_tab_button_in_tab_bar = false,
 	tab_bar_style = {},
 	enable_tab_bar = true,
-	tab_max_width = 48,
+	tab_max_width = 24,
 	hide_tab_bar_if_only_one_tab = true,
 	--
 	scrollback_lines = 3000,

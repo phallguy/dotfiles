@@ -43,21 +43,21 @@ require("lazy").setup({
 
 			-- Useful status updates for LSP
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{
-				"j-hui/fidget.nvim",
-				opts = {
-					text = {
-						spinner = "dots",
-					},
-					timer = {
-						fidget_decay = 0,
-						task_decay = 0,
-					},
-					fmt = {
-						task = function() end,
-					},
-				},
-			},
+			-- {
+			-- 	"j-hui/fidget.nvim",
+			-- 	opts = {
+			-- 		text = {
+			-- 			spinner = "dots",
+			-- 		},
+			-- 		timer = {
+			-- 			fidget_decay = 0,
+			-- 			task_decay = 0,
+			-- 		},
+			-- 		fmt = {
+			-- 			task = function() end,
+			-- 		},
+			-- 	},
+			-- },
 
 			-- Additional lua configuration, makes nvim stuff amazing!
 			"folke/neodev.nvim",
