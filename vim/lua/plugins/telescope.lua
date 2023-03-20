@@ -75,7 +75,7 @@ return {
 						theme = "dropdown",
 						previewer = false,
 						initial_mode = "insert",
-						-- sort_lastused = true,
+						sort_lastused = true,
 					},
 					live_grep = {
 						theme = "ivy",

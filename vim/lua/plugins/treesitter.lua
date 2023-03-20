@@ -42,6 +42,9 @@ return {
 				matchup = {
 					enabled = true,
 				},
+				autotag = {
+					enable = true,
+				},
 				textobjects = {
 					select = {
 						enable = true,
@@ -98,6 +101,9 @@ return {
 			})
 		end,
 	},
+
+	{ "windwp/nvim-ts-autotag" },
+	{ "windwp/nvim-autopairs", opts = {} },
 
 	{
 		"nvim-treesitter/nvim-treesitter-context",

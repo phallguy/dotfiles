@@ -59,6 +59,7 @@ return {
 				Hlargs = { fg = colors.main.darkorange },
 				HlargsNamedParams = { fg = colors.main.darkorange },
 				GitSignsUntracked = { fg = colors.git.untracked },
+				CursorLineNr = { fg = colors.main.gray },
 			},
 			lualine_style = "stealth",
 		})

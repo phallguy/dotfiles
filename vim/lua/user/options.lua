@@ -16,14 +16,21 @@ opt.laststatus = 2
 opt.list = false -- Show some invisible characters (tabs...
 opt.mouse = "" -- Enable mouse mode
 opt.number = true -- Print line number
-opt.pumblend = 10 -- Popup blend
+opt.pumblend = 0 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = false -- Relative line numbers
 opt.scrolloff = 10 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
-opt.shortmess:append({ W = true, I = true, c = true })
+opt.shortmess = {
+	-- "filnxtToOF"
+	a = true,
+	s = true,
+	W = true, -- I know I just wrote it
+	I = true, -- Start clean
+	F = true,
+}
 opt.showmode = true -- Dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
@@ -50,8 +57,8 @@ opt.incsearch = true
 opt.foldmethod = "marker"
 opt.foldenable = true
 opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldlevel= 0
-opt.foldopen:append "jump"
+opt.foldlevel = 0
+opt.foldopen:append("jump")
 opt.endofline = false -- Don't automatically add newline
 opt.fixendofline = false
 opt.startofline = false -- Keep the cursor on the same column
@@ -69,10 +76,18 @@ opt.backup = false
 -- h - Something about hlsearch
 opt.shada = "!,'30,s10,h"
 
-vim.cmd([[
-set formatoptions-=t2
-set formatoptions+=c
-]])
+opt.iskeyword:append({ '-' }) -- Kabab case
+
+opt.formatoptions:append({
+	c = true, -- Auto wrap comments
+	a = true, -- Automatically format paragraphs on insert
+	n = true, -- Recognize numbered lists
+	j = true, -- Try to remove comment leaders when joining lines
+})
+opt.formatoptions:remove({
+	"t", -- Don't wrap regular text
+	"2", -- Don't use 'second' line of paragraph
+}) -- U
 
 if vim.fn.has("nvim-0.9.0") == 1 then
 	opt.splitkeep = "screen"

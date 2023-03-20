@@ -24,6 +24,9 @@ end, { desc = "Peek [d]efinition" })
 vim.keymap.set("n", "<leader>lg", function()
 	require("lspsaga.command").load_command("goto_definition")
 end, { desc = "[G]o to definition" })
+vim.keymap.set("n", "<leader>l/", function()
+
+end)
 
 vim.keymap.set("n", "<leader>lu", function()
 	require("lspsaga.command").load_command("lsp_finder")
@@ -37,13 +40,10 @@ vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature hel
 vim.keymap.set("n", "<leader>lb", require("telescope.builtin").diagnostics, { desc = "Resume search" })
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "Buffer quickfix" })
 
--- t = {
---   name = "Typescript",
---   a = { "<CMD>TypescriptAddMissingImports<CR>", "Add missing imports" },
---   u = { "<CMD>TypescriptRemoveUnused<CR>", "Remove unused" },
---   f = { "<CMD>TypescriptFixAll<CR>", "Fix all" },
---   i = { "<CMD>TypescriptOrganizeImports<CR>", "Organize imports" },
--- }
+vim.keymap.set("n", "<leader>lta", "<CMD>TypescriptAddMissingImports<CR>", { desc = "Add missing imports" })
+vim.keymap.set("n", "<leader>ltu", "<CMD>TypescriptRemoveUnused<CR>", { desc = "Remove unused" })
+vim.keymap.set("n", "<leader>ltf", "<CMD>TypescriptFixAll<CR>", { desc = "Fix all" })
+vim.keymap.set("n", "<leader>lti", "<CMD>TypescriptOrganizeImports<CR>", { desc = "Organize imports" })
 
 local diagnostics = {
 	underline = true,
@@ -52,9 +52,9 @@ local diagnostics = {
 		active = true,
 		values = {
 			{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-			{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-			{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-			{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+			{ name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
+			{ name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
+			{ name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
 		},
 	},
 }
@@ -106,8 +106,9 @@ mason_lspconfig.setup_handlers({
 
 -- nvim-cmp setup
 local cmp = require("cmp")
-local cmp_buffer = require("cmp_buffer")
+local compare = require("cmp.config.compare")
 local luasnip = require("luasnip")
+local lspkind = require("lspkind")
 
 luasnip.config.setup({})
 
@@ -151,24 +152,59 @@ cmp.setup({
 	}),
 	sources = {
 		{ name = "luasnip" },
+		{ name = "nvim_lsp", max_item_count = 5 },
+		-- {
+		-- 	name = "buffer",
+		-- 	max_item_count = 5,
+		-- 	dup = 0,
+		-- 	option = {
+		-- 		keyword_pattern = [[\k\+]],
+		-- 	}
+		-- },
 		{
-			name = "buffer",
+			name = "fuzzy_buffer",
+			max_item_count = 5,
+			dup = 0,
 			option = {
-				keyword_length = 3,
+				keyword_length = 2,
+				fuzzy_extra_arg = 2, -- Respect case
 				get_bufnrs = function()
 					return vim.api.nvim_list_bufs()
 				end,
 			},
 		},
-		{ name = "nvim_lsp" },
+		{ name = "git" },
 		{ name = "path" },
 	},
 	sorting = {
+		priority_weight = 2,
 		comparators = {
-			function(...)
-				return cmp_buffer:compare_locality(...)
-			end,
+			compare.kind,
+			require("cmp_fuzzy_buffer.compare"),
+			compare.offset,
+			compare.exact,
+			compare.score,
+			compare.recently_used,
+			compare.sort_text,
+			compare.length,
+			compare.order,
 		},
+	},
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol_text", -- show only symbol annotations
+			maxwidth = 50,     -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+			ellipsis_char = "…", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+			menu = ({
+				fuzzy_buffer = "[Fuzzy Buffer]",
+				buffer = "[Buffer]",
+				nvim_lsp = "[LSP]",
+				luasnip = "[LuaSnip]",
+				nvim_lua = "[Lua]",
+				git = "[Git]",
+				path = "[Path]",
+			})
+		}),
 	},
 })
 
@@ -211,7 +247,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.prettierd,
 		-- null_ls.builtins.formatting.erb_lint,
 		null_ls.builtins.formatting.fixjson,
-		null_ls.builtins.formatting.rubocop,
+		-- null_ls.builtins.formatting.rubocop,
 		null_ls.builtins.formatting.htmlbeautifier.with({
 			extra_args = {
 				"-b",

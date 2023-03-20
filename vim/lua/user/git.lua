@@ -17,10 +17,11 @@ vim.keymap.set("n", "<leader>gb", "<CMD>G blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gB", "<CMD><C-r>=line('.')<CR>GBrowse<CR>", { desc = "Browse" })
 vim.keymap.set("n", "<leader>gt", "<CMD>silent !git difftool %:p<CR>", { desc = "Diff tool", silent = true })
 vim.keymap.set("n", "<leader>gT", "<CMD>silent !git difftool<CR>", { desc = "Diff tool all", silent = true })
-vim.keymap.set("n", "<leader>gl", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
+vim.keymap.set("n", "<leader>gr", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
+vim.keymap.set("n", "<leader>gl", "<CMD>Gclog -n 10<CR>", { desc = "Recent log" })
+vim.keymap.set("n", "<leader>gp", "<CMD>G! pusho<CR>", { desc = "Push" })
+vim.keymap.set("n", "<leader>gc", "<CMD>G commit<CR>", { desc = "Commit" })
+vim.keymap.set("n", "<leader>ga", "<CMD>G cam<CR>", { desc = "Commit ammend" })
 
 vim.opt.fillchars:append({ diff = "╱" })
 vim.opt.diffopt:append("iwhite") -- Ignore whitespace
-
--- https://github.com/pwntester/octo.nvim
-require("octo").setup({})

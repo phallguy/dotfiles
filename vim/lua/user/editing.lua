@@ -1,6 +1,6 @@
 -- Better save
 vim.keymap.set("n", "<leader>s", "<CMD>w<CR>", { desc = "Save" })
-vim.keymap.set("n", "<leader>sa", ":saveas %:h/", { desc = "Save as" })
+vim.keymap.set("n", "<leader>S", ":saveas %:h/", { desc = "Save as" })
 
 
 -- Better paste
@@ -49,7 +49,7 @@ vim.keymap.set("n", "[c", function()
 end, { expr = true, desc= "Prev diff hunk" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR><CMD>bp<CR>:bd#<CR>", { desc = "Close" })
+vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR><CMD>bp<CR><CMD>bd#<CR>", { desc = "Close" })
 vim.keymap.set("n", "<leader>q", "<CMD>DiffviewClose<CR><CMD>q<CR>", { desc = "Quit" })
 
 vim.keymap.set("n", "<leader>o", "<CMD>only<CR><CMD>set cmdheight=1<CR>", { desc = "Close all but this" })
@@ -76,11 +76,6 @@ vim.keymap.set("n", "<leader>lf", function()
 	vim.lsp.buf.format()
 end, { desc = "Format" })
 
--- vim.cmd([[
--- autocmd FileType eruby nnoremap <buffer> <leader>lf :silent !htmlbeautifier -b 2 %<CR>
--- autocmd FileType svg nnoremap <buffer> <leader>lf :silent !htmlbeautifier -b 2 %<CR>
--- ]])
---
 -- Open file in VS Code
 vim.keymap.set(
 	"n",

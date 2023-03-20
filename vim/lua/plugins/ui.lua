@@ -80,6 +80,14 @@ return {
 						},
 						opts = { stop = true, skip = true },
 					},
+					{
+						filter = {
+							event = "msg_show",
+							kind = "",
+							find = "[noeol]",
+						},
+						opts = { stop = true, skip = true },
+					}
 				},
 			})
 		end,
