@@ -1,24 +1,35 @@
 -- https://wezfurlong.org/wezterm/config/files/
 local wezterm = require("wezterm")
+local font_family = "JetBrainsMonoNL Nerd Font Mono"
 
 return {
 	-- Appearance ===
-	font = wezterm.font(
-		"JetBrainsMonoNL Nerd Font Mono",
-		{
-			weight = "Light",
-		}
-	),
-	font_size = 14,
+	--
+	-- Fonts
+	font = wezterm.font(font_family, {
+		weight = "Light",
+	}),
+	font_size = 14.5,
 	line_height = 0.89,
 	cell_width = 0.89,
 	freetype_load_target = "Light",
 	freetype_render_target = "Light",
-	color_scheme = "Material Palenight (base16)",
+	font_rules = {
+		{
+			intensity = "Bold",
+			italic = false,
+			font = wezterm.font(font_family, {
+				weight = "Regular",
+			}),
+		},
+	},
+	-- colors
+	color_scheme = "rose-pine-moon",
+	-- color_scheme = "Material Palenight (base16)",
 	window_frame = {
 		font = wezterm.font_with_fallback({
 			-- <built-in>, BuiltIn
-			{ family = "Roboto",                         weight = "Medium" },
+			{ family = "Roboto", weight = "Medium" },
 
 			-- /Users/paulalexander/Library/Fonts/JetBrains Mono NL Light Nerd Font Complete Mono.ttf, CoreText
 			{ family = "JetBrainsMonoNL Nerd Font Mono", weight = "Light" },
@@ -33,22 +44,22 @@ return {
 
 			-- <built-in>, BuiltIn
 			"Symbols Nerd Font Mono",
-
 		}),
 		font_size = 12,
-		active_titlebar_bg = "#202331",
+		active_titlebar_bg = "#2a273f",
+
 	},
 	colors = {
 		tab_bar = {
-			background = "#202331",
-			inactive_tab_edge = "#444267",
+			background = "#232136",
+			inactive_tab_edge = "#3e8fb0",
 			active_tab = {
-				bg_color = "#292D3E",
-				fg_color = "#515772",
+				fg_color = "#3e8fb0",
+        bg_color = "#232136",
 			},
 			inactive_tab = {
-				bg_color = "#202331",
-				fg_color = "#444267",
+				fg_color = "#6e6a86",
+        bg_color = "#2a273f",
 			},
 		},
 	},
@@ -90,6 +101,6 @@ return {
 			key = "n",
 			mods = "CTRL | SHIFT",
 			action = wezterm.action.ActivateCommandPalette,
-		}
-	}
+		},
+	},
 }

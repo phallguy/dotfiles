@@ -6,7 +6,7 @@ unset CC
 unset VERSION
 export RUBYOPT="-W0"
 export RIPGREP_CONFIG_PATH="/Users/paulalexander/.ripgreprc"
-export BAT_THEME="Monokai Extended"
+# export BAT_THEME="Monokai Extended"
 LESSOPEN="|/opt/homebrew/Cellar/bat-extras/2022.07.27/bin/batpipe %s";
 export LESSOPEN;
 unset LESSCLOSE;
@@ -29,10 +29,10 @@ export CLICOLOR=1
 #export LSCOLORS=gxfxFxdxbxDxDxBxBxExEx
 
 # # Base16 Shell
-export BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        source "$BASE16_SHELL/profile_helper.sh"
+# export BASE16_SHELL="$HOME/.config/base16-shell/"
+# [ -n "$PS1" ] && \
+#     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+#         source "$BASE16_SHELL/profile_helper.sh"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -65,18 +65,18 @@ function git_status_indicator {
   local git_status="$(git status 2> /dev/null)"
 
   if [[ $git_status =~ "not staged for commit" ]]; then
-    echo "\e[38;5;1m ▪︎ "
+    echo "\e[31;2m ▪︎ "
   elif [[ $git_status =~ "nothing to commit" ]]; then
-    echo "\e[38;5;2m   "
+    echo "\e[30m "
   elif [[ ! $git_status =~ "working directory clean" ]]; then
-    echo "\e[38;5;3m ⦿ "
+    echo "\e[33;2m ⦿ "
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-    echo "\e[38;5;3m ● "
+    echo "\e[33;2m ● "
   fi
 }
 
 function my_git_ps1 {
-  __git_ps1 "  $( git_status_indicator )%s "
+  __git_ps1 "$( git_status_indicator )%s"
 }
 
 function current_dirname {
@@ -102,28 +102,28 @@ function my_prompt {
   LAST_EXIT=$?
 
   # Base16 Colors
-  WORKING_DIR='\[\e[0;48;5;18;38;5;15m\]  $( "current_dirname" )\[\e[38;5;16m\]$( current_basename )  '
-  GIT='\[\e[0;48;5;0;38;5;8m\]$( my_git_ps1 )'
-  CURRENT_TIME='\[\e[0;48;5;10;38;5;18m\] \@ '
-  PROMPT='\[\e[0;1;36m\]\$ \[\e[0m\]'
+  WORKING_DIR='\[\e[0;40;37m\]  $( "current_dirname" )\[\e[0;32m\]$( current_basename )  '
+  GIT='\[\e[0m\]$( my_git_ps1 )'
+  CURRENT_TIME='\[\e[0;46;30m\] \@ '
+  PROMPT='\[\e[0;1;32m\]\$ \[\e[0;37m\]'
 
   if [ "$LAST_EXIT" == "0" ]; then
-    EXECUTION_RESULT='\[\e[48;5;14m\] ${timer_show}s '
+    EXECUTION_RESULT='\[\e[0;42;30m\] ${timer_show}s '
   else
-    EXECUTION_RESULT='\[\e[48;5;1;38;5;21m\] ${timer_show}s '
+    EXECUTION_RESULT='\[\e[0;41;1;m\] ${timer_show}s '
     if [ "$LAST_EXIT" != "1" ]; then
-      EXECUTION_RESULT="${EXECUTION_RESULT}\[\e[48;5;16;38;5;18m\] $LAST_EXIT "
+      EXECUTION_RESULT="${EXECUTION_RESULT}\[\e[1;33m\] $LAST_EXIT "
       tput bel
     fi
   fi
 
   if [[ $CPU_ARCH =~ x86_64 ]]; then
-    CURRENT_ARCH="\[\e[48;5;16;38;5;18m\] x86_64 "
+    CURRENT_ARCH="\[\e[0;1;31m\] x86_64 "
   else
     CURRENT_ARCH=""
   fi
 
-  PS1="\r\n\n$(title $(current_basename))${CURRENT_TIME}${CURRENT_ARCH}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}\[\e[0m\]\r\n\n${PROMPT}"
+  PS1="\r\n\n$(title $(current_basename))${CURRENT_TIME}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}${CURRENT_ARCH}\[\e[0m\]\r\n\n${PROMPT}"
 }
 export PROMPT_COMMAND="my_prompt; history -a; timer_stop"
 shopt -s histappend

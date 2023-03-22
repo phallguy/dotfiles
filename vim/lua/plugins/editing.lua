@@ -1,3 +1,7 @@
+if vim.g.vscode then
+	return {}
+end
+
 return {
 	"tpope/vim-vinegar", -- netwr support
 
@@ -22,9 +26,10 @@ return {
 		end,
 	},
 	{ "AndrewRadev/splitjoin.vim" },
-	{ "mbbill/undotree" },
+	-- { "mbbill/undotree" },
 	{
 		"norcalli/nvim-colorizer.lua",
+		cond = not vim.g.vscode,
 		config = function()
 			vim.opt.termguicolors = true -- True color support
 			require("colorizer").setup({
@@ -36,5 +41,12 @@ return {
 	},
 	{ "KabbAmine/vCoolor.vim" },
 
-  { 'sheerun/vim-polyglot' },
+	{
+		"sheerun/vim-polyglot",
+		cond = not vim.g.vscode,
+		init = function()
+			-- vim.g.polyglot_disabled = { "autoindent" }
+		end,
+		priority = 10,
+	},
 }

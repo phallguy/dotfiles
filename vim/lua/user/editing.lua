@@ -2,10 +2,9 @@
 vim.keymap.set("n", "<leader>s", "<CMD>w<CR>", { desc = "Save" })
 vim.keymap.set("n", "<leader>S", ":saveas %:h/", { desc = "Save as" })
 
-
 -- Better paste
 vim.keymap.set("v", "p", '"_dP') -- don't yank into clipboard when pasting
-vim.keymap.set("n", "x", '"_x') -- when deleting a single character don't clobber clipboard
+vim.keymap.set("n", "x", '"_x')  -- when deleting a single character don't clobber clipboard
 vim.keymap.set("n", "p", "p=`]") -- reindent on paste
 
 -- Move to window using the <ctrl> hjkl keys
@@ -27,26 +26,28 @@ vim.keymap.set("n", "[q", "<CMD>cp<CR>", { desc = "Prev qf" })
 vim.keymap.set("n", "]q", "<CMD>cn<CR>", { desc = "Next qf" })
 
 -- Next/prev diff hunk
-local gs = require("gitsigns")
-vim.keymap.set("n", "]c", function()
-	if vim.wo.diff then
-		return "]c"
-	end
-	vim.schedule(function()
-		gs.next_hunk()
-	end)
-	return "<Ignore>"
-end, { expr = true, desc= "Next diff hunk" })
+if not vim.g.vscode then
+	local gs = require("gitsigns")
+	vim.keymap.set("n", "]c", function()
+		if vim.wo.diff then
+			return "]c"
+		end
+		vim.schedule(function()
+			gs.next_hunk()
+		end)
+		return "<Ignore>"
+	end, { expr = true, desc = "Next diff hunk" })
 
-vim.keymap.set("n", "[c", function()
-	if vim.wo.diff then
-		return "[c"
-	end
-	vim.schedule(function()
-		gs.prev_hunk()
-	end)
-	return "<Ignore>"
-end, { expr = true, desc= "Prev diff hunk" })
+	vim.keymap.set("n", "[c", function()
+		if vim.wo.diff then
+			return "[c"
+		end
+		vim.schedule(function()
+			gs.prev_hunk()
+		end)
+		return "<Ignore>"
+	end, { expr = true, desc = "Prev diff hunk" })
+end
 
 -- Buffers
 vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR><CMD>bp<CR><CMD>bd#<CR>", { desc = "Close" })
@@ -94,3 +95,24 @@ vim.g["qfenter_keymap"] = {
 	vopen = { "<C-v>" },
 	topen = { "<C-t>" },
 }
+
+-- Themeing
+vim.keymap.set("n", "<leader>ht", "<CMD>TSCaptureUnderCursor<CR>", { desc = "TS captures under cursor" })
+
+vim.cmd([[
+augroup HighlightSyntax
+	autocmd!
+	function! SynStack()
+		if !exists("*synstack")
+			return
+		endif
+		echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+	endfunc
+augroup END
+]])
+
+vim.keymap.set("n", "<leader>hv", "<CMD>call SynStack()<CR>", { desc = "Vim highlights under cursor" })
+
+vim.keymap.set("n", "<leader>hl", "<CMD>Telescope highlights<CR>", { desc = "All highlights" })
+
+vim.keymap.set("n", "<leader>hi", "<CMD>Inspect<CR>", { desc = "Inspect highlights" })

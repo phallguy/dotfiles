@@ -1,3 +1,7 @@
+if vim.g.vscode then
+	return {}
+end
+
 return {
 	-- Set lualine as statusline
 	"nvim-lualine/lualine.nvim",

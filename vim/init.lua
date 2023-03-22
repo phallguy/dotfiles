@@ -12,14 +12,14 @@ require("user.options")
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -29,71 +29,55 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require("lazy").setup({
-	-- NOTE: First, some plugins that don't require any configuration
+  -- NOTE: First, some plugins that don't require any configuration
 
-	"embear/vim-localvimrc", -- import .vimrc from CWD when launching
+  "embear/vim-localvimrc", -- import .vimrc from CWD when launching
 
-	{
-		-- LSP Configuration & Plugins
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			-- Automatically install LSPs to stdpath for neovim
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+  {
+    -- LSP Configuration & Plugins
+    "neovim/nvim-lspconfig",
+    cond = not vim.g.vscode,
+    dependencies = {
+      -- Automatically install LSPs to stdpath for neovim
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
 
-			-- Useful status updates for LSP
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			-- {
-			-- 	"j-hui/fidget.nvim",
-			-- 	opts = {
-			-- 		text = {
-			-- 			spinner = "dots",
-			-- 		},
-			-- 		timer = {
-			-- 			fidget_decay = 0,
-			-- 			task_decay = 0,
-			-- 		},
-			-- 		fmt = {
-			-- 			task = function() end,
-			-- 		},
-			-- 	},
-			-- },
+      -- Additional lua configuration, makes nvim stuff amazing!
+      "folke/neodev.nvim",
+    },
+  },
 
-			-- Additional lua configuration, makes nvim stuff amazing!
-			"folke/neodev.nvim",
-		},
-	},
+  { "tzachar/fuzzy.nvim", requires = { "nvim-telescope/telescope-fzf-native.nvim" } },
 
-	{ "tzachar/fuzzy.nvim", requires = { "nvim-telescope/telescope-fzf-native.nvim" } },
+  {
+    -- Autocompletion
+    "hrsh7th/nvim-cmp",
+    cond = not vim.g.vscode,
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lsp-document-symbol",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "petertriho/cmp-git",
+      "onsails/lspkind.nvim",
+    },
+  },
 
-	{
-		-- Autocompletion
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp-document-symbol",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"petertriho/cmp-git",
-			"onsails/lspkind.nvim",
-		},
-	},
-
-	{ import = "plugins" },
+  { import = "plugins" },
 }, {
-	ui = {
-		border = "rounded",
-	},
-	checker = {
-		enabled = true,
-	},
-	change_detection = {
-		enabled = false,
-		notify = false,
-	},
+  ui = {
+    border = "rounded",
+  },
+  checker = {
+    enabled = true,
+  },
+  change_detection = {
+    enabled = false,
+    notify = true,
+  },
 })
 
 require("user.editing")

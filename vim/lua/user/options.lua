@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+opt.compatible = false
 opt.autowrite = true -- Enable auto write
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
@@ -35,7 +36,7 @@ opt.showmode = true -- Dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true -- Don't ignore case with capitals
-opt.smartindent = true -- Insert indents automatically
+opt.smartindent = false -- Insert indents automatically
 opt.breakindent = false
 opt.autoindent = true
 opt.spelllang = { "en" }
@@ -78,9 +79,9 @@ opt.shada = "!,'30,s10,h"
 
 opt.iskeyword:append({ '-' }) -- Kabab case
 
+opt.formatoptions = vim.opt.formatoptions._info.default
 opt.formatoptions:append({
 	c = true, -- Auto wrap comments
-	a = true, -- Automatically format paragraphs on insert
 	n = true, -- Recognize numbered lists
 	j = true, -- Try to remove comment leaders when joining lines
 })

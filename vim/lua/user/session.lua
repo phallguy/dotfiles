@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 vim.cmd([[
 augroup TrailingWhitespace
   autocmd!

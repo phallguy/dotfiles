@@ -1,5 +1,6 @@
 return {
   'kevinhwang91/nvim-bqf',
+  cond = not vim.g.vscode,
   config = function()
     require('bqf').setup({
       auto_enable = true,

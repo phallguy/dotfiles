@@ -1,3 +1,8 @@
+if vim.g.vscode then
+	return
+end
+
+
 local icons = require("user.icons")
 
 vim.keymap.set("n", "gd", function()

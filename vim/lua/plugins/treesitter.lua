@@ -1,3 +1,7 @@
+if vim.g.vscode then
+	return {}
+end
+
 return {
 	{
 		-- Highlight, edit, and navigate code
@@ -27,9 +31,10 @@ return {
 				auto_install = true,
 				highlight = {
 					enable = true,
-					-- disable = { "eruby", "embedded_template" },
+					disable = { "eruby", "embedded_template" },
+					additional_vim_regex_highlighting = false,
 				},
-				indent = { enable = true, disable = { "python", "ruby" } },
+				indent = { enable = true, disable = { "python" } },
 				incremental_selection = {
 					enable = true,
 					keymaps = {
@@ -91,6 +96,7 @@ return {
 					-- },
 					playground = {
 						enable = true,
+						updatetime = 25,
 					},
 					query_linter = {
 						enable = true,
@@ -119,5 +125,6 @@ return {
 				named_parameters = true,
 			},
 		},
+		requires = { "nvim-treesitter/nvim-treesitter" },
 	}, -- Highlight method args separately
 }

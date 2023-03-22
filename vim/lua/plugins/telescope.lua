@@ -1,3 +1,7 @@
+if vim.g.vscode then
+	return {}
+end
+
 -- https://github.com/nvim-telescope/telescope.nvim
 return {
 	-- Fuzzy Finder (files, lsp, etc)
@@ -35,6 +39,8 @@ return {
 			vim.keymap.set("n", "<leader>fe", builtin.registers, { desc = "Registers" })
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
 			vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })
+			vim.keymap.set("n", "<leader>fm", "<CMD>Telescope media_files<CR>", { desc = "Media files" })
+			vim.keymap.set("n", "<leader>fu", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
 
 			local show_notifications = function()
 				require("telescope").extensions.notify.notify()
@@ -115,6 +121,9 @@ return {
 							},
 						},
 					},
+					media_files = {
+						find_cmd = "rg"
+					}
 				},
 			})
 
@@ -122,6 +131,8 @@ return {
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "live_grep_args")
 			pcall(require("telescope").load_extension, "noice")
+			pcall(require("telescope").load_extension, "media_files")
+			pcall(require("telescope").load_extension, "undo")
 		end,
 	},
 
@@ -139,4 +150,6 @@ return {
 	},
 
 	{ "nvim-telescope/telescope-live-grep-args.nvim" }, -- refine live grep
+	{ "nvim-telescope/telescope-media-files.nvim" },
+	{ "debugloop/telescope-undo.nvim"}
 }
