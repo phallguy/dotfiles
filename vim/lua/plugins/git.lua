@@ -6,6 +6,7 @@ return {
 	{ "tpope/vim-fugitive" }, -- Git magic
 	{ "tpope/vim-rhubarb" }, -- Even more git magic
 	{
+		-- https://github.com/sindrets/diffview.nvim
 		"sindrets/diffview.nvim",
 		opts = {
 			enhanced_diff_hl = true,
@@ -15,7 +16,15 @@ return {
 				},
 			},
 			hooks = {
-				view_entered = function(view)
+				view_enter = function()
+					vim.notify("DIFF BABY", "warning")
+
+					vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR>")
+					vim.keymap.set("n", "q", "<CMD>DiffviewClose<CR>")
+				end,
+				view_leave = function()
+					vim.keymap.del("n", "<leader>c")
+					vim.keymap.del("n", "q")
 				end
 			}
 		},

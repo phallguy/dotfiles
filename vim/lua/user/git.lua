@@ -1,21 +1,6 @@
 local group = vim.api.nvim_create_augroup("GitEx", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
 	group = group,
-	pattern = {
-		"DiffviewFiles",
-		"diffview",
-	},
-	callback = function(event)
-		vim.notify("DIFF BABY")
-		vim.bo[event.buf].buflisted = false
-		vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR>", { buffer = event.buf })
-		vim.keymap.set("n", "q", "<CMD>DiffviewClose<CR>", { buffer = event.buf })
-	end,
-})
-
-local group = vim.api.nvim_create_augroup("GitEx", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	group = group,
 	pattern = { "git" },
 	callback = function()
 		vim.opt_local.foldmethod = "syntax"
