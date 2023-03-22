@@ -28,7 +28,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>gr", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
 vim.keymap.set("n", "<leader>gl", "<CMD>Gclog -n 10<CR>", { desc = "Recent log" })
 vim.keymap.set("n", "<leader>gp", "<CMD>G! pusho<CR>", { desc = "Push" })
-vim.keymap.set("n", "<leader>gc", "<CMD>G commit<CR>", { desc = "Commit" })
+vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>G commit<CR>", { desc = "Commit" })
 vim.keymap.set("n", "<leader>ga", "<CMD>G cam<CR>", { desc = "Commit ammend" })
 
 vim.opt.fillchars:append({ diff = "╱" })
