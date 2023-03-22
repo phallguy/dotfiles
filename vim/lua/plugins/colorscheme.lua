@@ -17,6 +17,7 @@ return {
 
 					["@function.call"] = { fg = "foam", italic = true },
 					["@lsp.type.property.lua"] = { fg = "text" },
+					["@text.title.gitcommit"] = { fg = "iris", bold = true },
 
           SpellBad      = { fg = colors.love, italic = true, undercurl = true },
           SpellCap      = { fg = colors.love, italic = true, undercurl = true },
