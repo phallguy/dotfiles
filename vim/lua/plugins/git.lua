@@ -17,8 +17,6 @@ return {
 			},
 			hooks = {
 				view_enter = function()
-					vim.notify("DIFF BABY", "warning")
-
 					vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR>")
 					vim.keymap.set("n", "q", "<CMD>DiffviewClose<CR>")
 				end,

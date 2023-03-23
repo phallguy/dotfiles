@@ -1,7 +1,7 @@
 local group = vim.api.nvim_create_augroup("GitEx", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
 	group = group,
-	pattern = { "git" },
+	pattern = { "git", "gitcommit" },
 	callback = function()
 		vim.opt_local.foldmethod = "syntax"
 	end,
@@ -26,10 +26,10 @@ vim.keymap.set(
 	{ desc = "Diff tool all", silent = true }
 )
 vim.keymap.set("n", "<leader>gr", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
-vim.keymap.set("n", "<leader>gl", "<CMD>Gclog -n 10<CR>", { desc = "Recent log" })
+vim.keymap.set("n", "<leader>gl", "<CMD>tabnew | tab Gclog -n 10<CR>", { desc = "Recent log" })
 vim.keymap.set("n", "<leader>gp", "<CMD>G! pusho<CR>", { desc = "Push" })
-vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>G commit<CR>", { desc = "Commit" })
-vim.keymap.set("n", "<leader>ga", "<CMD>G cam<CR>", { desc = "Commit ammend" })
+vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tabnew | tab G commit -v<CR>", { desc = "Commit" })
+vim.keymap.set("n", "<leader>ga", "<CMD>tabnew | tab G cam<CR>", { desc = "Commit ammend" })
 
 vim.opt.fillchars:append({ diff = "╱" })
 vim.opt.diffopt:append("iwhite") -- Ignore whitespace

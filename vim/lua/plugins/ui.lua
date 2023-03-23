@@ -80,7 +80,7 @@ return {
             filter = {
               event = "lsp",
               kind = "progress",
-              find = "diagnostics",
+              find = "iagnos",
             },
             opts = { stop = true, skip = true },
           },

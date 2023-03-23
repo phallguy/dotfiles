@@ -122,8 +122,9 @@ return {
 						},
 					},
 					media_files = {
-						find_cmd = "rg"
-					}
+						filetypes = { "png", "webp", "jpg", "jpeg", "svg" },
+						find_cmd = "rg",
+					},
 				},
 			})
 
@@ -151,5 +152,5 @@ return {
 
 	{ "nvim-telescope/telescope-live-grep-args.nvim" }, -- refine live grep
 	{ "nvim-telescope/telescope-media-files.nvim" },
-	{ "debugloop/telescope-undo.nvim"}
+	{ "debugloop/telescope-undo.nvim" },
 }

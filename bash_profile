@@ -67,7 +67,7 @@ function git_status_indicator {
   if [[ $git_status =~ "not staged for commit" ]]; then
     echo "\e[31;2m ▪︎ "
   elif [[ $git_status =~ "nothing to commit" ]]; then
-    echo "\e[30m "
+    echo "\e[1;30m "
   elif [[ ! $git_status =~ "working directory clean" ]]; then
     echo "\e[33;2m ⦿ "
   elif [[ $git_status =~ "Your branch is ahead of" ]]; then

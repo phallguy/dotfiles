@@ -1,31 +1,47 @@
 return {
 	{
 		"rose-pine/neovim",
+		name = "rose-pine-neovim",
 		cond = not vim.g.vscode,
 		config = function()
-      local colors = require('rose-pine.palette')
+			local colors = require("rose-pine.palette")
+
 			require("rose-pine").setup({
 				variant = "moon",
+				groups = {
+					git_text = "gold",
+				}
+			})
+
+			local config = require("rose-pine.config").options
+
+			require("rose-pine").colorscheme({
 				highlight_groups = {
 					LineNr = { fg = "overlay" },
-					CursorLineNr = { fg = "highlight_med" },
+					CursorLineNr = { fg = "muted" },
 					IndentBlanklineChar = { fg = "highlight_low" },
 					IndentBlanklineContextChar = { fg = "highlight_med" },
-
 					Type = { fg = "text" },
-          Keyword = { fg = "iris" },
-
+					Keyword = { fg = "iris" },
+					Folded = { fg = "highlight_high" },
 					["@function.call"] = { fg = "foam", italic = true },
 					["@lsp.type.property.lua"] = { fg = "text" },
 					["@text.title.gitcommit"] = { fg = "foam", bold = true },
-
-          SpellBad      = { fg = colors.love, italic = true, undercurl = true },
-          SpellCap      = { fg = colors.love, italic = true, undercurl = true },
-          SpellLocal    = { fg = colors.pine, italic = true, undercurl = true },
-          SpellRare     = { fg = colors.gold, italic = true, undercurl = true },
-
-          Hlargs = { link = "@parameter", bold = true },
-          HlargsNamedParams = { link = "@parameter", bold = true },
+					["@text.diff.delete"] = { fg = "text", bg = config.groups.git_delete, blend = 20 },
+					["@text.diff.add"] = { fg = "text", bg = config.groups.git_add, blend = 20 },
+					["@attribute.diff"] = { fg = "iris" },
+					SpellBad = { fg = colors.love, italic = true, undercurl = true },
+					SpellCap = { fg = colors.love, italic = true, undercurl = true },
+					SpellLocal = { fg = colors.pine, italic = true, undercurl = true },
+					SpellRare = { fg = colors.gold, italic = true, undercurl = true },
+					Hlargs = { link = "@parameter", bold = true },
+					HlargsNamedParams = { link = "@parameter", bold = true },
+					qfSeparator = { fg = colors.subtle },
+					qfLineNr = { fg = colors.pine },
+					qfFileName = { fg = colors.subtle, italic = true, bold = false },
+					qfError = { fg = colors.love, bold = true, italic = true },
+					DiffViewDiffDelete = { fg = "highlight_med" },
+					SagaNormal = { bg = "surface" },
 				},
 			})
 

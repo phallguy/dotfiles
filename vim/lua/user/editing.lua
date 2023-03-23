@@ -1,5 +1,6 @@
 -- Better save
 vim.keymap.set("n", "<leader>s", "<CMD>w<CR>", { desc = "Save" })
+vim.keymap.set("n", "<leader>w", "<CMD>w<CR>", { desc = "Save" })
 vim.keymap.set("n", "<leader>S", ":saveas %:h/", { desc = "Save as" })
 
 -- Better paste
@@ -70,6 +71,7 @@ vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv-gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv-gv")
 
+
 -- Formatting
 vim.keymap.set("n", "<leader>G", "mygg=G`y", { desc = "Reindent file" }) -- reindent entire file
 
@@ -97,7 +99,6 @@ vim.g["qfenter_keymap"] = {
 }
 
 -- Themeing
-vim.keymap.set("n", "<leader>ht", "<CMD>TSCaptureUnderCursor<CR>", { desc = "TS captures under cursor" })
 
 vim.cmd([[
 augroup HighlightSyntax
@@ -111,8 +112,7 @@ augroup HighlightSyntax
 augroup END
 ]])
 
+vim.keymap.set("n", "<leader>ht", "<CMD>TSCaptureUnderCursor<CR>", { desc = "TS captures under cursor" })
 vim.keymap.set("n", "<leader>hv", "<CMD>call SynStack()<CR>", { desc = "Vim highlights under cursor" })
-
 vim.keymap.set("n", "<leader>hl", "<CMD>Telescope highlights<CR>", { desc = "All highlights" })
-
 vim.keymap.set("n", "<leader>hi", "<CMD>Inspect<CR>", { desc = "Inspect highlights" })
