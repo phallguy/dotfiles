@@ -2,7 +2,6 @@ if vim.g.vscode then
 	return
 end
 
-
 local icons = require("user.icons")
 
 vim.keymap.set("n", "gd", function()
@@ -29,8 +28,9 @@ end, { desc = "Peek [d]efinition" })
 vim.keymap.set("n", "<leader>lg", function()
 	require("lspsaga.command").load_command("goto_definition")
 end, { desc = "[G]o to definition" })
-vim.keymap.set("n", "<leader>l/", function()
-
+vim.keymap.set("n", "<leader>l/", require("telescope.builtin").lsp_document_symbols, { desc = "Document symbols" })
+vim.keymap.set("n", "<leader>lo", function()
+	require("lspsaga.command").load_command("outline")
 end)
 
 vim.keymap.set("n", "<leader>lu", function()
@@ -42,7 +42,7 @@ vim.keymap.set("n", "K", function()
 end, { desc = "Hover Documentation" })
 vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
 
-vim.keymap.set("n", "<leader>lb", require("telescope.builtin").diagnostics, { desc = "Resume search" })
+vim.keymap.set("n", "<leader>lb", require("telescope.builtin").diagnostics, { desc = "Diagnostics" })
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "Buffer quickfix" })
 
 vim.keymap.set("n", "<leader>lta", "<CMD>TypescriptAddMissingImports<CR>", { desc = "Add missing imports" })
@@ -57,9 +57,9 @@ local diagnostics = {
 		active = true,
 		values = {
 			{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-			{ name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
-			{ name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
-			{ name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
+			{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
+			{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
+			{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
 		},
 	},
 }
@@ -198,9 +198,9 @@ cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format({
 			mode = "symbol_text", -- show only symbol annotations
-			maxwidth = 50,     -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 			ellipsis_char = "…", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-			menu = ({
+			menu = {
 				fuzzy_buffer = "[Fuzzy Buffer]",
 				buffer = "[Buffer]",
 				nvim_lsp = "[LSP]",
@@ -208,7 +208,7 @@ cmp.setup({
 				nvim_lua = "[Lua]",
 				git = "[Git]",
 				path = "[Path]",
-			})
+			},
 		}),
 	},
 })

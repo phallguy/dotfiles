@@ -7,10 +7,6 @@ vim.g.maplocalleader = " "
 
 require("user.options")
 
-vim.api.nvim__get_hl_defs = function(id, _opts)
-  return vim.api.nvim_get_hl(id)
-end
-
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info

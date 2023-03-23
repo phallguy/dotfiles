@@ -106,6 +106,11 @@ return {
 						initial_mode = "insert",
 						-- sort_lastused = true,
 					},
+					lsp_document_symbols = {
+						theme = "ivy",
+						initial_mode = "insert",
+						sort_lastused = true,
+					}
 				},
 				extensions = {
 					live_grep_args = {
