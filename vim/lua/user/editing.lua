@@ -22,9 +22,11 @@ vim.keymap.set("n", "]d", function()
 	require("lspsaga.command").load_command("diagnostic_jump_next")
 end, { desc = "Next diagnostic" })
 
--- Quickfix
+-- Quickfix / List
 vim.keymap.set("n", "[q", "<CMD>cp<CR>", { desc = "Prev qf" })
 vim.keymap.set("n", "]q", "<CMD>cn<CR>", { desc = "Next qf" })
+vim.keymap.set("n", "[l", "<cmd>lprevious<cr>", { desc = "prev list" })
+vim.keymap.set("n", "]l", "<cmd>lnext<cr>", { desc = "next list" })
 
 -- Next/prev diff hunk
 if not vim.g.vscode then
@@ -116,3 +118,19 @@ vim.keymap.set("n", "<leader>ht", "<CMD>TSCaptureUnderCursor<CR>", { desc = "TS 
 vim.keymap.set("n", "<leader>hv", "<CMD>call SynStack()<CR>", { desc = "Vim highlights under cursor" })
 vim.keymap.set("n", "<leader>hl", "<CMD>Telescope highlights<CR>", { desc = "All highlights" })
 vim.keymap.set("n", "<leader>hi", "<CMD>Inspect<CR>", { desc = "Inspect highlights" })
+
+
+-- help
+-- Open vert
+vim.cmd.cnoreabbrev("H", "vert", "bo", "h")
+
+local group = vim.api.nvim_create_augroup("HelpEx", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	group = group,
+	pattern = { "help" },
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+		vim.opt_local.number = true
+		vim.keymap.set("n", "q", "<CMD>lcl<CR><CMD>helpc<CR>", { buffer = event.buf, silent = true })
+	end,
+})

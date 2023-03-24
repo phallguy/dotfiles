@@ -10,7 +10,7 @@ return {
 				variant = "moon",
 				groups = {
 					git_text = "gold",
-				}
+				},
 			})
 
 			local config = require("rose-pine.config").options
@@ -42,6 +42,16 @@ return {
 					qfError = { fg = colors.love, bold = true, italic = true },
 					DiffViewDiffDelete = { fg = "highlight_med" },
 					SagaNormal = { bg = "surface" },
+					-- Tree
+					NeoTreeGitUntracked = { fg = "gold" },
+					NeoTreeGitUnstaged = { fg = "gold" },
+					NeoTreeGitConflict = { fg = "love" },
+					NeoTreeNormal = { bg = "surface" },
+					NeoTreeNormalNC = { bg = "surface" },
+					NeoTreeMessage = { fg = "muted" },
+					NeoTreeDotfile = { fg = "#FFFF00" },
+					NeoTreeHiddenByName = { fg = "#00FF00" },
+
 				},
 			})
 
