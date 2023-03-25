@@ -11,6 +11,10 @@ return {
 				name = {
 					trailing_slash = true,
 				},
+				nesting_rules = {
+					["ts"] = { "test.ts" },
+					["tsx"] = { "test.tsx" },
+				},
 				source_selector = {
 					show_scrolled_off_parent_node = true,
 				},
@@ -36,6 +40,7 @@ return {
 									show_path = "relative", -- "none", "relative", "absolute"
 								},
 							},
+							["A"] = "noop",
 							["d"] = "add_directory",
 							["D"] = "delete",
 						},
@@ -43,18 +48,13 @@ return {
 					hijack_netrw_behavior = "open_current",
 					follow_current_file = true,
 					cwd_target = {
-						float = "window",
 						current = "window",
 					},
 				},
 			})
 
-			-- vim.keymap.set("n", "-",, { desc = "Browse from here" })
-
-			vim.keymap.set("n", "<leader>e", "<CMD>Neotree reveal_force_cwd<CR>", { desc = "Toggle tree" })
-			-- vim.keymap.set("n", "-", function()
-			-- 	api.tree.find_file({ open = true, update_root = true, focus = true })
-			-- end)
+			vim.keymap.set("n", "<leader>e", "<CMD>Neotree toggle reveal_force_cwd<CR>", { desc = "Toggle tree" })
+			vim.keymap.set("n", "<leader>E", "<CMD>Neotree focus<CR>", { desc = "Focs tree" })
 		end,
 		requires = {
 			"nvim-lua/plenary.nvim",

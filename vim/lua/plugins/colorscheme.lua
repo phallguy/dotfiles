@@ -43,15 +43,20 @@ return {
 					DiffViewDiffDelete = { fg = "highlight_med" },
 					SagaNormal = { bg = "surface" },
 					-- Tree
-					NeoTreeGitUntracked = { fg = "gold" },
-					NeoTreeGitUnstaged = { fg = "gold" },
+					NeoTreeGitUntracked = { fg = config.groups.git_add },
+					NeoTreeGitUnstaged = { fg = config.groups.git_dirty },
 					NeoTreeGitConflict = { fg = "love" },
+					NeoTreeGitModified = { fg = config.groups.git_dirty },
+					NeoTreeGitAdded  = { fg = config.groups.git_add },
+					NeoTreeGitDeleted  = { fg = config.groups.git_delete },
+					NeoTreeGitIgnored = { fg = config.groups.git_ignore },
+					NeoTreeGitStaged = { fg = config.groups.git_stage },
+
 					NeoTreeNormal = { bg = "surface" },
 					NeoTreeNormalNC = { bg = "surface" },
 					NeoTreeMessage = { fg = "muted" },
-					NeoTreeDotfile = { fg = "#FFFF00" },
-					NeoTreeHiddenByName = { fg = "#00FF00" },
-
+					NeoTreeDotfile = { fg = "muted" },
+					NeoTreeCursorLine = { bg = "pine", blend = 20 },
 				},
 			})
 

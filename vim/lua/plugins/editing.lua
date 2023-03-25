@@ -3,7 +3,7 @@ if vim.g.vscode then
 end
 
 return {
-	"tpope/vim-vinegar", -- netwr support
+	-- "tpope/vim-vinegar", -- netwr support
 
 	-- Useful plugin to show you pending keybinds.
 	{ "folke/which-key.nvim", opts = {} },
