@@ -15,7 +15,7 @@ vim.g["test#echo_command"] = 0
 vim.g["test#filename_modifier"] = ":p"
 
 vim.g["test#strategy"] = "dispatch"
-vim.g["test#neovim#term_position"] = "botright 30"
+vim.g["test#neovim#term_position"] = "vert botright 30"
 
 vim.cmd([[
 augroup TestTerminal
