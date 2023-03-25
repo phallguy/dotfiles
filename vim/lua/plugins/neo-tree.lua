@@ -18,6 +18,14 @@ return {
 				source_selector = {
 					show_scrolled_off_parent_node = true,
 				},
+				default_component_configs = {
+					symbols = {
+						unstaged = "~",
+					},
+					git_status = {
+						symbols = {},
+					},
+				},
 				window = {
 					-- position = "float",
 					mappings = {
@@ -30,9 +38,11 @@ return {
 						mappings = {
 							["<space"] = "noop",
 							["<esc>"] = "close_window",
-							["-"] = "navigate_up",
+							["-"] = "close_node",
 							["[c"] = "prev_git_modified",
 							["]c"] = "next_git_modified",
+							["[g"] = "noop",
+							["]g"] = "noop",
 							["a"] = "noop",
 							["%"] = {
 								"add",
@@ -45,8 +55,9 @@ return {
 							["D"] = "delete",
 						},
 					},
-					hijack_netrw_behavior = "open_current",
+					hijack_netrw_behavior = "disabled",
 					follow_current_file = true,
+					bind_to_cwd = false,
 					cwd_target = {
 						current = "window",
 					},
@@ -55,6 +66,7 @@ return {
 
 			vim.keymap.set("n", "<leader>e", "<CMD>Neotree toggle reveal_force_cwd<CR>", { desc = "Toggle tree" })
 			vim.keymap.set("n", "<leader>E", "<CMD>Neotree focus<CR>", { desc = "Focs tree" })
+			vim.keymap.set("n", "-", "<CMD>Neotree toggle current reveal_force_cwd<CR>", { desc = "Up tree" })
 		end,
 		requires = {
 			"nvim-lua/plenary.nvim",

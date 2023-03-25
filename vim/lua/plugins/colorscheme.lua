@@ -43,10 +43,10 @@ return {
 					DiffViewDiffDelete = { fg = "highlight_med" },
 					SagaNormal = { bg = "surface" },
 					-- Tree
-					NeoTreeGitUntracked = { fg = config.groups.git_add },
-					NeoTreeGitUnstaged = { fg = config.groups.git_dirty },
+					NeoTreeGitUntracked = { fg = "pine" },
+					NeoTreeGitUnstaged = { fg = "iris" },
 					NeoTreeGitConflict = { fg = "love" },
-					NeoTreeGitModified = { fg = config.groups.git_dirty },
+					NeoTreeGitModified = { fg = "gold" },
 					NeoTreeGitAdded  = { fg = config.groups.git_add },
 					NeoTreeGitDeleted  = { fg = config.groups.git_delete },
 					NeoTreeGitIgnored = { fg = config.groups.git_ignore },

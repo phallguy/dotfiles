@@ -13,7 +13,6 @@ return {
 			-- [[ Configure Telescope ]]
 			-- See `:help telescope` and `:help telescope.setup()`
 			local actions = require("telescope.actions")
-			local action_state = require("telescope.actions.state")
 			local lga_actions = require("telescope-live-grep-args.actions")
 			local builtin = require("telescope.builtin")
 
