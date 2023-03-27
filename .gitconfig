@@ -10,6 +10,51 @@
   rebase = auto
   ui = true
 
+[core]
+  autocrlf = false
+  excludesfile = /Users/paulalexander/.gitignore_global
+  pager = diff-so-fancy | less --tabs=4 -RFX
+  preloadIndex = false
+  fsmonitor = false
+  untrackedcache = false
+
+[init]
+  defaultBranch = master
+
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
+
+[filter "hawser"]
+  clean = git hawser clean %f
+  smudge = git hawser smudge %f
+  required = true
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[http]
+  postBuffer = 524288000
+
+[commit]
+  gpgsign = true
+  template = /Users/paulalexander/dotfiles/.gitcommit.template
+  cleanup = scissors
+
+[gpg]
+  program = gpg
+
+[maintenance]
+  repo = /Users/paulalexander/workspace/bark/bark-desktop
+  repo = /Users/paulalexander/workspace/bark/bark-www
+  repo = /Users/paulalexander/workspace/bark/bark-admin
+
+[rebase]
+  updateRefs = true
+
 [alias]
   st = status
   co = checkout --recurse-submodules
@@ -29,62 +74,23 @@
   pushf = push origin HEAD -f --no-verify
   pusho = push origin HEAD
 
-[core]
-  autocrlf = false
-  excludesfile = /Users/paulalexander/.gitignore_global
-  pager = diff-so-fancy | less --tabs=4 -RFX
-  preloadIndex = false
-  fsmonitor = false
-  untrackedcache = false
-
-[filter "media"]
-  clean = git-media-clean %f
-  smudge = git-media-smudge %f
-
-[mergetool "Kaleidoscope"]
-  trustexitcode = true
-  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-  prompt = false
 [diff]
   renames = true
   tool = nvimdiff
-[filter "hawser"]
-  clean = git hawser clean %f
-  smudge = git hawser smudge %f
-  required = true
-[http]
-  postBuffer = 524288000
-[commit]
-  gpgsign = true
-  template = /Users/paulalexander/dotfiles/.gitcommit.template
-  cleanup = scissors
-[gpg]
-  program = gpg
-[filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
-[init]
-  defaultBranch = master
-[difftool "Kaleidoscope"]
-  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+  minimal = true
+
 [difftool]
   prompt = false
   trustExitCode = true
+  minimal = true
+
 [merge]
   tool = Kaleidoscope
+
 [mergetool]
   prompt = false
-[maintenance]
-  repo = /Users/paulalexander/workspace/bark/bark-desktop
-  repo = /Users/paulalexander/workspace/bark/bark-www
-  repo = /Users/paulalexander/workspace/bark/bark-admin
-[rebase]
-  updateRefs = true
-[interactive]
-  diffFilter = diff-so-fancy --patch
 
+# VS Code
 
 [difftool "vscode"]
   cmd = code --wait --diff $LOCAL $REMOTE
@@ -92,6 +98,8 @@
 [mergetool "vscode"]
   cmd = code --wait $MERGED
 
+# NVIM
+#
 [difftool "nvimdiff"]
   trustExitCode = true
   prompt = true
@@ -99,3 +107,14 @@
 [mergetool "nvimdiff"]
   trustExitCode = true
   prompt = true
+
+# Kaleidoscope
+
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+[mergetool "Kaleidoscope"]
+  trustexitcode = true
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  prompt = false
+

@@ -5,29 +5,28 @@ end
 return {
 	-- { "stevearc/dressing.nvim", opts = {} },
 	{ "MunifTanjim/nui.nvim" },
-	{
-		"rcarriga/nvim-notify",
-		opts = {
-			-- level = vim.log.levels.WARN,
-			render = "compact",
-			stages = "static",
-		},
-	},
-	{},
+	-- {
+	-- 	"rcarriga/nvim-notify",
+	-- 	opts = {
+	-- 		-- level = vim.log.levels.WARN,
+	-- 		render = "compact",
+	-- 		stages = "static",
+	-- 	},
+	-- },
 	{
 		"folke/noice.nvim",
 		config = function()
 			require("noice").setup({
-				debug = false,
-				presets = {
-					-- lsp_doc_border = true,
+				-- debug = true,
+				notify = {
+					view = "mini",
 				},
 				views = {
 					mini = {
 						backend = "mini",
 						relative = "editor",
 						align = "message-right",
-						timeout = 1000,
+						timeout = 3000,
 						reverse = true,
 						focusable = false,
 						position = {
@@ -92,14 +91,14 @@ return {
 						},
 						opts = { stop = true, skip = true },
 					},
-					{
-						filter = {
-							event = "msg_show",
-							kind = "",
-							find = "[noeol]",
-						},
-						opts = { stop = true, skip = true },
-					},
+					-- {
+					-- 	filter = {
+					-- 		event = "msg_show",
+					-- 		kind = "",
+					-- 		find = "[noeol]",
+					-- 	},
+					-- 	opts = { stop = true, skip = true },
+					-- },
 					{
 						filter = {
 							event = "msg_show",
@@ -108,6 +107,20 @@ return {
 						},
 						opts = { stop = true, skip = true },
 					},
+					{
+						filter = {
+							event = "notify",
+							min_height = 10,
+						},
+						view = "split",
+					},
+					{
+						filter = {
+							event = "msg_show",
+							min_height = 10,
+						},
+						view = "split",
+					},
 				},
 			})
 
@@ -115,7 +128,6 @@ return {
 		end,
 		requires = {
 			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
 		},
 	},
 }

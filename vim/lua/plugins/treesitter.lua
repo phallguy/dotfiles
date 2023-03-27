@@ -34,7 +34,7 @@ return {
 					-- disable = { "eruby", "embedded_template" },
 					additional_vim_regex_highlighting = false,
 				},
-				indent = { enable = true, disable = { "python" } },
+				indent = { enable = true, disable = { "python", "ruby" } },
 				incremental_selection = {
 					enable = true,
 					keymaps = {

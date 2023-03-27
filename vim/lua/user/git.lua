@@ -28,8 +28,8 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>gr", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
 vim.keymap.set("n", "<leader>gl", "<CMD>DiffviewFileHistory<CR>", { desc = "Recent log" })
 vim.keymap.set("n", "<leader>gp", "<CMD>G! pusho<CR>", { desc = "Push" })
-vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tabnew | tab G commit -v<CR>", { desc = "Commit" })
-vim.keymap.set("n", "<leader>ga", "<CMD>tabnew | tab G cam<CR>", { desc = "Commit ammend" })
+vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR>", { desc = "Commit" })
+vim.keymap.set("n", "<leader>ga", "<CMD>tab G cam<CR>", { desc = "Commit ammend" })
 
 vim.opt.fillchars:append({ diff = "╱" })
 vim.opt.diffopt:append("iwhite") -- Ignore whitespace

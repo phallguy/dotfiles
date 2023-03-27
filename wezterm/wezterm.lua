@@ -3,6 +3,8 @@ local wezterm = require("wezterm")
 local font_family = "JetBrainsMonoNL Nerd Font Mono"
 
 return {
+	-- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=terminfo
+	term = "wezterm",
 	-- Appearance ===
 	--
 	-- Fonts

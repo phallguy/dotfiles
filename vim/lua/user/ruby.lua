@@ -14,3 +14,14 @@ vim.g.splitjoin_ruby_options_as_arguments = 1
 vim.g["test#ruby#use_spring_binstub"] = 0
 
 vim.keymap.set("v", "<leader>x", ":Extract ", { desc = "Extract to partial" })
+
+local group = vim.api.nvim_create_augroup("RubyEx", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	group = group,
+	pattern = { "ruby", "eruby" },
+	callback = function()
+		vim.opt_local.indentkeys="0{,0},0),0],!^F,o,O,e,:,=end,=else,=elsif,=when,=in ,=ensure,=rescue,==begin,==end,=private,=protected,=public"
+		vim.opt_local.smartindent = true
+		vim.opt_local.autoindent = true
+	end,
+})

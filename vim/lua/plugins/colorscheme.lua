@@ -30,6 +30,8 @@ return {
 					["@text.diff.delete"] = { fg = "text", bg = config.groups.git_delete, blend = 20 },
 					["@text.diff.add"] = { fg = "text", bg = config.groups.git_add, blend = 20 },
 					["@attribute.diff"] = { fg = "iris" },
+					["@type.qualifier"] = { fg = "pine" },
+					["@parameter"] = { fg = "text", italic = true },
 					SpellBad = { fg = colors.love, italic = true, undercurl = true },
 					SpellCap = { fg = colors.love, italic = true, undercurl = true },
 					SpellLocal = { fg = colors.pine, italic = true, undercurl = true },
@@ -40,6 +42,7 @@ return {
 					qfLineNr = { fg = colors.pine },
 					qfFileName = { fg = colors.subtle, italic = true, bold = false },
 					qfError = { fg = colors.love, bold = true, italic = true },
+					QuickFixLine = { bg = "pine", blend = 10 },
 					DiffViewDiffDelete = { fg = "highlight_med" },
 					SagaNormal = { bg = "surface" },
 					-- Tree
@@ -47,16 +50,20 @@ return {
 					NeoTreeGitUnstaged = { fg = "iris" },
 					NeoTreeGitConflict = { fg = "love" },
 					NeoTreeGitModified = { fg = "gold" },
-					NeoTreeGitAdded  = { fg = config.groups.git_add },
-					NeoTreeGitDeleted  = { fg = config.groups.git_delete },
+					NeoTreeGitAdded = { fg = config.groups.git_add },
+					NeoTreeGitDeleted = { fg = config.groups.git_delete },
 					NeoTreeGitIgnored = { fg = config.groups.git_ignore },
 					NeoTreeGitStaged = { fg = config.groups.git_stage },
-
 					NeoTreeNormal = { bg = "surface" },
 					NeoTreeNormalNC = { bg = "surface" },
 					NeoTreeMessage = { fg = "muted" },
 					NeoTreeDotfile = { fg = "muted" },
 					NeoTreeCursorLine = { bg = "pine", blend = 20 },
+					TroubleNormal = { bg = "surface" },
+					-- Treesitter context
+					TreesitterContext = { bg = "#1f1d30" },
+					-- TreesitterContext = { bg = "overlay" },
+					TreesitterContextBottom = { underline = true, sp = "highlight_med"  },
 				},
 			})
 
@@ -136,4 +143,5 @@ return {
 			"glepnir/lspsaga.nvim",
 		},
 	},
+	{ "folke/lsp-colors.nvim", opts = {} },
 }

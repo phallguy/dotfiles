@@ -23,6 +23,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
 --
@@ -85,11 +86,11 @@ require("user.session")
 require("user.netwr")
 require("user.hilight_on_yank")
 require("user.git")
-require("user.testing")
 
 require("user.html")
 require("user.ruby")
 
+require("user.testing")
 require("user.lsp")
 
 vim.g["localvimrc_name"] = { ".lvimrc", ".vimrc" }

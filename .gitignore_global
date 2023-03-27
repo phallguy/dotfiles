@@ -33,6 +33,7 @@ config/definitions.rb
 .erb-lint.yml
 .yamllint
 .projections.json
+config/projections.json
 
 
 

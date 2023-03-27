@@ -1,3 +1,7 @@
+if vim.g.vscode then
+	return {}
+end
+
 return {
 	{
 		-- https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/lua/neo-tree/defaults.lua
@@ -8,6 +12,7 @@ return {
 			require("neo-tree").setup({
 				-- log_level = "debug",
 				close_if_last_window = true,
+				close_floats_on_escape_key = true,
 				name = {
 					trailing_slash = true,
 				},
@@ -32,6 +37,7 @@ return {
 					-- position = "float",
 					mappings = {
 						["v"] = "open_vsplit",
+						["<C-v>"] = "open_vsplit",
 					},
 					popup_border_style = "rounded",
 				},
@@ -39,6 +45,7 @@ return {
 					window = {
 						mappings = {
 							["<space"] = "noop",
+							["<esc>"] = "close_window",
 							["-"] = "close_node",
 							["[c"] = "prev_git_modified",
 							["]c"] = "next_git_modified",
@@ -79,7 +86,7 @@ return {
 
 			vim.keymap.set("n", "<leader>e", "<CMD>Neotree toggle reveal_force_cwd<CR>", { desc = "Toggle tree" })
 			vim.keymap.set("n", "<leader>E", "<CMD>Neotree focus<CR>", { desc = "Focs tree" })
-			vim.keymap.set("n", "-", "<CMD>Neotree toggle float reveal_force_cwd<CR>", { desc = "Up tree" })
+			vim.keymap.set("n", "-", "<CMD>Neotree toggle float reveal<CR>", { desc = "Up tree" })
 		end,
 		requires = {
 			"nvim-lua/plenary.nvim",

@@ -13,8 +13,10 @@ return {
 			-- [[ Configure Telescope ]]
 			-- See `:help telescope` and `:help telescope.setup()`
 			local actions = require("telescope.actions")
+			local layout_actions = require("telescope.actions.layout")
 			local lga_actions = require("telescope-live-grep-args.actions")
 			local builtin = require("telescope.builtin")
+			local trouble = require("trouble.providers.telescope")
 
 			vim.keymap.set("n", ",", builtin.buffers, { desc = "Buffers" })
 			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find files" })
@@ -40,6 +42,7 @@ return {
 			vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })
 			vim.keymap.set("n", "<leader>fm", "<CMD>Telescope media_files<CR>", { desc = "Media files" })
 			vim.keymap.set("n", "<leader>fu", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
+			vim.keymap.set("n", "<leader>fn", "<CMD>Telescope man_pages<CR>", { desc = "Man pages" })
 
 			local show_notifications = function()
 				require("telescope").extensions.notify.notify()
@@ -65,13 +68,17 @@ return {
 									prompt_to_prefix = true,
 								})
 							end,
+							["<c-t>"] = trouble.open_with_trouble,
 						},
 						n = {
-							["<C-n>"] = actions.cycle_history_next,
-							["<C-p>"] = actions.cycle_history_prev,
+							-- ["<C-n>"] = actions.cycle_history_next,
+							-- ["<C-p>"] = actions.cycle_history_prev,
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
+							["<C-l>"] = layout_actions.cycle_layout_next,
+							["P"] = layout_actions.toggle_preview,
 							["?"] = actions.which_key,
+							["<c-t>"] = trouble.open_with_trouble,
 						},
 					},
 				},
@@ -109,7 +116,10 @@ return {
 						theme = "ivy",
 						initial_mode = "insert",
 						sort_lastused = true,
-					}
+					},
+					diagnostics = {
+						theme = "ivy",
+					},
 				},
 				extensions = {
 					live_grep_args = {
