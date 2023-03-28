@@ -56,7 +56,7 @@ vim.keymap.set("n", "<leader>bc", function()
 			cmd = serverCmd,
 			close_on_exit = true,
 			auto_scroll = true,
-			count = 10,
+			count = 11,
 		})
 	end
 
