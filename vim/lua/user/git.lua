@@ -25,7 +25,8 @@ vim.keymap.set(
 	"<CMD>silent !git difftool --tool Kaleidoscope<CR>",
 	{ desc = "Diff tool all", silent = true }
 )
-vim.keymap.set("n", "<leader>gr", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
+vim.keymap.set("n", "<leader>gR", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
+vim.keymap.set("n", "<leader>gr", ":G! br phallguy/", { desc = "Branch" })
 vim.keymap.set("n", "<leader>gl", "<CMD>DiffviewFileHistory<CR>", { desc = "Recent log" })
 vim.keymap.set("n", "<leader>gp", "<CMD>G! pusho<CR>", { desc = "Push" })
 vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR>", { desc = "Commit" })
