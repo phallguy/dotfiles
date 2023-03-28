@@ -31,6 +31,7 @@ vim.keymap.set("n", "<leader>gl", "<CMD>DiffviewFileHistory<CR>", { desc = "Rece
 vim.keymap.set("n", "<leader>gp", "<CMD>G! pusho<CR>", { desc = "Push" })
 vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR>", { desc = "Commit" })
 vim.keymap.set("n", "<leader>ga", "<CMD>tab G cam<CR>", { desc = "Commit ammend" })
+vim.keymap.set("n", "<leader>gf", "<CMD>G! bam<CR>", { desc = "Fetch latest master" })
 
 vim.opt.fillchars:append({ diff = "╱" })
 vim.opt.diffopt:append("iwhite") -- Ignore whitespace

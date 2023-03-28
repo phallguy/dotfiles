@@ -17,6 +17,13 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
+vim.keymap.set("n", "<Up>", "<CMD>resize +2<CR>", { desc = "Taller" })
+vim.keymap.set("n", "<Up>", "<CMD>resize +2<CR>", { desc = "Taller" })
+vim.keymap.set("n", "<Right>", "<CMD>vertical resize +2<CR>", { desc = "Narrower" })
+vim.keymap.set("n", "<Left>", "<CMD>vertical resize -2<CR>", { desc = "Wider" })
+
+
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", function()
 	require("lspsaga.command").load_command("diagnostic_jump_prev")

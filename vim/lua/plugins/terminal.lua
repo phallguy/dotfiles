@@ -20,11 +20,16 @@ return {
 	-- 	end,
 	-- },
 	{
+		-- https://github.com/akinsho/toggleterm.nvi
 		"akinsho/toggleterm.nvim",
 		config = function()
 			require("toggleterm").setup({
-				shading_factor = -15,
-				shell = "bash -il",
+				-- shading_factor = -15,
+				shell = "zsh -il",
+				shade_terminals = false,
+				highlights = {
+					Normal = { guibg = "#1f1d30" },
+				},
 			})
 		end,
 	},

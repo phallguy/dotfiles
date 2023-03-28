@@ -3,6 +3,7 @@ return {
 		"rose-pine/neovim",
 		name = "rose-pine-neovim",
 		cond = not vim.g.vscode,
+		proority = 10000,
 		config = function()
 			local colors = require("rose-pine.palette")
 
@@ -68,7 +69,8 @@ return {
 					-- Treesitter context
 					TreesitterContext = { bg = "#1f1d30" },
 					-- TreesitterContext = { bg = "overlay" },
-					TreesitterContextBottom = { underline = true, sp = "highlight_med"  },
+					TreesitterContextBottom = { underline = true, sp = "highlight_med" },
+					ToggleTerm10Normal = { bg = "rose" },
 				},
 			})
 

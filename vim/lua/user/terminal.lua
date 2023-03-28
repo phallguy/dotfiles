@@ -16,6 +16,16 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = group,
+	pattern = { "term://*toggleterm#*" },
+	callback = function(event)
+		local opts = { buffer = event.buf }
+
+		vim.keymap.set("n", "<esc>", "<CMD>ToggleTerm<CR>", opts)
+	end,
+})
+
 local Terminal = require("toggleterm.terminal").Terminal
 local scratchTerminal = Terminal:new({
 	close_on_exit = false,
