@@ -17,6 +17,11 @@ return {
 
 			require("rose-pine").colorscheme({
 				highlight_groups = {
+					-- Enable transparent backgrounds
+					Normal = { bg = "none" },
+					NormalNC = { bg = "none" },
+					--
+
 					LineNr = { fg = "overlay" },
 					CursorLineNr = { fg = "muted" },
 					IndentBlanklineChar = { fg = "highlight_low" },

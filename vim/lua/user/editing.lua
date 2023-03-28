@@ -3,6 +3,9 @@ vim.keymap.set("n", "<leader>s", "<CMD>w<CR>", { desc = "Save" })
 vim.keymap.set("n", "<leader>w", "<CMD>w<CR>", { desc = "Save" })
 vim.keymap.set("n", "<leader>S", ":saveas %:h/", { desc = "Save as" })
 
+-- Beter normal?
+vim.keymap.set("i", "jk", [[<C-\><C-n>]])
+
 -- Better paste
 vim.keymap.set("v", "p", '"_dP') -- don't yank into clipboard when pasting
 vim.keymap.set("n", "x", '"_x')  -- when deleting a single character don't clobber clipboard

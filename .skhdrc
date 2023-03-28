@@ -22,25 +22,18 @@ shift + alt + ctrl - k : yabai -m window --warp north
 shift + alt + ctrl - l : yabai -m window --warp east
 
 # rotate tree
-alt - r : yabai -m space --rotate 90
+alt - r : yabai -m space --rotate 270
 
 # toggle window fullscreen zoom
 alt - f : yabai -m window --toggle zoom-fullscreen
 
-# alt - s : yabai -m window --toggle
-# alt - s : yabai -m window --toggle sticky;\
-#       yabai -m window --toggle topmost;\
-#       yabai -m window --toggle pip
-
-# toggle padding and gap
-alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
-
 # float / unfloat window and center on screen
-#alt - t : yabai -m window --toggle float;\
-#  yabai -m window --grid 4:4:1:1:2:2
+alt - m : yabai -m window --toggle float;\
+  yabai -m window --grid 4:4:1:1:2:2
 
 # toggle window split type
 alt - e : yabai -m window --toggle split
+alt - b : yabai -m window --toggle border
 
 # balance size of windows
 shift + alt - 0 : yabai -m space --balance

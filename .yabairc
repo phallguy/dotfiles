@@ -17,35 +17,40 @@ yabai -m config window_opacity_duration      0.0
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.90
 yabai -m config window_border                on
-yabai -m config window_border_width          4
+yabai -m config window_border_width          6
 yabai -m config window_border_blur           off
-yabai -m config active_window_border_color   0xff56949f
+yabai -m config active_window_border_color   0xff907aa9
+# yabai -m config active_window_border_color   0xffc4a7e7
 yabai -m config normal_window_border_color   0xff44415a
 yabai -m config insert_feedback_color        0xff3e8fb0
 yabai -m config split_ratio                  0.50
 yabai -m config split_type                   auto
 yabai -m config auto_balance                 off
 yabai -m config mouse_modifier               alt
-yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
+yabai -m config mouse_action1                move
 yabai -m config mouse_drop_action            swap
+
 
 # general space settings
 yabai -m config layout bsp
-yabai -m config top_padding    4
-yabai -m config bottom_padding 4
-yabai -m config left_padding   4
-yabai -m config right_padding  4
-yabai -m config window_gap     8
+yabai -m config top_padding    0
+yabai -m config bottom_padding 0
+yabai -m config left_padding   0
+yabai -m config right_padding  0
+yabai -m config window_gap     4
 
 yabai -m space 1 --label main
-yabai -m space 2 --label comms
-yabai -m space 3 --label ent
+yabai -m space 2 --label secondary
+yabai -m space 3 --label comms
+yabai -m space 4 --label misc
+yabai -m space 5 --label ent
 
 yabai -m rule --add app="Pandora" space=ent
 yabai -m rule --add app="Spotify" space=ent
 yabai -m rule --add app="Slack" space=comms
 yabai -m rule --add app="Messages" space=comms
+yabai -m rule --add app="Reminders" space=misc
 
 # apps to not manage (ignore)
 yabai -m rule --add app="^System Settings$" manage=off

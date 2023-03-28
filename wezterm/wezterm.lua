@@ -27,7 +27,6 @@ return {
 	},
 	-- colors
 	color_scheme = "rose-pine-moon",
-	-- color_scheme = "Material Palenight (base16)",
 	window_frame = {
 		font = wezterm.font_with_fallback({
 			-- <built-in>, BuiltIn
@@ -73,6 +72,8 @@ return {
 	},
 	window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
+	macos_window_background_blur = 50,
+	window_background_opacity = 0.92,
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,
 	initial_rows = 40,

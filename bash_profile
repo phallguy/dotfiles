@@ -6,7 +6,7 @@ unset CC
 unset VERSION
 export RUBYOPT="-W0"
 export RIPGREP_CONFIG_PATH="/Users/paulalexander/.ripgreprc"
-# export BAT_THEME="Monokai Extended"
+export BAT_THEME="base16-256"
 LESSOPEN="|/opt/homebrew/Cellar/bat-extras/2022.07.27/bin/batpipe %s";
 export LESSOPEN;
 unset LESSCLOSE;
@@ -101,14 +101,13 @@ function current_basename {
 function my_prompt {
   LAST_EXIT=$?
 
-  # Base16 Colors
-  WORKING_DIR='\[\e[0;40;37m\]  $( "current_dirname" )\[\e[0;32m\]$( current_basename )  '
+  WORKING_DIR='\[\e[0;1;30m\]$( "current_dirname" )\[\e[0;32m\]$( current_basename )  '
   GIT='\[\e[0m\]$( my_git_ps1 )'
-  CURRENT_TIME='\[\e[0;46;30m\] \@ '
+  CURRENT_TIME='\[\e[0;30m\] \@ '
   PROMPT='\[\e[0;1;32m\]\$ \[\e[0;37m\]'
 
   if [ "$LAST_EXIT" == "0" ]; then
-    EXECUTION_RESULT='\[\e[0;42;30m\] ${timer_show}s '
+    EXECUTION_RESULT='\[\e[0;30m\] ${timer_show}s '
   else
     EXECUTION_RESULT='\[\e[0;41;1;m\] ${timer_show}s '
     if [ "$LAST_EXIT" != "1" ]; then
@@ -123,7 +122,7 @@ function my_prompt {
     CURRENT_ARCH=""
   fi
 
-  PS1="\r\n\n$(title $(current_basename))${CURRENT_TIME}${EXECUTION_RESULT}${WORKING_DIR}${GIT}${PROJECT_PS1}${CURRENT_ARCH}\[\e[0m\]\r\n\n${PROMPT}"
+  PS1="\r\n\n$(title $(current_basename))${WORKING_DIR}${GIT}${PROJECT_PS1}${CURRENT_ARCH}${CURRENT_TIME}${EXECUTION_RESULT}\[\e[0m\]\r\n\n${PROMPT}"
 }
 export PROMPT_COMMAND="my_prompt; history -a; timer_stop"
 shopt -s histappend

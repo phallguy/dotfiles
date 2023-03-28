@@ -23,6 +23,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g["localvimrc_name"] = { ".lvimrc", ".vimrc" }
+vim.g["localvimrc_sandbox"] = 0
+vim.g["localvimrc_persistent"] = 2
+vim.g["localvimrc_debug"] = 4
 
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -32,7 +36,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- NOTE: First, some plugins that don't require any configuration
 
-	"embear/vim-localvimrc", -- import .vimrc from CWD when launching
+	-- import .vimrc from CWD when launching
+	{
+		"embear/vim-localvimrc",
+		config = function()
+		end,
+	},
 
 	{
 		-- LSP Configuration & Plugins
@@ -85,6 +94,7 @@ require("user.editing")
 require("user.session")
 require("user.netwr")
 require("user.hilight_on_yank")
+require("user.terminal")
 require("user.git")
 
 require("user.html")
@@ -92,10 +102,6 @@ require("user.ruby")
 
 require("user.testing")
 require("user.lsp")
-
-vim.g["localvimrc_name"] = { ".lvimrc", ".vimrc" }
-vim.g["localvimrc_sandbox"] = 0
-vim.g["localvimrc_persistent"] = 2
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
