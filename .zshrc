@@ -71,7 +71,6 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-export RIPGREP_CONFIG_PATH="/Users/paulalexander/.ripgreprc"
 export CLICOLOR=1
 
 LESSOPEN="|/opt/homebrew/Cellar/bat-extras/2022.07.27/bin/batpipe %s";
@@ -86,25 +85,7 @@ export BATPIPE;
 
 export GPG_TTY=$(tty)
 
-export EDITOR="nvim"
-export VISUAL="nvim"
-export BUNDLER_EDITOR="nvim"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-alias ll='exa -l --icons --git'
-alias d='docker'
-alias dcl='docker-compose -f docker-compose.yml.local'
-alias k='kubectl'
-alias vi='nvim'
-alias t='terraform'
-alias psql='pgcli'
-alias v='vagrant'
-
 eval "$(direnv hook zsh)"
-
 eval "$(rbenv init -)"
 
 if command -v wezterm &> /dev/null; then
