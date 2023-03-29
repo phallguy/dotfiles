@@ -86,5 +86,18 @@ if command -v wezterm &> /dev/null; then
   eval "$(wezterm shell-completion --shell zsh)"
 fi
 
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+alias ll='exa -l --icons --git'
+alias d='docker'
+alias dcl='docker-compose -f docker-compose.yml.local'
+alias k='kubectl'
+alias vi='nvim'
+alias t='terraform'
+alias psql='pgcli'
+alias v='vagrant'
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

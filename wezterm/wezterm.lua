@@ -51,7 +51,7 @@ return {
 
 	},
 	colors = {
-		selection_bg = "#1B293E",
+		selection_bg = "#22385f",
 		tab_bar = {
 			background = "#232136",
 			inactive_tab_edge = "#3e8fb0",
