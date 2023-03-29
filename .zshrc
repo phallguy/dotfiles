@@ -1,3 +1,4 @@
+export DIRENV_LOG_FORMAT=$'\E[30mdirenv: %s\E[0m'
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -65,7 +66,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git z command-not-found zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,7 +77,6 @@ source $ZSH/oh-my-zsh.sh
 
 export CLICOLOR=1
 export GPG_TTY=$TTY
-export DIRENV_LOG_FORMAT=$'\E[30mdirenv: %s\E[0m'
 
 eval "$(batpipe)"
 # eval "$(direnv hook zsh)"
@@ -101,3 +101,4 @@ alias v='vagrant'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

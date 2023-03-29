@@ -74,7 +74,7 @@ return {
 	window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
 	macos_window_background_blur = 50,
-	window_background_opacity = 0.95,
+	window_background_opacity = 0.92,
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,
 	initial_rows = 40,

@@ -56,4 +56,11 @@ return {
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 		end,
 	},
+
+	{
+		"kazhala/close-buffers.nvim",
+		opts = {
+			preserve_window_layout = { "this" },
+		},
+	},
 }

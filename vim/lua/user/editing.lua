@@ -18,7 +18,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
 vim.keymap.set("n", "<Up>", "<CMD>resize +2<CR>", { desc = "Taller" })
-vim.keymap.set("n", "<Up>", "<CMD>resize +2<CR>", { desc = "Taller" })
+vim.keymap.set("n", "<Down>", "<CMD>resize -2<CR>", { desc = "Shorter" })
 vim.keymap.set("n", "<Right>", "<CMD>vertical resize +2<CR>", { desc = "Narrower" })
 vim.keymap.set("n", "<Left>", "<CMD>vertical resize -2<CR>", { desc = "Wider" })
 
@@ -73,7 +73,11 @@ vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR><CMD>bp<CR><CMD>bd#<CR>"
 vim.keymap.set("n", "<leader>q", "<CMD>DiffviewClose<CR><CMD>q<CR>", { desc = "Quit" })
 
 vim.keymap.set("n", "<leader>o", "<CMD>only<CR><CMD>set cmdheight=1<CR>", { desc = "Close all but this" })
-vim.keymap.set("n", "<leader>O", [[<CMD>only|%bd|e#|bd#<CR>]], { desc = "Hard Close all but this" })
+-- vim.keymap.set("n", "<leader>O", [[<CMD>only|%bd|e#|bd#<CR>]], { desc = "Hard Close all but this" })
+vim.keymap.set("n", "<leader>O", function()
+	require("close_buffers").delete({ type = "other" })
+end, { desc = "Hard Close all but this", silent = true })
+
 
 -- -- Keep selection after indenting
 vim.keymap.set("v", "<", "<gv", { noremap = true })
@@ -84,10 +88,10 @@ vim.keymap.set({ "n", "v" }, "<C-a>", "ggVGG", { desc = "Select all" })
 -- Move current line / block with Alt-j/k ala vscode.
 -- vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
 -- vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
-vim.keymap.set("n", "<A-J>", "<CMD>m .+1<CR>==")
-vim.keymap.set("n", "<A-K>", "<CMD>m .-2<CR>==")
-vim.keymap.set("v", "<A-J>", "<CMD>m '>+1<CR>gv-gv")
-vim.keymap.set("v", "<A-K>", "<CMD>m '<-2<CR>gv-gv")
+vim.keymap.set("n", "<CA-J>", "<CMD>m .+1<CR>==")
+vim.keymap.set("n", "<CA-K>", "<CMD>m .-2<CR>==")
+vim.keymap.set("v", "<CA-J>", "<CMD>m '>+1<CR>gv-gv")
+vim.keymap.set("v", "<CA-K>", "<CMD>m '<-2<CR>gv-gv")
 
 -- Formatting
 vim.keymap.set("n", "<leader>G", "mygg=G`y", { desc = "Reindent file" }) -- reindent entire file

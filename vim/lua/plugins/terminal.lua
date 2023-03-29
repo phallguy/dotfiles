@@ -29,6 +29,8 @@ return {
 				shade_terminals = false,
 				highlights = {
 					Normal = { guibg = "#1f1d30" },
+					NormalFloat = { guibg = "#1f1d30" },
+					FloatBorder = { guibg = "#1f1d30", guifg="#44415a"  },
 				},
 			})
 		end,

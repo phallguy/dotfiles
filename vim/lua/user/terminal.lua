@@ -22,72 +22,113 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	callback = function(event)
 		local opts = { buffer = event.buf }
 
+		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "<esc>", "<CMD>ToggleTerm<CR>", opts)
 	end,
 })
 
+vim.keymap.set("n", "<leader>ba", [[<CMD>ToggleTermToggleAll<CR>]], { desc = "Toggle all terminals" })
+
 local Terminal = require("toggleterm.terminal").Terminal
-local scratchTerminal = Terminal:new({
-	close_on_exit = false,
-	auto_scroll = false,
-	count = 1,
+local terminals = {}
+local terminalCount = 0
+
+local function createTerminal(name, opts)
+	local result = terminals[name]
+	if result then
+		return result
+	end
+
+	result = { name = name }
+
+	local build = function()
+		local terminal = result.terminal
+		if not terminal then
+			local cmd = vim.g["terminal_" .. name .. "_command"]
+			if not cmd and opts then
+				cmd = opts.cmd
+			end
+
+			if not cmd then
+				return
+			end
+
+			local options = {
+				close_on_exit = false,
+				auto_scroll = false,
+				count = terminalCount,
+				cmd = cmd,
+			}
+
+			if opts and opts.command and opts.command.opts then
+				options = vim.tbl_extend("force", options, opts.command.opts)
+			end
+
+			terminal = Terminal:new(options)
+			result.terminal = terminal
+			result.num = terminalCount
+
+			terminalCount = terminalCount + 1
+		end
+
+		return terminal
+	end
+
+	local toggle = function()
+		local terminal = build()
+		if terminal then
+			terminal:toggle(20)
+		end
+	end
+	result.toggle = toggle
+
+	if opts and opts.command then
+		local command_name = opts.command.name or name
+		vim.api.nvim_create_user_command(
+			"TermToggle" .. command_name,
+			toggle,
+			{ desc = "Toggle " .. name .. " terminal" }
+		)
+
+		if opts.command.binding then
+			vim.keymap.set("n", opts.command.binding, toggle, { desc = "Toggle " .. command_name .. " terminal" })
+		end
+	end
+
+	return result
+end
+
+createTerminal("scratch", {
+	cmd = vim.o.shell,
+	command = {
+		name = "Scratch",
+		binding = "<leader>bt",
+	},
 })
 
-vim.keymap.set("n", "<leader>bt", function()
-	scratchTerminal:toggle(20)
-end, { desc = "Scratch terminal" })
+createTerminal("server", {
+	command = {
+		name = "Server",
+		binding = "<leader>bs",
+		opts = {
+			direction = "float"
+		}
+	},
+})
 
-vim.keymap.set({ "n", "t" }, "<A-t>", function()
-	scratchTerminal:toggle(20)
-end, { desc = "Scratch terminal" })
+createTerminal("console", {
+	command = {
+		name = "Console",
+		binding = "<leader>bc",
+	},
+})
 
-local serverTerminal
-vim.keymap.set("n", "<leader>bs", function()
-	if not serverTerminal then
-		local serverCmd = vim.g.terminal_server_command
-
-		serverTerminal = Terminal:new({
-			cmd = serverCmd,
-			close_on_exit = true,
-			auto_scroll = true,
-			count = 10,
-		})
-	end
-
-	serverTerminal:toggle(20)
-end, { desc = "Project server" })
-
-local consoleTerminal
-vim.keymap.set("n", "<leader>bc", function()
-	if not consoleTerminal then
-		local serverCmd = vim.g.terminal_console_command
-
-		consoleTerminal = Terminal:new({
-			cmd = serverCmd,
-			close_on_exit = true,
-			auto_scroll = true,
-			count = 11,
-		})
-	end
-
-	consoleTerminal:toggle(20)
-end, { desc = "Project console" })
-
-
-local jobsTerminal
-vim.keymap.set("n", "<leader>bj", function()
-	if not jobsTerminal then
-		local serverCmd = vim.g.terminal_jobs_command
-
-		jobsTerminal = Terminal:new({
-			cmd = serverCmd,
-			close_on_exit = true,
-			auto_scroll = true,
-			count = 12,
-		})
-	end
-
-	jobsTerminal:toggle(20)
-end, { desc = "Project jobs" })
-
-vim.keymap.set("n", "<leader>ba", [[<CMD>ToggleTermToggleAll<CR>]], { desc = "Toggle all terminals" })
+createTerminal("jobs", {
+	command = {
+		name = "Jobs",
+		binding = "<leader>bj",
+		opts = {
+			direction = "float"
+		}
+	},
+})
