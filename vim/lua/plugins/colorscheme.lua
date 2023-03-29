@@ -17,14 +17,11 @@ return {
 			local config = require("rose-pine.config").options
 
 			require("rose-pine").colorscheme({
+				disable_background = true,
 				highlight_groups = {
-					-- Enable transparent backgrounds
-					Normal = { bg = "none" },
-					NormalNC = { bg = "none" },
-					--
-
 					LineNr = { fg = "overlay" },
-					CursorLineNr = { fg = "muted" },
+					CursorLineNr = { fg = "muted", bg = "highlight_low" },
+					CursorLineSign = { fg = "muted", bg = "highlight_low" },
 					IndentBlanklineChar = { fg = "highlight_low" },
 					IndentBlanklineContextChar = { fg = "highlight_med" },
 					Type = { fg = "text" },

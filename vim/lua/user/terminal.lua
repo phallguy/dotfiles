@@ -73,4 +73,21 @@ vim.keymap.set("n", "<leader>bc", function()
 	consoleTerminal:toggle(20)
 end, { desc = "Project console" })
 
+
+local jobsTerminal
+vim.keymap.set("n", "<leader>bj", function()
+	if not jobsTerminal then
+		local serverCmd = vim.g.terminal_jobs_command
+
+		jobsTerminal = Terminal:new({
+			cmd = serverCmd,
+			close_on_exit = true,
+			auto_scroll = true,
+			count = 12,
+		})
+	end
+
+	jobsTerminal:toggle(20)
+end, { desc = "Project jobs" })
+
 vim.keymap.set("n", "<leader>ba", [[<CMD>ToggleTermToggleAll<CR>]], { desc = "Toggle all terminals" })

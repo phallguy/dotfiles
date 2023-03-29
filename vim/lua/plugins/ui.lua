@@ -40,7 +40,7 @@ return {
 						},
 						zindex = 60,
 						win_options = {
-							winblend = 100,
+							winblend = 10,
 							winhighlight = {
 								Normal = "NoiceMini",
 								IncSearch = "",

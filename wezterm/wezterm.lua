@@ -51,6 +51,7 @@ return {
 
 	},
 	colors = {
+		selection_bg = "#1B293E",
 		tab_bar = {
 			background = "#232136",
 			inactive_tab_edge = "#3e8fb0",
@@ -73,7 +74,7 @@ return {
 	window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
 	macos_window_background_blur = 50,
-	window_background_opacity = 0.92,
+	window_background_opacity = 0.95,
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,
 	initial_rows = 40,
@@ -101,9 +102,9 @@ return {
 			action = wezterm.action.DisableDefaultAssignment,
 		},
 		{
-			key = "n",
+			key = "F",
 			mods = "CTRL | SHIFT",
-			action = wezterm.action.ActivateCommandPalette,
-		},
+			action = wezterm.action.DisableDefaultAssignment,
+		}
 	},
 }

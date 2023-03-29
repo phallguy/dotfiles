@@ -1,3 +1,5 @@
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,6 +7,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -72,20 +75,11 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 export CLICOLOR=1
+export GPG_TTY=$TTY
+export DIRENV_LOG_FORMAT=$'\E[30mdirenv: %s\E[0m'
 
-LESSOPEN="|/opt/homebrew/Cellar/bat-extras/2022.07.27/bin/batpipe %s";
-export LESSOPEN;
-unset LESSCLOSE;
-
-# The following will enable colors when using batpipe with less:
-LESS="$LESS -FRX";
-BATPIPE="color";
-export LESS;
-export BATPIPE;
-
-export GPG_TTY=$(tty)
-
-eval "$(direnv hook zsh)"
+eval "$(batpipe)"
+# eval "$(direnv hook zsh)"
 eval "$(rbenv init -)"
 
 if command -v wezterm &> /dev/null; then

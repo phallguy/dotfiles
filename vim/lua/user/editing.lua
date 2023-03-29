@@ -8,7 +8,7 @@ vim.keymap.set("i", "jk", [[<C-\><C-n>]])
 
 -- Better paste
 vim.keymap.set("v", "p", '"_dP') -- don't yank into clipboard when pasting
-vim.keymap.set("n", "x", '"_x')  -- when deleting a single character don't clobber clipboard
+vim.keymap.set("n", "x", '"_x') -- when deleting a single character don't clobber clipboard
 vim.keymap.set("n", "p", "p=`]") -- reindent on paste
 
 -- Move to window using the <ctrl> hjkl keys
@@ -21,8 +21,6 @@ vim.keymap.set("n", "<Up>", "<CMD>resize +2<CR>", { desc = "Taller" })
 vim.keymap.set("n", "<Up>", "<CMD>resize +2<CR>", { desc = "Taller" })
 vim.keymap.set("n", "<Right>", "<CMD>vertical resize +2<CR>", { desc = "Narrower" })
 vim.keymap.set("n", "<Left>", "<CMD>vertical resize -2<CR>", { desc = "Wider" })
-
-
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", function()
@@ -37,6 +35,14 @@ vim.keymap.set("n", "[q", "<CMD>cp<CR>", { desc = "Prev qf" })
 vim.keymap.set("n", "]q", "<CMD>cn<CR>", { desc = "Next qf" })
 vim.keymap.set("n", "[l", "<cmd>lprevious<cr>", { desc = "prev list" })
 vim.keymap.set("n", "]l", "<cmd>lnext<cr>", { desc = "next list" })
+
+vim.keymap.set("n", "]t", function()
+	require("trouble").next({ skip_groups = true, jump = true })
+end, { desc = "Next trouble" })
+
+vim.keymap.set("n", "[t", function()
+	require("trouble").previous({ skip_groups = true, jump = true })
+end, { desc = "Next trouble" })
 
 -- Next/prev diff hunk
 if not vim.g.vscode then
@@ -78,11 +84,10 @@ vim.keymap.set({ "n", "v" }, "<C-a>", "ggVGG", { desc = "Select all" })
 -- Move current line / block with Alt-j/k ala vscode.
 -- vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
 -- vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv-gv")
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv-gv")
-
+vim.keymap.set("n", "<A-J>", "<CMD>m .+1<CR>==")
+vim.keymap.set("n", "<A-K>", "<CMD>m .-2<CR>==")
+vim.keymap.set("v", "<A-J>", "<CMD>m '>+1<CR>gv-gv")
+vim.keymap.set("v", "<A-K>", "<CMD>m '<-2<CR>gv-gv")
 
 -- Formatting
 vim.keymap.set("n", "<leader>G", "mygg=G`y", { desc = "Reindent file" }) -- reindent entire file
@@ -128,7 +133,6 @@ vim.keymap.set("n", "<leader>ht", "<CMD>TSCaptureUnderCursor<CR>", { desc = "TS 
 vim.keymap.set("n", "<leader>hv", "<CMD>call SynStack()<CR>", { desc = "Vim highlights under cursor" })
 vim.keymap.set("n", "<leader>hl", "<CMD>Telescope highlights<CR>", { desc = "All highlights" })
 vim.keymap.set("n", "<leader>hi", "<CMD>Inspect<CR>", { desc = "Inspect highlights" })
-
 
 -- help
 -- Open vert
