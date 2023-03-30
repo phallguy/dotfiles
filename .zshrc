@@ -66,11 +66,28 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z command-not-found zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(
+  zsh-navigation-tools
+  git
+  aws
+  z
+  command-not-found
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  thefuck
+  # Interferes with completions
+  zsh-vim-mode
+)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+autoload znt-history-widget
+zle -N znt-history-widget
+
+bindkey "^f" znt-history-widget
+bindkey '^ ' autosuggest-accept
+
+source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -79,7 +96,6 @@ export CLICOLOR=1
 export GPG_TTY=$TTY
 
 eval "$(batpipe)"
-# eval "$(direnv hook zsh)"
 eval "$(rbenv init -)"
 
 if command -v wezterm &> /dev/null; then
@@ -90,15 +106,16 @@ fi
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-alias ll='exa -l --icons --git'
+exa_params=('--git' '--icons' '--classify' '--group-directories-first' '--color-scale')
+alias ls='exa $exa_params'
+alias ll='exa $exa_params --long'
 alias d='docker'
 alias dcl='docker-compose -f docker-compose.yml.local'
 alias k='kubectl'
 alias vi='nvim'
 alias t='terraform'
-alias psql='pgcli'
 alias v='vagrant'
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-

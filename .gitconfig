@@ -13,10 +13,13 @@
 [core]
   autocrlf = false
   excludesfile = /Users/paulalexander/.gitignore_global
-  pager = diff-so-fancy | less --tabs=4 -RFX
   preloadIndex = false
   fsmonitor = false
   untrackedcache = false
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
 
 [init]
   defaultBranch = master
@@ -76,8 +79,7 @@
 
 [diff]
   renames = true
-  tool = nvimdiff
-  minimal = true
+  colorMoved = default
 
 [difftool]
   prompt = false
@@ -118,3 +120,7 @@
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   prompt = false
 
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  show-syntax = true
+  side-by-side = true

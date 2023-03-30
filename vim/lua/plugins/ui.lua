@@ -5,14 +5,6 @@ end
 return {
 	-- { "stevearc/dressing.nvim", opts = {} },
 	{ "MunifTanjim/nui.nvim" },
-	-- {
-	-- 	"rcarriga/nvim-notify",
-	-- 	opts = {
-	-- 		-- level = vim.log.levels.WARN,
-	-- 		render = "compact",
-	-- 		stages = "static",
-	-- 	},
-	-- },
 	{
 		"folke/noice.nvim",
 		config = function()
@@ -40,7 +32,7 @@ return {
 						},
 						zindex = 60,
 						win_options = {
-							winblend = 10,
+							winblend = 0,
 							winhighlight = {
 								Normal = "NoiceMini",
 								IncSearch = "",
@@ -110,14 +102,14 @@ return {
 					{
 						filter = {
 							event = "notify",
-							min_height = 10,
+							min_height = 3,
 						},
 						view = "split",
 					},
 					{
 						filter = {
 							event = "msg_show",
-							min_height = 10,
+							min_height = 3,
 						},
 						view = "split",
 					},

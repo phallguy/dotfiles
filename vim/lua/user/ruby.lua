@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "ruby", "eruby" },
 	callback = function()
 		vim.opt_local.indentkeys="0{,0},0),0],!^F,o,O,e,:,=end,=else,=elsif,=when,=in ,=ensure,=rescue,==begin,==end,=private,=protected,=public"
-		vim.opt_local.smartindent = true
-		vim.opt_local.autoindent = true
+		-- vim.opt_local.smartindent = true
+		-- vim.opt_local.autoindent = true
 	end,
 })

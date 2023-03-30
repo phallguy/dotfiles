@@ -59,6 +59,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "man",
     "notify",
     "qf",
+    "git",
     "query", -- :InspectTree
     "spectre_panel",
     "startuptime",

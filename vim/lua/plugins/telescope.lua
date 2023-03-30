@@ -43,6 +43,7 @@ return {
 			vim.keymap.set("n", "<leader>fm", "<CMD>Telescope media_files<CR>", { desc = "Media files" })
 			vim.keymap.set("n", "<leader>fu", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
 			vim.keymap.set("n", "<leader>fn", "<CMD>Telescope man_pages<CR>", { desc = "Man pages" })
+			vim.keymap.set("n", "<leader>fd", "<CMD>tab DBUI<CR>", { desc = "Databases" })
 
 			local show_notifications = function()
 				require("telescope").extensions.notify.notify()
@@ -120,6 +121,9 @@ return {
 					diagnostics = {
 						theme = "ivy",
 					},
+					undo = {
+						theme = "ivy",
+					}
 				},
 				extensions = {
 					live_grep_args = {
@@ -138,6 +142,14 @@ return {
 					media_files = {
 						filetypes = { "png", "webp", "jpg", "jpeg", "svg" },
 						find_cmd = "rg",
+					},
+					undo = {
+						use_delta = false,
+						side_by_side = false,
+						layout_strategy = "vertical",
+						layout_config = {
+							preview_height = 0.8,
+						}
 					},
 				},
 			})
@@ -166,5 +178,7 @@ return {
 
 	{ "nvim-telescope/telescope-live-grep-args.nvim" }, -- refine live grep
 	{ "nvim-telescope/telescope-media-files.nvim" },
-	{ "debugloop/telescope-undo.nvim" },
+	{
+		"debugloop/telescope-undo.nvim",
+	},
 }

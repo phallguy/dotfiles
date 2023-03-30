@@ -69,8 +69,9 @@ if not vim.g.vscode then
 end
 
 -- Buffers
-vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR><CMD>bp<CR><CMD>bd#<CR>", { desc = "Close" })
+vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR><CMD>BDelete this<CR>", { desc = "Close" })
 vim.keymap.set("n", "<leader>q", "<CMD>DiffviewClose<CR><CMD>q<CR>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>C", "<CMD>tabclose<CR>", { desc = "Close tab", silent = true })
 
 vim.keymap.set("n", "<leader>o", "<CMD>only<CR><CMD>set cmdheight=1<CR>", { desc = "Close all but this" })
 -- vim.keymap.set("n", "<leader>O", [[<CMD>only|%bd|e#|bd#<CR>]], { desc = "Hard Close all but this" })
