@@ -105,7 +105,7 @@
     todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-    # cpu_arch              # CPU architecture
+    cpu_arch                # CPU architecture
     # =========================[ Line #2 ]=========================
     # newline
     # ip                    # ip address and bandwidth usage for a specified network interface

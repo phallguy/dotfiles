@@ -241,7 +241,7 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.yamllint,
 
 		-- Fixes
-		null_ls.builtins.code_actions.eslint,
+		null_ls.builtins.code_actions.eslint_d,
 		-- null_ls.builtins.code_actions.gitsigns,
 
 		-- Formatting

@@ -21,8 +21,8 @@ return {
 					vim.keymap.set("n", "q", "<CMD>DiffviewClose<CR>")
 				end,
 				view_leave = function()
-					vim.keymap.del("n", "<leader>c")
-					vim.keymap.del("n", "q")
+					pcall(vim.keymap.del, "n", "<leader>c")
+					pcall(vim.keymap.del ,"n", "q")
 				end
 			}
 		},

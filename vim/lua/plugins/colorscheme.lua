@@ -63,11 +63,16 @@ return {
 					NeoTreeDotfile = { fg = "muted" },
 					NeoTreeCursorLine = { bg = "pine", blend = 20 },
 					TroubleNormal = { bg = "surface" },
+
+					NormalOverlay = { bg = "#1f1d30" },
 					-- Treesitter context
-					TreesitterContext = { bg = "#1f1d30" },
+					TreesitterContext = { link = "NormalOverlay" },
 					-- TreesitterContext = { bg = "overlay" },
 					TreesitterContextBottom = { underline = true, sp = "highlight_med" },
 					ToggleTerm10Normal = { bg = "rose" },
+
+					-- Matchparen
+					MatchParen = { fg = "gold", bg = "pine", blend = 50 },
 				},
 			})
 

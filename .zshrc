@@ -1,3 +1,9 @@
+if [[ $(uname -p) == 'arm' ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
 export DIRENV_LOG_FORMAT=$'\E[30mdirenv: %s\E[0m'
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
@@ -69,17 +75,14 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 plugins=(
   zsh-navigation-tools
   git
-  aws
   z
-  command-not-found
-  zsh-autosuggestions
+  # zsh-autosuggestions
   zsh-syntax-highlighting
-  thefuck
-  # Interferes with completions
   zsh-vim-mode
 )
 
 source $ZSH/oh-my-zsh.sh
+source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 autoload znt-history-widget
 zle -N znt-history-widget
@@ -87,13 +90,12 @@ zle -N znt-history-widget
 bindkey "^f" znt-history-widget
 bindkey '^ ' autosuggest-accept
 
-source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
-
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+#export ARCHFLAGS="-arch x86_64"
 
 export CLICOLOR=1
 export GPG_TTY=$TTY
+export BAT_THEME=ansi
 
 eval "$(batpipe)"
 eval "$(rbenv init -)"
@@ -115,6 +117,7 @@ alias k='kubectl'
 alias vi='nvim'
 alias t='terraform'
 alias v='vagrant'
+alias x86='arch -arch x86_64 /bin/zsh'
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

@@ -2,6 +2,8 @@ if vim.g.vscode then
 	return {}
 end
 
+vim.g.loaded_matchit = 1
+
 return {
 	-- "tpope/vim-vinegar", -- netwr support
 

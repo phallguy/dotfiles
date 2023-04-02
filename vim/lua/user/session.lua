@@ -65,9 +65,11 @@ vim.api.nvim_create_autocmd("FileType", {
     "startuptime",
     "tsplayground",
     "checkhealth",
+    "fugitiveblame",
   },
   callback = function(event)
-    vim.bo[event.buf].buflisted = false
+    -- Can't unlist, messes with fugutive G! commands
+    -- vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })

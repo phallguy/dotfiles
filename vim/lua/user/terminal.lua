@@ -120,6 +120,9 @@ createTerminal("console", {
 	command = {
 		name = "Console",
 		binding = "<leader>bc",
+		opts = {
+			direction = "float"
+		}
 	},
 })
 

@@ -1,8 +1,7 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-export EDITOR="vi"
-export VISUAL="vi"
-export BUNDLER_EDITOR="vi"
+# Use arm or x86 version of brew depending on architecture
+export EDITOR="nvim"
+export VISUAL="nvim"
+export BUNDLER_EDITOR="nvim"
 export RIPGREP_CONFIG_PATH="/Users/paulalexander/.ripgreprc"
 
 bd() {

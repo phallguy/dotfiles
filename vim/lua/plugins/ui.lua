@@ -48,11 +48,11 @@ return {
 						enter = false,
 						zindex = 60,
 						position = {
-							row = "75%",
+							row = "50%",
 							col = "50%",
 						},
 						size = {
-							min_width = 80,
+							min_width = 60,
 							width = "auto",
 							height = "auto",
 						},
@@ -61,8 +61,11 @@ return {
 							padding = { 2, 5 },
 						},
 						win_options = {
-							winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-							cursorline = false,
+							winhighlight = {
+								Normal = "NormalOverlay",
+								FloatBorder = "FloatBorder",
+							}
+							-- cursorline = false,
 						},
 					},
 				},
@@ -87,32 +90,24 @@ return {
 					-- 	filter = {
 					-- 		event = "msg_show",
 					-- 		kind = "",
-					-- 		find = "[noeol]",
+					-- 		find = { "change;", "line less;", "lines less;", "more line;", "more lines;", "changes;" },
 					-- 	},
 					-- 	opts = { stop = true, skip = true },
 					-- },
-					{
-						filter = {
-							event = "msg_show",
-							kind = "echo",
-							find = ":!<",
-						},
-						opts = { stop = true, skip = true },
-					},
-					{
-						filter = {
-							event = "notify",
-							min_height = 3,
-						},
-						view = "split",
-					},
-					{
-						filter = {
-							event = "msg_show",
-							min_height = 3,
-						},
-						view = "split",
-					},
+					-- {
+					-- 	filter = {
+					-- 		event = "notify",
+					-- 		min_height = 10,
+					-- 	},
+					-- 	view = "split",
+					-- },
+					-- {
+					-- 	filter = {
+					-- 		event = "msg_show",
+					-- 		min_height = 10,
+					-- 	},
+					-- 	view = "split",
+					-- },
 				},
 			})
 

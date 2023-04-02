@@ -71,6 +71,7 @@ return {
 		right = 10,
 		bottom = 0,
 	},
+	-- window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
 	window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
 	macos_window_background_blur = 50,
