@@ -9,6 +9,6 @@ return {
 	},
 	{
 		"tzachar/cmp-fuzzy-buffer",
-		requires = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" },
+		dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" },
 	},
 }

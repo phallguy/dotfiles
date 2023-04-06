@@ -22,6 +22,16 @@ vim.keymap.set("n", "<Down>", "<CMD>resize -2<CR>", { desc = "Shorter" })
 vim.keymap.set("n", "<Right>", "<CMD>vertical resize +2<CR>", { desc = "Narrower" })
 vim.keymap.set("n", "<Left>", "<CMD>vertical resize -2<CR>", { desc = "Wider" })
 
+
+-- Navigation - keep cursor centered when jumping large block
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
+vim.keymap.set("n", "<C-f>", "<C-f>zz", { noremap = true })
+vim.keymap.set("n", "<C-b>", "<C-b>zz", { noremap = true })
+vim.keymap.set("n", "n", "nzzzv", { noremap = true })
+vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", function()
 	require("lspsaga.command").load_command("diagnostic_jump_prev")
@@ -74,7 +84,6 @@ vim.keymap.set("n", "<leader>q", "<CMD>DiffviewClose<CR><CMD>q<CR>", { desc = "Q
 vim.keymap.set("n", "<leader>C", "<CMD>tabclose<CR>", { desc = "Close tab", silent = true })
 
 vim.keymap.set("n", "<leader>o", "<CMD>only<CR><CMD>set cmdheight=1<CR>", { desc = "Close all but this" })
--- vim.keymap.set("n", "<leader>O", [[<CMD>only|%bd|e#|bd#<CR>]], { desc = "Hard Close all but this" })
 vim.keymap.set("n", "<leader>O", function()
 	require("close_buffers").delete({ type = "other" })
 end, { desc = "Hard Close all but this", silent = true })

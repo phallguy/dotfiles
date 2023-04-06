@@ -52,6 +52,7 @@ return {
 	},
 	colors = {
 		selection_bg = "#22385f",
+		cursor_bg = "#ebbcba",
 		tab_bar = {
 			background = "#232136",
 			inactive_tab_edge = "#3e8fb0",
@@ -71,8 +72,8 @@ return {
 		right = 10,
 		bottom = 0,
 	},
-	-- window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
-	window_decorations = "RESIZE",
+	window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
+	-- window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
 	macos_window_background_blur = 50,
 	window_background_opacity = 0.92,

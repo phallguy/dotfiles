@@ -3,7 +3,7 @@ return {
 		"rose-pine/neovim",
 		name = "rose-pine-neovim",
 		cond = not vim.g.vscode,
-		proority = 10000,
+		priority = 10000,
 		config = function()
 			local colors = require("rose-pine.palette")
 

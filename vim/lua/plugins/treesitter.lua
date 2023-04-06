@@ -10,6 +10,7 @@ return {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/playground",
 		},
+		run = "<CMD>TSUpdate<CR>",
 		config = function()
 			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 			require("nvim-treesitter.configs").setup({
@@ -125,6 +126,6 @@ return {
 				named_parameters = true,
 			},
 		},
-		requires = { "nvim-treesitter/nvim-treesitter" },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	}, -- Highlight method args separately
 }

@@ -75,11 +75,12 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 plugins=(
   zsh-navigation-tools
   git
-  z
-  # zsh-autosuggestions
+  zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-vim-mode
 )
+
+zstyle ':omz:*' aliases no
 
 source $ZSH/oh-my-zsh.sh
 source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
@@ -104,6 +105,17 @@ if command -v wezterm &> /dev/null; then
   eval "$(wezterm shell-completion --shell zsh)"
 fi
 
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+else
+  echo "zoxide not installed"
+fi
+
+if command -v fzf &> /dev/null; then
+else
+  echo "fzf not installed"
+fi
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -117,8 +129,39 @@ alias k='kubectl'
 alias vi='nvim'
 alias t='terraform'
 alias v='vagrant'
-alias x86='arch -arch x86_64 /bin/zsh'
+alias x86='arch -arch x86_64 /bin/zsh --login'
 
+
+function _begin_osc {
+  printf "\033]"
+}
+
+function _end_osc {
+  printf "\007"
+}
+
+function resetTerminalBackground() {
+  _begin_osc
+  printf "104;"
+  _end_osc
+}
+
+function setTerminalBackground() {
+  color=${1:-#31002D}
+  _begin_osc
+  printf "11;${color}"
+  _end_osc
+}
+trap resetTerminalBackground EXIT
+
+function tailf() {
+  tail -F $@ | bat -pp -l log
+}
+
+
+if [[ $(uname -p) != 'arm' ]]; then
+  setTerminalBackground "#000064"
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

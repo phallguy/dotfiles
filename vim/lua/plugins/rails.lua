@@ -1,7 +1,7 @@
 return {
 	{
 		"tpope/vim-rails",
-		requires = {
+		dependencies = {
 			"tpope/vim-projectionist",
 		},
 	},

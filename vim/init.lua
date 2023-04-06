@@ -57,7 +57,7 @@ require("lazy").setup({
 		},
 	},
 
-	{ "tzachar/fuzzy.nvim", requires = { "nvim-telescope/telescope-fzf-native.nvim" } },
+	{ "tzachar/fuzzy.nvim", dependencies = { "nvim-telescope/telescope-fzf-native.nvim" } },
 
 	{
 		-- Autocompletion
