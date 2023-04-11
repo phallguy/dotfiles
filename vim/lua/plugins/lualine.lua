@@ -15,7 +15,8 @@ return {
 				icons_enabled = true,
 				theme = theme,
 				component_separators = { left = "", right = "" },
-				section_separators = { left = "", right = "" },
+				-- section_separators = { left = "", right = "" },
+				section_separators = { right = "", left = " " },
 			},
 			sections = {
 				lualine_a = { "mode" },

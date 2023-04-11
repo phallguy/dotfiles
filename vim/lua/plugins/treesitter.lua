@@ -20,7 +20,7 @@ return {
 					"python",
 					"tsx",
 					"typescript",
-					"help",
+					"vimdoc",
 					"vim",
 					"ruby",
 					"typescript",
@@ -33,6 +33,7 @@ return {
 				highlight = {
 					enable = true,
 					-- disable = { "eruby", "embedded_template" },
+					disable = { "log" },
 					additional_vim_regex_highlighting = false,
 				},
 				indent = { enable = true, disable = { "python", "ruby" } },
@@ -128,4 +129,4 @@ return {
 		},
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	}, -- Highlight method args separately
-}
+edi}

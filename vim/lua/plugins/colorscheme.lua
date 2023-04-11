@@ -19,9 +19,9 @@ return {
 			require("rose-pine").colorscheme({
 				disable_background = true,
 				highlight_groups = {
-					LineNr = { fg = "overlay" },
-					CursorLineNr = { fg = "muted", bg = "highlight_low" },
-					CursorLineSign = { fg = "muted", bg = "highlight_low" },
+					LineNr = { fg = "highlight_high" },
+					CursorLineNr = { fg = "iris", bg = "highlight_low" },
+					CursorLineSign = { fg = "text", bg = "highlight_low" },
 					IndentBlanklineChar = { fg = "highlight_low" },
 					IndentBlanklineContextChar = { fg = "highlight_med" },
 					Type = { fg = "text" },

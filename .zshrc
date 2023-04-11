@@ -91,9 +91,6 @@ zle -N znt-history-widget
 bindkey "^f" znt-history-widget
 bindkey '^ ' autosuggest-accept
 
-# Compilation flags
-#export ARCHFLAGS="-arch x86_64"
-
 export CLICOLOR=1
 export GPG_TTY=$TTY
 export BAT_THEME=ansi
@@ -130,6 +127,7 @@ alias vi='nvim'
 alias t='terraform'
 alias v='vagrant'
 alias x86='arch -arch x86_64 /bin/zsh --login'
+alias cd='z'
 
 
 function _begin_osc {
