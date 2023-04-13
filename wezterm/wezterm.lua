@@ -9,13 +9,13 @@ return {
 	--
 	-- Fonts
 	font = wezterm.font(font_family, {
-		weight = "Light",
+		weight = "Regular",
 	}),
 	font_size = 14.5,
 	line_height = 0.89,
 	cell_width = 0.89,
-	freetype_load_target = "Light",
-	freetype_render_target = "Light",
+	freetype_load_target = "HorizontalLcd",
+	freetype_render_target = "HorizontalLcd",
 	font_rules = {
 		{
 			intensity = "Bold",
@@ -52,7 +52,8 @@ return {
 	},
 	colors = {
 		selection_bg = "#22385f",
-		cursor_bg = "#ebbcba",
+		cursor_bg = "#c4a7e7",
+		-- cursor_bg = "#ebbcba",
 		tab_bar = {
 			background = "#232136",
 			inactive_tab_edge = "#3e8fb0",

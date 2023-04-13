@@ -20,6 +20,7 @@ return {
 				disable_background = true,
 				highlight_groups = {
 					LineNr = { fg = "highlight_high" },
+					AbsLineNr = { fg = "highlight_med" },
 					CursorLineNr = { fg = "iris", bg = "highlight_low" },
 					CursorLineSign = { fg = "text", bg = "highlight_low" },
 					IndentBlanklineChar = { fg = "highlight_low" },
@@ -27,6 +28,7 @@ return {
 					Type = { fg = "text" },
 					Keyword = { fg = "iris" },
 					Folded = { fg = "highlight_high" },
+					Visual = { bg = "pine", blend = 20 },
 					["@function.call"] = { fg = "foam", italic = true },
 					["@lsp.type.property.lua"] = { fg = "text" },
 					["@text.title.gitcommit"] = { fg = "foam", bold = true },
@@ -63,14 +65,12 @@ return {
 					NeoTreeDotfile = { fg = "muted" },
 					NeoTreeCursorLine = { bg = "pine", blend = 20 },
 					TroubleNormal = { bg = "surface" },
-
-					NormalOverlay = { bg = "#1f1d30" },
+					-- NormalOverlay = { bg = "#1f1d30" },
+					NormalOverlay = { bg = "surface" },
 					-- Treesitter context
 					TreesitterContext = { link = "NormalOverlay" },
 					-- TreesitterContext = { bg = "overlay" },
 					TreesitterContextBottom = { underline = true, sp = "highlight_med" },
-					ToggleTerm10Normal = { bg = "rose" },
-
 					-- Matchparen
 					MatchParen = { fg = "gold", bg = "pine", blend = 50 },
 				},

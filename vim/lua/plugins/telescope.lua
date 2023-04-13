@@ -55,7 +55,21 @@ return {
 				defaults = {
 					initial_mode = "insert",
 					path_display = { "truncate" },
-					theme = "ivy",
+					file_sorter = require("telescope.sorters").get_fuzzy_file,
+					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+					set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+					layout_config = {
+						horizontal = {
+							preview_width = 0.55,
+							results_width = 0.8,
+						},
+						vertical = {
+							mirror = false,
+						},
+						width = 0.87,
+						height = 0.80,
+						preview_cutoff = 120,
+					},
 					mappings = {
 						i = {
 							["<C-n>"] = actions.cycle_history_next,

@@ -8,7 +8,11 @@ return {
 	-- See `:help lualine.txt`
 	config = function()
 		local theme = require("lualine.themes.rose-pine")
+		local p = require('rose-pine.palette')
+
+		-- Make the line transparent
 		theme.normal.c.bg = "none"
+		theme.normal.c.fg = p.muted
 
 		require("lualine").setup({
 			options = {
