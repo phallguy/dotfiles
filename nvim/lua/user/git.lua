@@ -29,8 +29,8 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>gR", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
 vim.keymap.set("n", "<leader>gr", ":G br phallguy/", { desc = "Branch" })
 vim.keymap.set("n", "<leader>gl", "<CMD>DiffviewFileHistory<CR>", { desc = "Recent log" })
-vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR>", { desc = "Commit" })
-vim.keymap.set("n", "<leader>ga", "<CMD>tab G cam<CR>", { desc = "Commit ammend" })
+vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR>", { desc = "Commit", silent = true })
+vim.keymap.set("n", "<leader>ga", "<CMD>tab G cam<CR>", { desc = "Commit ammend", silent = true })
 
 vim.opt.fillchars:append({ diff = "╱" })
 vim.opt.diffopt:append("iwhite") -- Ignore whitespace
