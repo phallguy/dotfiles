@@ -4,9 +4,7 @@ end
 
 local icons = require("user.icons")
 
-vim.keymap.set("n", "gd", function()
-	require("lspsaga.definition"):goto_definition(1)
-end, { desc = "Definition" })
+vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Document symbols" })
 vim.keymap.set("n", "gu", function()
 	require("lspsaga.command").load_command("lsp_finder")
 end, { desc = "Usage" })
@@ -25,9 +23,7 @@ end, { desc = "[L]ine diagnostics" })
 vim.keymap.set("n", "<leader>lp", function()
 	require("lspsaga.command").load_command("peek_definition")
 end, { desc = "Peek [d]efinition" })
-vim.keymap.set("n", "<leader>lg", function()
-	require("lspsaga.command").load_command("goto_definition")
-end, { desc = "[G]o to definition" })
+vim.keymap.set("n", "<leader>lg", require("telescope.builtin").lsp_definitions, { desc = "[G]o to definition" })
 vim.keymap.set("n", "<leader>l/", require("telescope.builtin").lsp_document_symbols, { desc = "Document symbols" })
 vim.keymap.set("n", "<leader>lo", function()
 	require("lspsaga.command").load_command("outline")
@@ -68,6 +64,8 @@ end
 
 local servers = {
 	tsserver = {},
+	ruby_ls = {},
+	solargraph = {},
 	lua_ls = {
 		Lua = {
 			-- workspace = { checkThirdParty = false },

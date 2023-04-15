@@ -99,7 +99,7 @@ return {
 					-- 		event = "msg_show",
 					-- 		kind = "",
 					-- 		find = { "change;", "line less;", "lines less;", "more line;", "more lines;", "changes;" },
-					-- 	},
+-- 	},
 					-- 	opts = { stop = true, skip = true },
 					-- },
 					-- {
@@ -109,13 +109,13 @@ return {
 					-- 	},
 					-- 	view = "split",
 					-- },
-					-- {
-					-- 	filter = {
-					-- 		event = "msg_show",
-					-- 		min_height = 10,
-					-- 	},
-					-- 	view = "split",
-					-- },
+					{
+						filter = {
+							event = "msg_show",
+							min_height = 10,
+						},
+						view = "split",
+					},
 				},
 			})
 

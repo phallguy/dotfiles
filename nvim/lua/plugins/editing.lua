@@ -8,7 +8,7 @@ return {
 	-- "tpope/vim-vinegar", -- netwr support
 
 	-- Useful plugin to show you pending keybinds.
-	{ "folke/which-key.nvim", opts = {} },
+	-- { "folke/which-key.nvim", opts = {} },
 
 	-- "gc" to comment visual regions/lines
 	{
@@ -47,7 +47,7 @@ return {
 		"sheerun/vim-polyglot",
 		cond = not vim.g.vscode,
 		init = function()
-			-- vim.g.polyglot_disabled = { "autoindent" }
+			-- vim.g.polyglot_disabled = { "autoindent", "sensible", "ftdetect" }
 		end,
 		priority = 10,
 	},
