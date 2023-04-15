@@ -8,26 +8,28 @@ return {
 	-- See `:help lualine.txt`
 	config = function()
 		local theme = require("lualine.themes.rose-pine")
-		local p = require('rose-pine.palette')
+		local p = require("rose-pine.palette")
 
 		-- Make the line transparent
 		theme.normal.c.bg = "none"
 		theme.normal.c.fg = p.muted
+		theme.normal.b.bg = p.overlay
+		theme.normal.y = { fg = p.subtle, bg = p.overlay }
 
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
 				theme = theme,
-				component_separators = { left = "", right = "" },
+				component_separators = { left = "  ", right = "" },
 				-- section_separators = { left = "", right = "" },
-				section_separators = { right = "", left = " " },
+				section_separators = { right = " ", left = "" },
 			},
 			sections = {
 				lualine_a = { "mode" },
-				lualine_b = {},
+				lualine_b = { { " ", draw_empty = true } },
 				lualine_c = { { "filename", path = 1 } },
-				lualine_x = { "branch", "filetype" },
-				lualine_y = { "location" },
+				lualine_x = { "branch" },
+				lualine_y = { { "filetype", padding = 2 }, { "location", padding = { right = 1 } } },
 				lualine_z = {
 					{
 						"diagnostics",
