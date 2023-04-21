@@ -6,9 +6,10 @@ return {
 		priority = 10000,
 		config = function()
 			local colors = require("rose-pine.palette")
+			local variant = "moon"
 
 			require("rose-pine").setup({
-				variant = "moon",
+				variant = variant,
 				groups = {
 					git_text = "gold",
 				},
@@ -17,7 +18,7 @@ return {
 			local config = require("rose-pine.config").options
 
 			require("rose-pine").colorscheme({
-				disable_background = true,
+				disable_background = variant == "moon",
 				highlight_groups = {
 					LineNr = { fg = "highlight_high" },
 					AbsLineNr = { fg = "highlight_med" },
@@ -64,12 +65,13 @@ return {
 					NeoTreeMessage = { fg = "muted" },
 					NeoTreeDotfile = { fg = "muted" },
 					NeoTreeCursorLine = { bg = "pine", blend = 20 },
+
+					--
+
 					TroubleNormal = { bg = "surface" },
-					-- NormalOverlay = { bg = "#1f1d30" },
 					NormalOverlay = { bg = "surface" },
 					-- Treesitter context
-					TreesitterContext = { link = "NormalOverlay" },
-					-- TreesitterContext = { bg = "overlay" },
+					TreesitterContext = { bg = "iris", blend = 5 },
 					TreesitterContextBottom = { underline = true, sp = "highlight_med" },
 					-- Matchparen
 					MatchParen = { fg = "gold", bg = "pine", blend = 50 },
@@ -78,79 +80,5 @@ return {
 
 			vim.cmd.colorscheme("rose-pine")
 		end,
-	},
-	{
-		-- https://github.com/marko-cerovac/material.nvim
-		"marko-cerovac/material.nvim",
-		cond = not vim.g.vscode,
-		config = function()
-			vim.g.material_style = "palenight"
-			local colors = require("material.colors")
-
-			colors.git.added = "#3e4949"
-			colors.git.deleted = "#483647"
-			colors.git.modified = "#2e3851"
-			colors.git.untracked = "#546653"
-
-			require("material").setup({
-				contrast = {
-					cursor_line = true,
-					floating_windows = true,
-					sidebars = true,
-					non_current_windows = false,
-					terminal = true,
-				},
-				styles = {
-					functions = { bold = true },
-					types = { bold = true },
-					comments = { italic = true },
-				},
-				plugins = { -- Uncomment the plugins that you use to highlight them
-					-- Available plugins:
-					-- "dap",
-					-- "dashboard",
-					"gitsigns",
-					-- "hop",
-					"indent-blankline",
-					"lspsaga",
-					-- "mini",
-					-- "neogit",
-					-- "neorg",
-					"nvim-cmp",
-					-- "nvim-navic",
-					-- "nvim-tree",
-					"nvim-web-devicons",
-					-- "sneak",
-					"telescope",
-					-- "trouble",
-					"which-key",
-				},
-				custom_highlights = {
-					IndentBlanklineChar = { fg = colors.editor.line_numbers },
-					IndentBlanklineContextChar = { fg = "#63698a" },
-					DiffAdd = { bg = colors.git.added },
-					DiffDelete = { bg = colors.git.deleted },
-					DiffChange = { bg = colors.git.modified },
-					DiffviewDiffAddAsDelete = { bg = colors.git.deleted },
-					DiffText = { bg = "#484443" },
-					SagaNormal = { bg = colors.editor.bg_alt },
-					SagaLightBulb = { fg = colors.main.yellow },
-					FloatBorder = { bg = colors.editor.bg_alt, fg = colors.editor.border },
-					-- SagaBorder = { bg = colors.editor.bg_alt, fg = colors.main.yellow },
-
-					Hlargs = { fg = colors.main.darkorange },
-					HlargsNamedParams = { fg = colors.main.darkorange },
-					GitSignsUntracked = { fg = colors.git.untracked },
-					CursorLineNr = { fg = colors.main.gray },
-				},
-				lualine_style = "stealth",
-			})
-
-			-- vim.cmd.colorscheme("material")
-		end,
-		dependencies = {
-			"glepnir/lspsaga.nvim",
-		},
-	},
-	{ "folke/lsp-colors.nvim", opts = {} },
+	}
 }

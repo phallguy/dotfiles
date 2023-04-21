@@ -8,9 +8,7 @@ return {
 	-- Appearance ===
 	--
 	-- Fonts
-	font = wezterm.font(font_family, {
-		weight = "Regular",
-	}),
+	font = wezterm.font(font_family, {}),
 	font_size = 14.5,
 	line_height = 0.89,
 	cell_width = 0.89,
@@ -48,7 +46,6 @@ return {
 		}),
 		font_size = 12,
 		active_titlebar_bg = "#2a273f",
-
 	},
 	colors = {
 		selection_bg = "#22385f",
@@ -59,11 +56,11 @@ return {
 			inactive_tab_edge = "#3e8fb0",
 			active_tab = {
 				fg_color = "#3e8fb0",
-        bg_color = "#232136",
+				bg_color = "#232136",
 			},
 			inactive_tab = {
 				fg_color = "#6e6a86",
-        bg_color = "#2a273f",
+				bg_color = "#2a273f",
 			},
 		},
 	},
@@ -108,6 +105,6 @@ return {
 			key = "F",
 			mods = "CTRL | SHIFT",
 			action = wezterm.action.DisableDefaultAssignment,
-		}
+		},
 	},
 }

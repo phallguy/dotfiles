@@ -10,21 +10,15 @@ return {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/playground",
 		},
-		run = "<CMD>TSUpdate<CR>",
+		priority = 1000,
 		config = function()
 			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 			require("nvim-treesitter.configs").setup({
 				-- Add languages to be installed here that you want installed for treesitter
 				ensure_installed = {
 					"lua",
-					"python",
-					"tsx",
-					"typescript",
 					"vimdoc",
 					"vim",
-					"ruby",
-					"typescript",
-					"javascript",
 					"markdown",
 					"markdown_inline",
 				},
@@ -35,7 +29,7 @@ return {
 					-- disable = { "eruby", "embedded_template" },
 					disable = { "log" },
 					additional_vim_regex_highlighting = false,
-					use_languagetree = true,
+					use_languagetree = false,
 				},
 				indent = { enable = true, disable = { "python" } },
 				incremental_selection = {
@@ -57,46 +51,7 @@ return {
 					select = {
 						enable = true,
 						lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-						-- keymaps = {
-						-- 	-- You can use the capture groups defined in textobjects.scm
-						-- 	["aa"] = "@parameter.outer",
-						-- 	["ia"] = "@parameter.inner",
-						-- 	["af"] = "@function.outer",
-						-- 	["if"] = "@function.inner",
-						-- 	["ac"] = "@class.outer",
-						-- 	["ic"] = "@class.inner",
-						-- 	["ar"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-						-- },
 					},
-					-- move = {
-					-- 	enable = true,
-					-- 	set_jumps = true, -- whether to set jumps in the jumplist
-					-- 	goto_next_start = {
-					-- 		["]m"] = "@function.outer",
-					-- 		["]]"] = "@class.outer",
-					-- 	},
-					-- 	goto_next_end = {
-					-- 		["]M"] = "@function.outer",
-					-- 		["]["] = "@class.outer",
-					-- 	},
-					-- 	goto_previous_start = {
-					-- 		["[m"] = "@function.outer",
-					-- 		["[["] = "@class.outer",
-					-- 	},
-					-- 	goto_previous_end = {
-					-- 		["[M"] = "@function.outer",
-					-- 		["[]"] = "@class.outer",
-					-- 	},
-					-- },
-					-- swap = {
-					--   enable = true,
-					--   swap_next = {
-					--     ['<leader>a'] = '@parameter.inner',
-					--   },
-					--   swap_previous = {
-					--     ['<leader>A'] = '@parameter.inner',
-					--   },
-					-- },
 					playground = {
 						enable = true,
 						updatetime = 25,
@@ -118,6 +73,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		opts = {
 			enable = true,
+			max_lines = 3,
 		},
 	}, -- Show function/scope in windowbar
 

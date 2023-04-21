@@ -39,8 +39,7 @@ require("lazy").setup({
 	-- import .vimrc from CWD when launching
 	{
 		"embear/vim-localvimrc",
-		config = function()
-		end,
+		config = function() end,
 	},
 
 	{

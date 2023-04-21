@@ -1,10 +1,5 @@
 return {
-	{
-		"tpope/vim-rails",
-		dependencies = {
-			"tpope/vim-projectionist",
-		},
-	},
+	{ "tpope/vim-rails" },
 	{ "tpope/vim-bundler" },
 	{ "tpope/vim-endwise" },
 }

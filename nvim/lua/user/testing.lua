@@ -1,6 +1,6 @@
 vim.keymap.set("n", "<leader>tf", "<CMD>TestFile<CR>", { desc = "File" })
 vim.keymap.set("n", "<leader>tc", "<CMD>TestNearest<CR>", { desc = "Current" })
-vim.keymap.set("n", "<leader>td", "<CMD>cclose<CR>:TestNearest -strategy=bufferterm<CR>", { desc = "Current terminal" })
+vim.keymap.set("n", "<leader>td", "<CMD>cclose<CR><CMD>TestNearest -strategy=bufferterm<CR>", { desc = "Current terminal" })
 vim.keymap.set("n", "<leader>tl", "<CMD>TestLast<CR>", { desc = "Last" })
 vim.keymap.set("n", "<leader>tt", "<CMD>TestVisit<CR>", { desc = "Goto last test" })
 vim.keymap.set("n", "<leader>ts", "<CMD>TestSuite<CR>", { desc = "Suite" })

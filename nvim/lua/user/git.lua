@@ -13,7 +13,11 @@ vim.keymap.set("n", "<leader>gd", "<CMD>DiffviewOpen -- %<CR>", { desc = "Diff b
 vim.keymap.set("n", "<leader>gh", "<CMD>DiffviewFileHistory %<CR>", { desc = "Diff file history" })
 vim.keymap.set("n", "<leader>gw", "<CMD>G show<CR>", { desc = "Git show" })
 vim.keymap.set("n", "<leader>gb", "<CMD>G blame<CR>", { desc = "Blame" })
-vim.keymap.set("n", "<leader>gB", "<CMD><C-r>=line('.')<CR>GBrowse<CR>", { desc = "Browse" })
+vim.keymap.set("n", "<leader>gB", function()
+	local r,c = unpack(vim.api.nvim_win_get_cursor(0))
+	print(r, c)
+	vim.cmd(r .. ":GBrowse")
+end, { desc = "Browse", noremap = true })
 vim.keymap.set(
 	"n",
 	"<leader>gt",

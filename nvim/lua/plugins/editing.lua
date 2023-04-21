@@ -8,7 +8,7 @@ return {
 	-- "tpope/vim-vinegar", -- netwr support
 
 	-- Useful plugin to show you pending keybinds.
-	-- { "folke/which-key.nvim", opts = {} },
+	{ "folke/which-key.nvim", opts = {} },
 
 	-- "gc" to comment visual regions/lines
 	{
@@ -65,4 +65,6 @@ return {
 			preserve_window_layout = { "this" },
 		},
 	},
+
+	{ "tpope/vim-projectionist" },
 }

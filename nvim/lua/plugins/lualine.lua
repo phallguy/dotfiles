@@ -21,12 +21,11 @@ return {
 				icons_enabled = true,
 				theme = theme,
 				component_separators = { left = "  ", right = "" },
-				-- section_separators = { left = "", right = "" },
 				section_separators = { right = " ", left = "" },
 			},
 			sections = {
 				lualine_a = { "mode" },
-				lualine_b = { { " ", draw_empty = true } },
+				lualine_b = { { "%{ ' ' } ", draw_empty = true, padding = 0 } },
 				lualine_c = { { "filename", path = 1 } },
 				lualine_x = { "branch" },
 				lualine_y = { { "filetype", padding = 2 }, { "location", padding = { right = 1 } } },
