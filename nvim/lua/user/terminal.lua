@@ -1,3 +1,7 @@
+if vim.g.vscode then
+	return {}
+end
+
 local group = vim.api.nvim_create_augroup("TermEx", { clear = true })
 vim.api.nvim_create_autocmd("TermOpen", {
 	group = group,

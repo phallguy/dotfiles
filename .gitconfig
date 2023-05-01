@@ -76,6 +76,7 @@
   lg = log --graph --decorate
   pushf = push origin HEAD -f --no-verify
   pusho = push origin HEAD
+  s = show
 
 [diff]
   renames = true

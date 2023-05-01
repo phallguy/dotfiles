@@ -6,6 +6,7 @@ return {
 	-- Set lualine as statusline
 	"nvim-lualine/lualine.nvim",
 	-- See `:help lualine.txt`
+	priority = 1010,
 	config = function()
 		local theme = require("lualine.themes.rose-pine")
 		local p = require("rose-pine.palette")

@@ -10,7 +10,6 @@ return {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/playground",
 		},
-		priority = 1000,
 		config = function()
 			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 			require("nvim-treesitter.configs").setup({
@@ -26,12 +25,12 @@ return {
 				auto_install = true,
 				highlight = {
 					enable = true,
-					-- disable = { "eruby", "embedded_template" },
+					-- disable = { "log", "eruby", "embedded_template" },
 					disable = { "log" },
-					additional_vim_regex_highlighting = false,
+					additional_vim_regex_highlighting = { "gitcommit" },
 					use_languagetree = false,
 				},
-				indent = { enable = true, disable = { "python" } },
+				indent = { enable = true, disable = { "python", "ruby", "eruby" } },
 				incremental_selection = {
 					enable = true,
 					keymaps = {
@@ -45,6 +44,9 @@ return {
 					enabled = true,
 				},
 				autotag = {
+					enable = true,
+				},
+				endwise = {
 					enable = true,
 				},
 				textobjects = {
@@ -67,7 +69,13 @@ return {
 	},
 
 	{ "windwp/nvim-ts-autotag" },
-	-- { "windwp/nvim-autopairs", opts = {} },
+	{
+		"windwp/nvim-autopairs",
+		opts = {
+			check_ts = true,
+		},
+	},
+	{ "RRethy/nvim-treesitter-endwise" },
 
 	{
 		"nvim-treesitter/nvim-treesitter-context",

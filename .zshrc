@@ -1,3 +1,4 @@
+# Use arm or x86 version of brew depending on architecture
 if [[ $(uname -p) == 'arm' ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
@@ -128,6 +129,7 @@ alias t='terraform'
 alias v='vagrant'
 alias x86='arch -arch x86_64 /bin/zsh --login'
 alias cd='z'
+alias g='git'
 
 
 function _begin_osc {

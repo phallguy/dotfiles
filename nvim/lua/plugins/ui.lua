@@ -70,8 +70,8 @@ return {
 						},
 						win_options = {
 							winhighlight = {
-								Normal = "NormalOverlay",
-								FloatBorder = "FloatBorder",
+								Normal = "CmdOverlay",
+								FloatBorder = "CmdOverlay",
 							}
 							-- cursorline = false,
 						},

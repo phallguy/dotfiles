@@ -35,6 +35,12 @@ return {
 				require("telescope").extensions.live_grep_args.live_grep_args,
 				{ desc = "Live grep" }
 			)
+			vim.keymap.set(
+				"n",
+				"<leader>fG",
+				require("telescope-live-grep-args.shortcuts").grep_word_under_cursor,
+				{ desc = "Live grep" }
+			)
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
 			vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume search" })
 			vim.keymap.set("n", "<leader>fe", builtin.registers, { desc = "Registers" })
@@ -138,7 +144,7 @@ return {
 							-- extend mappings
 							i = {
 								["<C-f>"] = lga_actions.quote_prompt(),
-								["<CS-f>"] = lga_actions.quote_prompt({ postfix = " --iglob **/" }),
+								["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob **/" }),
 							},
 						},
 					},

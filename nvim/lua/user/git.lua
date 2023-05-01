@@ -37,4 +37,5 @@ vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR
 vim.keymap.set("n", "<leader>ga", "<CMD>tab G cam<CR>", { desc = "Commit ammend", silent = true })
 
 vim.opt.fillchars:append({ diff = "╱" })
+vim.opt.fillchars:append({ eob = " " })
 vim.opt.diffopt:append("iwhite") -- Ignore whitespace

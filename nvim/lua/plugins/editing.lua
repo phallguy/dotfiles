@@ -8,7 +8,14 @@ return {
 	-- "tpope/vim-vinegar", -- netwr support
 
 	-- Useful plugin to show you pending keybinds.
-	{ "folke/which-key.nvim", opts = {} },
+	{
+		"folke/which-key.nvim",
+		opts = {
+			triggers_blacklist = {
+				n = { "g", "gf" },
+			},
+		},
+	},
 
 	-- "gc" to comment visual regions/lines
 	{
@@ -33,9 +40,11 @@ return {
 		"norcalli/nvim-colorizer.lua",
 		cond = not vim.g.vscode,
 		config = function()
-			vim.opt.termguicolors = true -- True color support
 			require("colorizer").setup({
-				"*",
+				ruby = {
+					css = false,
+					RGB = false,
+				},
 			}, {
 				css = true,
 			})

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-IRB.conf[:USE_AUTOCOMPLETE] = false
+IRB.conf[:USE_AUTOCOMPLETE] = true
 IRB.conf[:SHOW_FRAMES] = 0
 IRB.conf[:SHOW_SRC_LINES] = 25
 IRB.conf[:PROMPT_MODE] = :SIMPLE
@@ -8,7 +8,7 @@ IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_MULTILINE] = true
 
 ARGV.concat [
-  # "--readline",
+  "--readline",
   "--prompt-mode",
   "simple",
 ]

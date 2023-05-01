@@ -28,6 +28,7 @@ bin/up
 BqfPreviewBorder
 .vimspector.json
 Gemfile.local
+Gemfile.local.lock
 .codespellrc
 .ripgreprc
 config/definitions.rb

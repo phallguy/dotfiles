@@ -2,9 +2,11 @@ if vim.g.vscode then
 	return
 end
 
+-- vim.lsp.set_log_level("debug")
+
 local icons = require("user.icons")
 
-vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Document symbols" })
+vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Goto Definition" })
 vim.keymap.set("n", "gu", function()
 	require("lspsaga.command").load_command("lsp_finder")
 end, { desc = "Usage" })
@@ -64,7 +66,6 @@ end
 
 local servers = {
 	tsserver = {},
-	ruby_ls = {},
 	lua_ls = {
 		Lua = {
 			-- workspace = { checkThirdParty = false },
@@ -96,10 +97,17 @@ mason_lspconfig.setup({
 
 mason_lspconfig.setup_handlers({
 	function(server_name)
-		require("lspconfig")[server_name].setup({
-			capabilities = capabilities,
-			settings = servers[server_name],
-		})
+		if server_name == "solargraph" then
+			require("lspconfig").solargraph.setup({
+				capabilities = capabilities,
+				cmd = { "bundle", "exec", "--gemfile", "Gemfile.local", "solargraph", "stdio" },
+			})
+		else
+			require("lspconfig")[server_name].setup({
+				capabilities = capabilities,
+				settings = servers[server_name],
+			})
+		end
 	end,
 })
 
@@ -123,12 +131,12 @@ local has_words_before = function()
 end
 
 cmp.setup({
-	completion = {
-		autocomplete = false,
-	},
-	performance = {
-		throttle = 1000,
-	},
+	-- completion = {
+	-- 	autocomplete = true,
+	-- },
+	-- performance = {
+	-- 	throttle = 1000,
+	-- },
 	experimental = {
 		ghost_text = true,
 	},
@@ -165,7 +173,12 @@ cmp.setup({
 	-- 	end, { "i", "s" }),
 	-- }),
 	mapping = {
-		['<CR>'] = cmp.mapping.confirm({ select = true }),
+		-- ["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<C-Space>"] = cmp.mapping.complete({}),
+		["<S-CR>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		}),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -189,7 +202,7 @@ cmp.setup({
 	},
 	sources = {
 		{ name = "luasnip" },
-		{ name = "nvim_lsp", max_item_count = 5 },
+		{ name = "nvim_lsp", max_item_count = 10 },
 		{
 			name = "fuzzy_buffer",
 			max_item_count = 5,
@@ -264,7 +277,7 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.eslint_d,
 		null_ls.builtins.diagnostics.codespell,
 		-- null_ls.builtins.diagnostics.erb_lint,
-		-- null_ls.builtins.diagnostics.rubocop,
+		null_ls.builtins.diagnostics.rubocop,
 		null_ls.builtins.diagnostics.stylelint,
 		null_ls.builtins.diagnostics.yamllint,
 
@@ -277,7 +290,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.prettierd,
 		-- null_ls.builtins.formatting.erb_lint,
 		null_ls.builtins.formatting.fixjson,
-		-- null_ls.builtins.formatting.rubocop,
+		null_ls.builtins.formatting.rubocop,
 		null_ls.builtins.formatting.htmlbeautifier.with({
 			extra_args = {
 				"-b",

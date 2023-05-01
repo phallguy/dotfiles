@@ -4,22 +4,27 @@ local font_family = "JetBrainsMonoNL Nerd Font Mono"
 
 return {
 	-- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=terminfo
-	term = "wezterm",
+	-- term = "wezterm",
 	-- Appearance ===
 	--
 	-- Fonts
 	font = wezterm.font(font_family, {}),
-	font_size = 14.5,
+	font_size = 16,
 	line_height = 0.89,
 	cell_width = 0.89,
 	freetype_load_target = "HorizontalLcd",
 	freetype_render_target = "HorizontalLcd",
 	font_rules = {
 		{
+			font = wezterm.font(font_family, {
+				weight = "ExtraLight",
+			}),
+		},
+		{
 			intensity = "Bold",
 			italic = false,
 			font = wezterm.font(font_family, {
-				weight = "Regular",
+				weight = "Bold",
 			}),
 		},
 	},
@@ -44,7 +49,7 @@ return {
 			-- <built-in>, BuiltIn
 			"Symbols Nerd Font Mono",
 		}),
-		font_size = 12,
+		font_size = 14,
 		active_titlebar_bg = "#2a273f",
 	},
 	colors = {
@@ -66,15 +71,15 @@ return {
 	},
 	window_padding = {
 		top = 0,
-		left = 10,
-		right = 10,
+		left = 0,
+		right = 0,
 		bottom = 0,
 	},
 	window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
 	-- window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
-	macos_window_background_blur = 50,
-	window_background_opacity = 0.92,
+	macos_window_background_blur = 30,
+	-- window_background_opacity = 0.95,
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,
 	initial_rows = 40,
