@@ -138,42 +138,16 @@ cmp.setup({
 	-- 	throttle = 1000,
 	-- },
 	experimental = {
-		ghost_text = true,
+		ghost_text = false,
 	},
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
 		end,
 	},
-	-- mapping = cmp.mapping.preset.insert({
-	-- 	["<C-d>"] = cmp.mapping.scroll_docs(-4),
-	-- 	["<C-f>"] = cmp.mapping.scroll_docs(4),
-	-- 	["<C-Space>"] = cmp.mapping.complete({}),
-	-- 	["<S-CR>"] = cmp.mapping.confirm({
-	-- 		behavior = cmp.ConfirmBehavior.Replace,
-	-- 		select = true,
-	-- 	}),
-	-- 	["<Tab>"] = cmp.mapping(function(fallback)
-	-- 		if cmp.visible() then
-	-- 			cmp.select_next_item()
-	-- 		elseif luasnip.expand_or_jumpable() then
-	-- 			luasnip.expand_or_jump()
-	-- 		else
-	-- 			fallback()
-	-- 		end
-	-- 	end, { "i", "s" }),
-	-- 	["<S-Tab>"] = cmp.mapping(function(fallback)
-	-- 		if cmp.visible() then
-	-- 			cmp.select_prev_item()
-	-- 		elseif luasnip.jumpable(-1) then
-	-- 			luasnip.jump(-1)
-	-- 		else
-	-- 			fallback()
-	-- 		end
-	-- 	end, { "i", "s" }),
-	-- }),
-	mapping = {
-		-- ["<CR>"] = cmp.mapping.confirm({ select = true }),
+	mapping = cmp.mapping.preset.insert({
+		["<C-d>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete({}),
 		["<S-CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
@@ -199,13 +173,41 @@ cmp.setup({
 				fallback()
 			end
 		end, { "i", "s" }),
-	},
+	}),
+	-- mapping = {
+	-- 	-- ["<CR>"] = cmp.mapping.confirm({ select = true }),
+	-- 	["<C-Space>"] = cmp.mapping.complete({}),
+	-- 	["<S-CR>"] = cmp.mapping.confirm({
+	-- 		behavior = cmp.ConfirmBehavior.Replace,
+	-- 		select = true,
+	-- 	}),
+	-- 	["<Tab>"] = cmp.mapping(function(fallback)
+	-- 		if cmp.visible() then
+	-- 			cmp.select_next_item()
+	-- 		elseif luasnip.expand_or_jumpable() then
+	-- 			luasnip.expand_or_jump()
+	-- 		elseif has_words_before() then
+	-- 			cmp.complete()
+	-- 		else
+	-- 			fallback()
+	-- 		end
+	-- 	end, { "i", "s" }),
+	-- 	["<S-Tab>"] = cmp.mapping(function(fallback)
+	-- 		if cmp.visible() then
+	-- 			cmp.select_prev_item()
+	-- 		elseif luasnip.jumpable(-1) then
+	-- 			luasnip.jump(-1)
+	-- 		else
+	-- 			fallback()
+	-- 		end
+	-- 	end, { "i", "s" }),
+	-- },
 	sources = {
 		{ name = "luasnip" },
-		{ name = "nvim_lsp", max_item_count = 10 },
+		{ name = "nvim_lsp" },
 		{
 			name = "fuzzy_buffer",
-			max_item_count = 5,
+			max_item_count = 3,
 			dup = 0,
 			option = {
 				keyword_length = 2,

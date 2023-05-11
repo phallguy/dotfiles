@@ -3,6 +3,7 @@ vim.g.ruby_indent_access_modifier_style = "indent"
 vim.g.ruby_indent_block_style = "do"
 vim.g.ruby_indent_hanging_elements = 0
 vim.g.ruby_indent_assignment_style = "hanging"
+vim.g.no_ruby_maps = 1
 
 vim.g.splitjoin_ruby_curly_braces = 0
 vim.g.splitjoin_ruby_hanging_args = 0

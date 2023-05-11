@@ -8,7 +8,7 @@ return {
 			local colors = require("rose-pine.palette")
 
 			require("rose-pine").setup({
-				variant = "auto",
+				variant = "dawn",
 				dark_variant = "moon",
 				groups = {
 					git_text = "gold",
@@ -28,6 +28,7 @@ return {
 					IndentBlanklineContextChar = { fg = "highlight_med" },
 					Folded = { fg = "highlight_high" },
 					Visual = { bg = "pine", blend = 20 },
+					Keyword = { fg = "iris" },
 					["@function.call"] = { fg = "foam", italic = true },
 					["@type.qualifier"] = { fg = "pine" },
 					SpellBad = { fg = colors.love, italic = true, undercurl = true },
@@ -36,11 +37,13 @@ return {
 					SpellRare = { fg = colors.gold, italic = true, undercurl = true },
 					Hlargs = { link = "@parameter", bold = true },
 					HlargsNamedParams = { link = "@parameter", bold = true },
+					-- Quick fix
 					qfSeparator = { fg = colors.subtle },
-					qfLineNr = { fg = colors.pine },
+					qfLineNr = { fg = colors.love },
 					qfFileName = { fg = colors.subtle, italic = true, bold = false },
 					qfError = { fg = colors.love, bold = true, italic = true },
 					QuickFixLine = { bg = "pine", blend = 15 },
+					-- Diff
 					DiffViewDiffDelete = { fg = "highlight_med" },
 					["@text.diff.delete"] = { fg = "text", bg = config.groups.git_delete, blend = 20 },
 					["@text.diff.add"] = { fg = "text", bg = config.groups.git_add, blend = 20 },
@@ -67,7 +70,7 @@ return {
 					NormalOverlay = { bg = "surface" },
 					-- Treesitter context
 					TreesitterContext = { bg = "iris", blend = 5 },
-					TreesitterContextBottom = { underline = true, sp = "highlight_med" },
+					TreesitterContextBottom = { underline = true, fg = "highlight_med" },
 					-- Matchparen
 					MatchParen = { fg = "gold", bg = "pine", blend = 50 },
 					-- BQF
@@ -75,7 +78,6 @@ return {
 					BqfPreviewBorder = { link = "BqfPreviewFloat" },
 					-- Cmd
 					CmdOverlay = { bg = "#000000", blend = 10 },
-
 					-- help slow-fast-terminal
 					NonText = { fg = "none" },
 				},
@@ -83,5 +85,5 @@ return {
 
 			vim.cmd.colorscheme("rose-pine")
 		end,
-	},
+	}
 }

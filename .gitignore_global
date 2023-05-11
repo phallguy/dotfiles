@@ -22,7 +22,6 @@ tags
 tags.tmp
 chromedriver
 .agignore
-.ctags
 bin/up
 .pryrc
 BqfPreviewBorder
@@ -38,4 +37,7 @@ config/definitions.rb
 config/projections.json
 
 
-
+.ctags
+.tags
+.tags.lock
+.tags.tmp

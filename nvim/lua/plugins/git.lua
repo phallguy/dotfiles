@@ -14,16 +14,19 @@ return {
 				default = {
 					winbar_info = true,
 				},
+				merge_tool = {
+					layout = "diff3_mixed"
+				}
 			},
 			hooks = {
-				view_enter = function()
-					vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR>")
-					vim.keymap.set("n", "q", "<CMD>DiffviewClose<CR>")
+				diff_buf_win_enter = function(bufnr)
+					vim.keymap.set("n", "q", "<CMD>DiffviewClose<CR>", { buffer = bufnr })
 				end,
-				view_leave = function()
-					pcall(vim.keymap.del, "n", "<leader>c")
-					pcall(vim.keymap.del ,"n", "q")
-				end
+			},
+			keymaps = {
+				file_panel = {
+					q = "<CMD>DiffviewClose<CR>"
+				}
 			}
 		},
 	},

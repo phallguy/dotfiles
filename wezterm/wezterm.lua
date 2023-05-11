@@ -9,7 +9,7 @@ return {
 	--
 	-- Fonts
 	font = wezterm.font(font_family, {}),
-	font_size = 16,
+	font_size = 15,
 	line_height = 0.89,
 	cell_width = 0.89,
 	freetype_load_target = "HorizontalLcd",
@@ -17,7 +17,7 @@ return {
 	font_rules = {
 		{
 			font = wezterm.font(font_family, {
-				weight = "ExtraLight",
+				weight = "Regular",
 			}),
 		},
 		{
@@ -29,7 +29,7 @@ return {
 		},
 	},
 	-- colors
-	color_scheme = "rose-pine-moon",
+	color_scheme = "rose-pine-dawn",
 	window_frame = {
 		font = wezterm.font_with_fallback({
 			-- <built-in>, BuiltIn
@@ -78,8 +78,8 @@ return {
 	window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
 	-- window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
-	macos_window_background_blur = 30,
-	-- window_background_opacity = 0.95,
+	macos_window_background_blur = 50,
+	-- window_background_opacity = 0.96,
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,
 	initial_rows = 40,

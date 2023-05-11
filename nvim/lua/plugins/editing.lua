@@ -11,6 +11,12 @@ return {
 	{
 		"folke/which-key.nvim",
 		opts = {
+			marks = false,
+			registers = false,
+			presets ={
+				operators = false,
+				motions = false,
+			},
 			triggers_blacklist = {
 				n = { "g", "gf" },
 			},
@@ -35,7 +41,6 @@ return {
 		end,
 	},
 	{ "AndrewRadev/splitjoin.vim" },
-	-- { "mbbill/undotree" },
 	{
 		"norcalli/nvim-colorizer.lua",
 		cond = not vim.g.vscode,

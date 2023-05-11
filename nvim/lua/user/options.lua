@@ -20,7 +20,7 @@ opt.number = true -- Print line number
 opt.relativenumber = false -- Relative line numbers oh my!
 opt.pumblend = 0 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
-opt.scrolloff = 8 -- Lines of context, large number keeps code mostly centered
+opt.scrolloff = 50 -- Lines of context, large number keeps code mostly centered
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
@@ -45,7 +45,7 @@ opt.splitright = true -- Put new windows right of current
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.textwidth = 100
 opt.termguicolors = true -- True color support
-opt.timeoutlen = 500
+opt.timeoutlen = 700
 opt.undofile = true
 opt.undolevels = 10000
 opt.undodir = { os.getenv("HOME") .. "/.vimundo/" } -- use a directory to store the undo history
@@ -61,7 +61,7 @@ opt.foldmethod = "marker"
 opt.foldenable = true
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevel = 0
-opt.foldopen:append("jump")
+opt.foldopen:append({"jump"})
 opt.endofline = false -- Don't automatically add newline
 opt.fixendofline = false
 opt.startofline = false -- Keep the cursor on the same column

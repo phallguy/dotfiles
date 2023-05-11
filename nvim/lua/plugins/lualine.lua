@@ -16,6 +16,25 @@ return {
 		theme.normal.c.fg = p.muted
 		theme.normal.b.bg = p.overlay
 		theme.normal.y = { fg = p.subtle, bg = p.overlay }
+		theme.normal.x = { fg = p.rose, bg = "none" }
+
+		theme.insert.c.bg = "none"
+		theme.insert.c.fg = p.muted
+		theme.insert.b.bg = p.overlay
+		theme.insert.y = { fg = p.subtle, bg = p.overlay }
+		theme.insert.x = { fg = p.rose, bg = "none" }
+
+		theme.visual.c.bg = "none"
+		theme.visual.c.fg = p.muted
+		theme.visual.b.bg = p.overlay
+		theme.visual.y = { fg = p.subtle, bg = p.overlay }
+		theme.visual.x = { fg = p.rose, bg = "none" }
+
+		theme.command.c.bg = "none"
+		theme.command.c.fg = p.muted
+		theme.command.b.bg = p.overlay
+		theme.command.y = { fg = p.subtle, bg = p.overlay }
+		theme.command.x = { fg = p.rose, bg = "none" }
 
 		require("lualine").setup({
 			options = {
