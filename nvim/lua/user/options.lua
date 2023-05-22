@@ -18,7 +18,7 @@ opt.list = false -- Show some invisible characters (tabs...
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Print line number
 opt.relativenumber = false -- Relative line numbers oh my!
-opt.pumblend = 0 -- Popup blend
+opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.scrolloff = 50 -- Lines of context, large number keeps code mostly centered
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
@@ -31,6 +31,7 @@ opt.shortmess = {
 	W = true, -- I know I just wrote it
 	I = true, -- Start clean
 	F = true,
+	C = true,
 }
 opt.showmode = true -- Dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
@@ -47,9 +48,9 @@ opt.textwidth = 100
 opt.termguicolors = true -- True color support
 opt.timeoutlen = 700
 opt.undofile = true
-opt.undolevels = 10000
+opt.undolevels = 1000
 opt.undodir = { os.getenv("HOME") .. "/.vimundo/" } -- use a directory to store the undo history
-opt.updatetime = 200 -- Save swap file and trigger CursorHold
+opt.updatetime = 500 -- Save swap file and trigger CursorHold
 opt.wildmode = "lastused,longest:full,full" -- Command-line completion mode
 opt.wildoptions = "fuzzy,pum"
 opt.winminwidth = 5 -- Minimum window width
@@ -81,7 +82,7 @@ opt.shada = "!,'30,s10,h"
 
 opt.iskeyword:append({ '-' }) -- Kabab case
 
-opt.formatoptions = vim.opt.formatoptions._info.default
+-- opt.formatoptions = vim.opt.formatoptions._info.default
 opt.formatoptions:append({
 	c = true, -- Auto wrap comments
 	n = true, -- Recognize numbered lists
@@ -94,7 +95,6 @@ opt.formatoptions:remove({
 
 if vim.fn.has("nvim-0.9.0") == 1 then
 	opt.splitkeep = "screen"
-	opt.shortmess:append({ C = true })
 end
 
 -- Fix markdown indentation settings

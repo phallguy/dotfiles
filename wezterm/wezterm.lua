@@ -8,35 +8,21 @@ return {
 	-- Appearance ===
 	--
 	-- Fonts
-	font = wezterm.font(font_family, {}),
-	font_size = 15,
+	font = wezterm.font(font_family, { weight="Thin" }),
+	font_size = 16,
 	line_height = 0.89,
 	cell_width = 0.89,
 	freetype_load_target = "HorizontalLcd",
 	freetype_render_target = "HorizontalLcd",
-	font_rules = {
-		{
-			font = wezterm.font(font_family, {
-				weight = "Regular",
-			}),
-		},
-		{
-			intensity = "Bold",
-			italic = false,
-			font = wezterm.font(font_family, {
-				weight = "Bold",
-			}),
-		},
-	},
 	-- colors
-	color_scheme = "rose-pine-dawn",
+	color_scheme = "rose-pine-moon",
 	window_frame = {
 		font = wezterm.font_with_fallback({
 			-- <built-in>, BuiltIn
 			{ family = "Roboto", weight = "Medium" },
 
 			-- /Users/paulalexander/Library/Fonts/JetBrains Mono NL Light Nerd Font Complete Mono.ttf, CoreText
-			{ family = "JetBrainsMonoNL Nerd Font Mono", weight = "Light" },
+			{ family = "JetBrainsMonoNL Nerd Font Mono", weight = "Thin" },
 
 			-- /Users/paulalexander/Library/Fonts/JetBrainsMono-Regular.ttf, CoreText
 			"JetBrains Mono",

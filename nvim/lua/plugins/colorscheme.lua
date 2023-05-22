@@ -8,7 +8,7 @@ return {
 			local colors = require("rose-pine.palette")
 
 			require("rose-pine").setup({
-				variant = "dawn",
+				variant = "moon",
 				dark_variant = "moon",
 				groups = {
 					git_text = "gold",

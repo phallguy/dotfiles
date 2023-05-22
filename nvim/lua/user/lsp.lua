@@ -174,40 +174,11 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 	}),
-	-- mapping = {
-	-- 	-- ["<CR>"] = cmp.mapping.confirm({ select = true }),
-	-- 	["<C-Space>"] = cmp.mapping.complete({}),
-	-- 	["<S-CR>"] = cmp.mapping.confirm({
-	-- 		behavior = cmp.ConfirmBehavior.Replace,
-	-- 		select = true,
-	-- 	}),
-	-- 	["<Tab>"] = cmp.mapping(function(fallback)
-	-- 		if cmp.visible() then
-	-- 			cmp.select_next_item()
-	-- 		elseif luasnip.expand_or_jumpable() then
-	-- 			luasnip.expand_or_jump()
-	-- 		elseif has_words_before() then
-	-- 			cmp.complete()
-	-- 		else
-	-- 			fallback()
-	-- 		end
-	-- 	end, { "i", "s" }),
-	-- 	["<S-Tab>"] = cmp.mapping(function(fallback)
-	-- 		if cmp.visible() then
-	-- 			cmp.select_prev_item()
-	-- 		elseif luasnip.jumpable(-1) then
-	-- 			luasnip.jump(-1)
-	-- 		else
-	-- 			fallback()
-	-- 		end
-	-- 	end, { "i", "s" }),
-	-- },
 	sources = {
 		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
 		{
 			name = "fuzzy_buffer",
-			max_item_count = 3,
 			dup = 0,
 			option = {
 				keyword_length = 2,
@@ -225,10 +196,10 @@ cmp.setup({
 		comparators = {
 			compare.kind,
 			require("cmp_fuzzy_buffer.compare"),
-			compare.offset,
+			-- compare.offset,
+			compare.recently_used,
 			compare.exact,
 			compare.score,
-			compare.recently_used,
 			compare.sort_text,
 			compare.length,
 			compare.order,
@@ -276,7 +247,7 @@ null_ls.setup({
 	end,
 	sources = {
 		-- Diagnostics
-		null_ls.builtins.diagnostics.eslint_d,
+		null_ls.builtins.diagnostics.eslint,
 		null_ls.builtins.diagnostics.codespell,
 		-- null_ls.builtins.diagnostics.erb_lint,
 		null_ls.builtins.diagnostics.rubocop,
@@ -284,7 +255,7 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.yamllint,
 
 		-- Fixes
-		null_ls.builtins.code_actions.eslint_d,
+		null_ls.builtins.code_actions.eslint,
 		-- null_ls.builtins.code_actions.gitsigns,
 
 		-- Formatting
@@ -316,7 +287,7 @@ require("lspsaga").setup({
 	outline = {
 		auto_close = true,
 		keys = {
-			jump = "<CR>",
+			expand_or_jump = "<CR>",
 		},
 	},
 	lightbulb = {

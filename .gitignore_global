@@ -41,3 +41,5 @@ config/projections.json
 .tags
 .tags.lock
 .tags.tmp
+tags
+tags.lock

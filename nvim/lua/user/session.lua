@@ -66,6 +66,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "tsplayground",
     "checkhealth",
     "fugitiveblame",
+    "DiffviewFileHistory",
   },
   callback = function(event)
     -- Can't unlist, messes with fugutive G! commands

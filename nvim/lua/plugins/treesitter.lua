@@ -109,13 +109,7 @@ return {
 	},
 
 	{ "windwp/nvim-ts-autotag" },
-	{
-		"windwp/nvim-autopairs",
-		cond = false,
-		opts = {
-			check_ts = true,
-		},
-	},
+
 	{ "RRethy/nvim-treesitter-endwise" },
 
 	{
@@ -128,7 +122,6 @@ return {
 
 	{
 		"m-demare/hlargs.nvim",
-		cond = false,
 		opts = {
 			extras = {
 				named_parameters = true,

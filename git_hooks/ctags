@@ -9,8 +9,8 @@ echo "Started ctags process..."
 (
   trap "rmdir .git/tags_lock; rm -f tags.tmp" EXIT ;
   command -v ripper-tags >/dev/null || gem install ripper-tags ;
-  ripper-tags -R --force --tag-relative -f tags.tmp ;
-  ctags -R --tag-relative --append -f tags.tmp ;
+  ripper-tags -R --force --tag-relative -f tags.tmp --exclude *.js --exclude *.coffee ;
+  ctags -R --tag-relative --append -f tags.tmp --exclude=*.js --exclude=*.coffee ;
   mv tags.tmp tags
 ) &
 

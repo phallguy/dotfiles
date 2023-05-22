@@ -84,8 +84,8 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>e", "<CMD>Neotree toggle left reveal_force_cwd<CR>", { desc = "Toggle tree" })
-			vim.keymap.set("n", "<leader>E", "<CMD>Neotree focus<CR>", { desc = "Focs tree" })
+			vim.keymap.set("n", "<leader>e", "<CMD>Neotree left reveal_force_cwd<CR>", { desc = "Show tree" })
+			vim.keymap.set("n", "<leader>E", "<CMD>Neotree toggle<CR>", { desc = "Toggle tree" })
 			vim.keymap.set("n", "-", "<CMD>Neotree toggle float reveal<CR>", { desc = "Up tree" })
 		end,
 		dependencies = {

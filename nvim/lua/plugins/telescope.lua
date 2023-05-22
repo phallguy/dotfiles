@@ -125,7 +125,6 @@ return {
 					lsp_document_symbols = {
 						theme = "ivy",
 						initial_mode = "insert",
-						sort_lastused = true,
 					},
 					diagnostics = {
 						theme = "ivy",
@@ -136,7 +135,7 @@ return {
 				},
 				extensions = {
 					live_grep_args = {
-						auto_quoting = true, -- enable/disable auto-quoting
+						-- auto_quoting = true, -- enable/disable auto-quoting
 						layout_strategy = "vertical",
 						-- sort_lastused = true,
 						-- define mappings, e.g.
