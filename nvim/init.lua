@@ -39,7 +39,8 @@ require("lazy").setup({
 	-- import .vimrc from CWD when launching
 	{
 		"embear/vim-localvimrc",
-		config = function() end,
+		config = function()
+		end,
 	},
 
 	{
@@ -48,7 +49,10 @@ require("lazy").setup({
 		cond = not vim.g.vscode,
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
-			"williamboman/mason.nvim",
+			{
+				"williamboman/mason.nvim",
+				build = ":MasonUpdate"
+			},
 			"williamboman/mason-lspconfig.nvim",
 
 			-- Additional lua configuration, makes nvim stuff amazing!

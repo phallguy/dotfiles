@@ -1,24 +1,20 @@
 return {
 	{
 		"rose-pine/neovim",
-		name = "rose-pine-neovim",
+		name = "rose-pine",
 		cond = not vim.g.vscode,
 		priority = 1000,
 		config = function()
 			local colors = require("rose-pine.palette")
+			local config = require("rose-pine.config").options
 
 			require("rose-pine").setup({
 				variant = "moon",
 				dark_variant = "moon",
+				disable_background = false,
 				groups = {
 					git_text = "gold",
 				},
-			})
-
-			local config = require("rose-pine.config").options
-
-			require("rose-pine").colorscheme({
-				disable_background = false,
 				highlight_groups = {
 					LineNr = { fg = "highlight_high" },
 					AbsLineNr = { fg = "highlight_med" },
@@ -85,5 +81,5 @@ return {
 
 			vim.cmd.colorscheme("rose-pine")
 		end,
-	}
+	},
 }

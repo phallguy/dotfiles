@@ -24,6 +24,9 @@ return {
 					show_scrolled_off_parent_node = true,
 				},
 				default_component_configs = {
+					container = {
+						enable_character_fade = false,
+					},
 					symbols = {
 						unstaged = "~",
 					},
@@ -38,6 +41,7 @@ return {
 					mappings = {
 						["v"] = "open_vsplit",
 						["<C-v>"] = "open_vsplit",
+						["/"] = "noop",
 					},
 					popup_border_style = "rounded",
 				},
@@ -47,6 +51,7 @@ return {
 							["<space"] = "noop",
 							["<esc>"] = "close_window",
 							["-"] = "close_node",
+							["<CR>"] = "open_drop",
 							["[c"] = "prev_git_modified",
 							["]c"] = "next_git_modified",
 							["[g"] = "noop",
@@ -84,9 +89,9 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>e", "<CMD>Neotree left reveal_force_cwd<CR>", { desc = "Show tree" })
+			vim.keymap.set("n", "<leader>e", "<CMD>Neotree close<CR>", { desc = "Show tree" })
 			vim.keymap.set("n", "<leader>E", "<CMD>Neotree toggle<CR>", { desc = "Toggle tree" })
-			vim.keymap.set("n", "-", "<CMD>Neotree toggle float reveal<CR>", { desc = "Up tree" })
+			vim.keymap.set("n", "-", "<CMD>Neotree left reveal_force_cwd<CR>", { desc = "Up tree" })
 		end,
 		dependencies = {
 			"nvim-lua/plenary.nvim",

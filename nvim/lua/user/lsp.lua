@@ -6,7 +6,10 @@ end
 
 local icons = require("user.icons")
 
-vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Goto Definition" })
+-- vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Goto Definition" })
+vim.keymap.set("n", "gd", function()
+	require("lspsaga.command").load_command("goto_definition")
+end, { desc = "Goto definition" })
 vim.keymap.set("n", "gu", function()
 	require("lspsaga.command").load_command("lsp_finder")
 end, { desc = "Usage" })
@@ -83,6 +86,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 -- Setup mason so it can manage external tooling
 require("mason").setup({
+	log_level = vim.log.levels.DEBUG,
 	ui = {
 		border = "rounded",
 	},
@@ -100,6 +104,7 @@ mason_lspconfig.setup_handlers({
 		if server_name == "solargraph" then
 			require("lspconfig").solargraph.setup({
 				capabilities = capabilities,
+				filetypes = { "ruby", "eruby" },
 				cmd = { "bundle", "exec", "--gemfile", "Gemfile.local", "solargraph", "stdio" },
 			})
 		else
@@ -138,7 +143,7 @@ cmp.setup({
 	-- 	throttle = 1000,
 	-- },
 	experimental = {
-		ghost_text = false,
+		ghost_text = true,
 	},
 	snippet = {
 		expand = function(args)
@@ -175,24 +180,25 @@ cmp.setup({
 		end, { "i", "s" }),
 	}),
 	sources = {
+		{ name = "nvim_lsp", priority = -1 },
 		{ name = "luasnip" },
-		{ name = "nvim_lsp" },
+		{ name = "path" },
 		{
 			name = "fuzzy_buffer",
+			keyword_length = 5,
 			dup = 0,
 			option = {
-				keyword_length = 2,
 				fuzzy_extra_arg = 2, -- Respect case
+				min_match_length = 5,
 				get_bufnrs = function()
 					return vim.api.nvim_list_bufs()
 				end,
 			},
 		},
 		{ name = "git" },
-		{ name = "path" },
 	},
 	sorting = {
-		priority_weight = 2,
+		priority_weight = 20,
 		comparators = {
 			compare.kind,
 			require("cmp_fuzzy_buffer.compare"),

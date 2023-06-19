@@ -9,7 +9,7 @@ return {
 			})
 
 			vim.keymap.set("n", "<leader>ld", "<CMD>TroubleToggle document_diagnostics<CR>", { desc = "Diagnostics" })
-			vim.keymap.set("n", "<leader>lD", "<CMD>TroubleToggle workspace_diagnostics<CR>", { desc = "Diagnostics" })
+			vim.keymap.set("n", "<leader>lD", "<CMD>TroubleToggle workspace_diagnostics<CR>", { desc = "Workspace Diagnostics" })
 		end,
 	},
 }
