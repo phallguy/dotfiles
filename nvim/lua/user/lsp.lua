@@ -10,9 +10,6 @@ local icons = require("user.icons")
 vim.keymap.set("n", "gd", function()
 	require("lspsaga.command").load_command("goto_definition")
 end, { desc = "Goto definition" })
-vim.keymap.set("n", "gu", function()
-	require("lspsaga.command").load_command("lsp_finder")
-end, { desc = "Usage" })
 
 vim.keymap.set("n", "<leader>lrs", function()
 	require("lspsaga.rename"):lsp_rename()
@@ -22,9 +19,7 @@ vim.keymap.set("n", "<leader>lrf", "<CMD>TypescriptRenameFile<CR>", { desc = "[R
 vim.keymap.set("n", "<leader>la", function()
 	require("lspsaga.codeaction"):code_action()
 end, { desc = "Code [a]ction" })
-vim.keymap.set("n", "<leader>ll", function()
-	require("lspsaga.command").load_command("show_line_diagnostics")
-end, { desc = "[L]ine diagnostics" })
+vim.keymap.set("n", "<leader>ll", "<CMD>Lspsaga show_line_diagnostics<CR>", { desc = "[L]ine diagnostics" })
 vim.keymap.set("n", "<leader>lp", function()
 	require("lspsaga.command").load_command("peek_definition")
 end, { desc = "Peek [d]efinition" })
@@ -34,9 +29,7 @@ vim.keymap.set("n", "<leader>lo", function()
 	require("lspsaga.command").load_command("outline")
 end, { desc = "Document [o]utline" })
 
-vim.keymap.set("n", "<leader>lu", function()
-	require("lspsaga.command").load_command("lsp_finder")
-end, { desc = "Usage" })
+vim.keymap.set("n", "<leader>lu", "<CMD>Lspsaga finder<CR>", { desc = "Usage" })
 
 vim.keymap.set("n", "K", function()
 	require("lspsaga.command").load_command("hover_doc")
@@ -185,11 +178,11 @@ cmp.setup({
 		{ name = "path" },
 		{
 			name = "fuzzy_buffer",
-			keyword_length = 5,
+			keyword_length = 3,
 			dup = 0,
 			option = {
 				fuzzy_extra_arg = 2, -- Respect case
-				min_match_length = 5,
+				min_match_length = 3,
 				get_bufnrs = function()
 					return vim.api.nvim_list_bufs()
 				end,
@@ -242,7 +235,7 @@ end
 local null_ls = require("null-ls")
 
 null_ls.setup({
-	debug = true,
+	-- debug = true,
 	border = "rounded",
 	debounce = 1000,
 	diagnostic_format = "[#{c}] #{m} (#{s})",

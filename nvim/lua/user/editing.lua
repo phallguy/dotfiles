@@ -22,7 +22,6 @@ vim.keymap.set("n", "<Down>", "<CMD>resize -2<CR>", { desc = "Shorter" })
 vim.keymap.set("n", "<Right>", "<CMD>vertical resize +2<CR>", { desc = "Narrower" })
 vim.keymap.set("n", "<Left>", "<CMD>vertical resize -2<CR>", { desc = "Wider" })
 
-
 -- Navigation - keep cursor centered when jumping large block
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
@@ -41,8 +40,11 @@ vim.keymap.set("n", "]d", function()
 end, { desc = "Next diagnostic" })
 
 -- Quickfix / List
-vim.keymap.set("n", "[q", "<CMD>cp<CR>", { desc = "Prev qf" })
-vim.keymap.set("n", "]q", "<CMD>cn<CR>", { desc = "Next qf" })
+vim.keymap.set("n", "[q", "<CMD>cp<CR>", { desc = "Prev qf entry" })
+vim.keymap.set("n", "]q", "<CMD>cn<CR>", { desc = "Next qf entry" })
+vim.keymap.set("n", "]Q", "<CMD>cnewer<CR>", { desc = "Next qf list" })
+vim.keymap.set("n", "[Q", "<CMD>colder<CR>", { desc = "Prev qf list" })
+
 vim.keymap.set("n", "[l", "<cmd>lprevious<cr>", { desc = "prev list" })
 vim.keymap.set("n", "]l", "<cmd>lnext<cr>", { desc = "next list" })
 
@@ -80,14 +82,17 @@ end
 
 -- Buffers
 vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR><CMD>BDelete this<CR>", { desc = "Close", silent = true })
-vim.keymap.set("n", "<leader>q", "<CMD>DiffviewClose<CR><CMD>q<CR>", { desc = "Quit" , silent = true})
-vim.keymap.set("n", "<leader>C", "<CMD>tabclose<CR>", { desc = "Close tab", silent = true })
+vim.keymap.set("n", "<leader>q", "<CMD>DiffviewClose<CR><CMD>q<CR>", { desc = "Quit", silent = true })
 
-vim.keymap.set("n", "<leader>o", "<CMD>only<CR><CMD>set cmdheight=1<CR>", { desc = "Close all but this", silent = true })
+vim.keymap.set(
+	"n",
+	"<leader>o",
+	"<CMD>only<CR><CMD>set cmdheight=1<CR>",
+	{ desc = "Close all but this", silent = true }
+)
 vim.keymap.set("n", "<leader>O", function()
 	require("close_buffers").delete({ type = "other" })
 end, { desc = "Hard Close all but this", silent = true })
-
 
 -- -- Keep selection after indenting
 vim.keymap.set("v", "<", "<gv", { noremap = true })

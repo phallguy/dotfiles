@@ -10,7 +10,7 @@ return {
 	-- Fonts
 	font = wezterm.font(font_family, { weight="Thin" }),
 	font_size = 16,
-	line_height = 0.89,
+	line_height = 0.91,
 	cell_width = 0.89,
 	freetype_load_target = "HorizontalLcd",
 	freetype_render_target = "HorizontalLcd",
@@ -78,7 +78,7 @@ return {
 	tab_max_width = 16,
 	hide_tab_bar_if_only_one_tab = true,
 	--
-	scrollback_lines = 3000,
+	scrollback_lines = 50000,
 	cursor_blink_ease_in = "Constant",
 	cursor_blink_ease_out = "Constant",
 	keys = {

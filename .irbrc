@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-IRB.conf[:USE_AUTOCOMPLETE] = true
+IRB.conf[:USE_AUTOCOMPLETE] = false
 IRB.conf[:SHOW_FRAMES] = 0
 IRB.conf[:SHOW_SRC_LINES] = 25
 IRB.conf[:PROMPT_MODE] = :SIMPLE

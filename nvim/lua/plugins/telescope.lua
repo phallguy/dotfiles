@@ -51,11 +51,11 @@ return {
 			vim.keymap.set("n", "<leader>fn", "<CMD>Telescope man_pages<CR>", { desc = "Man pages" })
 			vim.keymap.set("n", "<leader>fd", "<CMD>tab DBUI<CR>", { desc = "Databases" })
 
-			local show_notifications = function()
-				require("telescope").extensions.notify.notify()
-			end
-
-			vim.keymap.set("n", "<leader>fn", show_notifications, { desc = "Notifications" })
+			-- local show_notifications = function()
+			-- 	require("telescope").extensions.notify.notify()
+			-- end
+			--
+			-- vim.keymap.set("n", "<leader>fn", show_notifications, { desc = "Notifications" })
 
 			require("telescope").setup({
 				defaults = {

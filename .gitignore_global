@@ -43,3 +43,5 @@ config/projections.json
 .tags.tmp
 tags
 tags.lock
+
+.qfscratch

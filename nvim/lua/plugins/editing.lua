@@ -13,7 +13,7 @@ return {
 		opts = {
 			marks = false,
 			registers = false,
-			presets ={
+			presets = {
 				operators = false,
 				motions = false,
 			},
