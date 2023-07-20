@@ -99,6 +99,11 @@ mason_lspconfig.setup_handlers({
 				capabilities = capabilities,
 				filetypes = { "ruby", "eruby" },
 				cmd = { "bundle", "exec", "--gemfile", "Gemfile.local", "solargraph", "stdio" },
+				settings = {
+					solargraph = {
+						diagnostics = true,
+					},
+				},
 			})
 		else
 			require("lspconfig")[server_name].setup({
@@ -235,7 +240,7 @@ end
 local null_ls = require("null-ls")
 
 null_ls.setup({
-	-- debug = true,
+	debug = true,
 	border = "rounded",
 	debounce = 1000,
 	diagnostic_format = "[#{c}] #{m} (#{s})",
@@ -262,7 +267,9 @@ null_ls.setup({
 		null_ls.builtins.formatting.prettierd,
 		-- null_ls.builtins.formatting.erb_lint,
 		null_ls.builtins.formatting.fixjson,
-		null_ls.builtins.formatting.rubocop,
+		null_ls.builtins.formatting.rubocop.with({
+			command = { "bundle", "exec", "--gemfile", "Gemfile.local", "rubocop" },
+		}),
 		null_ls.builtins.formatting.htmlbeautifier.with({
 			extra_args = {
 				"-b",
