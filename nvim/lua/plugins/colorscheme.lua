@@ -11,7 +11,7 @@ return {
 			require("rose-pine").setup({
 				variant = "moon",
 				dark_variant = "moon",
-				disable_background = false,
+				disable_background = true,
 				groups = {
 					git_text = "gold",
 				},

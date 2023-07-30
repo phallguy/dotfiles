@@ -9,7 +9,7 @@ return {
 	--
 	-- Fonts
 	font = wezterm.font(font_family, { weight="Thin" }),
-	font_size = 16,
+	font_size = 15,
 	line_height = 0.91,
 	cell_width = 0.89,
 	freetype_load_target = "HorizontalLcd",
@@ -66,7 +66,7 @@ return {
 	-- window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
 	macos_window_background_blur = 50,
-	-- window_background_opacity = 0.96,
+	window_background_opacity = 0.93,
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,
 	initial_rows = 40,
@@ -79,7 +79,7 @@ return {
 	tab_max_width = 16,
 	hide_tab_bar_if_only_one_tab = true,
 	--
-	scrollback_lines = 50000,
+	scrollback_lines = 10000,
 	cursor_blink_ease_in = "Constant",
 	cursor_blink_ease_out = "Constant",
 	keys = {
