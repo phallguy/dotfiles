@@ -12,20 +12,31 @@ require("mason").setup({
 local mason_lspconfig = require("mason-lspconfig")
 
 mason_lspconfig.setup({
-})
-
-mason_lspconfig.setup_handlers({
-	function(server_name)
-		if server_name == "solargraph" then
-			require("lspconfig").solargraph.setup({
-				capabilities = capabilities,
-				filetypes = { "ruby", "eruby" },
-				cmd = { "bundle", "exec", "--gemfile", "Gemfile.local", "solargraph", "stdio" },
-			})
-		else
+	handlers = {
+		function(server_name)
 			require("lspconfig")[server_name].setup({
 				capabilities = capabilities,
 			})
-		end
-	end,
+		end,
+	}
+})
+
+require("lspconfig").solargraph.setup({
+	capabilities = capabilities,
+	filetypes = { "ruby", "eruby" },
+	init_options = {
+		formatting = false
+	}
+})
+
+require("lspconfig").rubocop.setup({
+	capabilities = capabilities,
+	filetypes = { "ruby" },
+	on_new_config = function(config, root_dir)
+		config.cmd = { 'rubocop', '--lsp' }
+	end
+})
+
+require("lspconfig").prettierd.setup({
+	capabilities = capabilities,
 })
