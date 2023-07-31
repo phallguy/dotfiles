@@ -39,45 +39,10 @@ require("lazy").setup({
 	-- import .vimrc from CWD when launching
 	{
 		"embear/vim-localvimrc",
-		config = function()
-		end,
-	},
-
-	{
-		-- LSP Configuration & Plugins
-		"neovim/nvim-lspconfig",
-		cond = not vim.g.vscode,
-		dependencies = {
-			-- Automatically install LSPs to stdpath for neovim
-			{
-				"williamboman/mason.nvim",
-				build = ":MasonUpdate"
-			},
-			"williamboman/mason-lspconfig.nvim",
-
-			-- Additional lua configuration, makes nvim stuff amazing!
-			"folke/neodev.nvim",
-		},
+		config = function() end,
 	},
 
 	{ "tzachar/fuzzy.nvim", dependencies = { "nvim-telescope/telescope-fzf-native.nvim" } },
-
-	{
-		-- Autocompletion
-		"hrsh7th/nvim-cmp",
-		cond = not vim.g.vscode,
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp-document-symbol",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"petertriho/cmp-git",
-			"onsails/lspkind.nvim",
-		},
-	},
 
 	{ import = "plugins" },
 }, {

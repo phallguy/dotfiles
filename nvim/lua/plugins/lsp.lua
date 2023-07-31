@@ -3,27 +3,23 @@ if vim.g.vscode then
 end
 
 return {
-	{ "jose-elias-alvarez/null-ls.nvim" },
+	{
+		-- LSP Configuration & Plugins
+		"neovim/nvim-lspconfig",
+		cond = not vim.g.vscode,
+		dependencies = {
+			-- Automatically install LSPs to stdpath for neovim
+			{
+				"williamboman/mason.nvim",
+				build = ":MasonUpdate",
+			},
+			"williamboman/mason-lspconfig.nvim",
+
+			-- Additional lua configuration, makes nvim stuff amazing!
+			"folke/neodev.nvim",
+		},
+	},
 	{
 		"glepnir/lspsaga.nvim",
 	},
-	{
-		"tzachar/cmp-fuzzy-buffer",
-		dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" },
-	},
-	-- {
-	-- 	"ludovicchabant/vim-gutentags",
-	-- },
-	{
-		"ray-x/lsp_signature.nvim",
-		config = function ()
-			require("lsp_signature").setup({
-				bind = true,
-				noice = true,
-				handler_opts = {
-					border = "rounded"
-				}
-			})
-		end,
-	}
 }
