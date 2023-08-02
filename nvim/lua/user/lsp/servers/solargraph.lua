@@ -6,9 +6,9 @@ require("lspconfig").solargraph.setup({
 	init_options = {
 		formatting = true
 	},
-	settings = {
-		solargraph = {
-			diagnostics = false,
-		}
-	}
+	-- settings = {
+	-- 	solargraph = {
+	-- 		diagnostics = false,
+	-- 	}
+	-- }
 })
