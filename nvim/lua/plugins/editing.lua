@@ -40,7 +40,7 @@ return {
 			vim.g["pencil#wrapModeDefault"] = "soft"
 		end,
 	},
-	{ "AndrewRadev/splitjoin.vim" },
+	-- { "AndrewRadev/splitjoin.vim" },
 	{
 		"norcalli/nvim-colorizer.lua",
 		cond = not vim.g.vscode,
