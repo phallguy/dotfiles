@@ -20,4 +20,7 @@ return {
 	{
 		"glepnir/lspsaga.nvim",
 	},
+	{
+		"MunifTanjim/prettier.nvim",
+	}
 }

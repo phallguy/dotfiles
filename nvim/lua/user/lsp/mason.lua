@@ -1,4 +1,4 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require("user.lsp.capabilities")
 
 -- Setup mason so it can manage external tooling
 require("mason").setup({
@@ -21,22 +21,7 @@ mason_lspconfig.setup({
 	}
 })
 
-require("lspconfig").solargraph.setup({
-	capabilities = capabilities,
-	filetypes = { "ruby", "eruby" },
-	init_options = {
-		formatting = false
-	}
-})
-
-require("lspconfig").rubocop.setup({
-	capabilities = capabilities,
-	filetypes = { "ruby" },
-	on_new_config = function(config, root_dir)
-		config.cmd = { 'rubocop', '--lsp' }
-	end
-})
-
-require("lspconfig").prettierd.setup({
-	capabilities = capabilities,
-})
+require("user.lsp.servers.solargraph")
+require("user.lsp.servers.rubocop")
+require("user.lsp.servers.prettier")
+require("user.lsp.servers.tsserver")

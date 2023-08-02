@@ -9,8 +9,8 @@ return {
 	--
 	-- Fonts
 	font = wezterm.font(font_family, { weight="Thin" }),
-	font_size = 15,
-	line_height = 0.91,
+	font_size = 14,
+	line_height = 0.95,
 	cell_width = 0.89,
 	freetype_load_target = "HorizontalLcd",
 	freetype_render_target = "HorizontalLcd",
