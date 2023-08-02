@@ -5,8 +5,6 @@ end
 vim.g.loaded_matchit = 1
 
 return {
-	-- "tpope/vim-vinegar", -- netwr support
-
 	-- Useful plugin to show you pending keybinds.
 	{
 		"folke/which-key.nvim",
@@ -33,14 +31,13 @@ return {
 
 	{ "mg979/vim-visual-multi" }, -- Multi cursors
 	{ "junegunn/vim-easy-align" }, -- Multi-line bock alignment
-	{ "tpope/vim-surround" }, -- change surrounding tags/quotes/parens
+	{ "tpope/vim-surround" },     -- change surrounding tags/quotes/parens
 	{
 		"reedes/vim-pencil",
 		config = function()
 			vim.g["pencil#wrapModeDefault"] = "soft"
 		end,
 	},
-	-- { "AndrewRadev/splitjoin.vim" },
 	{
 		"norcalli/nvim-colorizer.lua",
 		cond = not vim.g.vscode,
@@ -71,6 +68,15 @@ return {
 			-- may set any options here
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 		end,
+	},
+	{
+		"m4xshen/autoclose.nvim",
+		config = function()
+			require("autoclose").setup({
+				disable_when_touch = true,
+				pair_spaces = true,
+			})
+		end
 	},
 
 	{

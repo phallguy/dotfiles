@@ -21,7 +21,7 @@ mason_lspconfig.setup({
 	}
 })
 
-require("user.lsp.servers.solargraph")
 require("user.lsp.servers.rubocop")
+require("user.lsp.servers.solargraph")
 require("user.lsp.servers.prettier")
 require("user.lsp.servers.tsserver")

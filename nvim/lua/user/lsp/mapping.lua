@@ -28,7 +28,8 @@ end, { desc = "Document [o]utline" })
 vim.keymap.set("n", "<leader>lu", "<CMD>Lspsaga finder<CR>", { desc = "Usage" })
 
 vim.keymap.set("n", "K", function()
-	require("lspsaga.command").load_command("hover_doc")
+	-- require("lspsaga.command").load_command("hover_doc")
+	vim.lsp.buf.hover()
 end, { desc = "Hover Documentation" })
 vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
 

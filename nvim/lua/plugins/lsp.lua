@@ -15,7 +15,7 @@ return {
 	},
 	{
 		"folke/neodev.nvim",
-		config = {}
+		opts = {}
 	},
 	{
 		"glepnir/lspsaga.nvim",

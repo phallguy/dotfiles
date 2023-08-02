@@ -4,6 +4,11 @@ require("lspconfig").solargraph.setup({
 	capabilities = capabilities,
 	filetypes = { "ruby", "eruby" },
 	init_options = {
-		formatting = false
+		formatting = true
+	},
+	settings = {
+		solargraph = {
+			diagnostics = false,
+		}
 	}
 })
