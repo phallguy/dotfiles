@@ -5,6 +5,7 @@ return {
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
+			"tzachar/cmp-fuzzy-buffer",
 			"hrsh7th/cmp-path",
 			"petertriho/cmp-git",
 			"onsails/lspkind.nvim",
@@ -13,6 +14,7 @@ return {
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			local compare = require("cmp.config.compare")
 
 			local has_words_before = function()
 				unpack = unpack or table.unpack
@@ -61,7 +63,7 @@ return {
 						end
 					end, { "i", "s" }),
 				}),
-				sources = {
+				sources = cmp.config.sources({
 					{ name = "nvim_lsp", priority = -1 },
 					{
 						name = "fuzzy_buffer",
@@ -77,6 +79,20 @@ return {
 					},
 					{ name = "path" },
 					{ name = "git" },
+				}),
+				sorting = {
+					priority_weight = 20,
+					comparators = {
+						compare.kind,
+						require("cmp_fuzzy_buffer.compare"),
+						-- compare.offset,
+						compare.recently_used,
+						compare.exact,
+						compare.score,
+						compare.sort_text,
+						compare.length,
+						compare.order,
+					},
 				},
 				formatting = {
 					format = lspkind.cmp_format({

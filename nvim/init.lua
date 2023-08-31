@@ -50,7 +50,8 @@ require("lazy").setup({
 		border = "rounded",
 	},
 	checker = {
-		enabled = true,
+    -- Look for plugin updates
+		enabled = false,
 	},
 	change_detection = {
 		enabled = false,

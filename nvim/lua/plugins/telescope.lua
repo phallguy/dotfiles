@@ -41,14 +41,20 @@ return {
 				require("telescope-live-grep-args.shortcuts").grep_word_under_cursor,
 				{ desc = "Live grep" }
 			)
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
+			vim.keymap.set(
+				"n",
+				"<leader>fb",
+				function()
+					return require("telescope.builtin").live_grep({ grep_open_files = true })
+				end,
+				{ desc = "Live grep buffers" }
+			)
 			vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume search" })
 			vim.keymap.set("n", "<leader>fe", builtin.registers, { desc = "Registers" })
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
 			vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })
 			vim.keymap.set("n", "<leader>fm", "<CMD>Telescope media_files<CR>", { desc = "Media files" })
 			vim.keymap.set("n", "<leader>fu", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
-			vim.keymap.set("n", "<leader>fn", "<CMD>Telescope man_pages<CR>", { desc = "Man pages" })
 			vim.keymap.set("n", "<leader>fd", "<CMD>tab DBUI<CR>", { desc = "Databases" })
 
 			-- local show_notifications = function()

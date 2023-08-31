@@ -8,6 +8,7 @@ return {
 	-- Useful plugin to show you pending keybinds.
 	{
 		"folke/which-key.nvim",
+		enabled = false,
 		opts = {
 			marks = false,
 			registers = false,
@@ -37,6 +38,9 @@ return {
 		config = function()
 			vim.g["pencil#wrapModeDefault"] = "soft"
 		end,
+	},
+	{
+		"junegunn/goyo.vim",
 	},
 	{
 		"norcalli/nvim-colorizer.lua",

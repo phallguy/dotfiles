@@ -12,7 +12,7 @@ require("lspsaga").setup({
 	outline = {
 		auto_close = true,
 		keys = {
-			expand_or_jump = "<CR>",
+			toggle_or_jump = "<CR>",
 		},
 	},
 	lightbulb = {

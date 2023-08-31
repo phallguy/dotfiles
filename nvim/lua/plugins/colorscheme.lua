@@ -11,7 +11,7 @@ return {
 			require("rose-pine").setup({
 				variant = "moon",
 				dark_variant = "moon",
-				disable_background = true,
+				disable_background = false,
 				groups = {
 					git_text = "gold",
 				},
@@ -23,7 +23,7 @@ return {
 					IndentBlanklineChar = { fg = "highlight_low" },
 					IndentBlanklineContextChar = { fg = "highlight_med" },
 					Folded = { fg = "highlight_high" },
-					Visual = { bg = "pine", blend = 20 },
+					Visual = { bg = "pine", blend = 50 },
 					Keyword = { fg = "iris" },
 					["@function.call"] = { fg = "foam", italic = true },
 					["@type.qualifier"] = { fg = "pine" },
