@@ -23,6 +23,7 @@ tags.tmp
 chromedriver
 .agignore
 bin/up
+bin/up-*
 .pryrc
 BqfPreviewBorder
 .vimspector.json

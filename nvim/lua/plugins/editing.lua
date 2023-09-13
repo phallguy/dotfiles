@@ -126,4 +126,5 @@ return {
 	},
 
 	{ "tpope/vim-projectionist" },
+	{ "stefanlogue/hydrate.nvim" },
 }

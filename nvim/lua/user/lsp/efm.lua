@@ -6,6 +6,9 @@ require "lspconfig".efm.setup {
 			scss = {
 				require("user.lsp.efm.prettier")
 			},
+			css = {
+				require("user.lsp.efm.prettier")
+			},
 			eruby = {
 				require("user.lsp.efm.htmlbeautifier")
 			}

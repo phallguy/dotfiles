@@ -1,4 +1,4 @@
-local command = "prettier --stdin --stdin-filepath  '${INPUT}' ${--range-start:charStart} ${--range-end:charEnd} ${--tab-width:tabSize} ${--use-tabs:!insertSpaces}"
+local command = "prettierd '${INPUT}' ${--range-start:charStart} ${--range-end:charEnd} ${--tab-width:tabSize} ${--use-tabs:!insertSpaces}"
 
 return {
 	formatCanRange = true,
