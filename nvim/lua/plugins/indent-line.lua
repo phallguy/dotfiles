@@ -1,10 +1,16 @@
+if vim.g.vscode then
+	return {}
+end
+
 return {
   -- Add indentation guides even on blank lines
   "lukas-reineke/indent-blankline.nvim",
-  -- See `:help indent_blankline.txt`
+  main = "ibl",
+  -- See `:help ibl.setup`
   opts = {
-    show_trailing_blankline_indent = false,
-    show_current_context = true,
-    show_current_context_start = false,
+    scope = {
+      show_start = false,
+      show_end = false,
+    }
   },
 }

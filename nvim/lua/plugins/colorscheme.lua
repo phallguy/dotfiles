@@ -22,6 +22,8 @@ return {
 					CursorLineSign = { fg = "text", bg = "highlight_low" },
 					IndentBlanklineChar = { fg = "highlight_low" },
 					IndentBlanklineContextChar = { fg = "highlight_med" },
+					IblIndent = { fg = "highlight_low" },
+					IblScope = { fg = "highlight_med" },
 					Folded = { fg = "highlight_high" },
 					Visual = { bg = "pine", blend = 50 },
 					Keyword = { fg = "iris" },

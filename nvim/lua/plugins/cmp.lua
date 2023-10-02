@@ -1,11 +1,18 @@
 return {
+	-- {
+	-- 	"tzachar/cmp-fuzzy-buffer",
+	-- 	dependencies = {
+	-- 		"romgrk/fzy-lua-native",
+	-- 		"tzachar/fuzzy.nvim",
+	-- 	}
+	-- },
 	{
 		"hrsh7th/nvim-cmp",
 		cond = not vim.g.vscode,
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
-			"tzachar/cmp-fuzzy-buffer",
+			-- "tzachar/cmp-fuzzy-buffer",
 			"hrsh7th/cmp-path",
 			"petertriho/cmp-git",
 			"onsails/lspkind.nvim",
@@ -66,34 +73,36 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp", priority = -1 },
 					{
-						name = "fuzzy_buffer",
-						keyword_length = 3,
-						dup = 0,
+						name = "buffer",
 						option = {
-							fuzzy_extra_arg = 2, -- Respect case
-							min_match_length = 3,
 							get_bufnrs = function()
-								return vim.api.nvim_list_bufs()
-							end,
-						},
+								local bufs = {}
+								for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+									local buftype = vim.api.nvim_buf_get_option(buf, 'buftype')
+									if buftype ~= 'nofile' and buftype ~= 'prompt' then
+										bufs[#bufs + 1] = buf
+									end
+								end
+								return bufs
+							end
+						}
 					},
 					{ name = "path" },
 					{ name = "git" },
 				}),
-				sorting = {
-					priority_weight = 20,
-					comparators = {
-						compare.kind,
-						require("cmp_fuzzy_buffer.compare"),
-						-- compare.offset,
-						compare.recently_used,
-						compare.exact,
-						compare.score,
-						compare.sort_text,
-						compare.length,
-						compare.order,
-					},
-				},
+				-- sorting = {
+				-- 	priority_weight = 20,
+				-- 	-- comparators = {
+				-- 	-- 	compare.kind,
+				-- 	-- 	compare.offset,
+				-- 	-- 	compare.recently_used,
+				-- 	-- 	compare.exact,
+				-- 	-- 	compare.score,
+				-- 	-- 	compare.sort_text,
+				-- 	-- 	compare.length,
+				-- 	-- 	compare.order,
+				-- 	-- },
+				-- },
 				formatting = {
 					format = lspkind.cmp_format({
 						-- mode = "symbol_text", -- show only symbol annotations

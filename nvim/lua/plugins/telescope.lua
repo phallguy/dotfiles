@@ -165,8 +165,14 @@ return {
 							preview_height = 0.8,
 						}
 					},
-				},
+					fzy_native = {
+						override_generic_sorter = false,
+						override_file_sorter = true,
+					}
+				}
 			})
+
+			require('telescope').load_extension('fzy_native')
 
 			-- Enable telescope fzf native, if installed
 			pcall(require("telescope").load_extension, "fzf")

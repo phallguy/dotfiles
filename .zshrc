@@ -79,6 +79,7 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-vim-mode
+  rbenv
 )
 
 zstyle ':omz:*' aliases no
@@ -109,9 +110,9 @@ else
   echo "zoxide not installed"
 fi
 
-if command -v fzf &> /dev/null; then
+if command -v fzy &> /dev/null; then
 else
-  echo "fzf not installed"
+  echo "fzy not installed"
 fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,

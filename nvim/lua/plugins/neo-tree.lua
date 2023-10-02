@@ -12,7 +12,6 @@ return {
 			require("neo-tree").setup({
 				-- log_level = "debug",
 				close_if_last_window = true,
-				close_floats_on_escape_key = true,
 				name = {
 					trailing_slash = true,
 				},
@@ -75,7 +74,9 @@ return {
 						},
 					},
 					hijack_netrw_behavior = "open_current",
-					follow_current_file = true,
+					follow_current_file = {
+						enabled = true,
+					},
 					bind_to_cwd = false,
 					cwd_target = {
 						current = "window",

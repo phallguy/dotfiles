@@ -8,7 +8,7 @@ return {
 	-- Appearance ===
 	--
 	-- Fonts
-	font = wezterm.font(font_family, { weight="ExtraLight" }),
+	font = wezterm.font(font_family, { weight="Light" }),
 	-- font = wezterm.font(font_family, { weight="Medium" }),
 	font_size = 14,
 	line_height = 0.95,
