@@ -104,6 +104,8 @@ return {
 						previewer = false,
 						initial_mode = "insert",
 						sort_lastused = true,
+						sort_mry = true,
+						ignore_current_buffer = true,
 					},
 					live_grep = {
 						theme = "ivy",
@@ -122,6 +124,7 @@ return {
 						theme = "ivy",
 						previewer = false,
 						-- sort_lastused = true,
+						sort_mru = true,
 					},
 					current_buffer_fuzzy_find = {
 						theme = "ivy",
@@ -166,15 +169,14 @@ return {
 						}
 					},
 					fzy_native = {
-						override_generic_sorter = false,
+						override_generic_sorter = true,
 						override_file_sorter = true,
 					}
 				}
 			})
 
-			require('telescope').load_extension('fzy_native')
 
-			-- Enable telescope fzf native, if installed
+			pcall(require('telescope').load_extension, 'fzy_native')
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "live_grep_args")
 			pcall(require("telescope").load_extension, "noice")
@@ -186,15 +188,15 @@ return {
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built.
 	-- Only load if `make` is available. Make sure you have the system
 	-- requirements installed.
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		-- NOTE: If you are having trouble with this installation,
-		--       refer to the README for telescope-fzf-native for more instructions.
-		build = "make",
-		cond = function()
-			return vim.fn.executable("make") == 1
-		end,
-	},
+	-- {
+	-- 	"nvim-telescope/telescope-fzf-native.nvim",
+	-- 	-- NOTE: If you are having trouble with this installation,
+	-- 	--       refer to the README for telescope-fzf-native for more instructions.
+	-- 	build = "make",
+	-- 	cond = function()
+	-- 		return vim.fn.executable("make") == 1
+	-- 	end,
+	-- },
 
 	{ "nvim-telescope/telescope-live-grep-args.nvim" }, -- refine live grep
 	{ "nvim-telescope/telescope-media-files.nvim" },

@@ -19,7 +19,4 @@ return {
 			})
 		end,
 	},
-	{
-		"junegunn/fzf",
-	},
 }

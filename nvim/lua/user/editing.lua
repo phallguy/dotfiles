@@ -11,6 +11,9 @@ vim.keymap.set("v", "p", '"_dP') -- don't yank into clipboard when pasting
 vim.keymap.set("n", "x", '"_x') -- when deleting a single character don't clobber clipboard
 vim.keymap.set("n", "p", "p=`]") -- reindent on paste
 
+-- Better cmd
+vim.keymap.set("n", "<leader><leader>", ":" )
+
 -- Move to window using the <ctrl> hjkl keys
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })

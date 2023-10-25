@@ -10,6 +10,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.keymap.set("n", "<leader>gs", "<CMD>DiffviewOpen<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>gS", "<CMD>DiffviewOpen head~<CR>", { desc = "Status (head~)" })
 vim.keymap.set("n", "<leader>gd", "<CMD>DiffviewOpen -- %<CR>", { desc = "Diff buffer" })
+vim.keymap.set("n", "<leader>gD", "<CMD>DiffviewOpen head~ -- %<CR>", { desc = "Diff buffer (head~)" })
 vim.keymap.set("n", "<leader>gh", "<CMD>DiffviewFileHistory %<CR>", { desc = "Diff file history" })
 vim.keymap.set("n", "<leader>gw", "<CMD>G show<CR>", { desc = "Git show" })
 vim.keymap.set("n", "<leader>gb", "<CMD>G blame<CR>", { desc = "Blame" })
@@ -34,7 +35,8 @@ vim.keymap.set("n", "<leader>go", "<CMD>Telescope git_branches<CR>", { desc = "B
 vim.keymap.set("n", "<leader>gr", ":G br phallguy/", { desc = "Branch" })
 vim.keymap.set("n", "<leader>gl", "<CMD>DiffviewFileHistory<CR>", { desc = "Recent log" })
 vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR>", { desc = "Commit", silent = true })
-vim.keymap.set("n", "<leader>ga", "<CMD>tab G cam<CR>", { desc = "Commit ammend", silent = true })
+vim.keymap.set("n", "<leader>ga", "<CMD>DiffviewClose<CR><CMD>tab G cam<CR>", { desc = "Commit ammend", silent = true })
+vim.keymap.set("n", "<leader>gt", "<CMD>DiffviewClose<CR><CMD>G ++curwin todo<CR>", { desc = "Todo", silent = true })
 
 vim.opt.fillchars:append({ diff = "╱" })
 vim.opt.fillchars:append({ eob = " " })

@@ -78,7 +78,7 @@
   pushf = push origin HEAD -f --no-verify
   pusho = push origin HEAD
   s = show
-  todo = log -Gfail --patch
+  todo = diff head~ -Sfail -STODO
 
 
 [diff]

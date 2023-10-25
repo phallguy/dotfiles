@@ -8,7 +8,7 @@ IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_MULTILINE] = true
 
 ARGV.concat [
-  "--readline",
+  "--noreadline",
   "--prompt-mode",
   "simple",
 ]

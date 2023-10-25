@@ -4,7 +4,8 @@ end
 
 -- vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "Goto Definition" })
 vim.keymap.set("n", "gd", function()
-	require("lspsaga.command").load_command("goto_definition")
+	-- require("lspsaga.command").load_command("goto_definition")
+	vim.lsp.buf.definition()
 end, { desc = "[G]oto [d]efinition" })
 
 vim.keymap.set("n", "<leader>lrs", function()
