@@ -31,7 +31,7 @@ require("lspsaga").setup({
 	finder = {
 		request_timeout = 10000,
 		keys = {
-			expand_or_jump = "<CR>",
+			toggle_or_open = "<CR>",
 			vsplit = { "<C-v>", "v" },
 			split = { "s" },
 		},

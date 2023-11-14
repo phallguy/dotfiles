@@ -68,8 +68,8 @@
   rb = rebase
   rbc = rebase --continue
   boom = !git remote prune origin && git fetch origin && git reset --hard origin/$( git rev-parse --abbrev-ref HEAD ) && git submodule update --recursive
-  bam = !git co master && git boom && (git branch --format '%(refname:short)' --merged | egrep -v "^master" | xargs git branch -d)  && git checkout -
-  bamm = !git co master && git boom && (git branch --format '%(refname:short)' --merged | egrep -v "^master" | xargs git branch -d)
+  bam = !DEFAULT_BRANCH=$(basename $(git rev-parse --abbrev-ref origin/HEAD)) && git co $DEFAULT_BRANCH && git boom && (git branch --format '%(refname:short)' --merged | egrep -v "^${DEFAULT_BRANCH}" | xargs git branch -d)  && git checkout -
+  bamm = !DEFAULT_BRANCH=$(basename $(git rev-parse --abbrev-ref origin/HEAD)) && git co $DEFAULT_BRANCH && git boom && (git branch --format '%(refname:short)' --merged | egrep -v "^${DEAFULT_BRANCH}" | xargs git branch -d)
   dt = difftool
   dtc = difftool --cached
   ca = commit --amend --no-edit --no-verify

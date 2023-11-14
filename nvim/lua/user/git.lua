@@ -36,7 +36,7 @@ vim.keymap.set("n", "<leader>gr", ":G br phallguy/", { desc = "Branch" })
 vim.keymap.set("n", "<leader>gl", "<CMD>DiffviewFileHistory<CR>", { desc = "Recent log" })
 vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR>", { desc = "Commit", silent = true })
 vim.keymap.set("n", "<leader>ga", "<CMD>DiffviewClose<CR><CMD>tab G cam<CR>", { desc = "Commit ammend", silent = true })
-vim.keymap.set("n", "<leader>gt", "<CMD>DiffviewClose<CR><CMD>G ++curwin todo<CR>", { desc = "Todo", silent = true })
+vim.keymap.set("n", "<leader>gt", "<CMD>DiffviewClose<CR><CMD>G todo<CR>", { desc = "Todo", silent = true })
 
 vim.opt.fillchars:append({ diff = "╱" })
 vim.opt.fillchars:append({ eob = " " })

@@ -13,6 +13,8 @@ return {
 		config = function()
 			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 			require("nvim-treesitter.configs").setup({
+				-- Make the stupid diagnostics go away
+				modules = {},
 				-- Add languages to be installed here that you want installed for treesitter
 				ensure_installed = {
 					"lua",
@@ -25,8 +27,10 @@ return {
 				},
 				-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 				auto_install = true,
+				sync_install = false,
+				ignore_install = {},
 				highlight = {
-					enable = false,
+					enable = true,
 					-- disable = { "log", "eruby", "embedded_template" },
 					-- disable = { "log", "gitcommit" },
 					disable = function(lang, buf)
@@ -54,6 +58,8 @@ return {
 				},
 				autotag = {
 					enable = true,
+					filetypes = { "html", "xml", "javascript", "javascriptreact", "typescript", "typescriptreact", "eruby",
+						"markdown", "tsx", "jsx" },
 				},
 				endwise = {
 					enable = true,

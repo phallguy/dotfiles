@@ -21,7 +21,6 @@ return {
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			local compare = require("cmp.config.compare")
 
 			local has_words_before = function()
 				unpack = unpack or table.unpack
@@ -71,11 +70,12 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp", priority = -1 },
+					{ name = "nvim_lsp", priority = -1, dup = 0 },
 					{
 						name = "buffer",
 						keyword_length = 3,
 						max_indexed_line_length = 2048,
+						dup = 0,
 						option = {
 							get_bufnrs = function()
 								local bufs = {}
@@ -109,8 +109,8 @@ return {
 				formatting = {
 					format = lspkind.cmp_format({
 						-- mode = "symbol_text", -- show only symbol annotations
-						-- maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-						-- ellipsis_char = "…", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+						maxwidth = 72, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+						ellipsis_char = "…", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 						menu = {
 							fuzzy_buffer = "[Fuzzy Buffer]",
 							buffer = "[Buffer]",
