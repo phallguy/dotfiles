@@ -8,9 +8,9 @@ return {
 	-- Appearance ===
 	--
 	-- Fonts
-	font = wezterm.font(font_family, { weight="ExtraLight" }),
+	font = wezterm.font(font_family, { weight="Thin" }),
 	-- font = wezterm.font(font_family, { weight="Medium" }),
-	font_size = 14,
+	font_size = 15,
 	line_height = 0.95,
 	cell_width = 0.90,
 	freetype_load_target = "HorizontalLcd",
@@ -66,8 +66,8 @@ return {
 	window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
 	-- window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
-	macos_window_background_blur = 50,
-	-- window_background_opacity = 0.93,
+	macos_window_background_blur = 10,
+	window_background_opacity = 0.93,
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,
 	initial_rows = 40,

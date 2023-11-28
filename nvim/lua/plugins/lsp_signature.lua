@@ -5,7 +5,9 @@ return {
 		require('lsp_signature').setup({
 			bind = true,
 			noice = true,
-			-- hint_inline = function() return true end,
+			doc_lines = 20,
+			max_height = 22,
+			max_width = 100,
 			handler_opts = {
 				border = "rounded",
 			}

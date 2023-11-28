@@ -170,3 +170,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "q", "<CMD>lcl<CR><CMD>helpc<CR>", { buffer = event.buf, silent = true })
 	end,
 })
+
+-- THICC borders
+vim.opt.fillchars = {
+	horiz     = '━',
+	horizup   = '┻',
+	horizdown = '┳',
+	vert      = '┃',
+	vertleft  = '┫',
+	vertright = '┣',
+	verthoriz = '╋',
+}

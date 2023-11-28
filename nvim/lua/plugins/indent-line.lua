@@ -8,6 +8,7 @@ return {
   main = "ibl",
   -- See `:help ibl.setup`
   opts = {
+    indent = { char = "│" },
     scope = {
       show_start = false,
       show_end = false,
