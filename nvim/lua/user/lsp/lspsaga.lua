@@ -47,4 +47,8 @@ require("lspsaga").setup({
 		border = "rounded",
 		code_action = icons.diagnostics.Hint,
 	},
+	code_actions = {
+		show_server_name = true,
+		extend_gitsigns = true,
+	}
 })

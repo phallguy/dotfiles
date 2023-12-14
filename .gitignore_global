@@ -36,6 +36,7 @@ config/definitions.rb
 .yamllint
 .projections.json
 config/projections.json
+*.bun-build
 
 
 .ctags
