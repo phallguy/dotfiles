@@ -8,7 +8,7 @@ return {
 	-- Appearance ===
 	--
 	-- Fonts
-	font = wezterm.font(font_family, { weight="Thin" }),
+	font = wezterm.font(font_family, { weight = "Thin" }),
 	-- font = wezterm.font(font_family, { weight="Medium" }),
 	font_size = 15,
 	line_height = 0.95,
@@ -20,7 +20,7 @@ return {
 	window_frame = {
 		font = wezterm.font_with_fallback({
 			-- <built-in>, BuiltIn
-			{ family = "Roboto", weight = "Medium" },
+			{ family = "Roboto",                         weight = "Medium" },
 
 			-- /Users/paulalexander/Library/Fonts/JetBrains Mono NL Light Nerd Font Complete Mono.ttf, CoreText
 			{ family = "JetBrainsMonoNL Nerd Font Mono", weight = "Thin" },
@@ -66,8 +66,16 @@ return {
 	window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
 	-- window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
-	macos_window_background_blur = 10,
-	window_background_opacity = 0.93,
+	macos_window_background_blur = 15,
+	window_background_opacity = 0.90,
+	-- window_background_gradient = {
+	-- 	orientation = "Vertical",
+	-- 	colors = {
+	-- 		'#232136',
+	-- 		'#42384D',
+	-- 		'#232136',
+	-- 	}
+	-- },
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,
 	initial_rows = 40,

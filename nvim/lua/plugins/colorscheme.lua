@@ -46,7 +46,7 @@ return {
 					["@text.diff.add"] = { fg = "text", bg = config.groups.git_add, blend = 20 },
 					["@attribute.diff"] = { fg = "iris" },
 					["@text.title.gitcommit"] = { fg = "foam", bold = true },
-					GitSignsAdd = { fg = colors.git_add, bg = "none" },
+					GitSignsAdd = { fg = "pine", bg = "none" },
 					GitSignsChange = { fg = colors.git_change, bg= "none" },
 					GitSignsDelete = { fg = colors.git_delete, bg= "none" },
 					SagaNormal = { bg = "surface" },
