@@ -71,6 +71,7 @@ return {
 							["A"] = "noop",
 							["d"] = "add_directory",
 							["D"] = "delete",
+							["<leader>p"] = "image_preview"
 						},
 					},
 					hijack_netrw_behavior = "open_current",
@@ -86,6 +87,14 @@ return {
 						hide_by_name = {
 							".git",
 						},
+					},
+					commands = {
+						image_preview = function(state)
+							local node = state.tree:get_node()
+							if node.type == "file" then
+								require("image_preview").PreviewImage(node.path)
+							end
+						end,
 					},
 				},
 			})

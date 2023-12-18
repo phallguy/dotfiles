@@ -6,6 +6,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require("user.options")
+require("user.kitty")
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim

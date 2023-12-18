@@ -9,7 +9,7 @@ return {
 			local config = require("rose-pine.config").options
 
 			require("rose-pine").setup({
-				variant = "moon",
+				-- variant = "moon",
 				dark_variant = "moon",
 				disable_background = true,
 				groups = {
@@ -47,6 +47,7 @@ return {
 					["@attribute.diff"] = { fg = "iris" },
 					["@text.title.gitcommit"] = { fg = "foam", bold = true },
 					GitSignsAdd = { fg = "pine", bg = "none" },
+
 					GitSignsChange = { fg = colors.git_change, bg= "none" },
 					GitSignsDelete = { fg = colors.git_delete, bg= "none" },
 					SagaNormal = { bg = "surface" },
