@@ -6,7 +6,7 @@ return {
   -- Adds git related signs to the gutter, as well as utilities for managing changes
   "lewis6991/gitsigns.nvim",
   opts = {
-    numhl = true,
+    numhl = false,
     word_diff = false,
     linehl = false,
     -- signs = {

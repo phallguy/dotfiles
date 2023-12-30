@@ -14,11 +14,13 @@ return {
 				disable_background = true,
 				groups = {
 					git_text = "gold",
+					git_change = "iris",
+					git_delete = "rose",
 				},
 				highlight_groups = {
-					LineNr = { fg = "highlight_high" },
+					LineNr = { fg = "highlight_med" },
 					AbsLineNr = { fg = "highlight_med" },
-					CursorLineNr = { fg = "iris", bg = "highlight_low" },
+					CursorLineNr = { fg = "subtle", bg = "highlight_low" },
 					CursorLineSign = { fg = "text", bg = "highlight_low" },
 					IblIndent = { fg = "highlight_low", bold = false },
 					IblScope = { fg = "highlight_high" },

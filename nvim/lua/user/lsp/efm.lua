@@ -9,9 +9,15 @@ require "lspconfig".efm.setup {
 			css = {
 				require("user.lsp.efm.prettier")
 			},
+			js = {
+				require("user.lsp.efm.prettier")
+			},
+			typescript = {
+				require("user.lsp.efm.prettier")
+			},
 			eruby = {
 				require("user.lsp.efm.htmlbeautifier")
-			}
+			},
 		}
 	}
 }
