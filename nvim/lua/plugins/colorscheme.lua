@@ -8,6 +8,10 @@ return {
 			local colors = require("rose-pine.palette")
 			local config = require("rose-pine.config").options
 
+			config.groups.git_change = "iris"
+			config.groups.git_text = "gold"
+			config.groups.git_delete = "rose"
+
 			require("rose-pine").setup({
 				-- variant = "moon",
 				-- dark_variant = "moon",
@@ -50,7 +54,8 @@ return {
 					qfError = { fg = colors.love, bold = true, italic = true },
 					QuickFixLine = { bg = "pine", blend = 15 },
 					-- Diff
-					DiffText = { bg = "iris", blend = 40 },
+					DiffText = { bg = config.groups.git_change, blend = 30 },
+					DiffChange = { bg = config.groups.git_change, blend = 10 },
 					DiffViewDiffDelete = { fg = "highlight_med" },
 					DiffViewDiffAdd = { bg = config.groups.git_add, blend = 15 },
 					DiffViewDiffDeleteDim = { fg = "highlight_med" },
