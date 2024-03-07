@@ -5,6 +5,7 @@ end
 return {
 	-- Set lualine as statusline
 	"nvim-lualine/lualine.nvim",
+	event = "VeryLazy",
 	-- See `:help lualine.txt`
 	priority = 1010,
 	config = function()

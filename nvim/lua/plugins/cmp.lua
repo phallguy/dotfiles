@@ -8,6 +8,8 @@ return {
 	-- },
 	{
 		"hrsh7th/nvim-cmp",
+		event = "VeryLazy",
+		lazy = true,
 		cond = not vim.g.vscode,
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",

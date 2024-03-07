@@ -1,5 +1,6 @@
 return {
 	"petertriho/nvim-scrollbar",
+	event = "BufEnter",
 	opts = {
 		handlers = {
 			gitsigns = true,   -- gitsigns integration (display hunks)

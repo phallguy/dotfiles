@@ -1,6 +1,7 @@
 return {
 	{
 		"RishabhRD/nvim-cheat.sh",
+		event = "VeryLazy",
 		dependencies = { "RishabhRD/popfix" },
 		config = function()
 			vim.g.cheat_default_window_layout = 'vertical_split'

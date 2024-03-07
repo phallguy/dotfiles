@@ -1,4 +1,10 @@
 return {
-	{ "tpope/vim-rails" },
-	{ "tpope/vim-bundler" },
+	{
+		"tpope/vim-rails",
+		event = "VeryLazy"
+	},
+	{
+		"tpope/vim-bundler",
+		event = "VeryLazy"
+	},
 }

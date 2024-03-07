@@ -1,6 +1,8 @@
 return {
 	{
 		"folke/trouble.nvim",
+		lazy = true,
+		event = "VeryLazy",
 		config = function()
 			require("trouble").setup({
 				mode = "document_diagnostics",

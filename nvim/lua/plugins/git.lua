@@ -3,11 +3,27 @@ if vim.g.vscode then
 end
 
 return {
-	{ "tpope/vim-fugitive" }, -- Git magic
-	{ "tpope/vim-rhubarb" }, -- Even more git magic
+ 	-- Git magic
+	{
+		"tpope/vim-fugitive",
+		event = "VeryLazy",
+	},
+
+ 	-- Even more git magic
+	{
+		"tpope/vim-rhubarb",
+		event = "VeryLazy",
+	},
+
 	{
 		-- https://github.com/sindrets/diffview.nvim
 		"sindrets/diffview.nvim",
+		lazy = true,
+		cmd = {
+			"DiffviewOpen",
+			"DiffviewFileHistory",
+			"DiffviewClose",
+		},
 		opts = {
 			enhanced_diff_hl = true,
 			view = {

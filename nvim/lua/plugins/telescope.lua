@@ -8,6 +8,8 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		version = "*",
+		lazy = true,
+		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			-- [[ Configure Telescope ]]
@@ -189,18 +191,23 @@ return {
 	-- Only load if `make` is available. Make sure you have the system
 	-- requirements installed.
 	{
-		"nvim-telescope/telescope-fzf-native.nvim",
 		-- NOTE: If you are having trouble with this installation,
 		--       refer to the README for telescope-fzf-native for more instructions.
+		"nvim-telescope/telescope-fzf-native.nvim",
+		lazy = true,
 		build = "make",
 		cond = function()
 			return vim.fn.executable("make") == 1
 		end,
 	},
 
-	{ "nvim-telescope/telescope-live-grep-args.nvim" }, -- refine live grep
-	{ "nvim-telescope/telescope-media-files.nvim" },
+ 	-- refine live grep
+	{
+		"nvim-telescope/telescope-live-grep-args.nvim",
+		lazy = true,
+	},
 	{
 		"debugloop/telescope-undo.nvim",
+		lazy = true,
 	},
 }

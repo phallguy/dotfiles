@@ -6,6 +6,7 @@ return {
 	{
 		-- https://github.com/akinsho/toggleterm.nvi
 		"akinsho/toggleterm.nvim",
+		lazy = true,
 		config = function()
 			local colors = require("rose-pine.palette")
 

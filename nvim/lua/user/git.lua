@@ -19,18 +19,6 @@ vim.keymap.set("n", "<leader>gB", function()
 	print(r, c)
 	vim.cmd(r .. ":GBrowse")
 end, { desc = "Browse", noremap = true })
-vim.keymap.set(
-	"n",
-	"<leader>gt",
-	"<CMD>silent !git difftool --tool Kaleidoscope %:p<CR>",
-	{ desc = "Diff tool", silent = true }
-)
-vim.keymap.set(
-	"n",
-	"<leader>gT",
-	"<CMD>silent !git difftool --tool Kaleidoscope<CR>",
-	{ desc = "Diff tool all", silent = true }
-)
 vim.keymap.set("n", "<leader>go", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
 vim.keymap.set("n", "<leader>gr", ":G br phallguy/", { desc = "Branch" })
 vim.keymap.set("n", "<leader>gl", "<CMD>DiffviewFileHistory<CR>", { desc = "Recent log" })

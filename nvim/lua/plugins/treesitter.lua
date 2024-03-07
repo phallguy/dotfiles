@@ -6,6 +6,8 @@ return {
 	{
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
+		event = "BufEnter",
+		lazy = true,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/playground",
@@ -128,17 +130,34 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
 
 			require('ts_context_commentstring').setup(
-				{ enable = true, enable_autocmd = false })      -- Enable commentstring
+				{ enable = true, enable_autocmd = false })   -- Enable commentstring
 			vim.g.skip_ts_context_commentstring_module = true -- Increase performance
 		end,
 	},
 
-	{ "windwp/nvim-ts-autotag" },
+	{
+		"windwp/nvim-ts-autotag",
+		lazy = true,
+	},
 
-	{ "RRethy/nvim-treesitter-endwise" },
+	{
+		"nvim-treesitter/playground",
+		lazy = true,
+	},
+
+	{
+		"RRethy/nvim-treesitter-endwise",
+		lazy = true,
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		lazy = true
+	},
 
 	{
 		"nvim-treesitter/nvim-treesitter-context",
+		lazy = true,
 		opts = {
 			enable = true,
 			max_lines = 4,
@@ -147,11 +166,11 @@ return {
 
 	{
 		"m-demare/hlargs.nvim",
+		lazy = true,
 		opts = {
 			extras = {
 				named_parameters = true,
 			},
 		},
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	}, -- Highlight method args separately
 }

@@ -6,92 +6,83 @@ vim.g.loaded_matchit = 1
 
 return {
 	-- Useful plugin to show you pending keybinds.
-	{
-		"folke/which-key.nvim",
-		enabled = false,
-		opts = {
-			marks = false,
-			registers = false,
-			presets = {
-				operators = false,
-				motions = false,
-			},
-			triggers_blacklist = {
-				n = { "g", "gf" },
-			},
-		},
-	},
 
 	-- "gc" to comment visual regions/lines
 	{
 		"numToStr/Comment.nvim",
+		event = "BufEnter",
 		opts = {},
 	},
 
-	{ "nvim-tree/nvim-web-devicons", opts = {} },
+	{
+		"nvim-tree/nvim-web-devicons",
+		lazy = true,
+		event = "VeryLazy",
+		opts = {},
+	},
 
-	{ "mg979/vim-visual-multi" }, -- Multi cursors
-	{ "junegunn/vim-easy-align" }, -- Multi-line bock alignment
-	{ "tpope/vim-surround" },     -- change surrounding tags/quotes/parens
+ 	-- Multi cursors
+	{
+		"mg979/vim-visual-multi",
+		event = "BufEnter",
+	},
+
+	{
+		"junegunn/vim-easy-align",
+		event = "BufEnter"
+	}, -- Multi-line bock alignment
+
+	{
+		"tpope/vim-surround",
+		event = "BufEnter",
+	}, -- change surrounding tags/quotes/parens
+
 	{
 		"reedes/vim-pencil",
+		cmd = {
+			"Pencil",
+			"PencilSoft"
+		},
 		config = function()
 			vim.g["pencil#wrapModeDefault"] = "soft"
 		end,
 	},
+
 	{
 		"junegunn/goyo.vim",
+		cmd = { "Goyo" }
 	},
-	-- {
-	-- 	"norcalli/nvim-colorizer.lua",
-	-- 	cond = not vim.g.vscode,
-	-- 	config = function()
-	-- 		require("colorizer").setup({
-	-- 			ruby = {
-	-- 				css = false,
-	-- 				RGB = false,
-	-- 			},
-	-- 		}, {
-	-- 			css = true,
-	-- 		})
-	-- 	end,
-	-- },
+
 	{
 		"brenoprata10/nvim-highlight-colors",
+		event = "BufEnter",
 		config = function()
 			require('nvim-highlight-colors').setup {
 				enable_named_colors = false,
 			}
 		end
 	},
-	{ "KabbAmine/vCoolor.vim" },
 
 	{
 		"sheerun/vim-polyglot",
 		cond = not vim.g.vscode,
+		lazy = true,
+		event = "VeryLazy",
 		init = function()
 			-- vim.g.polyglot_disabled = { "autoindent", "sensible", "ftdetect" }
 		end,
 		priority = 10,
 	},
+
 	{
 		"andymass/vim-matchup",
-		event = "VeryLazy",
+		event = "BufEnter",
 		config = function()
 			vim.g.matchup_matchparen_deferred = 1 -- work async
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 		end,
 	},
-	-- {
-	-- 	-- TODO compare with autopairs
-	-- 	"m4xshen/autoclose.nvim",
-	-- 	config = function()
-	-- 		require("autoclose").setup({
-	-- 			disable_when_touch = true,
-	-- 			pair_spaces = true,
-	-- 		})
-	-- 	end
-	-- },
+
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -138,12 +129,16 @@ return {
 
 	{
 		"kazhala/close-buffers.nvim",
+		event = "VeryLazy",
 		opts = {
 			preserve_window_layout = { "this" },
 		},
 	},
 
-	{ "tpope/vim-projectionist" },
+	{
+		"tpope/vim-projectionist",
+		event = "BufEnter"
+	},
 
 	-- {
 	-- 	"m4xshen/hardtime.nvim",
