@@ -9,9 +9,10 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/playground",
+			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
 		config = function()
-			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+			-- pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 			require("nvim-treesitter.configs").setup({
 				-- Make the stupid diagnostics go away
 				modules = {},
@@ -47,7 +48,7 @@ return {
 				incremental_selection = {
 					enable = true,
 					keymaps = {
-						scope_incremental = "<c-s>",
+						scope_incremental = false,
 						init_selection = "+",
 						node_incremental = "+",
 						node_decremental = "_",
@@ -55,6 +56,7 @@ return {
 				},
 				matchup = {
 					enabled = true,
+					enable_quotes = true,
 				},
 				autotag = {
 					enable = true,
@@ -74,27 +76,33 @@ return {
 							["im"] = "@function.inner",
 							["as"] = "@scope.outer",
 							["is"] = "@scope.inner",
+							["ak"] = { query = "@block.outer", desc = "around block" },
+							["ik"] = { query = "@block.inner", desc = "inside block" },
 						},
 					},
 					move = {
 						enable = true,
 						goto_next_start = {
+							["]k"] = { query = "@block.outer", desc = "Next block start" },
 							["]m"] = "@function.outer",
 							["]]"] = { query = "@class.outer", desc = "Next class start" },
 							--
 							["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
 						},
 						goto_next_end = {
+							["]K"] = { query = "@block.outer", desc = "Next block end" },
 							["]M"] = "@function.outer",
 							["]["] = "@class.outer",
 						},
 						goto_previous_start = {
+							["[k"] = { query = "@block.outer", desc = "Previous block start" },
 							["[m"] = "@function.outer",
 							["[["] = "@class.outer",
 							--
 							["[s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
 						},
 						goto_previous_end = {
+							["[K"] = { query = "@block.outer", desc = "Previous block end" },
 							["[M"] = "@function.outer",
 							["[]"] = "@class.outer",
 							--
@@ -118,6 +126,10 @@ return {
 			-- Repeat movement with ; and ,
 			-- ensure ; goes forward and , goes backward regardless of the last direction
 			vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+
+			require('ts_context_commentstring').setup(
+				{ enable = true, enable_autocmd = false })      -- Enable commentstring
+			vim.g.skip_ts_context_commentstring_module = true -- Increase performance
 		end,
 	},
 

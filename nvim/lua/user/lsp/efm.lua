@@ -18,6 +18,12 @@ require "lspconfig".efm.setup {
 			eruby = {
 				require("user.lsp.efm.htmlbeautifier")
 			},
+			xml = {
+				require("user.lsp.efm.xmllint")
+			},
+			svg = {
+				require("user.lsp.efm.xmllint")
+			},
 		}
 	}
 }

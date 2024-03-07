@@ -2,25 +2,6 @@ if vim.g.vscode then
   return
 end
 
-vim.cmd([[
-augroup TrailingWhitespace
-  autocmd!
-
-  " Remove trailing whitespace on save
-  function! s:RemoveTrailingWhitespaces()
-  "Save last cursor position
-  let l = line(".")
-  let c = col(".")
-
-  %s/\s\+$//ge
-
-  call cursor(l,c)
-  endfunction
-
-  au BufWritePre * :call <SID>RemoveTrailingWhitespaces()
-augroup END
-]])
-
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end

@@ -8,6 +8,7 @@ return {
 			doc_lines = 20,
 			max_height = 22,
 			max_width = 100,
+			hi_parameter = "IncSearch",   -- Color to highlight floating window.
 			handler_opts = {
 				border = "rounded",
 			}

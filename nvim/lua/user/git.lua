@@ -39,6 +39,5 @@ vim.keymap.set("n", "<leader>ga", "<CMD>DiffviewClose<CR><CMD>tab G cam<CR>", { 
 vim.keymap.set("n", "<leader>gt", "<CMD>DiffviewClose<CR><CMD>G todo<CR>", { desc = "Todo", silent = true })
 
 vim.opt.fillchars:append({ diff = "╱" })
-vim.opt.fillchars:append({ eob = " " })
 vim.opt.diffopt:append("iwhite") -- Ignore whitespace
 

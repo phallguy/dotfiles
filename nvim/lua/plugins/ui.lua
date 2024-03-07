@@ -7,6 +7,7 @@ return {
 	{ "MunifTanjim/nui.nvim" },
 	{
 		"folke/noice.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("noice").setup({
 				-- debug = true,

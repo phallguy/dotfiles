@@ -42,19 +42,27 @@ return {
 	{
 		"junegunn/goyo.vim",
 	},
+	-- {
+	-- 	"norcalli/nvim-colorizer.lua",
+	-- 	cond = not vim.g.vscode,
+	-- 	config = function()
+	-- 		require("colorizer").setup({
+	-- 			ruby = {
+	-- 				css = false,
+	-- 				RGB = false,
+	-- 			},
+	-- 		}, {
+	-- 			css = true,
+	-- 		})
+	-- 	end,
+	-- },
 	{
-		"norcalli/nvim-colorizer.lua",
-		cond = not vim.g.vscode,
+		"brenoprata10/nvim-highlight-colors",
 		config = function()
-			require("colorizer").setup({
-				ruby = {
-					css = false,
-					RGB = false,
-				},
-			}, {
-				css = true,
-			})
-		end,
+			require('nvim-highlight-colors').setup {
+				enable_named_colors = false,
+			}
+		end
 	},
 	{ "KabbAmine/vCoolor.vim" },
 
@@ -68,8 +76,9 @@ return {
 	},
 	{
 		"andymass/vim-matchup",
+		event = "VeryLazy",
 		config = function()
-			-- may set any options here
+			vim.g.matchup_matchparen_deferred = 1 -- work async
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 		end,
 	},
@@ -85,6 +94,7 @@ return {
 	-- },
 	{
 		"windwp/nvim-autopairs",
+		event = "InsertEnter",
 		config = function()
 			local npairs = require('nvim-autopairs')
 			local Rule   = require('nvim-autopairs.rule')
@@ -92,6 +102,14 @@ return {
 			npairs.setup({
 				check_ts = true,
 			})
+
+			local cmp_status_ok, cmp = pcall(require, "cmp")
+			if cmp_status_ok then
+				cmp.event:on(
+					"confirm_done",
+					require("nvim-autopairs.completion.cmp").on_confirm_done { tex = false }
+				)
+			end
 
 			local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
 			npairs.add_rules {
@@ -126,4 +144,9 @@ return {
 	},
 
 	{ "tpope/vim-projectionist" },
+
+	-- {
+	-- 	"m4xshen/hardtime.nvim",
+	-- 	opts = {}
+	-- },
 }

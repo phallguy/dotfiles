@@ -10,8 +10,11 @@ return {
 
 			require("rose-pine").setup({
 				-- variant = "moon",
-				dark_variant = "moon",
+				-- dark_variant = "moon",
 				disable_background = true,
+				styles = {
+					transparency = true,
+				},
 				groups = {
 					git_text = "gold",
 					git_change = "iris",
@@ -26,10 +29,14 @@ return {
 					IblScope = { fg = "highlight_high" },
 					Folded = { fg = "highlight_high" },
 					Visual = { bg = "pine", blend = 50 },
-					WinSeparator = { fg = "nc", bold = true },
-					Keyword = { fg = "iris" },
+					WinSeparator = { fg = "highlight_med", bold = true },
+					Keyword = { fg = "iris", bold = true },
+					Type = { fg = "foam", bold = true },
+					-- String = { fg = "love" },
+					["Identifier"] = { fg = "rose" },
 					["@function.call"] = { fg = "foam", italic = true },
 					["@type.qualifier"] = { fg = "pine" },
+					["@variable.member"] = { fg = "foam" },
 					SpellBad = { fg = colors.love, italic = true, undercurl = true },
 					SpellCap = { fg = colors.love, italic = true, undercurl = true },
 					SpellLocal = { fg = colors.pine, italic = true, undercurl = true },
@@ -43,15 +50,18 @@ return {
 					qfError = { fg = colors.love, bold = true, italic = true },
 					QuickFixLine = { bg = "pine", blend = 15 },
 					-- Diff
+					DiffText = { bg = "iris", blend = 40 },
 					DiffViewDiffDelete = { fg = "highlight_med" },
+					DiffViewDiffAdd = { bg = config.groups.git_add, blend = 15 },
+					DiffViewDiffDeleteDim = { fg = "highlight_med" },
 					["@text.diff.delete"] = { fg = "text", bg = config.groups.git_delete, blend = 20 },
 					["@text.diff.add"] = { fg = "text", bg = config.groups.git_add, blend = 20 },
 					["@attribute.diff"] = { fg = "iris" },
 					["@text.title.gitcommit"] = { fg = "foam", bold = true },
 					GitSignsAdd = { fg = "pine", bg = "none" },
 
-					GitSignsChange = { fg = colors.git_change, bg= "none" },
-					GitSignsDelete = { fg = colors.git_delete, bg= "none" },
+					GitSignsChange = { fg = colors.git_change, bg = "none" },
+					GitSignsDelete = { fg = colors.git_delete, bg = "none" },
 					SagaNormal = { bg = "surface" },
 					-- Tree
 					NeoTreeGitUntracked = { fg = "pine" },
@@ -67,6 +77,7 @@ return {
 					NeoTreeMessage = { fg = "muted" },
 					NeoTreeDotfile = { fg = "muted" },
 					NeoTreeCursorLine = { bg = "pine", blend = 20 },
+					NeoTreeDirectoryName = { fg = "foam", bold = true },
 					--
 
 					TroubleNormal = { bg = "surface" },

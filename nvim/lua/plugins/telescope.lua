@@ -19,7 +19,7 @@ return {
 			local trouble = require("trouble.providers.telescope")
 
 			vim.keymap.set("n", ",", builtin.buffers, { desc = "Buffers" })
-			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find files" })
+			vim.keymap.set("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
 
 			local oldfiles = function()
 				builtin.oldfiles({ only_cwd = true })
@@ -188,15 +188,15 @@ return {
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built.
 	-- Only load if `make` is available. Make sure you have the system
 	-- requirements installed.
-	-- {
-	-- 	"nvim-telescope/telescope-fzf-native.nvim",
-	-- 	-- NOTE: If you are having trouble with this installation,
-	-- 	--       refer to the README for telescope-fzf-native for more instructions.
-	-- 	build = "make",
-	-- 	cond = function()
-	-- 		return vim.fn.executable("make") == 1
-	-- 	end,
-	-- },
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		-- NOTE: If you are having trouble with this installation,
+		--       refer to the README for telescope-fzf-native for more instructions.
+		build = "make",
+		cond = function()
+			return vim.fn.executable("make") == 1
+		end,
+	},
 
 	{ "nvim-telescope/telescope-live-grep-args.nvim" }, -- refine live grep
 	{ "nvim-telescope/telescope-media-files.nvim" },

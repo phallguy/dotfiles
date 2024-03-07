@@ -23,4 +23,5 @@ return {
 	{
 		"MunifTanjim/prettier.nvim",
 	}
+
 }

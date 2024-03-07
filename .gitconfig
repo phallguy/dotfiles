@@ -65,8 +65,8 @@
   brd = !git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/heads | column -s '|' -t
   m = merge
   mn = merge --no-ff --no-commit
-  rb = rebase
   rbc = rebase --continue
+  rbm = !git bam && git rebase -i origin/master
   boom = !git remote prune origin && git fetch origin && git reset --hard origin/$( git rev-parse --abbrev-ref HEAD ) && git submodule update --recursive
   bam = !DEFAULT_BRANCH=$(basename $(git rev-parse --abbrev-ref origin/HEAD)) && git co $DEFAULT_BRANCH && git boom && (git branch --format '%(refname:short)' --merged | egrep -v "^${DEFAULT_BRANCH}" | xargs git branch -d)  && git checkout -
   bamm = !DEFAULT_BRANCH=$(basename $(git rev-parse --abbrev-ref origin/HEAD)) && git co $DEFAULT_BRANCH && git boom && (git branch --format '%(refname:short)' --merged | egrep -v "^${DEAFULT_BRANCH}" | xargs git branch -d)
@@ -128,3 +128,7 @@
   navigate = true    # use n and N to move between diff sections
   show-syntax = true
   side-by-side = true
+
+[difftool "kitty"]
+  cmd = kitten diff $LOCAL $REMOTE
+

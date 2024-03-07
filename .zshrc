@@ -79,7 +79,6 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-vim-mode
-  rbenv
 )
 
 zstyle ':omz:*' aliases no
@@ -98,7 +97,6 @@ export GPG_TTY=$TTY
 export BAT_THEME=ansi
 
 eval "$(batpipe)"
-eval "$(rbenv init -)"
 
 if command -v wezterm &> /dev/null; then
   eval "$(wezterm shell-completion --shell zsh)"
@@ -167,3 +165,5 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH=$PATH:/Users/paulalexander/.spicetify
+
+eval "$(rbenv init - zsh)"

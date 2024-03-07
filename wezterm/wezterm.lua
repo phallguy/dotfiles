@@ -1,14 +1,42 @@
 -- https://wezfurlong.org/wezterm/config/files/
 local wezterm = require("wezterm")
-local font_family = "JetBrainsMonoNL Nerd Font Mono"
 
 return {
 	-- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=terminfo
-	-- term = "wezterm",
+	term = "wezterm",
 	-- Appearance ===
 	--
 	-- Fonts
-	font = wezterm.font(font_family, { weight = "Thin" }),
+	font = wezterm.font_with_fallback({
+		{
+			family = "JetBrains Mono",
+			weight = "Light",
+			harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+		},
+		"JetBrainsMono Nerd Font Mono",
+	}),
+	font_rules = {
+		{
+			intensity = "Bold",
+			italic = true,
+			font = wezterm.font_with_fallback({ {
+				family = "JetBrains Mono",
+				weight = "Bold",
+				italic = true,
+			} }
+			),
+		},
+
+		{
+			intensity = "Bold",
+			italic = false,
+			font = wezterm.font_with_fallback({ {
+				family = "JetBrains Mono",
+				weight = "Bold"
+			} }
+			),
+		}
+	},
 	-- font = wezterm.font(font_family, { weight="Medium" }),
 	font_size = 15,
 	line_height = 0.95,
@@ -16,17 +44,14 @@ return {
 	freetype_load_target = "HorizontalLcd",
 	freetype_render_target = "HorizontalLcd",
 	-- colors
-	color_scheme = "rose-pine-moon",
+	color_scheme = "rose-pine",
 	window_frame = {
 		font = wezterm.font_with_fallback({
 			-- <built-in>, BuiltIn
-			{ family = "Roboto",                         weight = "Medium" },
+			{ family = "Roboto",                      weight = "Medium" },
 
 			-- /Users/paulalexander/Library/Fonts/JetBrains Mono NL Light Nerd Font Complete Mono.ttf, CoreText
-			{ family = "JetBrainsMonoNL Nerd Font Mono", weight = "Thin" },
-
-			-- /Users/paulalexander/Library/Fonts/JetBrainsMono-Regular.ttf, CoreText
-			"JetBrains Mono",
+			{ family = "JetBrainsMono Nerd Font Mono" },
 
 			-- <built-in>, BuiltIn
 			-- Assumed to have Emoji Presentation
@@ -66,8 +91,8 @@ return {
 	window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
 	-- window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
-	macos_window_background_blur = 15,
-	window_background_opacity = 0.90,
+	-- macos_window_background_blur = 15,
+	-- window_background_opacity = 0.93,
 	-- window_background_gradient = {
 	-- 	orientation = "Vertical",
 	-- 	colors = {
