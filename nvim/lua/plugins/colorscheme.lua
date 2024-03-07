@@ -34,6 +34,7 @@ return {
 					Folded = { fg = "highlight_high" },
 					Visual = { bg = "pine", blend = 50 },
 					WinSeparator = { fg = "highlight_med", bold = true },
+					ScrollbarThumb = { bg = "iris" },
 					Keyword = { fg = "iris", bold = true },
 					Type = { fg = "foam", bold = true },
 					-- String = { fg = "love" },
