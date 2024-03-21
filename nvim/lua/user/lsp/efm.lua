@@ -10,7 +10,7 @@ require "lspconfig".efm.setup {
 				require("user.lsp.efm.prettier")
 			},
 			js = {
-				require("user.lsp.efm.prettier")
+				require("user.lsp.efm.prettierd")
 			},
 			typescript = {
 				require("user.lsp.efm.prettier")

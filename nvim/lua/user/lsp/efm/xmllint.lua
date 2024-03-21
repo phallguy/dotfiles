@@ -1,4 +1,4 @@
-local command = 'xmllint --format'
+local command = 'xmllint --format -- '
 
 return {
 	formatCanRange = false,

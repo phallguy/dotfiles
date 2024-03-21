@@ -2,6 +2,7 @@ return {
 	"petertriho/nvim-scrollbar",
 	event = "BufEnter",
 	opts = {
+		show_in_active_only = true,
 		handlers = {
 			gitsigns = false, -- gitsigns integration (display hunks)
 			ale = false,   -- lsp integration (display errors/warnings)

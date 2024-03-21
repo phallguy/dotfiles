@@ -97,7 +97,7 @@ return {
 					BqfPreviewFloat = { fg = "muted", bg = "#00000000", blend = 15 },
 					BqfPreviewBorder = { link = "BqfPreviewFloat" },
 					-- Cmd
-					CmdOverlay = { bg = "#000000", blend = 10 },
+					CmdOverlay = { bg = "#FFFFFF", blend = 10 },
 					-- help slow-fast-terminal
 					NonText = { fg = "none" },
 				},
