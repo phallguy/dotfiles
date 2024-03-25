@@ -8,8 +8,6 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		version = "*",
-		lazy = true,
-		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			-- [[ Configure Telescope ]]
@@ -21,10 +19,23 @@ return {
 			local trouble = require("trouble.providers.telescope")
 
 			vim.keymap.set("n", ",", builtin.buffers, { desc = "Buffers" })
-			vim.keymap.set("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
+			vim.keymap.set("n", "<C-p>", function()
+				require("telescope.builtin").find_files(require("telescope.themes").get_ivy({
+					sorting_strategy = "descending",
+					layout_config = {
+						prompt_position = "bottom",
+					}
+				}))
+				end, { desc = "Find files" })
 
 			local oldfiles = function()
-				builtin.oldfiles({ only_cwd = true })
+				builtin.oldfiles(require("telescope.themes").get_ivy({
+					only_cwd = true,
+					sorting_strategy = "descending",
+					layout_config = {
+						prompt_position = "bottom",
+					}
+				}))
 			end
 			vim.keymap.set("n", "<CS-P>", oldfiles, { desc = "Recent files" })
 			vim.keymap.set("n", "<MS-P>", oldfiles, { desc = "Recent files" }) -- sloppy keys
@@ -106,42 +117,42 @@ return {
 						previewer = false,
 						initial_mode = "insert",
 						sort_lastused = true,
-						sort_mry = true,
+						sort_mru = true,
 						ignore_current_buffer = true,
 					},
 					live_grep = {
-						theme = "ivy",
+						-- theme = "ivy",
 						-- sort_lastused = true,
 					},
 					live_grep_args = {
-						theme = "ivy",
+						-- theme = "ivy",
 						-- sort_lastused = true,
 					},
 					find_files = {
-						theme = "ivy",
+						-- theme = "ivy",
 						previewer = false,
-						-- sort_lastused = true,
+					-- -- 	-- sort_lastused = true,
 					},
 					oldfiles = {
-						theme = "ivy",
+						-- theme = "ivy",
 						previewer = false,
-						-- sort_lastused = true,
+						sort_lastused = true,
 						sort_mru = true,
 					},
 					current_buffer_fuzzy_find = {
-						theme = "ivy",
+						-- theme = "ivy",
 						initial_mode = "insert",
 						-- sort_lastused = true,
 					},
 					lsp_document_symbols = {
-						theme = "ivy",
+						-- theme = "ivy",
 						initial_mode = "insert",
 					},
 					diagnostics = {
-						theme = "ivy",
+						-- theme = "ivy",
 					},
 					undo = {
-						theme = "ivy",
+						-- theme = "ivy",
 					}
 				},
 				extensions = {
@@ -170,15 +181,16 @@ return {
 							preview_height = 0.8,
 						}
 					},
-					fzy_native = {
+					fzf = {
+						fuzzy = true,
 						override_generic_sorter = true,
 						override_file_sorter = true,
+						case_mode = "smart_case",
 					}
 				}
 			})
 
 
-			pcall(require('telescope').load_extension, 'fzy_native')
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "live_grep_args")
 			pcall(require("telescope").load_extension, "noice")

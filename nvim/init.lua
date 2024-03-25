@@ -42,9 +42,6 @@ require("lazy").setup({
 		"embear/vim-localvimrc",
 		config = function() end,
 	},
-  { "nvim-telescope/telescope-fzy-native.nvim" },
-  { "romgrk/fzy-lua-native" },
-  { "tzachar/fuzzy.nvim", dependencies = { "romgrk/fzy-lua-native" } },
 
 	{ import = "plugins" },
 }, {
