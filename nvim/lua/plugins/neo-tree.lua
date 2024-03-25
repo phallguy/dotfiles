@@ -6,8 +6,8 @@ return {
 	{
 		-- https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/lua/neo-tree/defaults.lua
 		"nvim-neo-tree/neo-tree.nvim",
-		event = "VeryLazy",
 		lazy = true,
+		cmd = { "Neotree" },
 		config = function()
 			vim.g.neo_tree_remove_legacy_commands = 1
 
@@ -101,9 +101,6 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>e", "<CMD>Neotree close<CR>", { desc = "Show tree" })
-			vim.keymap.set("n", "<leader>E", "<CMD>Neotree toggle<CR>", { desc = "Toggle tree" })
-			vim.keymap.set("n", "-", "<CMD>Neotree left reveal_force_cwd<CR>", { desc = "Up tree" })
 		end,
 		dependencies = {
 			"nvim-lua/plenary.nvim",

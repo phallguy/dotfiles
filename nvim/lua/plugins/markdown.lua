@@ -1,6 +1,6 @@
 return {
-	{
-		"mzlogin/vim-markdown-toc",
-		ft = { "markdown" }
-	}
+	-- {
+	-- 	"mzlogin/vim-markdown-toc",
+	-- 	ft = { "markdown" }
+	-- }
 }

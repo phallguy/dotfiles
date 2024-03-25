@@ -177,3 +177,16 @@ vim.opt.fillchars = {
 	verthoriz = '╋',
 	eob       = ' ',
 }
+
+
+-- Cheat sheat
+vim.keymap.set("n", "<leader>fh", function()
+	local word = vim.fn.expand("<cword>")
+	vim.cmd("Cheat " .. vim.bo.filetype .. " " .. word)
+end, { desc = "Cheat sheat" })
+
+
+-- Neotree
+vim.keymap.set("n", "<leader>e", "<CMD>Neotree close<CR>", { desc = "Show tree" })
+vim.keymap.set("n", "<leader>E", "<CMD>Neotree toggle<CR>", { desc = "Toggle tree" })
+vim.keymap.set("n", "-", "<CMD>Neotree left reveal_force_cwd<CR>", { desc = "Up tree" })

@@ -18,13 +18,12 @@ return {
 			"hrsh7th/cmp-path",
 			"petertriho/cmp-git",
 			"onsails/lspkind.nvim",
-			"L3MON4D3/LuaSnip",
 		},
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			local luasnip = require("luasnip")
+			-- local luasnip = require("luasnip")
 
 			local has_words_before = function()
 				unpack = unpack or table.unpack
@@ -46,7 +45,7 @@ return {
 
 				snippet = {
 					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
+						vim.snippet.expand(args.body)
 					end
 				},
 
@@ -64,8 +63,8 @@ return {
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
+						-- elseif luasnip.expand_or_jumpable() then
+						-- 	luasnip.expand_or_jump()
 						elseif has_words_before() then
 							cmp.complete()
 						else
@@ -75,8 +74,8 @@ return {
 					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
+						-- elseif luasnip.jumpable(-1) then
+						-- 	luasnip.jump(-1)
 						else
 							fallback()
 						end
