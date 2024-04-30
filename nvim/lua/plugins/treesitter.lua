@@ -6,12 +6,15 @@ return {
 	{
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
-		event = "BufEnter",
 		lazy = true,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/playground",
 			"JoosepAlviste/nvim-ts-context-commentstring",
+			"nvim-treesitter/nvim-treesitter-context",
+			"windwp/nvim-ts-autotag",
+			"RRethy/nvim-treesitter-endwise",
+			"m-demare/hlargs.nvim",
 		},
 		config = function()
 			-- pcall(require("nvim-treesitter.install").update({ with_sync = true }))

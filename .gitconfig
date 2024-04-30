@@ -16,7 +16,9 @@
   preloadIndex = false
   fsmonitor = false
   untrackedcache = false
-  pager = delta
+
+[pager]
+  difftool = true
 
 [interactive]
   diffFilter = delta --color-only
@@ -84,6 +86,7 @@
 [diff]
   renames = true
   colorMoved = default
+  tool = difftastic
 
 [difftool]
   prompt = false
@@ -113,6 +116,10 @@
 [mergetool "nvimdiff"]
   trustExitCode = true
   prompt = true
+
+# difftastic
+ [difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
 
 # Kaleidoscope
 

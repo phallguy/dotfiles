@@ -1,4 +1,3 @@
--- https://shopify.github.io/ruby-lsp/EDITORS_md.html
 -- textDocument/diagnostic support until 0.10.0 is released
 _timers = {}
 local function setup_diagnostics(client, buffer)
@@ -42,7 +41,7 @@ local function setup_diagnostics(client, buffer)
 	})
 end
 
-require("lspconfig").ruby_ls.setup({
+require("lspconfig").ruby_lsp.setup({
 	on_attach = function(client, buffer)
 		setup_diagnostics(client, buffer)
 	end,

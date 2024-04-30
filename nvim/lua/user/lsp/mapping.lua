@@ -16,7 +16,7 @@ vim.keymap.set("n", "<leader>lrf", "<CMD>TypescriptRenameFile<CR>", { desc = "[R
 vim.keymap.set("n", "<leader>la", function()
 	require("lspsaga.codeaction"):code_action()
 end, { desc = "Code [a]ction" })
-vim.keymap.set("n", "<leader>ll", "<CMD>Lspsaga show_line_diagnostics<CR>", { desc = "[L]ine diagnostics" })
+vim.keymap.set("n", "<leader>ll", vim.diagnostic.open_float, { desc = "[L]ine diagnostics" })
 vim.keymap.set("n", "<leader>lp", function()
 	require("lspsaga.command").load_command("peek_definition")
 end, { desc = "Peek [d]efinition" })

@@ -7,12 +7,13 @@ vim.g.loaded_matchit = 1
 return {
 	-- Useful plugin to show you pending keybinds.
 
-	-- "gc" to comment visual regions/lines
-	{
-		"numToStr/Comment.nvim",
-		event = "BufEnter",
-		opts = {},
-	},
+	-- -- "gc" to comment visual regions/lines
+	-- {
+	-- 	"numToStr/Comment.nvim",
+	-- 	opts = {},
+	-- },
+
+	{ 'echasnovski/mini.comment', version = '*', opts = {}},
 
 	{
 		"nvim-tree/nvim-web-devicons",
@@ -21,21 +22,19 @@ return {
 		opts = {},
 	},
 
+
  	-- Multi cursors
 	{
 		"mg979/vim-visual-multi",
-		event = "BufEnter",
 	},
 
 	{
 		"junegunn/vim-easy-align",
-		event = "BufEnter"
 	}, -- Multi-line bock alignment
 
-	{
-		"tpope/vim-surround",
-		event = "BufEnter",
-	}, -- change surrounding tags/quotes/parens
+	-- {
+	-- 	"tpope/vim-surround",
+	-- }, -- change surrounding tags/quotes/parens
 
 	{
 		"reedes/vim-pencil",
@@ -55,7 +54,6 @@ return {
 
 	{
 		"brenoprata10/nvim-highlight-colors",
-		event = "BufEnter",
 		config = function()
 			require('nvim-highlight-colors').setup {
 				enable_named_colors = false,
@@ -66,17 +64,15 @@ return {
 	{
 		"sheerun/vim-polyglot",
 		cond = not vim.g.vscode,
-		lazy = true,
-		event = "VeryLazy",
 		init = function()
 			-- vim.g.polyglot_disabled = { "autoindent", "sensible", "ftdetect" }
 		end,
-		priority = 10,
 	},
+
+	{"kmonad/kmonad-vim"},
 
 	{
 		"andymass/vim-matchup",
-		event = "BufEnter",
 		config = function()
 			vim.g.matchup_matchparen_deferred = 1 -- work async
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
@@ -137,7 +133,6 @@ return {
 
 	{
 		"tpope/vim-projectionist",
-		event = "BufEnter"
 	},
 
 	-- {

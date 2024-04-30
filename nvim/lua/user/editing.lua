@@ -107,8 +107,6 @@ vim.keymap.set("v", "<CA-J>", "<CMD>m '>+1<CR>gv-gv")
 vim.keymap.set("v", "<CA-K>", "<CMD>m '<-2<CR>gv-gv")
 
 -- Formatting
-vim.keymap.set("n", "<leader>G", "mygg=G`y", { desc = "Reindent file" }) -- reindent entire file
-
 vim.keymap.set("n", "<leader>lf", function()
 	vim.lsp.buf.format({ timeout_ms = 10000 })
 end, { desc = "Format" })

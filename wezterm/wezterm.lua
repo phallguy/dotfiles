@@ -4,6 +4,7 @@ local wezterm = require("wezterm")
 return {
 	-- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=terminfo
 	term = "wezterm",
+	front_end = "WebGpu",
 	-- Appearance ===
 	--
 	-- Fonts
@@ -41,8 +42,8 @@ return {
 	font_size = 15,
 	line_height = 0.95,
 	cell_width = 0.90,
-	freetype_load_target = "HorizontalLcd",
-	freetype_render_target = "HorizontalLcd",
+	-- freetype_load_target = "HorizontalLcd",
+	-- freetype_render_target = "HorizontalLcd",
 	-- colors
 	color_scheme = "rose-pine",
 	window_frame = {
@@ -92,7 +93,7 @@ return {
 	-- window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
 	-- macos_window_background_blur = 15,
-	-- window_background_opacity = 0.93,
+	-- window_background_opacity = 0.90,
 	-- window_background_gradient = {
 	-- 	orientation = "Vertical",
 	-- 	colors = {

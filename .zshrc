@@ -129,6 +129,7 @@ alias v='vagrant'
 alias x86='arch -arch x86_64 /bin/zsh --login'
 alias cd='z'
 alias g='git'
+alias lg='lazygit'
 
 
 function _begin_osc {

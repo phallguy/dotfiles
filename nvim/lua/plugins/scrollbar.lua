@@ -1,12 +1,11 @@
 return {
 	"petertriho/nvim-scrollbar",
-	event = "BufEnter",
 	opts = {
 		show_in_active_only = true,
 		handlers = {
 			gitsigns = false, -- gitsigns integration (display hunks)
 			ale = false,   -- lsp integration (display errors/warnings)
-			search = true, -- hlslens integration (display search result)
+			search = false, -- hlslens integration (display search result)
 		},
 		excluded_filetypes = {
 			"cmp_docs",

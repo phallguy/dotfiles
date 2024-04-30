@@ -19,23 +19,11 @@ return {
 			local trouble = require("trouble.providers.telescope")
 
 			vim.keymap.set("n", ",", builtin.buffers, { desc = "Buffers" })
-			vim.keymap.set("n", "<C-p>", function()
-				require("telescope.builtin").find_files(require("telescope.themes").get_ivy({
-					sorting_strategy = "descending",
-					layout_config = {
-						prompt_position = "bottom",
-					}
-				}))
-				end, { desc = "Find files" })
+			vim.keymap.set("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
+			vim.keymap.set("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
 
 			local oldfiles = function()
-				builtin.oldfiles(require("telescope.themes").get_ivy({
-					only_cwd = true,
-					sorting_strategy = "descending",
-					layout_config = {
-						prompt_position = "bottom",
-					}
-				}))
+				builtin.oldfiles({ only_cwd = true })
 			end
 			vim.keymap.set("n", "<CS-P>", oldfiles, { desc = "Recent files" })
 			vim.keymap.set("n", "<MS-P>", oldfiles, { desc = "Recent files" }) -- sloppy keys
@@ -119,40 +107,71 @@ return {
 						sort_lastused = true,
 						sort_mru = true,
 						ignore_current_buffer = true,
+
+						sorting_strategy = "descending",
+						layout_config = {
+							prompt_position = "bottom",
+						}
 					},
 					live_grep = {
-						-- theme = "ivy",
-						-- sort_lastused = true,
+						theme = "ivy",
+						sorting_strategy = "descending",
+						layout_config = {
+							prompt_position = "bottom",
+						}
 					},
 					live_grep_args = {
-						-- theme = "ivy",
-						-- sort_lastused = true,
+						theme = "ivy",
+						sorting_strategy = "descending",
+						layout_config = {
+							prompt_position = "bottom",
+						}
 					},
 					find_files = {
-						-- theme = "ivy",
+						theme = "ivy",
 						previewer = false,
-					-- -- 	-- sort_lastused = true,
+						sorting_strategy = "descending",
+						layout_config = {
+							prompt_position = "bottom",
+						}
 					},
 					oldfiles = {
-						-- theme = "ivy",
+						theme = "ivy",
 						previewer = false,
-						sort_lastused = true,
-						sort_mru = true,
+						sorting_strategy = "descending",
+						layout_config = {
+							prompt_position = "bottom",
+						}
 					},
 					current_buffer_fuzzy_find = {
-						-- theme = "ivy",
+						theme = "ivy",
 						initial_mode = "insert",
-						-- sort_lastused = true,
+						previewer = false,
+						sorting_strategy = "descending",
+						layout_config = {
+							prompt_position = "bottom",
+						}
 					},
 					lsp_document_symbols = {
-						-- theme = "ivy",
-						initial_mode = "insert",
+						theme = "ivy",
+						sorting_strategy = "descending",
+						layout_config = {
+							prompt_position = "bottom",
+						}
 					},
 					diagnostics = {
-						-- theme = "ivy",
+						theme = "ivy",
+						sorting_strategy = "descending",
+						layout_config = {
+							prompt_position = "bottom",
+						}
 					},
 					undo = {
-						-- theme = "ivy",
+						theme = "ivy",
+						sorting_strategy = "descending",
+						layout_config = {
+							prompt_position = "bottom",
+						}
 					}
 				},
 				extensions = {
