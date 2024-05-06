@@ -1,0 +1,51 @@
+;; Home rows are the best
+(defcfg
+
+  input (iokit-name)
+  output (kext)
+
+  fallthrough true
+
+  allow-cmd false
+)
+
+(defalias
+   fn (around (layer-toggle function) fn)
+
+   met_a (tap-hold-next-release 300 a lmet :timeout-button a)
+   alt_s (tap-hold-next-release 300 s lalt :timeout-button s)
+   sft_d (tap-hold-next-release 300 d lsft :timeout-button d)
+   ctl_f (tap-hold-next-release 300 f lctl :timeout-button f)
+
+   ctl_j (tap-hold-next-release 300 j rctl :timeout-button j)
+   sft_k (tap-hold-next-release 300 k rsft :timeout-button k)
+   alt_l (tap-hold-next-release 300 l lalt :timeout-button l)
+   met_; (tap-hold-next-release 300 ; rmet :timeout-button ;)
+)
+
+(defsrc
+ esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+ grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+ tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+ caps a    s    d    f    g    h    j    k    l    ;    '    ret
+ lsft z    x    c    v    b    n    m    ,    .    /    rsft up
+ fn   lctl lalt lmet           spc            rmet ralt left down rght
+)
+
+(deflayer default
+  _    brdn brup lp   mctl bldn blup prev pp   next mute vold volu
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  esc  @met_a    @alt_s    @sft_d    @ctl_f    _    _    @ctl_j    @sft_k    @alt_l    @met_;    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  @fn  _    _    _              _              _    _    _    _    _
+)
+
+(deflayer function
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _              _              _    _    _    _    _
+)

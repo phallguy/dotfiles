@@ -6,14 +6,10 @@ return {
 		config = function()
 			require("mini.completion").setup({
 				delay = {
-					commpletion = 300,
-					info = 300,
+					commpletion = 500,
+					info = 500,
 					signature = 150,
 				},
-				window = {
-					info = { border = "rounded" },
-					signature = { border = "rounded" }
-				}
 			})
 
 			vim.keymap.set('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })

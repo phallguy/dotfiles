@@ -20,6 +20,12 @@ vim.keymap.set("n", "<Down>", "<CMD>resize -2<CR>", { desc = "Shorter" })
 vim.keymap.set("n", "<Right>", "<CMD>vertical resize +2<CR>", { desc = "Narrower" })
 vim.keymap.set("n", "<Left>", "<CMD>vertical resize -2<CR>", { desc = "Wider" })
 
+vim.keymap.set("i", "<Up>", "<Nop>", { desc = "Disabled up" })
+vim.keymap.set("i", "<Down>", "<Nop>", { desc = "Disabled down" })
+vim.keymap.set("i", "<S-Up>", "<Nop>", { desc = "Disabled up" })
+vim.keymap.set("i", "<S-Down>", "<Nop>", { desc = "Disabled down" })
+
+
 -- Navigation - keep cursor centered when jumping large block
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })

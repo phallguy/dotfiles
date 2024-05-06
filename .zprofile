@@ -9,3 +9,4 @@ source "$HOME/.cargo/env"
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 alias imgcat="wezterm imgcat"
+export PATH="$PATH:/Users/paulalexander/.local/bin"
