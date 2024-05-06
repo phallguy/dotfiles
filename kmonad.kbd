@@ -10,17 +10,21 @@
 )
 
 (defalias
-   fn (around (layer-toggle function) fn)
+  fn (around (layer-toggle function) fn)
+  nav (around (layer-toggle arrows) tab)
 
-   met_a (tap-hold-next-release 300 a lmet :timeout-button a)
-   alt_s (tap-hold-next-release 300 s lalt :timeout-button s)
-   sft_d (tap-hold-next-release 300 d lsft :timeout-button d)
-   ctl_f (tap-hold-next-release 300 f lctl :timeout-button f)
+  prv_t (around lmet (around lsft [))
+  nxt_t (around lmet (around lsft ]))
 
-   ctl_j (tap-hold-next-release 300 j rctl :timeout-button j)
-   sft_k (tap-hold-next-release 300 k rsft :timeout-button k)
-   alt_l (tap-hold-next-release 300 l lalt :timeout-button l)
-   met_; (tap-hold-next-release 300 ; rmet :timeout-button ;)
+  met_a (tap-hold-next-release 600 a lmet :timeout-button a)
+  alt_s (tap-hold-next-release 600 s lalt :timeout-button s)
+  sft_d (tap-hold-next-release 600 d lsft :timeout-button d)
+  ctl_f (tap-hold-next-release 600 f lctl :timeout-button f)
+
+  ctl_j (tap-hold-next-release 600 j rctl :timeout-button j)
+  sft_k (tap-hold-next-release 600 k rsft :timeout-button k)
+  alt_l (tap-hold-next-release 600 l lalt :timeout-button l)
+  met_; (tap-hold-next-release 600 ; rmet :timeout-button ;)
 )
 
 (defsrc
@@ -33,9 +37,9 @@
 )
 
 (deflayer default
-  _    brdn brup lp   mctl bldn blup prev pp   next mute vold volu
+  _    brdn brup lp   mctl bldn blup prev @prv_t   @nxt_t mute vold volu
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  @nav    _    _    _    _    _    _    _    _    _    _    _    _    _
   esc  @met_a    @alt_s    @sft_d    @ctl_f    _    _    @ctl_j    @sft_k    @alt_l    @met_;    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _
   @fn  _    _    _              _              _    _    _    _    _
@@ -46,6 +50,15 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _              _              _    _    _    _    _
+)
+
+(deflayer arrows
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    up    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _              _              _    _    _    _    _
 )
