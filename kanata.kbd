@@ -15,7 +15,9 @@
     )
 )
 (defsrc
-  caps a   s   d   f   j   k   l   ;
+  f8 f9
+  tab
+  caps a   s   d   f   h   j   k   l   ;
 )
 (defvar
   ;; Note: consider using different time values for your different fingers.
@@ -38,12 +40,23 @@
   )
 )
 (deflayer base
-  @esc @a  @s  @d  @f  @j  @k  @l  @;
+  @f8 @f9
+  @tab
+  @esc @a  @s  @d  @f h @j  @k  @l  @;
 )
 
 (deflayer nomods
-  esc a   s   d   f   j   k   l   ;
+  f8 f9
+  tab
+  esc a   s   d   f   h   j   k   l   ;
 )
+
+(deflayer arrows
+  _   _
+  _
+  _   _   _   _   _   left  down  up  right _
+)
+
 (deffakekeys
   to-base (layer-switch base)
 )
@@ -53,7 +66,11 @@
     (on-idle-fakekey to-base tap 20)
   )
 
+  f8 S-M-[
+  f9 S-M-]
+
   esc (tap-dance $hold-time (esc (caps-word 2000)))
+  tab (tap-hold-press $tap-time $hold-time tab (layer-toggle arrows))
 
   a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
   s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
