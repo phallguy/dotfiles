@@ -20,10 +20,6 @@ return {
 		opts = {}
 	},
 	{
-		"glepnir/lspsaga.nvim",
-		lazy = true,
-	},
-	{
 		"MunifTanjim/prettier.nvim",
 		lazy = true,
 	}

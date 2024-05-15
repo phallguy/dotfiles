@@ -6,9 +6,9 @@ return {
 		config = function()
 			require("mini.completion").setup({
 				delay = {
-					commpletion = 500,
-					info = 500,
-					signature = 150,
+					commpletion = 5000,
+					info = 5000,
+					signature = 1500,
 				},
 			})
 

@@ -74,7 +74,6 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  zsh-navigation-tools
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -86,10 +85,10 @@ zstyle ':omz:*' aliases no
 source $ZSH/oh-my-zsh.sh
 source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
-autoload znt-history-widget
-zle -N znt-history-widget
-
-bindkey "^f" znt-history-widget
+# autoload znt-history-widget
+# zle -N znt-history-widget
+#
+# bindkey "^f" znt-history-widget
 bindkey '^ ' autosuggest-accept
 
 export CLICOLOR=1
@@ -131,6 +130,10 @@ alias cd='z'
 alias g='git'
 alias lg='lazygit'
 
+function kan() {
+  cd ~/dotfiles;
+  sudo kanata
+}
 
 function _begin_osc {
   printf "\033]"
@@ -168,3 +171,5 @@ fi
 export PATH=$PATH:/Users/paulalexander/.spicetify
 
 eval "$(rbenv init - zsh)"
+
+eval "$(atuin init zsh)"

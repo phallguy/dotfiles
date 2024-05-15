@@ -25,6 +25,8 @@ vim.keymap.set("n", "<leader>gl", "<CMD>DiffviewFileHistory<CR>", { desc = "Rece
 vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR>", { desc = "Commit", silent = true })
 vim.keymap.set("n", "<leader>ga", "<CMD>DiffviewClose<CR><CMD>tab G cam<CR>", { desc = "Commit ammend", silent = true })
 vim.keymap.set("n", "<leader>gt", "<CMD>DiffviewClose<CR><CMD>G todo<CR>", { desc = "Todo", silent = true })
+vim.keymap.set("n", "<leader>gh", "<CMD>Gitsigns preview_hunk_inline<CR>", { desc = "Preview hunk inline", silent = true })
+vim.keymap.set("n", "<leader>gH", "<CMD>Gitsigns preview_hunk<CR>", { desc = "Preview hunk", silent = true })
 
 vim.opt.fillchars:append({ diff = "╱" })
 vim.opt.diffopt:append("iwhite") -- Ignore whitespace

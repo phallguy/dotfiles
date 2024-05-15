@@ -36,12 +36,6 @@ vim.keymap.set("n", "n", "nzzzv", { noremap = true })
 vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", function()
-	require("lspsaga.command").load_command("diagnostic_jump_prev")
-end, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", function()
-	require("lspsaga.command").load_command("diagnostic_jump_next")
-end, { desc = "Next diagnostic" })
 
 -- Quickfix / List
 vim.keymap.set("n", "[q", "<CMD>cp<CR>", { desc = "Prev qf entry" })
