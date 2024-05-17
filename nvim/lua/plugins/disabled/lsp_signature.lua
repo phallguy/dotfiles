@@ -4,7 +4,7 @@ return {
 	config = function()
 		require('lsp_signature').setup({
 			bind = true,
-			noice = true,
+			-- noice = true,
 			doc_lines = 20,
 			max_height = 22,
 			max_width = 100,

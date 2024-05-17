@@ -212,7 +212,7 @@ return {
 
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "live_grep_args")
-			pcall(require("telescope").load_extension, "noice")
+			-- pcall(require("telescope").load_extension, "noice")
 			pcall(require("telescope").load_extension, "media_files")
 			pcall(require("telescope").load_extension, "undo")
 		end,

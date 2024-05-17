@@ -3,8 +3,6 @@ if vim.g.vscode then
 end
 
 return {
-	-- { "stevearc/dressing.nvim", opts = {} },
-	{ "MunifTanjim/nui.nvim" },
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -16,7 +14,7 @@ return {
 				-- },
 				lsp = {
 					signature = {
-						enabled = false,
+						enabled = true,
 					},
 					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 					override = {
@@ -98,21 +96,6 @@ return {
 						},
 						opts = { stop = true, skip = true },
 					},
-					-- {
-					-- 	filter = {
-					-- 		event = "msg_show",
-					-- 		kind = "",
-					-- 		find = { "change;", "line less;", "lines less;", "more line;", "more lines;", "changes;" },
--- 	},
-					-- 	opts = { stop = true, skip = true },
-					-- },
-					-- {
-					-- 	filter = {
-					-- 		event = "notify",
-					-- 		min_height = 10,
-					-- 	},
-					-- 	view = "split",
-					-- },
 					{
 						filter = {
 							event = "msg_show",

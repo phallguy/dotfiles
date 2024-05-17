@@ -16,6 +16,7 @@ return {
 			"RRethy/nvim-treesitter-endwise",
 			"m-demare/hlargs.nvim",
 		},
+		build = ":TSUpdate",
 		config = function()
 			-- pcall(require("nvim-treesitter.install").update({ with_sync = true }))
 			require("nvim-treesitter.configs").setup({
