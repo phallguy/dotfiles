@@ -1,4 +1,3 @@
--- Old vim https://github.com/phallguy/dotfiles/blob/6f512c6a40be13df2a27a9df0d6c4af28cd82c0b/vim/init.vim
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -6,7 +5,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require("user.options")
-require("user.kitty")
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -53,7 +51,6 @@ require("lazy").setup({
 		enabled = false,
 	},
 	change_detection = {
-		enabled = false,
 		notify = true,
 	},
 })

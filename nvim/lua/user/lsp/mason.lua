@@ -11,6 +11,8 @@ require("mason").setup({
 	},
 })
 
+require("mason-tool-installer").setup {}
+
 -- Ensure the servers above are installed
 local mason_lspconfig = require("mason-lspconfig")
 
@@ -26,7 +28,6 @@ mason_lspconfig.setup({
 
 for _, plugin in ipairs {
 	"mason-lspconfig",
-	"mason-null-ls",
 	"mason-nvim-dap",
 } do
 	pcall(require, plugin)

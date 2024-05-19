@@ -14,6 +14,9 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 	},
 	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+	},
+	{
 		"folke/neodev.nvim",
 		lazy = true,
 		event = "VeryLazy",
@@ -23,5 +26,4 @@ return {
 		"MunifTanjim/prettier.nvim",
 		lazy = true,
 	}
-
 }
