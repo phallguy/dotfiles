@@ -14,7 +14,7 @@ return {
 				-- },
 				lsp = {
 					signature = {
-						enabled = true,
+						enabled = false,
 					},
 					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 					override = {
@@ -80,22 +80,22 @@ return {
 					},
 				},
 				routes = {
-					{
-						filter = {
-							event = "lsp",
-							kind = "progress",
-							find = "code_action",
-						},
-						opts = { stop = true, skip = true },
-					},
-					{
-						filter = {
-							event = "lsp",
-							kind = "progress",
-							find = "iagnos",
-						},
-						opts = { stop = true, skip = true },
-					},
+					-- {
+					-- 	filter = {
+					-- 		event = "lsp",
+					-- 		kind = "progress",
+					-- 		find = "code_action",
+					-- 	},
+					-- 	opts = { stop = true, skip = true },
+					-- },
+					-- {
+					-- 	filter = {
+					-- 		event = "lsp",
+					-- 		kind = "progress",
+					-- 		find = "iagnos",
+					-- 	},
+					-- 	opts = { stop = true, skip = true },
+					-- },
 					{
 						filter = {
 							event = "msg_show",

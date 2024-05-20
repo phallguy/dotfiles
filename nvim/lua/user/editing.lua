@@ -79,7 +79,10 @@ if not vim.g.vscode then
 end
 
 -- Buffers
-vim.keymap.set("n", "<leader>c", "<CMD>DiffviewClose<CR><CMD>BDelete this<CR>", { desc = "Close", silent = true })
+vim.keymap.set("n", "<leader>c", function()
+	require("diffview").close()
+	require("mini.bufremove").delete()
+end, { desc = "Close", silent = true })
 vim.keymap.set("n", "<leader>q", "<CMD>DiffviewClose<CR><CMD>q<CR>", { desc = "Quit", silent = true })
 
 vim.keymap.set(
@@ -89,7 +92,19 @@ vim.keymap.set(
 	{ desc = "Close all but this", silent = true }
 )
 vim.keymap.set("n", "<leader>O", function()
-	require("close_buffers").delete({ type = "other" })
+	-- require("close_buffers").delete({ type = "other" })
+	local bn = vim.fn.bufnr()
+	vim.cmd.only()
+
+	for _, bufn in ipairs(vim.api.nvim_list_bufs()) do
+		if bufn ~= bn then
+			local buftype = vim.api.nvim_buf_get_option(bufn, 'buftype')
+
+			if buftype ~= "prompt" then
+				require("mini.bufremove").delete(bufn)
+			end
+		end
+	end
 end, { desc = "Hard Close all but this", silent = true })
 
 -- -- Keep selection after indenting
@@ -118,12 +133,6 @@ vim.keymap.set(
 	":silent !code --reuse-window --add '<C-r>=getcwd()<CR>' --goto '%:p':<C-r>=line('.')<CR>:<C-r>=col('.')<CR><CR>",
 	{ desc = "Open in VSCode", silent = true }
 )
-
--- Easy Align
-
--- Start interactive EasyAlign in visual mode (e.g. vipga)
--- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-vim.keymap.set({ "x", "n" }, "ga", "<Plug>(EasyAlign)")
 
 vim.g["qfenter_keymap"] = {
 	vopen = { "<C-v>" },

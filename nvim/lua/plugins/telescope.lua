@@ -8,7 +8,23 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		version = "*",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
+				'nvim-telescope/telescope-fzf-native.nvim',
+
+				-- `build` is used to run some command when the plugin is installed/updated.
+				-- This is only run then, not every time Neovim starts up.
+				build = 'make',
+
+				-- `cond` is a condition used to determine whether this plugin should be
+				-- installed and loaded.
+				cond = function()
+					return vim.fn.executable 'make' == 1
+				end,
+			},
+			{ 'nvim-telescope/telescope-ui-select.nvim' },
+		},
 		config = function()
 			-- [[ Configure Telescope ]]
 			-- See `:help telescope` and `:help telescope.setup()`
@@ -57,6 +73,7 @@ return {
 			vim.keymap.set("n", "<leader>fm", "<CMD>Telescope media_files<CR>", { desc = "Media files" })
 			vim.keymap.set("n", "<leader>fu", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
 			vim.keymap.set("n", "<leader>fd", "<CMD>tab DBUI<CR>", { desc = "Databases" })
+      vim.keymap.set('n', '<leader>fH', builtin.help_tags, { desc = '[F]earch [H]elp' })
 
 			-- local show_notifications = function()
 			-- 	require("telescope").extensions.notify.notify()
@@ -175,6 +192,9 @@ return {
 					}
 				},
 				extensions = {
+					['ui-select'] = {
+						require('telescope.themes').get_dropdown(),
+					},
 					live_grep_args = {
 						-- auto_quoting = true, -- enable/disable auto-quoting
 						layout_strategy = "vertical",
@@ -213,9 +233,9 @@ return {
 
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "live_grep_args")
-			-- pcall(require("telescope").load_extension, "noice")
 			pcall(require("telescope").load_extension, "media_files")
 			pcall(require("telescope").load_extension, "undo")
+			pcall(require("telescope").load_extension, "ui-select")
 		end,
 	},
 
@@ -233,7 +253,7 @@ return {
 		end,
 	},
 
- 	-- refine live grep
+	-- refine live grep
 	{
 		"nvim-telescope/telescope-live-grep-args.nvim",
 		lazy = true,

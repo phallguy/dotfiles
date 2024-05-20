@@ -1,6 +1,7 @@
 return {
 	{
 		"tpope/vim-dadbod",
+		lazy = true,
 		config = function()
 			--
 		end,
