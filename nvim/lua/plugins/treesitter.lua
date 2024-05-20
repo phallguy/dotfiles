@@ -6,12 +6,10 @@ return {
 	{
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
-		lazy = true,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			"nvim-treesitter/nvim-treesitter-context",
-			"windwp/nvim-ts-autotag",
 			"RRethy/nvim-treesitter-endwise",
 			"m-demare/hlargs.nvim",
 		},
@@ -62,11 +60,6 @@ return {
 				matchup = {
 					enabled = true,
 					enable_quotes = true,
-				},
-				autotag = {
-					enable = true,
-					filetypes = { "html", "xml", "javascript", "javascriptreact", "typescript", "typescriptreact", "eruby",
-						"markdown", "tsx", "jsx" },
 				},
 				endwise = {
 					enable = true,
@@ -140,17 +133,22 @@ return {
 
 	{
 		"windwp/nvim-ts-autotag",
-		lazy = true,
-	},
-
-	{
-		"nvim-treesitter/playground",
-		lazy = true,
+		config = function()
+			require('nvim-ts-autotag').setup({
+				opts = {
+					enable_rename = true,
+					enable_close = true,
+					enable_close_on_slash = true,
+				},
+				aliases = {
+					["eruby"] = "html"
+				}
+			})
+		end,
 	},
 
 	{
 		"RRethy/nvim-treesitter-endwise",
-		lazy = true,
 	},
 
 	{

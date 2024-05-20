@@ -21,9 +21,5 @@ return {
 		lazy = true,
 		event = "VeryLazy",
 		opts = {}
-	},
-	{
-		"MunifTanjim/prettier.nvim",
-		lazy = true,
 	}
 }
