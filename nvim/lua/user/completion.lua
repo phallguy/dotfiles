@@ -7,10 +7,31 @@ lspkind.init {}
 local cmp = require "cmp"
 
 cmp.setup {
+	experimental = {
+		ghost_text = true,
+	},
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "path" },
-		{ name = "buffer" },
+		{
+			name = "buffer",
+			keyword_length = 3,
+			max_indexed_line_length = 2048,
+			dup = 0,
+			option = {
+				get_bufnrs = function()
+					local bufs = {}
+					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+						local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+						local buftype = vim.api.nvim_buf_get_option(buf, 'buftype')
+						if buftype ~= 'nofile' and buftype ~= 'prompt' and byte_size < 1024 * 1024 then
+							bufs[#bufs + 1] = buf
+						end
+					end
+					return bufs
+				end
+			}
+		},
 	},
 	mapping = {
 		["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },

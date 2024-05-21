@@ -90,6 +90,7 @@ source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 #
 # bindkey "^f" znt-history-widget
 bindkey '^ ' autosuggest-accept
+bindkey '^y' autosuggest-accept
 
 export CLICOLOR=1
 export GPG_TTY=$TTY

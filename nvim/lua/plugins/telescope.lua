@@ -81,6 +81,14 @@ return {
 			--
 			-- vim.keymap.set("n", "<leader>fn", show_notifications, { desc = "Notifications" })
 
+			local ivy = {
+				theme = "ivy",
+				sorting_strategy = "descending",
+				layout_config = {
+					prompt_position = "bottom",
+				}
+			}
+
 			require("telescope").setup({
 				defaults = {
 					initial_mode = "insert",
@@ -130,36 +138,10 @@ return {
 							prompt_position = "bottom",
 						}
 					},
-					live_grep = {
-						theme = "ivy",
-						sorting_strategy = "descending",
-						layout_config = {
-							prompt_position = "bottom",
-						}
-					},
-					live_grep_args = {
-						theme = "ivy",
-						sorting_strategy = "descending",
-						layout_config = {
-							prompt_position = "bottom",
-						}
-					},
-					find_files = {
-						theme = "ivy",
-						previewer = false,
-						sorting_strategy = "descending",
-						layout_config = {
-							prompt_position = "bottom",
-						}
-					},
-					oldfiles = {
-						theme = "ivy",
-						previewer = false,
-						sorting_strategy = "descending",
-						layout_config = {
-							prompt_position = "bottom",
-						}
-					},
+					live_grep = ivy,
+					live_grep_args = ivy,
+					find_files = ivy,
+					oldfiles = ivy,
 					current_buffer_fuzzy_find = {
 						theme = "ivy",
 						initial_mode = "insert",
@@ -169,27 +151,10 @@ return {
 							prompt_position = "bottom",
 						}
 					},
-					lsp_document_symbols = {
-						theme = "ivy",
-						sorting_strategy = "descending",
-						layout_config = {
-							prompt_position = "bottom",
-						}
-					},
-					diagnostics = {
-						theme = "ivy",
-						sorting_strategy = "descending",
-						layout_config = {
-							prompt_position = "bottom",
-						}
-					},
-					undo = {
-						theme = "ivy",
-						sorting_strategy = "descending",
-						layout_config = {
-							prompt_position = "bottom",
-						}
-					}
+					lsp_definitions = ivy,
+					lsp_document_symbols = ivy,
+					diagnostics = ivy,
+					undo = ivy
 				},
 				extensions = {
 					['ui-select'] = {

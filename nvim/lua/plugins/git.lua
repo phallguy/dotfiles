@@ -3,16 +3,33 @@ if vim.g.vscode then
 end
 
 return {
- 	-- Git magic
+	-- Git magic
 	{
 		"tpope/vim-fugitive",
 		event = "VeryLazy",
 	},
 
- 	-- Even more git magic
+	-- Even more git magic
 	{
 		"tpope/vim-rhubarb",
 		event = "VeryLazy",
+	},
+
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		keys = {
+			{ "<leader>gL", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+		}
 	},
 
 	{

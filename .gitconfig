@@ -14,14 +14,12 @@
   autocrlf = false
   excludesfile = /Users/paulalexander/.gitignore_global
   preloadIndex = false
-  fsmonitor = false
-  untrackedcache = false
-
-[pager]
-  difftool = true
+  ; fsmonitor = false
+  ; untrackedcache = false
+  pager = delta
 
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta --color-only --features=interactive
 
 [init]
   defaultBranch = master
@@ -86,7 +84,7 @@
 [diff]
   renames = true
   colorMoved = default
-  tool = difftastic
+  ; tool = difftastic
 
 [difftool]
   prompt = false
@@ -94,7 +92,7 @@
   minimal = true
 
 [merge]
-  tool = Kaleidoscope
+  conflictstyle = diff3
 
 [mergetool]
   prompt = false
@@ -118,7 +116,7 @@
   prompt = true
 
 # difftastic
- [difftool "difftastic"]
+[difftool "difftastic"]
   cmd = difft "$LOCAL" "$REMOTE"
 
 # Kaleidoscope
@@ -135,7 +133,5 @@
   navigate = true    # use n and N to move between diff sections
   show-syntax = true
   side-by-side = true
-
-[difftool "kitty"]
-  cmd = kitten diff $LOCAL $REMOTE
-
+  features = decorations
+  true-color = always

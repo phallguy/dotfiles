@@ -1,0 +1,13 @@
+gui:
+  nerdFontsVersion: "3"
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never -s
+
+
+keybinding:
+  universal:
+    scrollUpMain: '<c-k>'
+    scrollDownMain: '<c-j>'

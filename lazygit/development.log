@@ -1,0 +1,92 @@
+{"level":"info","msg":"language: en-US","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git --version","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git --version (4.910208ms)","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --git-dir","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git rev-parse --git-dir (4.137334ms)","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --is-bare-repository","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git rev-parse --is-bare-repository (3.835541ms)","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --path-format=absolute --show-toplevel --absolute-git-dir --git-common-dir --show-superproject-working-tree","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git rev-parse --path-format=absolute --show-toplevel --absolute-git-dir --git-common-dir --show-superproject-working-tree (8.612291ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"starting main loop","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"Binary is not built with the buildBinary flag so we won't check for an update","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --is-bare-repository","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git fetch --all --no-write-fetch-head","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git rev-parse --is-bare-repository (4.43175ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"refreshing all scopes in async mode","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"Refresh took 32.875µs","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git stash list -z --pretty=%ct|%gs","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --abbrev-ref --verify HEAD","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git for-each-ref --sort=-committerdate --format=%(HEAD)%00%(refname:short)%00%(upstream:short)%00%(upstream:track)%00%(subject)%00%(objectname)%00%(committerdate:unix) refs/heads","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git tag --list -n --sort=-creatordate","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git stash list -z --pretty=%ct|%gs (6.305209ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for stash took 42.625µs","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git for-each-ref --sort=refname --format=%(refname:short) refs/remotes (7.104375ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for remotes took 106.875µs","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for remoteBranches took 3.417µs","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git tag --list -n --sort=-creatordate (7.493333ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for tags took 21.75µs","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git rev-parse --abbrev-ref --verify HEAD (7.9015ms)","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git merge-base phallguy/locations-classieness phallguy/locations-classieness@{u}","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --symbolic-full-name master@{u}","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --symbolic-full-name main@{u}","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git for-each-ref --sort=-committerdate --format=%(HEAD)%00%(refname:short)%00%(upstream:short)%00%(upstream:track)%00%(subject)%00%(objectname)%00%(committerdate:unix) refs/heads (10.948792ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"debug","msg":"Error getting git config value for key: status.showUntrackedFiles. Error: the key is not found for [git config --get --null status.showUntrackedFiles]","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git worktree list --porcelain","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git status --untracked-files=all --porcelain -z","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git merge-base phallguy/locations-classieness phallguy/locations-classieness@{u}","level":"error","msg":"fatal: no upstream configured for branch 'phallguy/locations-classieness'\n","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git merge-base phallguy/locations-classieness phallguy/locations-classieness@{u} (7.382458ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git rev-parse --symbolic-full-name master@{u} (7.343292ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git worktree list --porcelain (7.375583ms)","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git -C /Users/paulalexander/workspace/bark/bark-www rev-parse --path-format=absolute --absolute-git-dir","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git -c log.showSignature=false log -g --abbrev=40 --format=%h%x00%ct%x00%gs%x00%p (19.486334ms)","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --symbolic-full-name main@{u}","level":"error","msg":"fatal: no such branch: 'main'\n","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git rev-parse --symbolic-full-name main@{u} (10.295208ms)","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --verify --quiet refs/remotes/origin/main","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git log HEAD --topo-order --oneline --pretty=format:%H%x00%at%x00%aN%x00%ae%x00%D%x00%p%x00%s%x00%m --abbrev=40 -300 --no-show-signature -- (13.540334ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git -C /Users/paulalexander/workspace/bark/bark-www rev-parse --path-format=absolute --absolute-git-dir (5.588541ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for worktrees took 71.375µs","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for localBranches took 125.25µs","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --verify --quiet refs/remotes/origin/main","level":"error","msg":"","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git rev-parse --verify --quiet refs/remotes/origin/main (5.229708ms)","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --verify --quiet refs/heads/main","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git rev-parse --verify --quiet refs/heads/main","level":"error","msg":"","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git rev-parse --verify --quiet refs/heads/main (5.051125ms)","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git merge-base HEAD refs/remotes/origin/master","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for reflogCommits took 12.07875ms","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git merge-base HEAD refs/remotes/origin/master (6.279083ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"debug","msg":"using cache for key rebase.updateRefs","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for commits took 6.368542ms","time":"2024-04-23T09:14:54-07:00"}
+{"level":"debug","msg":"using cache for key rebase.updateRefs","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git for-each-ref --sort=-committerdate --format=%(HEAD)%00%(refname:short)%00%(upstream:short)%00%(upstream:track)%00%(subject)%00%(objectname)%00%(committerdate:unix) refs/heads","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git for-each-ref --sort=-committerdate --format=%(HEAD)%00%(refname:short)%00%(upstream:short)%00%(upstream:track)%00%(subject)%00%(objectname)%00%(committerdate:unix) refs/heads (9.132166ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for localBranches took 157.833µs","time":"2024-04-23T09:14:54-07:00"}
+{"level":"debug","msg":"using cache for key rebase.updateRefs","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git status --untracked-files=all --porcelain -z (71.384583ms)","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for submodules took 10.333µs","time":"2024-04-23T09:14:54-07:00"}
+{"command":"git -C /Users/paulalexander/workspace/bark/bark-www diff --no-ext-diff --submodule --unified=3 --color=always -- app/models/locations/activities","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"postRefreshUpdate for files took 121.042µs","time":"2024-04-23T09:14:54-07:00"}
+{"level":"info","msg":"git fetch --all --no-write-fetch-head (1.32252825s)","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"refreshing the following scopes in async mode: branches,commits,remotes,tags","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"Refresh took 77.917µs","time":"2024-04-23T09:14:55-07:00"}
+{"command":"git rev-parse --abbrev-ref --verify HEAD","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:55-07:00"}
+{"command":"git tag --list -n --sort=-creatordate","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"git rev-parse --abbrev-ref --verify HEAD (5.131625ms)","time":"2024-04-23T09:14:55-07:00"}
+{"command":"git merge-base phallguy/locations-classieness phallguy/locations-classieness@{u}","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:55-07:00"}
+{"command":"git merge-base HEAD refs/remotes/origin/master","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"git -c log.showSignature=false log -g --abbrev=40 --format=%h%x00%ct%x00%gs%x00%p (6.057625ms)","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"git tag --list -n --sort=-creatordate (5.982041ms)","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"git for-each-ref --sort=refname --format=%(refname:short) refs/remotes (8.325459ms)","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"postRefreshUpdate for tags took 65.958µs","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"postRefreshUpdate for remotes took 54.708µs","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"postRefreshUpdate for remoteBranches took 21.125µs","time":"2024-04-23T09:14:55-07:00"}
+{"command":"git merge-base phallguy/locations-classieness phallguy/locations-classieness@{u}","level":"error","msg":"fatal: no upstream configured for branch 'phallguy/locations-classieness'\n","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"git merge-base phallguy/locations-classieness phallguy/locations-classieness@{u} (5.545042ms)","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"git merge-base HEAD refs/remotes/origin/master (7.967ms)","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"postRefreshUpdate for reflogCommits took 9.834375ms","time":"2024-04-23T09:14:55-07:00"}
+{"command":"git for-each-ref --sort=-committerdate --format=%(HEAD)%00%(refname:short)%00%(upstream:short)%00%(upstream:track)%00%(subject)%00%(objectname)%00%(committerdate:unix) refs/heads","level":"debug","msg":"RunCommand","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"git log HEAD --topo-order --oneline --pretty=format:%H%x00%at%x00%aN%x00%ae%x00%D%x00%p%x00%s%x00%m --abbrev=40 -300 --no-show-signature -- (12.45075ms)","time":"2024-04-23T09:14:55-07:00"}
+{"level":"debug","msg":"using cache for key rebase.updateRefs","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"postRefreshUpdate for commits took 5.307167ms","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"git for-each-ref --sort=-committerdate --format=%(HEAD)%00%(refname:short)%00%(upstream:short)%00%(upstream:track)%00%(subject)%00%(objectname)%00%(committerdate:unix) refs/heads (9.321208ms)","time":"2024-04-23T09:14:55-07:00"}
+{"level":"info","msg":"postRefreshUpdate for localBranches took 85µs","time":"2024-04-23T09:14:55-07:00"}
+{"level":"debug","msg":"using cache for key rebase.updateRefs","time":"2024-04-23T09:14:55-07:00"}
