@@ -89,7 +89,7 @@ source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 # zle -N znt-history-widget
 #
 # bindkey "^f" znt-history-widget
-bindkey '^ ' autosuggest-accept
+# bindkey '^ ' autosuggest-accept
 bindkey '^y' autosuggest-accept
 
 export CLICOLOR=1

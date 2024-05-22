@@ -7,22 +7,9 @@ return {
 	-- Fuzzy Finder (files, lsp, etc)
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "*",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
-			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
-				'nvim-telescope/telescope-fzf-native.nvim',
-
-				-- `build` is used to run some command when the plugin is installed/updated.
-				-- This is only run then, not every time Neovim starts up.
-				build = 'make',
-
-				-- `cond` is a condition used to determine whether this plugin should be
-				-- installed and loaded.
-				cond = function()
-					return vim.fn.executable 'make' == 1
-				end,
-			},
+			{'nvim-telescope/telescope-fzf-native.nvim',},
 			{ 'nvim-telescope/telescope-ui-select.nvim' },
 		},
 		config = function()
@@ -73,7 +60,7 @@ return {
 			vim.keymap.set("n", "<leader>fm", "<CMD>Telescope media_files<CR>", { desc = "Media files" })
 			vim.keymap.set("n", "<leader>fu", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
 			vim.keymap.set("n", "<leader>fd", "<CMD>tab DBUI<CR>", { desc = "Databases" })
-      vim.keymap.set('n', '<leader>fH', builtin.help_tags, { desc = '[F]earch [H]elp' })
+			vim.keymap.set('n', '<leader>fH', builtin.help_tags, { desc = '[F]earch [H]elp' })
 
 			-- local show_notifications = function()
 			-- 	require("telescope").extensions.notify.notify()
@@ -92,7 +79,7 @@ return {
 			require("telescope").setup({
 				defaults = {
 					initial_mode = "insert",
-					path_display = { "truncate" },
+					path_display = { filename_first = { reverse_directories = false } },
 					file_sorter = require("telescope.sorters").get_fuzzy_file,
 					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 					set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,

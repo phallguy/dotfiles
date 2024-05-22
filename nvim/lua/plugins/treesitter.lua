@@ -7,8 +7,6 @@ return {
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"JoosepAlviste/nvim-ts-context-commentstring",
 			"nvim-treesitter/nvim-treesitter-context",
 			"RRethy/nvim-treesitter-endwise",
 			"m-demare/hlargs.nvim",
@@ -119,20 +117,21 @@ return {
 				},
 			})
 
-			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+			-- local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+			--
+			-- -- Repeat movement with ; and ,
+			-- -- ensure ; goes forward and , goes backward regardless of the last direction
+			-- vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
 
-			-- Repeat movement with ; and ,
-			-- ensure ; goes forward and , goes backward regardless of the last direction
-			vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-
-			require('ts_context_commentstring').setup(
-				{ enable = true, enable_autocmd = false })   -- Enable commentstring
-			vim.g.skip_ts_context_commentstring_module = true -- Increase performance
+			-- require('ts_context_commentstring').setup(
+			-- 	{ enable = true, enable_autocmd = false })   -- Enable commentstring
+			-- vim.g.skip_ts_context_commentstring_module = true -- Increase performance
 		end,
 	},
 
 	{
 		"windwp/nvim-ts-autotag",
+		lazy = true,
 		config = function()
 			require('nvim-ts-autotag').setup({
 				opts = {
@@ -149,12 +148,13 @@ return {
 
 	{
 		"RRethy/nvim-treesitter-endwise",
+		lazy = true,
 	},
 
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		lazy = true
-	},
+	-- {
+	-- 	"nvim-treesitter/nvim-treesitter-textobjects",
+	-- 	lazy = true
+	-- },
 
 	{
 		"nvim-treesitter/nvim-treesitter-context",

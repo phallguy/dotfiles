@@ -33,7 +33,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 vim.keymap.set("n", "<leader>ba", [[<CMD>ToggleTermToggleAll<CR>]], { desc = "Toggle all terminals" })
 
-local Terminal = require("toggleterm.terminal").Terminal
 local terminals = {}
 local terminalCount = 0
 
@@ -46,6 +45,7 @@ local function createTerminal(name, opts)
 	result = { name = name }
 
 	local build = function()
+    local Terminal = require("toggleterm.terminal").Terminal
 		local terminal = result.terminal
 		if not terminal then
 			local cmd = vim.g["terminal_" .. name .. "_command"]

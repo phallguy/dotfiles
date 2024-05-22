@@ -1,10 +1,11 @@
 if vim.g.vscode then
-	return {}
+  return {}
 end
 
 return {
   -- Add indentation guides even on blank lines
   "lukas-reineke/indent-blankline.nvim",
+  event = { "BufEnter" },
   main = "ibl",
   -- See `:help ibl.setup`
   opts = {

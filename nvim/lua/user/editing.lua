@@ -54,29 +54,6 @@ vim.keymap.set("n", "[t", function()
 	require("trouble").previous({ skip_groups = true, jump = true })
 end, { desc = "Next trouble" })
 
--- Next/prev diff hunk
-if not vim.g.vscode then
-	local gs = require("gitsigns")
-	vim.keymap.set("n", "]c", function()
-		if vim.wo.diff then
-			return "]c"
-		end
-		vim.schedule(function()
-			gs.next_hunk()
-		end)
-		return "<Ignore>"
-	end, { expr = true, desc = "Next diff hunk" })
-
-	vim.keymap.set("n", "[c", function()
-		if vim.wo.diff then
-			return "[c"
-		end
-		vim.schedule(function()
-			gs.prev_hunk()
-		end)
-		return "<Ignore>"
-	end, { expr = true, desc = "Prev diff hunk" })
-end
 
 -- Buffers
 vim.keymap.set("n", "<leader>c", function()

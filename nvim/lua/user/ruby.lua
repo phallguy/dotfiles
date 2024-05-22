@@ -5,13 +5,6 @@ vim.g.ruby_indent_hanging_elements = 0
 vim.g.ruby_indent_assignment_style = "hanging"
 vim.g.no_ruby_maps = 1
 
-vim.g.splitjoin_ruby_curly_braces = 0
-vim.g.splitjoin_ruby_hanging_args = 0
-vim.g.splitjoin_ruby_trailing_comma = 1
-vim.g.splitjoin_normalize_whitespace = 1
-vim.g.splitjoin_align = 1
-vim.g.splitjoin_ruby_options_as_arguments = 1
-
 vim.g["test#ruby#use_spring_binstub"] = 0
 
 vim.keymap.set("v", "<leader>x", ":Extract ", { desc = "Extract to partial" })

@@ -100,6 +100,8 @@ return {
 					CmdOverlay = { bg = "#FFFFFF", blend = 10 },
 					-- help slow-fast-terminal
 					NonText = { fg = "none" },
+					-- Telescope
+					TelescopeResultsComment = { fg = "highlight_high" }
 				},
 			})
 

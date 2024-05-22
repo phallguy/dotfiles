@@ -18,7 +18,20 @@ return {
 		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
 		-- - sd'   - [S]urround [D]elete [']quotes
 		-- - sr)'  - [S]urround [R]eplace [)] [']
-		require("mini.surround").setup()
+		require("mini.surround").setup({
+			mappings = {
+				add = 'ma',          -- Add surrounding in Normal and Visual modes
+				delete = 'md',       -- Delete surrounding
+				find = 'mf',         -- Find surrounding (to the right)
+				find_left = 'mF',    -- Find surrounding (to the left)
+				highlight = 'mh',    -- Highlight surrounding
+				replace = 'mc',      -- Replace surrounding
+				update_n_lines = 'mn', -- Update `n_lines`
+
+				suffix_last = 'l',   -- Suffix to search with "prev" method
+				suffix_next = 'n',   -- Suffix to search with "next" method
+			}
+		})
 
 		require("mini.splitjoin").setup({
 			mappings = {
@@ -34,8 +47,16 @@ return {
 		-- {
 		-- 	"junegunn/vim-easy-align",
 		-- }, -- Multi-line bock alignment
+		local MiniAlign = require("mini.align")
 		require("mini.align").setup({
-
+			modifiers = {
+    		[':'] = function(steps, opts)
+      		opts.split_pattern = ':'
+      		table.insert(steps.pre_justify, MiniAlign.gen_step.trim())
+      		table.insert(steps.pre_justify, MiniAlign.gen_step.pair())
+      		opts.merge_delimiter = ' '
+    		end,
+			}
 		})
 
 		-- {
@@ -50,6 +71,5 @@ return {
 		})
 
 		require("mini.extra").setup()
-
 	end,
 }
