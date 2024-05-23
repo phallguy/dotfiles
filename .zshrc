@@ -44,7 +44,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -55,7 +55,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -76,31 +76,25 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 plugins=(
   git
   zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-vim-mode
+  # zsh-syntax-highlighting
+  # zsh-vim-mode
 )
 
 zstyle ':omz:*' aliases no
 
 source $ZSH/oh-my-zsh.sh
-source $ZSH/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
-# autoload znt-history-widget
-# zle -N znt-history-widget
-#
-# bindkey "^f" znt-history-widget
-# bindkey '^ ' autosuggest-accept
 bindkey '^y' autosuggest-accept
 
 export CLICOLOR=1
 export GPG_TTY=$TTY
-export BAT_THEME=ansi
+export BAT_THEME="Monokai Extended Origin"
 
 eval "$(batpipe)"
 
-if command -v wezterm &> /dev/null; then
-  eval "$(wezterm shell-completion --shell zsh)"
-fi
+# if command -v wezterm &> /dev/null; then
+#   eval "$(wezterm shell-completion --shell zsh)"
+# fi
 
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
@@ -130,6 +124,7 @@ alias x86='arch -arch x86_64 /bin/zsh --login'
 alias cd='z'
 alias g='git'
 alias lg='lazygit'
+alias man='batman'
 
 function kan() {
   cd ~/dotfiles;
@@ -172,5 +167,4 @@ fi
 export PATH=$PATH:/Users/paulalexander/.spicetify
 
 eval "$(rbenv init - zsh)"
-
 eval "$(atuin init zsh)"

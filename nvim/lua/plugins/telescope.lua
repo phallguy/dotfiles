@@ -79,7 +79,7 @@ return {
 			require("telescope").setup({
 				defaults = {
 					initial_mode = "insert",
-					path_display = { filename_first = { reverse_directories = false } },
+					path_display = { filename_first = { reverse_directories = true } },
 					file_sorter = require("telescope.sorters").get_fuzzy_file,
 					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 					set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
@@ -145,7 +145,7 @@ return {
 				},
 				extensions = {
 					['ui-select'] = {
-						require('telescope.themes').get_dropdown(),
+						require('telescope.themes').get_dropdown({}),
 					},
 					live_grep_args = {
 						-- auto_quoting = true, -- enable/disable auto-quoting

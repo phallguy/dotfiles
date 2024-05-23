@@ -1,10 +1,10 @@
 lastupdatecheck: 0
 recentrepos:
-- /Users/paulalexander/dotfiles
-- /Users/paulalexander/workspace/bark/bark-www
-- /Users/paulalexander/workspace/bark/bark-desktop
+    - /Users/paulalexander/dotfiles
+    - /Users/paulalexander/workspace/bark/bark-www
+    - /Users/paulalexander/workspace/bark/bark-desktop
 startuppopupversion: 5
-lastversion: 0.41.0
+lastversion: 0.42.0
 customcommandshistory: []
 hidecommandlog: true
 ignorewhitespaceindiffview: false

@@ -42,6 +42,7 @@ require("lazy").setup({
 	},
 
 	{ import = "plugins" },
+	{ import = "plugins/colorschemes" }
 }, {
 	ui = {
 		border = "rounded",
@@ -55,6 +56,7 @@ require("lazy").setup({
 	},
 })
 
+require("user.colorscheme")
 require("user.editing")
 require("user.session")
 require("user.netwr")

@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
     vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = bufnr })
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
-    vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
+    -- vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
 
     vim.keymap.set("n", "<leader>ll", vim.diagnostic.open_float, { desc = "[L]ine diagnostics", buffer = bufnr })
     vim.keymap.set("n", "<leader>l/", require("telescope.builtin").lsp_document_symbols,

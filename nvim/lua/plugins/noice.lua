@@ -71,10 +71,10 @@ return {
 							padding = { 2, 5 },
 						},
 						win_options = {
-							winhighlight = {
-								Normal = "CmdOverlay",
-								FloatBorder = "CmdOverlay",
-							}
+							-- winhighlight = {
+							-- 	Normal = "CmdOverlay",
+							-- 	FloatBorder = "CmdOverlay",
+							-- }
 							-- cursorline = false,
 						},
 					},

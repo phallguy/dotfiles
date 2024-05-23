@@ -45,7 +45,7 @@ return {
 	-- freetype_load_target = "HorizontalLcd",
 	-- freetype_render_target = "HorizontalLcd",
 	-- colors
-	color_scheme = "rose-pine",
+	color_scheme = "rose-pine-moon",
 	window_frame = {
 		font = wezterm.font_with_fallback({
 			-- <built-in>, BuiltIn
