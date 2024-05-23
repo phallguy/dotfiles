@@ -133,8 +133,14 @@
   navigate = true    # use n and N to move between diff sections
   show-syntax = true
   side-by-side = true
-  features = decorations
   true-color = always
+  line-numbers-left-format = "{nm:^3}  "
+  line-numbers-right-format = " {nm:^3}  "
+  commit-style = omit
+  hunk-header-decoration-style =
+  hunk-header-file-style = ""
+  hunk-header-line-number-style = ""
+  hunk-header-style = omit
 
 [pager]
   difftool = true

@@ -1,10 +1,10 @@
 local group = vim.api.nvim_create_augroup("GitEx", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-	group = group,
-	pattern = { "git", "gitcommit" },
-	callback = function()
-		vim.opt_local.foldmethod = "syntax"
-	end,
+  group = group,
+  pattern = { "git", "gitcommit" },
+  callback = function()
+    vim.opt_local.foldmethod = "syntax"
+  end,
 })
 
 vim.keymap.set("n", "<leader>gs", "<CMD>DiffviewOpen<CR>", { desc = "Status" })
@@ -15,19 +15,26 @@ vim.keymap.set("n", "<leader>gh", "<CMD>DiffviewFileHistory %<CR>", { desc = "Di
 vim.keymap.set("n", "<leader>gw", "<CMD>G show<CR>", { desc = "Git show" })
 vim.keymap.set("n", "<leader>gb", "<CMD>G blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gB", function()
-	local r,c = unpack(vim.api.nvim_win_get_cursor(0))
-	print(r, c)
-	vim.cmd(r .. ":GBrowse")
+  local r, c = unpack(vim.api.nvim_win_get_cursor(0))
+  print(r, c)
+  vim.cmd(r .. ":GBrowse")
 end, { desc = "Browse", noremap = true })
-vim.keymap.set("n", "<leader>go", "<CMD>Telescope git_branches<CR>", { desc = "Branches" })
+vim.keymap.set(
+  "n",
+  "<leader>go",
+  function()
+    require("telescope.builtin").git_branches({ show_remote_tracking_branches = false })
+  end,
+  { desc = "Branches" }
+)
 vim.keymap.set("n", "<leader>gr", ":G br phallguy/", { desc = "Branch" })
 vim.keymap.set("n", "<leader>gl", "<CMD>DiffviewFileHistory<CR>", { desc = "Recent log" })
 vim.keymap.set("n", "<leader>gc", "<CMD>DiffviewClose<CR><CMD>tab G commit -v<CR>", { desc = "Commit", silent = true })
 vim.keymap.set("n", "<leader>ga", "<CMD>DiffviewClose<CR><CMD>tab G cam<CR>", { desc = "Commit ammend", silent = true })
 vim.keymap.set("n", "<leader>gt", "<CMD>DiffviewClose<CR><CMD>G todo<CR>", { desc = "Todo", silent = true })
-vim.keymap.set("n", "<leader>gh", "<CMD>Gitsigns preview_hunk_inline<CR>", { desc = "Preview hunk inline", silent = true })
+vim.keymap.set("n", "<leader>gh", "<CMD>Gitsigns preview_hunk_inline<CR>",
+  { desc = "Preview hunk inline", silent = true })
 vim.keymap.set("n", "<leader>gH", "<CMD>Gitsigns preview_hunk<CR>", { desc = "Preview hunk", silent = true })
 
 vim.opt.fillchars:append({ diff = "╱" })
 vim.opt.diffopt:append("iwhite") -- Ignore whitespace
-

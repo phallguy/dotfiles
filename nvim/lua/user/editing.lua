@@ -145,7 +145,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "help" },
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
-		vim.opt_local.number = true
+		vim.opt_local.number = false
 		vim.keymap.set("n", "q", "<CMD>lcl<CR><CMD>helpc<CR>", { buffer = event.buf, silent = true })
 	end,
 })

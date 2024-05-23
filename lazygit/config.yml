@@ -4,7 +4,7 @@ gui:
 git:
   paging:
     colorArg: always
-    pager: delta --dark --paging=never -s --commit-style=omit --hunk-header-decoration-style=omit
+    pager: delta --dark --paging=never -s
     # externalDiffCommand: difft --color=always --display=side-by-side --tab-width=2
 
 
