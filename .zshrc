@@ -170,8 +170,9 @@ if [[ $(uname -p) != 'arm' ]]; then
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH=$PATH:/Users/paulalexander/.spicetify
 
 eval "$(rbenv init - zsh)"
 eval "$(atuin init zsh)"
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
