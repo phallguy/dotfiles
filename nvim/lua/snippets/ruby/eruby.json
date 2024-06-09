@@ -1,0 +1,64 @@
+{
+  "link_block": {
+    "prefix": "ltb",
+    "body": [
+      "<%= link_to ${1:path} do %>",
+      "\t$0",
+      "<% end %>"
+    ],
+    "description": "linkto do"
+  },
+  "link_to": {
+    "prefix": "lt",
+    "body": [
+      "<%= link_to \"${1:title}\", ${2:path} %>"
+    ],
+    "description": "linkto do"
+  },
+  "render_block": {
+    "prefix": [
+      "peb",
+      "="
+    ],
+    "body": [
+      "<%= $1 do %>",
+      "\t$0",
+      "<% end %>"
+    ],
+    "description": "render block pe"
+  },
+  "render_block_with_param": {
+    "prefix": [
+      "pebb",
+      "="
+    ],
+    "body": [
+      "<%= $1 do |${2:b}| %>",
+      "\t$0",
+      "<% end %>"
+    ],
+    "description": "render block with param"
+  },
+
+  "evaluate_block": {
+    "prefix": [
+      "eb"
+    ],
+    "body": [
+      "<% $1 do %>",
+      "\t$0",
+      "<% end %>"
+    ]
+  },
+
+  "evaluate_block_param": {
+    "prefix": [
+      "ebb"
+    ],
+    "body": [
+      "<% $1 do |${2:b}| %>",
+      "\t$0",
+      "<% end %>"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "Add test": {
+    "prefix": "test",
+    "body": [
+      "test \"${1:description}\" do",
+      "\t${2:raise}",
+      "end"
+    ],
+    "description": "test_block"
+  },
+  "Assert equal": {
+    "prefix": "ase",
+    "body": [
+      "assert_equal ${1:expected}, ${2:actual}"
+    ],
+    "description": "assert_equal"
+  },
+  "Assert changes": {
+    "prefix": "asc",
+    "body": [
+      "assert_changes \"${1:condition}\" do",
+      "\t${2:code}",
+      "end"
+    ],
+    "description": "assert_changes"
+  },
+  "Assert difference": {
+    "prefix": "asd",
+    "body": [
+      "assert_difference \"${1:condition}\", ${2:amount} do",
+      "\t${3:code}",
+      "end"
+    ],
+    "description": "assert_difference"
+  }
+}

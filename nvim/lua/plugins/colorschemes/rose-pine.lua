@@ -49,8 +49,8 @@ return {
           SpellCap = { fg = colors.love, italic = true, undercurl = true },
           SpellLocal = { fg = colors.pine, italic = true, undercurl = true },
           SpellRare = { fg = colors.gold, italic = true, undercurl = true },
-          -- Hlargs = { link = "@parameter", bold = true },
-          -- HlargsNamedParams = { link = "@parameter", bold = true },
+          Hlargs = { link = "@parameter", bold = true },
+          HlargsNamedParams = { link = "@parameter", bold = true },
           -- -- Quick fix
           qfSeparator = { fg = colors.subtle },
           qfLineNr = { fg = colors.love },

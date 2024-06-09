@@ -56,6 +56,9 @@ return {
 						sources = { "ale", "nvim_diagnostic" },
 						colored = false,
 					},
+					{
+					  "reg_recording"
+					}
 				},
 			},
 			inactive_sections = {

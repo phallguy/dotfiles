@@ -13,8 +13,6 @@ opt.expandtab = true                                -- Use spaces instead of tab
 opt.formatoptions = "jcrqlnt"                       -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
-opt.infercase = true       -- Infer cases in keyword completion.
-opt.inccommand = "nosplit" -- preview incremental substitute
 opt.laststatus = 2
 opt.list = false           -- Show some invisible characters (tabs...
 opt.mouse = "a"            -- Enable mouse mode
@@ -41,6 +39,8 @@ opt.sidescrolloff = 8  -- Columns of context
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.ignorecase = false -- Ignore case
 opt.smartcase = true   -- Don't ignore case with capitals
+opt.infercase = true       -- Infer cases in keyword completion.
+opt.inccommand = "nosplit" -- preview incremental substitute
 opt.smartindent = true -- Insert indents automatically
 opt.breakindent = true
 opt.autoindent = true
@@ -52,10 +52,10 @@ opt.tabstop = 2           -- Number of spaces tabs count for
 opt.textwidth = 100
 opt.termguicolors = true  -- True color support
 opt.timeoutlen = 750
+opt.updatetime = 500                                -- Save swap file and trigger CursorHold
 opt.undofile = true
 opt.undolevels = 1000
 opt.undodir = { os.getenv("HOME") .. "/.vimundo/" } -- use a directory to store the undo history
-opt.updatetime = 500                                -- Save swap file and trigger CursorHold
 opt.writebackup = false                             -- Disable making a backup before overwriting a file.
 opt.wildmode = "lastused,longest:full,full"         -- Command-line completion mode
 opt.wildoptions = "fuzzy,pum"
@@ -65,7 +65,6 @@ opt.wrap = false                                    -- Disable line wrap
 opt.linebreak = true                                -- When we do wrap, try to break at natural line boundaries
 opt.hlsearch = false                                -- why even have this?
 opt.incsearch = true
-opt.inccommand = "split"
 opt.foldmethod = "marker"
 opt.foldenable = true
 opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -88,7 +87,7 @@ opt.backup = false
 -- h - Something about hlsearch
 opt.shada = "!,'30,s10,h"
 
-opt.iskeyword:append({ '-' }) -- Kabab case
+-- opt.iskeyword:append({ '-' }) -- Kabab case
 
 -- opt.formatoptions = vim.opt.formatoptions._info.default
 opt.formatoptions:append({

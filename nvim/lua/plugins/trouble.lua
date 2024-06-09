@@ -10,8 +10,9 @@ return {
 				auto_close = true,
 			})
 
-			vim.keymap.set("n", "<leader>ld", "<CMD>TroubleToggle document_diagnostics<CR>", { desc = "Diagnostics" })
-			vim.keymap.set("n", "<leader>lD", "<CMD>TroubleToggle workspace_diagnostics<CR>", { desc = "Workspace Diagnostics" })
+			vim.keymap.set("n", "<leader>ld", "<CMD>Trouble diagnostics toggle focus=false filter.buf=0<CR>", { desc = "Diagnostics" })
+			vim.keymap.set("n", "<leader>lD", "<CMD>Trouble diagnostics toggle<CR>", { desc = "Workspace Diagnostics" })
+			vim.keymap.set("n", "<leader>lo", "<CMD>Trouble symbols toggle<CR>", { desc = "Workspace Diagnostics" })
 		end,
 	},
 }

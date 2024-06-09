@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>l/", require("telescope.builtin").lsp_document_symbols,
       { desc = "Document symbols", buffer = bufnr })
 
-    -- vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { buffer = bufnr })
+    vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { buffer = bufnr })
     vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr })
   end,
 })

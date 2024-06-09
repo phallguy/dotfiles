@@ -58,7 +58,7 @@ return {
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
 			vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })
 			vim.keymap.set("n", "<leader>fm", "<CMD>Telescope media_files<CR>", { desc = "Media files" })
-			vim.keymap.set("n", "<leader>fu", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
+			vim.keymap.set("n", "<leader>fU", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
 			vim.keymap.set("n", "<leader>fd", "<CMD>tab DBUI<CR>", { desc = "Databases" })
 			vim.keymap.set('n', '<leader>fH', builtin.help_tags, { desc = '[F]earch [H]elp' })
 
@@ -97,7 +97,6 @@ return {
 									prompt_to_prefix = true,
 								})
 							end,
-							["<c-t>"] = trouble.open_with_trouble,
 						},
 						n = {
 							-- ["<C-n>"] = actions.cycle_history_next,
@@ -107,7 +106,6 @@ return {
 							["<C-l>"] = layout_actions.cycle_layout_next,
 							["P"] = layout_actions.toggle_preview,
 							["?"] = actions.which_key,
-							["<c-t>"] = trouble.open_with_trouble,
 						},
 					},
 				},

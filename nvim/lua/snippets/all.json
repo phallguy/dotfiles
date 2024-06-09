@@ -1,0 +1,12 @@
+{
+  "Lorem Ipsum Sentence": {
+    "prefix": "lors",
+    "body": "Bacon ipsum dolor amet pancetta burgdoggen bacon chuck short loin hamburger meatball pork belly drumstick.",
+    "description": "Lorem Ipsum Sentence"
+  },
+  "Lorem Ipsum Paragraph": {
+    "prefix": "lorp",
+    "body": "Turkey tail fatback, salami biltong buffalo bacon. Meatloaf tongue turducken jowl pork loin tenderloin. Tenderloin fatback shank buffalo pork pancetta salami alcatra ground round sausage pig flank chislic tail shankle. Alcatra ham shankle, tri-tip pork belly pork meatloaf. Drumstick cow jowl salami, ham hock alcatra flank picanha fatback bresaola pork chop. Pork chop landjaeger chuck salami. Biltong venison strip steak, tri-tip corned beef pork loin leberkas bacon ham turducken pork belly.",
+    "description": "Lorem Ipsum Paragraph"
+  }
+}

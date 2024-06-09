@@ -10,7 +10,12 @@ return {
 		--  - ci'  - [C]hange [I]nsie [']quote
 		require("mini.ai").setup({
 			n_lines = 500,
-			search_method = "cover_or_next"
+			search_method = "cover_or_next",
+			-- custom_textobjects = {
+			--   t = require("mini.surround").gen_spec.input.treesitter({
+			--     a = "@function.outer", i = "@function.inner"
+			--   })
+			-- }
 		})
 
 		-- Ad/delete/replace surroundings (brackets, quotes, etc.)
@@ -18,28 +23,35 @@ return {
 		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
 		-- - sd'   - [S]urround [D]elete [']quotes
 		-- - sr)'  - [S]urround [R]eplace [)] [']
+		--
+    local ts_input = require("mini.surround").gen_spec.input.treesitter
 		require("mini.surround").setup({
 			mappings = {
-				add = 'ma',          -- Add surrounding in Normal and Visual modes
-				delete = 'md',       -- Delete surrounding
+				add = 'as',          -- Add surrounding in Normal and Visual modes
+				delete = 'ds',       -- Delete surrounding
 				find = 'mf',         -- Find surrounding (to the right)
 				find_left = 'mF',    -- Find surrounding (to the left)
 				highlight = 'mh',    -- Highlight surrounding
-				replace = 'mc',      -- Replace surrounding
+				replace = 'cs',      -- Replace surrounding
 				update_n_lines = 'mn', -- Update `n_lines`
 
 				suffix_last = 'l',   -- Suffix to search with "prev" method
 				suffix_next = 'n',   -- Suffix to search with "next" method
+			},
+			custom_textobjects = {
+			  t = ts_input({
+			    outer = "@function.outer", inner = "@function.inner"
+			  })
 			}
 		})
 
-		require("mini.splitjoin").setup({
-			mappings = {
-				toggle = '',
-				split  = 'gS',
-				join   = 'gJ',
-			}
-		})
+		-- require("mini.splitjoin").setup({
+		-- 	mappings = {
+		-- 		toggle = '',
+		-- 		split  = 'gS',
+		-- 		join   = 'gJ',
+		-- 	}
+		-- })
 
 		require("mini.comment").setup()
 

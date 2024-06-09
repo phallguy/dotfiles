@@ -1,0 +1,7 @@
+{
+  "Tap debugger": {
+    "prefix": "dbg",
+    "body": [".tap { |obj| debugger }"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "my snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "ruby",
+        "path": "./ruby/ruby.json"
+      },
+      {
+        "language": "eruby",
+        "path": "./ruby/eruby.json"
+      },
+      {
+        "language": "minitest",
+        "path": "./ruby/minitest.json"
+      },
+      {
+        "language": "all",
+        "path": "./all.json"
+      }
+    ]
+  }
+}
