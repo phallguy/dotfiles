@@ -8,8 +8,11 @@
 
 (defcfg
   process-unmapped-keys yes
+  log-layer-changes no
+  rapid-event-delay 2
 
   concurrent-tap-hold yes
+  chords-v2-min-idle-experimental 100
 
   delegate-to-first-layer yes
   macos-dev-names-include (
@@ -45,8 +48,8 @@
 )
 (deflayer base
   f6 f7 f8 f9
-  @tab
-  @esc @a  @s  @d  @f h @j  @k  @l  @;
+  tab
+  esc @a  @s  @d  @f h @j  @k  @l  @;
   lsft lrld
   spc
 )
@@ -77,10 +80,6 @@
     (on-idle-fakekey to-base tap 20)
   )
 
-
-  esc (tap-dance $hold-time (esc (caps-word 2000)))
-  tab (tap-hold-press $tap-time $hold-time tab (layer-toggle arrows))
-
   a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
   s (tap-hold-release-keys $tap-time $hold-time (multi s @tap) lalt $left-hand-keys)
   d (tap-hold-release-keys $tap-time $hold-time (multi d @tap) lsft $left-hand-keys)
@@ -94,13 +93,14 @@
 )
 
 (defchordsv2-experimental
- (d spc) S-- 100 first-release ()
+  (k l) S-- 25 first-release ()
+  (s d) = 25 first-release ()
 
-  (d f) S-9 50 first-release ()
-  (e r) [   50 first-release ()
-  (c v) S-[ 50 first-release ()
+  (d f) S-9 25 first-release ()
+  (e r) [   25 first-release ()
+  (c v) S-[ 25 first-release ()
 
-  (j k) S-0 50 first-release ()
-  (u i) ]   50 first-release ()
-  (m ,) S-] 50 first-release ()
+  (j k) S-0 25 first-release ()
+  (u i) ]   25 first-release ()
+  (m ,) S-] 25 first-release ()
 )

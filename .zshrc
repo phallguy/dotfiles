@@ -44,7 +44,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -80,11 +80,18 @@ plugins=(
   # zsh-vim-mode
 )
 
+autoload edit-command-line
+zle -N edit-command-line
+
 zstyle ':omz:*' aliases no
 
 source $ZSH/oh-my-zsh.sh
 
-bindkey '^y' autosuggest-accept
+bindkey "^y" autosuggest-accept
+bindkey "^ " autosuggest-accept
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+bindkey "^v" edit-command-line
 
 export CLICOLOR=1
 export GPG_TTY=$TTY
@@ -128,7 +135,7 @@ alias man='batman'
 
 function kan() {
   cd ~/dotfiles;
-  sudo kanata
+  sudo kanata -n
 }
 
 function _begin_osc {
