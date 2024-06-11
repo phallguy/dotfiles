@@ -99,7 +99,7 @@ ls.config.set_config {
 -- ls.log.set_loglevel("debug")
 
 require("luasnip.loaders.from_vscode").lazy_load()
-require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.api.nvim_get_runtime_file("lua/snippets", false) })
+require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.api.nvim_get_runtime_file("lua/snippets", false), priority = 10000 })
 
 for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/custom/snippets/*.lua", true)) do
   loadfile(ft_path)()
