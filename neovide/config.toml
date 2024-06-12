@@ -1,0 +1,13 @@
+neovim-bin = "/opt/homebrew/bin/nvim"
+frame = "full"
+tabs = true
+title-hidden = true
+
+[font]
+  normal = [{ family = "JetBrains Mono", style = "Light"}, { family = "JetBrainsMono Nerd Font Mono" }]
+  size = 15
+  edging = "subpixelantialias"
+  hinting = "slight"
+
+[font.features]
+  "JetBrains Mono" = [ 'calt=0', 'clig=0', 'liga=0' ]

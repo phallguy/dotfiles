@@ -16,6 +16,9 @@ return {
       require("rose-pine").setup({
         -- variant = "dawn",
         dark_variant = "moon",
+        enable = {
+          migrations = true,
+        },
         styles = {
           bold = true,
           italic = true,
@@ -50,7 +53,7 @@ return {
           SpellLocal = { fg = colors.pine, italic = true, undercurl = true },
           SpellRare = { fg = colors.gold, italic = true, undercurl = true },
           Hlargs = { link = "@parameter", bold = true },
-          HlargsNamedParams = { link = "@parameter", bold = true },
+          -- HlargsNamedParams = { link = "@parameter", bold = true },
           -- -- Quick fix
           qfSeparator = { fg = colors.subtle },
           qfLineNr = { fg = colors.love },
@@ -104,12 +107,14 @@ return {
 
           -- Noice
           NoicePopupBorder = { fg = "overlay", bg = "surface" },
-          NoiceCmdlinePopup = { bg = "overlay" },
+          NoiceCmdlinePopup = { bg = "#101010" },
           NoiceCmdlinePopupBorder = { link = "NoicePopupBorder" },
           NoiceCmdlinePopupBorderSearch = { link = "NoicePopupBorder" },
           NoiceConfirm = { fg = "text", bg = "overlay" },
-          NoiceConfirmBorder = { fg = "surface", bg = "overlay" }
-
+          NoiceConfirmBorder = { fg = "surface", bg = "overlay" },
+          -- TreesiterContext
+          TreesitterContext = { bg = "_nc", force = true },
+          TreesitterContextBottom = { sp = "highlight_high", blend = 0, underline = true },
 
         },
       })

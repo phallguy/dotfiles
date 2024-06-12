@@ -42,8 +42,10 @@ return {
 	font_size = 15,
 	line_height = 0.95,
 	cell_width = 0.90,
-	-- freetype_load_target = "HorizontalLcd",
+	freetype_load_target = "Light",
 	-- freetype_render_target = "HorizontalLcd",
+	allow_square_glyphs_to_overflow_width = "Always",
+	font_antialias = "Subpixel",
 	-- colors
 	color_scheme = "rose-pine-moon",
 	window_frame = {
@@ -89,8 +91,7 @@ return {
 		bottom = 0,
 	},
 	webgpu_power_preference = "HighPerformance",
-	window_decorations = "RESIZE|MACOS_FORCE_ENABLE_SHADOW",
-	-- window_decorations = "RESIZE",
+	window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
 	-- macos_window_background_blur = 15,
 	-- window_background_opacity = 0.90,

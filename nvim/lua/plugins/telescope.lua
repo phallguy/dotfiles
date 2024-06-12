@@ -83,6 +83,7 @@ return {
 					file_sorter = require("telescope.sorters").get_fuzzy_file,
 					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 					set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+					-- winblend = 10,
 					mappings = {
 						i = {
 							["<C-n>"] = actions.cycle_history_next,
