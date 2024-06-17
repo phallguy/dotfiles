@@ -37,6 +37,6 @@ end
 require("user.lsp.servers.solargraph")
 require("user.lsp.servers.tsserver")
 require("user.lsp.servers.rust")
-require("user.lsp.servers.html")
+-- require("user.lsp.servers.html")
 require("user.lsp.servers.ruby-lsp")
 -- require("user.lsp.servers.markdown")

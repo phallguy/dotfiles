@@ -42,13 +42,13 @@ require("lazy").setup({
 	},
 
 	{ import = "plugins" },
-	{ import = "plugins/colorschemes" }
+	{ import = "plugins/colorschemes" },
 }, {
 	ui = {
 		border = "rounded",
 	},
 	checker = {
-    -- Look for plugin updates
+		-- Look for plugin updates
 		enabled = false,
 	},
 	change_detection = {

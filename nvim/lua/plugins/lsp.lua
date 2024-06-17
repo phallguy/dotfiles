@@ -21,5 +21,5 @@ return {
 		lazy = true,
 		event = "VeryLazy",
 		opts = {}
-	}
+	},
 }

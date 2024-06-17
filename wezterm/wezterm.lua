@@ -12,7 +12,7 @@ return {
 		{
 			family = "JetBrains Mono",
 			weight = "Light",
-			harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+			harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 		},
 		"JetBrainsMono Nerd Font Mono",
 	}),
@@ -20,12 +20,13 @@ return {
 		{
 			intensity = "Bold",
 			italic = true,
-			font = wezterm.font_with_fallback({ {
-				family = "JetBrains Mono",
-				weight = "Bold",
-				italic = true,
-			} }
-			),
+			font = wezterm.font_with_fallback({
+				{
+					family = "JetBrains Mono",
+					weight = "Bold",
+					italic = true,
+				},
+			}),
 		},
 
 		{
@@ -33,10 +34,9 @@ return {
 			italic = false,
 			font = wezterm.font_with_fallback({ {
 				family = "JetBrains Mono",
-				weight = "Bold"
-			} }
-			),
-		}
+				weight = "Bold",
+			} }),
+		},
 	},
 	-- font = wezterm.font(font_family, { weight="Medium" }),
 	font_size = 15,
@@ -45,13 +45,13 @@ return {
 	freetype_load_target = "Light",
 	-- freetype_render_target = "HorizontalLcd",
 	allow_square_glyphs_to_overflow_width = "Always",
-	font_antialias = "Subpixel",
+	-- font_antialias = "Subpixel",
 	-- colors
 	color_scheme = "rose-pine-moon",
 	window_frame = {
 		font = wezterm.font_with_fallback({
 			-- <built-in>, BuiltIn
-			{ family = "Roboto",                      weight = "Medium" },
+			{ family = "Roboto", weight = "Medium" },
 
 			-- /Users/paulalexander/Library/Fonts/JetBrains Mono NL Light Nerd Font Complete Mono.ttf, CoreText
 			{ family = "JetBrainsMono Nerd Font Mono" },
@@ -94,7 +94,7 @@ return {
 	window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
 	-- macos_window_background_blur = 15,
-	-- window_background_opacity = 0.90,
+	-- window_background_opacity = 0.93,
 	-- window_background_gradient = {
 	-- 	orientation = "Vertical",
 	-- 	colors = {

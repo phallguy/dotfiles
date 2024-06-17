@@ -75,6 +75,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  zsh-autocomplete
   zsh-autosuggestions
   # zsh-syntax-highlighting
   # zsh-vim-mode

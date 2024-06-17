@@ -5,9 +5,8 @@ vim.keymap.set("n", "<leader>S", ":saveas %:h/", { desc = "Save as" })
 
 -- Better paste
 vim.keymap.set("v", "p", '"_dP') -- don't yank into clipboard when pasting
-vim.keymap.set("n", "x", '"_x')  -- when deleting a single character don't clobber clipboard
+vim.keymap.set("n", "x", '"_x') -- when deleting a single character don't clobber clipboard
 vim.keymap.set("n", "p", "p=`]") -- reindent on paste
-
 
 -- Move to window using the <ctrl> hjkl keys
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
@@ -24,7 +23,6 @@ vim.keymap.set("i", "<Up>", "<Nop>", { desc = "Disabled up" })
 vim.keymap.set("i", "<Down>", "<Nop>", { desc = "Disabled down" })
 vim.keymap.set("i", "<S-Up>", "<Nop>", { desc = "Disabled up" })
 vim.keymap.set("i", "<S-Down>", "<Nop>", { desc = "Disabled down" })
-
 
 -- Navigation - keep cursor centered when jumping large block
 
@@ -54,7 +52,6 @@ vim.keymap.set("n", "[t", function()
 	require("trouble").previous({ skip_groups = true, jump = true })
 end, { desc = "Next trouble" })
 
-
 -- Buffers
 vim.keymap.set("n", "<leader>c", function()
 	require("diffview").close()
@@ -75,7 +72,7 @@ vim.keymap.set("n", "<leader>O", function()
 
 	for _, bufn in ipairs(vim.api.nvim_list_bufs()) do
 		if bufn ~= bn then
-			local buftype = vim.api.nvim_buf_get_option(bufn, 'buftype')
+			local buftype = vim.api.nvim_buf_get_option(bufn, "buftype")
 
 			if buftype ~= "prompt" then
 				require("mini.bufremove").delete(bufn)
@@ -98,10 +95,14 @@ vim.keymap.set("n", "<CA-K>", "<CMD>m .-2<CR>==")
 vim.keymap.set("v", "<CA-J>", "<CMD>m '>+1<CR>gv-gv")
 vim.keymap.set("v", "<CA-K>", "<CMD>m '<-2<CR>gv-gv")
 
--- Formatting
-vim.keymap.set("n", "<leader>lf", function()
-	vim.lsp.buf.format({ timeout_ms = 10000 })
-end, { desc = "Format" })
+-- -- Formatting
+-- vim.keymap.set("n", "<leader>lf", function()
+-- 	-- vim.lsp.buf.format({ timeout_ms = 10000 })
+-- 	require("conform").format({
+-- 		async = true,
+-- 		lsp_fallback = true,
+-- 	})
+-- end, { desc = "Format" })
 
 -- Open file in VS Code
 vim.keymap.set(
@@ -152,23 +153,21 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- THICC borders
 vim.opt.fillchars = {
-	horiz     = '━',
-	horizup   = '┻',
-	horizdown = '┳',
-	vert      = '┃',
-	vertleft  = '┫',
-	vertright = '┣',
-	verthoriz = '╋',
-	eob       = ' ',
+	horiz = "━",
+	horizup = "┻",
+	horizdown = "┳",
+	vert = "┃",
+	vertleft = "┫",
+	vertright = "┣",
+	verthoriz = "╋",
+	eob = " ",
 }
-
 
 -- Cheat sheat
 vim.keymap.set("n", "<leader>fh", function()
 	local word = vim.fn.expand("<cword>")
 	vim.cmd("Cheat " .. vim.bo.filetype .. " " .. word)
 end, { desc = "Cheat sheat" })
-
 
 -- Neotree
 vim.keymap.set("n", "<leader>e", "<CMD>Neotree close<CR>", { desc = "Show tree" })
