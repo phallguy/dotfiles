@@ -56,11 +56,12 @@ require("lazy").setup({
 	},
 })
 
+-- require("user.neovide")
 require("user.colorscheme")
 require("user.editing")
 require("user.session")
 require("user.netwr")
-require("user.hilight_on_yank")
+require("user.highlight_on_yank")
 require("user.terminal")
 require("user.git")
 

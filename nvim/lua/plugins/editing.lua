@@ -67,4 +67,21 @@ return {
 	{
 		"tpope/vim-projectionist",
 	},
+
+	{
+		"kjuq/sixelview.nvim",
+		keys = {
+			{
+				"<leader>l",
+				"<CMD>SixelView<CR>",
+				{ "Preview image" },
+			},
+		},
+		cmd = {
+			"SixelView",
+		},
+		opts = {
+			auto = false,
+		},
+	},
 }

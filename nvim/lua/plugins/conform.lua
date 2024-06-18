@@ -1,6 +1,5 @@
 return {
 	"stevearc/conform.nvim",
-	opts = {},
 	event = "BufWrite",
 	keys = {
 		{
@@ -14,13 +13,25 @@ return {
 			{ desc = "Format" },
 		},
 	},
+	cmd = {
+		"Conform",
+		"ConformInfo",
+		"FormatEnable",
+		"FormatDisable",
+	},
 	opts = {
 		-- log_level = vim.log.levels.DEBUG,
-		format_on_save = {
-			lsp_format = "fallback",
-			timeout_ms = 2000,
-			async = true,
-		},
+		format_after_save = function(bufnr)
+			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+				return
+			end
+
+			return {
+				lsp_format = "fallback",
+				timeout_ms = 500,
+				async = true,
+			}
+		end,
 		formatters = {
 			htmlbeautifier = {
 				prepend_args = { "-b", "2" },
@@ -51,5 +62,23 @@ return {
 	},
 	init = function()
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+		vim.api.nvim_create_user_command("FormatDisable", function(args)
+			if args.bang then
+				-- FormatDisable! will disable formatting just for this buffer
+				vim.b.disable_autoformat = true
+			else
+				vim.g.disable_autoformat = true
+			end
+		end, {
+			desc = "Disable autoformat-on-save",
+			bang = true,
+		})
+		vim.api.nvim_create_user_command("FormatEnable", function()
+			vim.b.disable_autoformat = false
+			vim.g.disable_autoformat = false
+		end, {
+			desc = "Re-enable autoformat-on-save",
+		})
 	end,
 }

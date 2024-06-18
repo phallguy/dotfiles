@@ -8,6 +8,24 @@ return {
 		"nvim-neo-tree/neo-tree.nvim",
 		lazy = true,
 		cmd = { "Neotree" },
+		keys = {
+			{
+
+				"<leader>e",
+				"<CMD>Neotree close<CR>",
+				{ desc = "Show tree" },
+			},
+			{
+				"<leader>E",
+				"<CMD>Neotree toggle<CR>",
+				{ desc = "Toggle tree" },
+			},
+			{
+				"-",
+				"<CMD>Neotree left reveal_force_cwd<CR>",
+				{ desc = "Up tree" },
+			},
+		},
 		config = function()
 			vim.g.neo_tree_remove_legacy_commands = 1
 
@@ -68,12 +86,12 @@ return {
 								"move",
 								config = {
 									show_path = "relative",
-							}
+								},
 							},
 							["A"] = "noop",
 							["d"] = "add_directory",
 							["D"] = "delete",
-							["<leader>p"] = "image_preview"
+							["<leader>l"] = "image_preview",
 						},
 					},
 					hijack_netrw_behavior = "open_current",
@@ -94,18 +112,31 @@ return {
 						image_preview = function(state)
 							local node = state.tree:get_node()
 							if node.type == "file" then
-								require("image_preview").PreviewImage(node.path)
+								-- require("image_preview").PreviewImage(node.path)
+								vim.cmd(("silent !qlmanage -p %s &"):format(node.path))
 							end
 						end,
 					},
 				},
 			})
 
+			-- Neotree
+			vim.keymap.set("n", "<leader>e", "<CMD>Neotree close<CR>", { desc = "Show tree" })
+			vim.keymap.set("n", "<leader>E", "<CMD>Neotree toggle<CR>", { desc = "Toggle tree" })
+			vim.keymap.set("n", "-", "<CMD>Neotree left reveal_force_cwd<CR>", { desc = "Up tree" })
 		end,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			"adelarsq/image_preview.nvim",
+			-- "adelarsq/image_preview.nvim",
 		},
 	},
+
+	-- {
+	-- 	"adelarsq/image_preview.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("image_preview").setup()
+	-- 	end,
+	-- },
 }

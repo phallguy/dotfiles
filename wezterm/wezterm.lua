@@ -134,5 +134,10 @@ return {
 			mods = "CTRL | SHIFT",
 			action = wezterm.action.DisableDefaultAssignment,
 		},
+		{
+			key = "b",
+			mods = "CTRL | SHIFT",
+			action = wezterm.action.PaneSelect,
+		},
 	},
 }

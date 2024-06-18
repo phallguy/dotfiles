@@ -1,4 +1,3 @@
-
 -- vim.g.ruby_indent_access_modifier_style = "indent"
 vim.g.ruby_indent_block_style = "do"
 vim.g.ruby_indent_hanging_elements = 0
@@ -21,8 +20,9 @@ vim.api.nvim_create_autocmd("FileType", {
 
 			initialized_ruby_syntax = true
 		end
-		vim.opt_local.indentkeys="0{,0},0),0],!^F,o,O,e,:,=end,=else,=elsif,=when,=in ,=ensure,=rescue,==begin,==end,=private,=protected,=public"
-		-- vim.opt_local.smartindent = true
-		-- vim.opt_local.autoindent = true
+		vim.opt_local.indentkeys =
+			"0{,0},0),0],!^F,o,O,e,:,=end,=else,=elsif,=when,=in ,=ensure,=rescue,==begin,==end,=private,=protected,=public"
+		vim.opt_local.smartindent = true
+		vim.opt_local.autoindent = true
 	end,
 })
