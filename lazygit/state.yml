@@ -1,7 +1,7 @@
 lastupdatecheck: 0
 recentrepos:
-    - /Users/paulalexander/workspace/bark/bark-www
     - /Users/paulalexander/dotfiles
+    - /Users/paulalexander/workspace/bark/bark-www
     - /Users/paulalexander/workspace/bark/bark-desktop
 startuppopupversion: 5
 lastversion: 0.42.0

@@ -1,6 +1,7 @@
 return {
 	{
 		"stevearc/oil.nvim",
+		enabled = false,
 		opts = {
 			delete_to_trash = true,
 			keymaps = {
@@ -9,7 +10,7 @@ return {
 					opts = { vertical = true },
 					desc = "Open the entry in a vertical split",
 				},
-				["<leader>l"] = {
+				["gq"] = {
 					function()
 						local oil = require("oil")
 						local entry = oil.get_cursor_entry()
@@ -39,7 +40,5 @@ return {
 		cmd = {
 			"Oil",
 		},
-		-- Optional dependencies
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 }

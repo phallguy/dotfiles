@@ -11,38 +11,34 @@ return {
 		require("mini.ai").setup({
 			n_lines = 500,
 			search_method = "cover_or_next",
-			-- custom_textobjects = {
-			--   t = require("mini.surround").gen_spec.input.treesitter({
-			--     a = "@function.outer", i = "@function.inner"
-			--   })
-			-- }
 		})
 
 		-- Ad/delete/replace surroundings (brackets, quotes, etc.)
 		--
-		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+		-- - saiw) - [S]urround [A]dd [I]inner [W]ord [)]Paren
 		-- - sd'   - [S]urround [D]elete [']quotes
 		-- - sr)'  - [S]urround [R]eplace [)] [']
 		--
-    local ts_input = require("mini.surround").gen_spec.input.treesitter
+		local ts_input = require("mini.surround").gen_spec.input.treesitter
 		require("mini.surround").setup({
 			mappings = {
-				add = 'as',          -- Add surrounding in Normal and Visual modes
-				delete = 'ds',       -- Delete surrounding
-				find = 'mf',         -- Find surrounding (to the right)
-				find_left = 'mF',    -- Find surrounding (to the left)
-				highlight = 'mh',    -- Highlight surrounding
-				replace = 'cs',      -- Replace surrounding
-				update_n_lines = 'mn', -- Update `n_lines`
+				add = "as", -- Add surrounding in Normal and Visual modes
+				delete = "ds", -- Delete surrounding
+				find = "mf", -- Find surrounding (to the right)
+				find_left = "mF", -- Find surrounding (to the left)
+				highlight = "mh", -- Highlight surrounding
+				replace = "cs", -- Replace surrounding
+				update_n_lines = "mn", -- Update `n_lines`
 
-				suffix_last = 'l',   -- Suffix to search with "prev" method
-				suffix_next = 'n',   -- Suffix to search with "next" method
+				suffix_last = "l", -- Suffix to search with "prev" method
+				suffix_next = "n", -- Suffix to search with "next" method
 			},
 			custom_textobjects = {
-			  t = ts_input({
-			    outer = "@function.outer", inner = "@function.inner"
-			  })
-			}
+				t = ts_input({
+					outer = "@function.outer",
+					inner = "@function.inner",
+				}),
+			},
 		})
 
 		-- require("mini.splitjoin").setup({
@@ -55,20 +51,19 @@ return {
 
 		require("mini.comment").setup()
 
-
 		-- {
 		-- 	"junegunn/vim-easy-align",
 		-- }, -- Multi-line bock alignment
 		local MiniAlign = require("mini.align")
 		require("mini.align").setup({
 			modifiers = {
-    		[':'] = function(steps, opts)
-      		opts.split_pattern = ':'
-      		table.insert(steps.pre_justify, MiniAlign.gen_step.trim())
-      		table.insert(steps.pre_justify, MiniAlign.gen_step.pair())
-      		opts.merge_delimiter = ' '
-    		end,
-			}
+				[":"] = function(steps, opts)
+					opts.split_pattern = ":"
+					table.insert(steps.pre_justify, MiniAlign.gen_step.trim())
+					table.insert(steps.pre_justify, MiniAlign.gen_step.pair())
+					opts.merge_delimiter = " "
+				end,
+			},
 		})
 
 		-- {
@@ -78,9 +73,7 @@ return {
 		-- 		preserve_window_layout = { "this" },
 		-- 	},
 		-- },
-		require("mini.bufremove").setup({
-
-		})
+		require("mini.bufremove").setup({})
 
 		require("mini.extra").setup()
 	end,

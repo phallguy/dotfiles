@@ -15,22 +15,22 @@ return {
 		event = "VeryLazy",
 	},
 
-	{
-		"kdheepak/lazygit.nvim",
-		cmd = {
-			"LazyGit",
-			"LazyGitConfig",
-			"LazyGitCurrentFile",
-			"LazyGitFilter",
-			"LazyGitFilterCurrentFile",
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		keys = {
-			{ "<leader>gL", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-		}
-	},
+	-- {
+	-- 	"kdheepak/lazygit.nvim",
+	-- 	cmd = {
+	-- 		"LazyGit",
+	-- 		"LazyGitConfig",
+	-- 		"LazyGitCurrentFile",
+	-- 		"LazyGitFilter",
+	-- 		"LazyGitFilterCurrentFile",
+	-- 	},
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<leader>gL", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+	-- 	}
+	-- },
 
 	{
 		-- https://github.com/sindrets/diffview.nvim
@@ -48,8 +48,8 @@ return {
 					winbar_info = true,
 				},
 				merge_tool = {
-					layout = "diff3_mixed"
-				}
+					layout = "diff3_mixed",
+				},
 			},
 			hooks = {
 				diff_buf_win_enter = function(bufnr)
@@ -58,9 +58,9 @@ return {
 			},
 			keymaps = {
 				file_panel = {
-					q = "<CMD>DiffviewClose<CR>"
-				}
-			}
+					q = "<CMD>DiffviewClose<CR>",
+				},
+			},
 		},
 	},
 }

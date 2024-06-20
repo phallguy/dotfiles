@@ -45,7 +45,7 @@ local function createTerminal(name, opts)
 	result = { name = name }
 
 	local build = function()
-    local Terminal = require("toggleterm.terminal").Terminal
+		local Terminal = require("toggleterm.terminal").Terminal
 		local terminal = result.terminal
 		if not terminal then
 			local cmd = vim.g["terminal_" .. name .. "_command"]
@@ -115,8 +115,8 @@ createTerminal("server", {
 		name = "Server",
 		binding = "<leader>bs",
 		opts = {
-			direction = "float"
-		}
+			direction = "float",
+		},
 	},
 })
 
@@ -124,9 +124,6 @@ createTerminal("console", {
 	command = {
 		name = "Console",
 		binding = "<leader>bc",
-		opts = {
-			direction = "float"
-		}
 	},
 })
 
@@ -135,7 +132,7 @@ createTerminal("jobs", {
 		name = "Jobs",
 		binding = "<leader>bj",
 		opts = {
-			direction = "float"
-		}
+			direction = "float",
+		},
 	},
 })

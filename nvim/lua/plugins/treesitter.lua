@@ -75,6 +75,8 @@ return {
 							["is"] = "@scope.inner",
 							["ak"] = { query = "@block.outer", desc = "around block" },
 							["ik"] = { query = "@block.inner", desc = "inside block" },
+							["ac"] = { query = "@class.outer", desc = "around class" },
+							["ic"] = { query = "@class.inner", desc = "inside class" },
 						},
 					},
 					move = {

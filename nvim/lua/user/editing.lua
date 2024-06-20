@@ -95,15 +95,6 @@ vim.keymap.set("n", "<CA-K>", "<CMD>m .-2<CR>==")
 vim.keymap.set("v", "<CA-J>", "<CMD>m '>+1<CR>gv-gv")
 vim.keymap.set("v", "<CA-K>", "<CMD>m '<-2<CR>gv-gv")
 
--- -- Formatting
--- vim.keymap.set("n", "<leader>lf", function()
--- 	-- vim.lsp.buf.format({ timeout_ms = 10000 })
--- 	require("conform").format({
--- 		async = true,
--- 		lsp_fallback = true,
--- 	})
--- end, { desc = "Format" })
-
 -- Open file in VS Code
 vim.keymap.set(
 	"n",
@@ -112,12 +103,16 @@ vim.keymap.set(
 	{ desc = "Open in VSCode", silent = true }
 )
 
+-- Open url/file in quick preview
+vim.keymap.set("n", "gq", "<CMD>!qlmanage -p <cfile>:p &<CR>")
+vim.keymap.set("n", "gQ", "<CMD>!qlmanage -p %:p &<CR>")
+
 vim.g["qfenter_keymap"] = {
 	vopen = { "<C-v>" },
 	topen = { "<C-t>" },
 }
 
--- Themeing
+-- Theming
 
 vim.cmd([[
 augroup HighlightSyntax
@@ -168,4 +163,3 @@ vim.keymap.set("n", "<leader>fh", function()
 	local word = vim.fn.expand("<cword>")
 	vim.cmd("Cheat " .. vim.bo.filetype .. " " .. word)
 end, { desc = "Cheat sheat" })
-

@@ -57,7 +57,6 @@ return {
 
 	{
 		"andymass/vim-matchup",
-		lazy = true,
 		config = function()
 			vim.g.matchup_matchparen_deferred = 1 -- work async
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
@@ -70,9 +69,10 @@ return {
 
 	{
 		"kjuq/sixelview.nvim",
+		enabled = false,
 		keys = {
 			{
-				"<leader>l",
+				"<leader>gp",
 				"<CMD>SixelView<CR>",
 				{ "Preview image" },
 			},

@@ -9,8 +9,8 @@ return {
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
-			{'nvim-telescope/telescope-fzf-native.nvim',},
-			{ 'nvim-telescope/telescope-ui-select.nvim' },
+			{ "nvim-telescope/telescope-fzf-native.nvim" },
+			{ "nvim-telescope/telescope-ui-select.nvim" },
 		},
 		config = function()
 			-- [[ Configure Telescope ]]
@@ -45,14 +45,9 @@ return {
 				require("telescope-live-grep-args.shortcuts").grep_word_under_cursor,
 				{ desc = "Live grep" }
 			)
-			vim.keymap.set(
-				"n",
-				"<leader>fb",
-				function()
-					return require("telescope.builtin").live_grep({ grep_open_files = true })
-				end,
-				{ desc = "Live grep buffers" }
-			)
+			vim.keymap.set("n", "<leader>fb", function()
+				return require("telescope.builtin").live_grep({ grep_open_files = true })
+			end, { desc = "Live grep buffers" })
 			vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume search" })
 			vim.keymap.set("n", "<leader>fe", builtin.registers, { desc = "Registers" })
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
@@ -60,7 +55,7 @@ return {
 			vim.keymap.set("n", "<leader>fm", "<CMD>Telescope media_files<CR>", { desc = "Media files" })
 			vim.keymap.set("n", "<leader>fU", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
 			vim.keymap.set("n", "<leader>fd", "<CMD>tab DBUI<CR>", { desc = "Databases" })
-			vim.keymap.set('n', '<leader>fH', builtin.help_tags, { desc = '[F]earch [H]elp' })
+			vim.keymap.set("n", "<leader>fH", builtin.help_tags, { desc = "[F]earch [H]elp" })
 
 			-- local show_notifications = function()
 			-- 	require("telescope").extensions.notify.notify()
@@ -73,7 +68,7 @@ return {
 				sorting_strategy = "descending",
 				layout_config = {
 					prompt_position = "bottom",
-				}
+				},
 			}
 
 			require("telescope").setup({
@@ -122,7 +117,7 @@ return {
 						sorting_strategy = "descending",
 						layout_config = {
 							prompt_position = "bottom",
-						}
+						},
 					},
 					live_grep = ivy,
 					live_grep_args = ivy,
@@ -135,16 +130,16 @@ return {
 						sorting_strategy = "descending",
 						layout_config = {
 							prompt_position = "bottom",
-						}
+						},
 					},
 					lsp_definitions = ivy,
 					lsp_document_symbols = ivy,
 					diagnostics = ivy,
-					undo = ivy
+					undo = ivy,
 				},
 				extensions = {
-					['ui-select'] = {
-						require('telescope.themes').get_dropdown({}),
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown({}),
 					},
 					live_grep_args = {
 						-- auto_quoting = true, -- enable/disable auto-quoting
@@ -169,7 +164,7 @@ return {
 						layout_strategy = "vertical",
 						layout_config = {
 							preview_height = 0.8,
-						}
+						},
 					},
 					fzf = {
 						fuzzy = true,
@@ -177,10 +172,9 @@ return {
 						override_file_sorter = true,
 						case_mode = "smart_case",
 						wrap_results = true,
-					}
-				}
+					},
+				},
 			})
-
 
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "live_grep_args")

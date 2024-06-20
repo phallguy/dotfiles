@@ -91,7 +91,7 @@ return {
 							["A"] = "noop",
 							["d"] = "add_directory",
 							["D"] = "delete",
-							["<leader>l"] = "image_preview",
+							["gq"] = "image_preview",
 						},
 					},
 					hijack_netrw_behavior = "open_current",
