@@ -65,6 +65,11 @@ return {
 
 	{
 		"tpope/vim-projectionist",
+		event = "VeryLazy",
+		dependencies = {
+			"sheerun/vim-polyglot",
+			"tpope/vim-rails",
+		},
 	},
 
 	{

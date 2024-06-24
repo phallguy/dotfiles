@@ -16,20 +16,28 @@ return {
 	cmd = {
 		"Conform",
 		"ConformInfo",
-		"FormatEnable",
-		"FormatDisable",
 	},
 	opts = {
 		-- log_level = vim.log.levels.DEBUG,
-		format_after_save = function(bufnr)
+		format_on_save = function(bufnr)
 			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+				return
+			end
+
+			local ignore_filetypes = { "yaml" }
+			if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+				return
+			end
+
+			-- Disable autoformat for files in a certain path
+			local bufname = vim.api.nvim_buf_get_name(bufnr)
+			if bufname:match("/node_modules/") then
 				return
 			end
 
 			return {
 				lsp_format = "fallback",
 				timeout_ms = 500,
-				async = true,
 			}
 		end,
 		formatters = {
@@ -52,19 +60,15 @@ return {
 			css = { { "prettierd", "prettier" } },
 			sass = { { "prettierd", "prettier" } },
 			scss = { { "prettierd", "prettier" } },
-			html = { { "prettierd", "prettier" }, "htmlbeautifier", "injected" },
-			eruby = { { "htmlbeautifier" } },
-			ruby = { "rubocop", "injected" },
-			yaml = { "yamlfmt" },
+			html = { { "prettierd", "prettier" }, "htmlbeautifier", { "typos" }, { "codespell" } },
+			eruby = { { "htmlbeautifier" }, { "typos" }, { "codespell" } },
+			ruby = { { "rubocop" }, { "typos" }, { "odespell" } },
+			yaml = { { "yamlfmt" } },
 			["eruby.yaml"] = { "yamlfmt" },
 			svg = { "xmlformat" },
-
-			["*"] = { "codespell", "typos" },
 		},
 	},
 	init = function()
-		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-
 		vim.api.nvim_create_user_command("FormatDisable", function(args)
 			if args.bang then
 				-- FormatDisable! will disable formatting just for this buffer
@@ -76,11 +80,14 @@ return {
 			desc = "Disable autoformat-on-save",
 			bang = true,
 		})
+
 		vim.api.nvim_create_user_command("FormatEnable", function()
 			vim.b.disable_autoformat = false
 			vim.g.disable_autoformat = false
 		end, {
 			desc = "Re-enable autoformat-on-save",
 		})
+
+		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 	end,
 }

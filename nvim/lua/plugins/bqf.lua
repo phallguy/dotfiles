@@ -5,13 +5,12 @@ end
 return {
 	{
 		"kevinhwang91/nvim-bqf",
-		enabled = false,
 		ft = "qf",
 		config = function()
 			require("bqf").setup({
 				auto_enable = true,
-				auto_resize_height = true,
-				magic_window = true,
+				auto_resize_height = false,
+				magic_window = false,
 				preview = {
 					win_height = 8,
 					win_vheight = 8,

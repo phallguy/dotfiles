@@ -98,7 +98,7 @@ vim.keymap.set("v", "<CA-K>", "<CMD>m '<-2<CR>gv-gv")
 -- Open file in VS Code
 vim.keymap.set(
 	"n",
-	"<leader>vs",
+	"<leader>gv",
 	":silent !code --reuse-window --add '<C-r>=getcwd()<CR>' --goto '%:p':<C-r>=line('.')<CR>:<C-r>=col('.')<CR><CR>",
 	{ desc = "Open in VSCode", silent = true }
 )
@@ -163,3 +163,17 @@ vim.keymap.set("n", "<leader>fh", function()
 	local word = vim.fn.expand("<cword>")
 	vim.cmd("Cheat " .. vim.bo.filetype .. " " .. word)
 end, { desc = "Cheat sheat" })
+
+-- Alternate files
+vim.keymap.set("n", "<leader>r", "<CMD>R<CR>", { desc = "Related file (same window)" })
+vim.keymap.set("n", "<leader>R", "<CMD>RV<CR>", { desc = "Related file (V split)" })
+vim.keymap.set("n", "<leader>a", "<CMD>A<CR>", { desc = "Alternate file (same window)" })
+vim.keymap.set("n", "<leader>A", "<CMD>AV<CR>", { desc = "Alternate file (V split)" })
+vim.keymap.set("n", "<leader>v", "<CMD>Eview<CR>", { desc = "Edit view (Same window)" })
+vim.keymap.set("n", "<leader>V", "<CMD>Vview<CR>", { desc = "Edit view (V split)" })
+vim.keymap.set("n", "<leader>j", "<CMD>Ejavascript<CR>", { desc = "Edit javascript (Same window)" })
+vim.keymap.set("n", "<leader>J", "<CMD>Vjavascript<CR>", { desc = "Edit javascript (V split)" })
+vim.keymap.set("n", "<leader>p", "<CMD>Epreview<CR>", { desc = "Edit preview (Same window)" })
+vim.keymap.set("n", "<leader>P", "<CMD>Vpreview<CR>", { desc = "Edit preview (V split)" })
+vim.keymap.set("n", "<leader>y", "<CMD>Estyles<CR>", { desc = "Edit styles (Same window)" })
+vim.keymap.set("n", "<leader>Y", "<CMD>Vstyles<CR>", { desc = "Edit styles (V split)" })

@@ -44,6 +44,9 @@ require("lazy").setup({
 	{ import = "plugins" },
 	{ import = "plugins/colorschemes" },
 }, {
+	rocks = {
+		enabled = false,
+	},
 	ui = {
 		border = "rounded",
 	},

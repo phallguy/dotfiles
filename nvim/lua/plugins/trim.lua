@@ -1,8 +1,8 @@
-
 -- trim.nvim [auto trim spaces]
 -- https://github.com/cappyzawa/trim.nvim
 return {
 	"cappyzawa/trim.nvim",
+	enabled = false,
 	event = "BufWrite",
 	opts = {
 		-- ft_blocklist = {"typescript"},
@@ -14,6 +14,3 @@ return {
 		-- patterns = {[[%s/\(\n\n\)\n\+/\1/]]}, -- Only one consecutive bl
 	},
 }
-
-
-

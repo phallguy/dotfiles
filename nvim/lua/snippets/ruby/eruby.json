@@ -39,7 +39,14 @@
     ],
     "description": "render block with param"
   },
-
+  "print_ruby": {
+    "prefix": [
+      "pr"
+    ],
+    "body": [
+      "<%= $0 %>"
+    ]
+  },
   "evaluate_block": {
     "prefix": [
       "eb"
@@ -50,7 +57,6 @@
       "<% end %>"
     ]
   },
-
   "evaluate_block_param": {
     "prefix": [
       "ebb"
@@ -59,6 +65,12 @@
       "<% $1 do |${2:b}| %>",
       "\t$0",
       "<% end %>"
+    ]
+  },
+  "Tap debugger": {
+    "prefix": "dbg",
+    "body": [
+      "tap { |obj| debugger }"
     ]
   }
 }
