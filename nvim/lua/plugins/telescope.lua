@@ -57,6 +57,10 @@ return {
 			vim.keymap.set("n", "<leader>fd", "<CMD>tab DBUI<CR>", { desc = "Databases" })
 			vim.keymap.set("n", "<leader>fH", builtin.help_tags, { desc = "[F]earch [H]elp" })
 
+			vim.keymap.set("n", "z=", function()
+				require("telescope.builtin").spell_suggest({})
+			end, { desc = "Spell suggest" })
+
 			-- local show_notifications = function()
 			-- 	require("telescope").extensions.notify.notify()
 			-- end

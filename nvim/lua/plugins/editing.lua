@@ -65,11 +65,14 @@ return {
 
 	{
 		"tpope/vim-projectionist",
-		event = "VeryLazy",
+		event = "BufEnter",
 		dependencies = {
 			"sheerun/vim-polyglot",
 			"tpope/vim-rails",
 		},
+		init = function()
+			vim.g.projectionist_vim_enter = 1
+		end,
 	},
 
 	{

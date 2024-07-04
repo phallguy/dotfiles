@@ -1,7 +1,7 @@
 return {
 	{
 		"tpope/vim-rails",
-		event = "VeryLazy",
+		event = "BufEnter",
 		config = function()
 			-- disable autocmd set filetype=eruby.yaml
 			vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {

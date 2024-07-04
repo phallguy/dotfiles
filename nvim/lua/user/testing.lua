@@ -40,7 +40,7 @@ vim.keymap.set("n", "<leader>tL", function()
 end, { desc = "Last terminal" })
 vim.keymap.set("n", "<leader>tt", "<CMD>TestVisit<CR>", { desc = "Goto last test" })
 vim.keymap.set("n", "<leader>tr", "<CMD>Copen<CR>", { desc = "Last test results" })
-
+vim.keymap.set("n", "<leader>tq", "<CMD>AbortDispatch<CR>", { desc = "Abort last run" })
 
 vim.g["test#preserve_screen"] = 0
 vim.g["test#neovim#start_normal"] = 1

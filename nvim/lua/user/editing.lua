@@ -165,15 +165,39 @@ vim.keymap.set("n", "<leader>fh", function()
 end, { desc = "Cheat sheat" })
 
 -- Alternate files
-vim.keymap.set("n", "<leader>r", "<CMD>R<CR>", { desc = "Related file (same window)" })
-vim.keymap.set("n", "<leader>R", "<CMD>RV<CR>", { desc = "Related file (V split)" })
-vim.keymap.set("n", "<leader>a", "<CMD>A<CR>", { desc = "Alternate file (same window)" })
-vim.keymap.set("n", "<leader>A", "<CMD>AV<CR>", { desc = "Alternate file (V split)" })
-vim.keymap.set("n", "<leader>v", "<CMD>Eview<CR>", { desc = "Edit view (Same window)" })
-vim.keymap.set("n", "<leader>V", "<CMD>Vview<CR>", { desc = "Edit view (V split)" })
-vim.keymap.set("n", "<leader>j", "<CMD>Ejavascript<CR>", { desc = "Edit javascript (Same window)" })
-vim.keymap.set("n", "<leader>J", "<CMD>Vjavascript<CR>", { desc = "Edit javascript (V split)" })
-vim.keymap.set("n", "<leader>p", "<CMD>Epreview<CR>", { desc = "Edit preview (Same window)" })
-vim.keymap.set("n", "<leader>P", "<CMD>Vpreview<CR>", { desc = "Edit preview (V split)" })
-vim.keymap.set("n", "<leader>y", "<CMD>Estyles<CR>", { desc = "Edit styles (Same window)" })
-vim.keymap.set("n", "<leader>Y", "<CMD>Vstyles<CR>", { desc = "Edit styles (V split)" })
+vim.api.nvim_create_user_command("ProjectionistDetect", "call projectionist#activate()", {})
+
+vim.keymap.set("n", "<leader>r", "<CMD>ProjectionistDetect<CR><CMD>R<CR>", { desc = "Related file (same window)" })
+vim.keymap.set("n", "<leader>R", "<CMD>ProjectionistDetect<CR><CMD>RV<CR>", { desc = "Related file (V split)" })
+vim.keymap.set("n", "<leader>a", "<CMD>ProjectionistDetect<CR><CMD>A<CR>", { desc = "Alternate file (same window)" })
+vim.keymap.set("n", "<leader>A", "<CMD>ProjectionistDetect<CR><CMD>AV<CR>", { desc = "Alternate file (V split)" })
+vim.keymap.set("n", "<leader>v", "<CMD>ProjectionistDetect<CR><CMD>Eview<CR>", { desc = "Edit view (Same window)" })
+vim.keymap.set("n", "<leader>V", "<CMD>ProjectionistDetect<CR><CMD>Vview<CR>", { desc = "Edit view (V split)" })
+vim.keymap.set(
+	"n",
+	"<leader>j",
+	"<CMD>ProjectionistDetect<CR><CMD>Ejavascript<CR>",
+	{ desc = "Edit javascript (Same window)" }
+)
+vim.keymap.set(
+	"n",
+	"<leader>J",
+	"<CMD>ProjectionistDetect<CR><CMD>Vjavascript<CR>",
+	{ desc = "Edit javascript (V split)" }
+)
+vim.keymap.set(
+	"n",
+	"<leader>p",
+	"<CMD>ProjectionistDetect<CR><CMD>Epreview<CR>",
+	{ desc = "Edit preview (Same window)" }
+)
+vim.keymap.set("n", "<leader>P", "<CMD>ProjectionistDetect<CR><CMD>Vpreview<CR>", { desc = "Edit preview (V split)" })
+vim.keymap.set(
+	"n",
+	"<leader>y",
+	"<CMD>ProjectionistDetect<CR><CMD>Estylesheet<CR>",
+	{ desc = "Edit styles (Same window)" }
+)
+vim.keymap.set("n", "<leader>Y", "<CMD>ProjectionistDetect<CR><CMD>Vstylesheet<CR>", { desc = "Edit styles (V split)" })
+vim.keymap.set("n", "<leader>b", "<CMD>ProjectionistDetect<CR><CMD>Esource<CR>", { desc = "Edit source (Same window)" })
+vim.keymap.set("n", "<leader>B", "<CMD>ProjectionistDetect<CR><CMD>Vsource<CR>", { desc = "Edit source (V split)" })

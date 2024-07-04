@@ -10,7 +10,13 @@ return {
 					lsp_format = "fallback",
 				})
 			end,
-			{ desc = "Format" },
+			desc = "Format",
+		},
+		{
+			"<leader>lf",
+			"<CMD>Format<CR>",
+			mode = "v",
+			desc = "Format selection",
 		},
 	},
 	cmd = {
@@ -62,7 +68,7 @@ return {
 			scss = { { "prettierd", "prettier" } },
 			html = { { "prettierd", "prettier" }, "htmlbeautifier", { "typos" }, { "codespell" } },
 			eruby = { { "htmlbeautifier" }, { "typos" }, { "codespell" } },
-			ruby = { { "rubocop" }, { "typos" }, { "odespell" } },
+			ruby = { { "rubocop" }, { "typos" }, { "codespell" } },
 			yaml = { { "yamlfmt" } },
 			["eruby.yaml"] = { "yamlfmt" },
 			svg = { "xmlformat" },
@@ -87,6 +93,18 @@ return {
 		end, {
 			desc = "Re-enable autoformat-on-save",
 		})
+
+		vim.api.nvim_create_user_command("Format", function(args)
+			local range = nil
+			if args.count ~= -1 then
+				local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+				range = {
+					start = { args.line1, 0 },
+					["end"] = { args.line2, end_line:len() },
+				}
+			end
+			require("conform").format({ async = true, lsp_format = "fallback", range = range })
+		end, { range = true })
 
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 	end,
