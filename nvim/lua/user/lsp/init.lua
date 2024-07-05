@@ -3,7 +3,7 @@ if vim.g.vscode then
 end
 
 vim.lsp.set_log_level("warn")
-require('vim.lsp.log').set_format_func(vim.inspect)
+require("vim.lsp.log").set_format_func(vim.inspect)
 
 require("user.lsp.mason")
 require("user.lsp.diagnostics")

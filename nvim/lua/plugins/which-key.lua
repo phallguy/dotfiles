@@ -1,6 +1,5 @@
 return {
 	"folke/which-key.nvim",
-	enabled = true,
 	event = "VeryLazy",
 	opts = {
 		-- marks = false,
@@ -10,7 +9,7 @@ return {
 			-- motions = false,
 		},
 		triggers_blacklist = {
-			n = { "g", "gf" },
+			-- n = { "g", "gf" },
 		},
 	},
 }

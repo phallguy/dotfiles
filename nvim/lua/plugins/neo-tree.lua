@@ -2,6 +2,8 @@ if vim.g.vscode then
 	return {}
 end
 
+local icons = require("user.icons")
+
 return {
 	{
 		-- https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/lua/neo-tree/defaults.lua
@@ -35,10 +37,6 @@ return {
 				name = {
 					trailing_slash = true,
 				},
-				-- nesting_rules = {
-				-- 	["ts"] = { "test.ts" },
-				-- 	["tsx"] = { "test.tsx" },
-				-- },
 				source_selector = {
 					show_scrolled_off_parent_node = true,
 				},
@@ -46,12 +44,20 @@ return {
 					container = {
 						enable_character_fade = false,
 					},
-					symbols = {
-						unstaged = "~",
+					modified = {
+						symbol = "",
 					},
 					git_status = {
 						symbols = {
-							unstaged = "~",
+							modified = "",
+							added = "",
+							deleted = icons.git.FileDeleted,
+							renamed = icons.git.FileRenamed,
+							unstaged = icons.git.FileUnstaged,
+							untracked = icons.git.FileUntracked,
+							ignored = "",
+							staged = icons.git.FileStaged,
+							conflict = icons.git.FileConflict,
 						},
 					},
 				},
@@ -128,15 +134,6 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			-- "adelarsq/image_preview.nvim",
 		},
 	},
-
-	-- {
-	-- 	"adelarsq/image_preview.nvim",
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 		require("image_preview").setup()
-	-- 	end,
-	-- },
 }

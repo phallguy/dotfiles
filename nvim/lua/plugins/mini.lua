@@ -1,6 +1,13 @@
+local icons = require("user.icons")
+
 return {
 	-- Collection of various small independent plugins/modules
 	"echasnovski/mini.nvim",
+	lazy = false,
+	priority = 1000,
+	-- specs = {
+	-- 	{ "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
+	-- },
 	config = function()
 		-- Better Around/Inside textobjects
 		--
@@ -41,19 +48,8 @@ return {
 			},
 		})
 
-		-- require("mini.splitjoin").setup({
-		-- 	mappings = {
-		-- 		toggle = '',
-		-- 		split  = 'gS',
-		-- 		join   = 'gJ',
-		-- 	}
-		-- })
-
 		require("mini.comment").setup()
 
-		-- {
-		-- 	"junegunn/vim-easy-align",
-		-- }, -- Multi-line bock alignment
 		local MiniAlign = require("mini.align")
 		require("mini.align").setup({
 			modifiers = {
@@ -66,14 +62,15 @@ return {
 			},
 		})
 
-		-- {
-		-- 	"kazhala/close-buffers.nvim",
-		-- 	event = "VeryLazy",
-		-- 	opts = {
-		-- 		preserve_window_layout = { "this" },
-		-- 	},
-		-- },
 		require("mini.bufremove").setup({})
+
+		require("mini.icons").setup({
+			default = {
+				file = { glyph = "" },
+				directory = { glyph = "󰉖" },
+			},
+		})
+		require("mini.icons").mock_nvim_web_devicons()
 
 		require("mini.extra").setup()
 	end,

@@ -15,23 +15,6 @@ return {
 		event = "VeryLazy",
 	},
 
-	-- {
-	-- 	"kdheepak/lazygit.nvim",
-	-- 	cmd = {
-	-- 		"LazyGit",
-	-- 		"LazyGitConfig",
-	-- 		"LazyGitCurrentFile",
-	-- 		"LazyGitFilter",
-	-- 		"LazyGitFilterCurrentFile",
-	-- 	},
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 	},
-	-- 	keys = {
-	-- 		{ "<leader>gL", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-	-- 	}
-	-- },
-
 	{
 		-- https://github.com/sindrets/diffview.nvim
 		"sindrets/diffview.nvim",
@@ -46,6 +29,7 @@ return {
 			view = {
 				default = {
 					winbar_info = true,
+					disable_diagnostics = true,
 				},
 				merge_tool = {
 					layout = "diff3_mixed",

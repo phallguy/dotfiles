@@ -5,15 +5,6 @@ end
 vim.g.loaded_matchit = 1
 
 return {
-	-- Useful plugin to show you pending keybinds.
-
-	{
-		"nvim-tree/nvim-web-devicons",
-		lazy = true,
-		-- event = "VeryLazy",
-		opts = {},
-	},
-
 	-- Multi cursors
 	{
 		"mg979/vim-visual-multi",

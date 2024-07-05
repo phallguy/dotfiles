@@ -3,7 +3,7 @@ return {
 	args = {
 		"--workdir",
 		"--exit-code",
-		"--runner rubocop"
+		"--runner rubocop",
 		"$FILENAME",
 	},
 	exit_codes = { 0, 1 },

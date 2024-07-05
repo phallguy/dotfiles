@@ -1,6 +1,7 @@
 if vim.g.vscode then
 	return {}
 end
+local icons = require("user.icons")
 
 return {
 	-- Set lualine as statusline
@@ -48,7 +49,7 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = { { "%{ ' ' } ", draw_empty = true, padding = 0 } },
 				lualine_c = { { "filename", path = 1 } },
-				lualine_x = { "branch" },
+				lualine_x = { { "branch", icon = icons.git.Branch } },
 				lualine_y = { { "filetype", padding = 2 }, { "location", padding = { right = 1 } } },
 				lualine_z = {
 					{
@@ -57,8 +58,8 @@ return {
 						colored = false,
 					},
 					{
-					  "reg_recording"
-					}
+						"reg_recording",
+					},
 				},
 			},
 			inactive_sections = {

@@ -12,8 +12,8 @@ return {
 				auto_resize_height = false,
 				magic_window = false,
 				preview = {
-					win_height = 8,
-					win_vheight = 8,
+					win_height = 12,
+					win_vheight = 12,
 					show_title = false,
 					buf_label = false,
 				},
