@@ -32,5 +32,21 @@
       "end"
     ],
     "description": "assert_difference"
+  },
+  "Assert select": {
+    "prefix": "ass",
+    "body": [
+      "assert_select \"${1:condition}\", \"${2:content}\""
+    ],
+    "description": "assert_select"
+  },
+  "Assert select block": {
+    "prefix": "assb",
+    "body": [
+      "assert_select \"${1:condition}\" do",
+      "  ${0}",
+      "end"
+    ],
+    "description": "assert_select body"
   }
 }

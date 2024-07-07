@@ -18,6 +18,10 @@
         "path": "./ruby/minitest.json"
       },
       {
+        "language": "javascript",
+        "path": "./javascript/javascript.json"
+      },
+      {
         "language": "all",
         "path": "./all.json"
       }

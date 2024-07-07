@@ -1,0 +1,54 @@
+{
+  "@type target": {
+    "prefix": "typet",
+    "body": [
+      "/** @type {${2:HTMLElement}} */ this.${1:element}Target",
+      "/** @type {boolean} */ this.has${1/(.)(.*)/${1:/upcase}$2/}Target${0}"
+    ]
+  },
+  "@type inline": {
+    "prefix": "type",
+    "body": [
+      "/** @type {${1:HTMLElement}} */ ${0} "
+    ]
+  },
+  "@type targets": {
+    "prefix": "typett",
+    "body": [
+      "/** @type {${2:HTMLElement}} */ this.${1:element}Target",
+      "/** @type {boolean} */ this.has${1/(.)(.*)/${1:/upcase}$2/}Target${0}"
+    ]
+  },
+  "@type √alue": {
+    "prefix": "typev",
+    "body": [
+      "/** @type {${2:string}} */ this.${1:data}Value${0}",
+      "/** @type {boolean} */ this.has${1/(.)(.*)/${1:/upcase}$2/}Value${0}"
+    ]
+  },
+  "@param event type": {
+    "prefix": "parame",
+    "body": [
+      "/** @param {${2:Event}} ${1:event} */"
+    ]
+  },
+  "@param type": {
+    "prefix": "param",
+    "body": [
+      "/** @param {${2:HTMLElement}} ${1:element} */"
+    ]
+  },
+  "@type constructor": {
+    "prefix": "constr",
+    "body": [
+      "/** @param {import(\"@hotwired/stimulus\").Context} context */",
+      "constructor(context) {",
+      "  super(context)",
+      "",
+      "  if(false) {",
+      "    ${0}",
+      "  }",
+      "}"
+    ]
+  }
+}

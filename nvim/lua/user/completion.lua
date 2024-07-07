@@ -11,6 +11,12 @@ cmp.setup({
 	experimental = {
 		ghost_text = true,
 	},
+	{
+		matching = {
+			disallow_partial_fuzzy_matching = true,
+			disallow_partial_matching = true,
+		},
+	},
 	sources = {
 		{
 			name = "luasnip",
@@ -24,7 +30,7 @@ cmp.setup({
 		{ name = "path" },
 		{
 			name = "buffer",
-			keyword_length = 2,
+			keyword_length = 3,
 			max_indexed_line_length = 2048,
 			dup = 0,
 			option = {
@@ -48,15 +54,15 @@ cmp.setup({
 		["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 		["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 		["<C-y>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
-		["<C-space>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		}),
-		["<tab>"] = cmp.mapping.confirm({
+		["<C-space>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		}),
+		["<tab>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		}),
 		["<C-l>"] = cmp.mapping(function()

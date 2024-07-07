@@ -67,7 +67,7 @@ return {
 		require("mini.icons").setup({
 			default = {
 				file = { glyph = "" },
-				directory = { glyph = "󰉖" },
+				-- directory = { glyph = "󰉖" },
 			},
 		})
 		require("mini.icons").mock_nvim_web_devicons()

@@ -123,6 +123,10 @@ return {
 					-- -- TreesiterContext
 					TreesitterContext = { bg = "_nc", force = true },
 					TreesitterContextBottom = { sp = "highlight_high", blend = 0, underline = true },
+
+					-- DiagnosticVirtualTextError = { fg = "#813D50", bg = "love", blend = 5 },
+					DiagnosticVirtualTextInfo = { fg = "#2A6077", bg = "foam", blend = 5 },
+					DiagnosticVirtualTextHint = { fg = "#7E6C95", bg = "iris", blend = 5 },
 				},
 			})
 		end,
