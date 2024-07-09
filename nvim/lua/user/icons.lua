@@ -33,4 +33,8 @@ return {
 		Debug = "",
 		Trace = "",
 	},
+	dap = {
+		Breakpoint = "",
+		Stopped = "",
+	},
 }

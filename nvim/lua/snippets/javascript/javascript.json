@@ -9,7 +9,7 @@
   "@type inline": {
     "prefix": "type",
     "body": [
-      "/** @type {${1:HTMLElement}} */ ${0} "
+      "/** @type {${1:HTMLElement}} */ ${0}"
     ]
   },
   "@type targets": {
@@ -19,7 +19,7 @@
       "/** @type {boolean} */ this.has${1/(.)(.*)/${1:/upcase}$2/}Target${0}"
     ]
   },
-  "@type √alue": {
+  "@type value": {
     "prefix": "typev",
     "body": [
       "/** @type {${2:string}} */ this.${1:data}Value${0}",

@@ -69,7 +69,7 @@ return {
 					QuickFixLine = { bg = "pine", blend = 15 },
 
 					-- Git/Diff
-					DiffViewDiffDeleteDim = { fg = "highlight_med" }, -- Makes the 'empty' slashes in diffs dim
+					DiffViewDiffDeleteDim = { fg = "highlight_low" }, -- Makes the 'empty' slashes in diffs dim
 					-- DiffText = { bg = config.groups.git_change, blend = 30 },
 					-- DiffChange = { bg = config.groups.git_change, blend = 10 },
 					-- DiffViewDiffDelete = { fg = "highlight_med" },
@@ -79,7 +79,6 @@ return {
 					-- ["@attribute.diff"] = { fg = "iris" },
 					-- ["@text.title.gitcommit"] = { fg = "foam", bold = true },
 					-- GitSignsAdd = { fg = "pine", bg = "none" },
-					--
 					-- GitSignsChange = { fg = colors.git_change, bg = "none" },
 					-- GitSignsDelete = { fg = colors.git_delete, bg = "none" },
 
@@ -124,9 +123,15 @@ return {
 					TreesitterContext = { bg = "_nc", force = true },
 					TreesitterContextBottom = { sp = "highlight_high", blend = 0, underline = true },
 
-					-- DiagnosticVirtualTextError = { fg = "#813D50", bg = "love", blend = 5 },
+					-- Diagnostics
 					DiagnosticVirtualTextInfo = { fg = "#2A6077", bg = "foam", blend = 5 },
 					DiagnosticVirtualTextHint = { fg = "#7E6C95", bg = "iris", blend = 5 },
+
+					-- Dap
+					DapBreakpoint = { fg = "love" },
+					DapStopped = { fg = "surface", bg = "love" },
+					DapStoppedLine = { bg = "love", blend = 10 },
+					DapUiNormal = { bg = "_nc" },
 				},
 			})
 		end,
