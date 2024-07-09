@@ -53,9 +53,7 @@ vim.g["test#neovim#term_position"] = "vert botright 30"
 
 vim.g["test#neovim_sticky#kill_previous"] = 1
 vim.g["test#ruby#bundle_exec"] = 0
-vim.g["test#ruby#use_spring_binstubs"] = 0
-vim.g["test#ruby#executable"] = "rails"
-vim.g["test#ruby#minitest#executable"] = "rails"
+vim.g["test#ruby#use_binstubs"] = 0
 
 function split(inputstr, sep)
 	if sep == nil then
@@ -73,12 +71,11 @@ function StartTestDap(cmd)
 
 	local args = split(cmd, " ")
 	local program = table.remove(args, 1)
-	vim.notify(program)
 
 	-- type = vim.bo.filetype,
 	dap.run({
 		name = "Run test",
-		command = "rails",
+		command = program,
 		args = args,
 		cwd = vim.fn.getcwd(),
 		request = "attach",

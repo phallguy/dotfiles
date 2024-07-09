@@ -131,7 +131,12 @@ return {
 					DapBreakpoint = { fg = "love" },
 					DapStopped = { fg = "surface", bg = "love" },
 					DapStoppedLine = { bg = "love", blend = 10 },
-					DapUiNormal = { bg = "_nc" },
+					-- DapUiNormal = { bg = "_nc" },
+					DapUIType = { link = "@lsp.type.keyword" },
+					DapUIVariable = { link = "@symbol" },
+					DapUIValue = { link = "@lsp.type.string" },
+					DapUIScope = { link = "@lsp.type.parameter", bold = true },
+					DapUILineNumber = { link = "qfLineNr" },
 				},
 			})
 		end,

@@ -172,27 +172,9 @@ return {
 				}
 			end
 
-			dap.adapters.rubyapt = {
-				type = "executable",
-				command = "readapt",
-				args = { "stdio" },
-			}
-
 			require("dap-ruby").setup({})
 
 			dap.configurations.ruby = {
-				{
-					name = "Run Rails",
-					command = "bundle",
-					args = { "exec", "rails", "s" },
-					request = "attach",
-					type = "rubyapt",
-					options = { source_filetype = "ruby" },
-					error_on_failure = true,
-					localfs = true,
-					port = 3009,
-					cwd = vim.fn.getcwd(),
-				},
 				{
 					name = "Attach Rails",
 					command = "bundle",
@@ -261,7 +243,7 @@ return {
 							-- },
 						},
 						position = "bottom",
-						size = 7,
+						size = 12,
 					},
 				},
 			})
