@@ -10,6 +10,7 @@ return {
 			"mxsdev/nvim-dap-vscode-js",
 			"nvim-neotest/nvim-nio",
 			"theHamsta/nvim-dap-virtual-text",
+			"LiadOz/nvim-dap-repl-highlights",
 			-- build debugger from source
 			{
 				"microsoft/vscode-js-debug",
@@ -71,6 +72,20 @@ return {
 				end,
 				desc = "Repl",
 			},
+			{
+				"<leader>dc",
+				function()
+					require("dapui").close()
+				end,
+				desc = "Close DAP",
+			},
+			{
+				"<leader>dt",
+				function()
+					require("dap").terminate()
+				end,
+				desc = "Stop DAP",
+			},
 		},
 		config = function()
 			require("dap-vscode-js").setup({
@@ -80,6 +95,8 @@ return {
 
 			local dap = require("dap")
 			local dapui = require("dapui")
+
+			dap.set_log_level("TRACE")
 
 			for _, language in ipairs({ "typescript", "javascript" }) do
 				dap.configurations[language] = {
@@ -155,36 +172,25 @@ return {
 				}
 			end
 
-			-- dap.adapters.ruby = {
-			-- 	type = "executable",
-			-- 	command = "bundle",
-			-- 	args = { "exec", "readapt", "stdio" },
-			-- }
-			--
-			-- dap.configurations.ruby = {
-			-- 	{
-			-- 		type = "ruby",
-			-- 		request = "launch",
-			-- 		name = "Rails",
-			-- 		program = "bundle",
-			-- 		programArgs = { "exec", "rails", "s" },
-			-- 		useBundler = true,
-			-- 	},
-			-- }
-			--
+			dap.adapters.rubyapt = {
+				type = "executable",
+				command = "readapt",
+				args = { "stdio" },
+			}
 
 			require("dap-ruby").setup({})
+
 			dap.configurations.ruby = {
 				{
 					name = "Run Rails",
 					command = "bundle",
 					args = { "exec", "rails", "s" },
 					request = "attach",
-					type = "ruby",
+					type = "rubyapt",
 					options = { source_filetype = "ruby" },
 					error_on_failure = true,
 					localfs = true,
-					port = 38698,
+					port = 3009,
 					cwd = vim.fn.getcwd(),
 				},
 				{
@@ -196,7 +202,7 @@ return {
 					options = { source_filetype = "ruby" },
 					error_on_failure = true,
 					localfs = true,
-					port = 38698,
+					port = 3009,
 					cwd = vim.fn.getcwd(),
 				},
 				{
@@ -264,6 +270,7 @@ return {
 				clear_on_continue = true, -- clear virtual text on "continue" (might cause flickering when stepping)
 				virt_text_pos = "eol",
 			})
+			require("nvim-dap-repl-highlights").setup()
 
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				dapui.open({ reset = true })

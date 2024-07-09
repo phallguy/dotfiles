@@ -119,9 +119,9 @@ fi
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-exa_params=('--git' '--icons' '--classify' '--group-directories-first' '--color-scale')
-alias ls='exa $exa_params'
-alias ll='exa $exa_params --long'
+eza_params=('--git' '--icons' '--classify' '--group-directories-first' '--color-scale')
+alias ls='eza $eza_params'
+alias ll='eza $eza_params --long'
 alias d='docker'
 alias dcl='docker-compose -f docker-compose.yml.local'
 alias k='kubectl'
