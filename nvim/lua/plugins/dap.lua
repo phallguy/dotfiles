@@ -56,6 +56,7 @@ return {
 				function()
 					require("dap.ui.widgets").hover()
 				end,
+				mode = { "n", "v" },
 				desc = "Widgets",
 			},
 			{
@@ -63,6 +64,7 @@ return {
 				function()
 					require("dapui").eval(nil, { enter = true })
 				end,
+				mode = { "n", "v" },
 				desc = "Inspect",
 			},
 			{
@@ -86,6 +88,12 @@ return {
 				end,
 				desc = "Stop DAP",
 			},
+			{
+				"<leader>dl",
+				function()
+					require("dap").run_last()
+				end,
+			},
 		},
 		config = function()
 			require("dap-vscode-js").setup({
@@ -96,7 +104,18 @@ return {
 			local dap = require("dap")
 			local dapui = require("dapui")
 
-			dap.set_log_level("TRACE")
+			-- dap.set_log_level("TRACE")
+			--
+
+			dap.defaults.fallback.focus_terminal = true
+			dap.defaults.fallback.terminal_win_cmd = "tabnew"
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "dap-repl" },
+				callback = function()
+					require("dap.ext.autocompl").attach()
+				end,
+			})
 
 			for _, language in ipairs({ "typescript", "javascript" }) do
 				dap.configurations[language] = {
@@ -203,6 +222,7 @@ return {
 			}
 
 			require("dapui").setup({
+				expand_lines = false,
 				floating = {
 					border = "rounded",
 				},
@@ -228,7 +248,7 @@ return {
 							},
 						},
 						position = "right",
-						size = 60,
+						size = 70,
 					},
 
 					{
@@ -277,8 +297,4 @@ return {
 			)
 		end,
 	},
-	-- https://github.com/mfussenegger/nvim-dap/issues/329
-	-- https://github.com/suketa/nvim-dap-ruby/tree/main
-	-- https://www.reddit.com/r/ruby/comments/1ctwtrd/debugging_ruby_in_neovim/
-	-- https://github.com/machakann/vim-sandwich
 }

@@ -72,6 +72,7 @@ function StartTestDap(cmd)
 	local args = split(cmd, " ")
 	local program = table.remove(args, 1)
 
+	-- TODO switch base on file type
 	-- type = vim.bo.filetype,
 	dap.run({
 		name = "Run test",
@@ -83,6 +84,22 @@ function StartTestDap(cmd)
 		random_port = true,
 		localfs = true,
 	})
+
+	-- table.insert(args, 1, "--inspect")
+	-- table.insert(args, 1, "--no-file-parallelism")
+	-- table.insert(args, 1, "--run")
+	-- table.insert(args, 1, program)
+	--
+	-- vim.notify(table.concat(args, " "))
+	--
+	-- dap.run({
+	-- 	type = "pwa-node",
+	-- 	request = "launch",
+	-- 	program = progrm,
+	-- 	programArgs = args,
+	-- 	cwd = "${workspaceFolder}",
+	-- 	localfs = true,
+	-- })
 end
 
 vim.cmd([[
