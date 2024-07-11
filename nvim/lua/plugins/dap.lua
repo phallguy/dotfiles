@@ -28,6 +28,12 @@ return {
 				end,
 			},
 			{
+				"<DMS-\\>",
+				function()
+					require("dap").toggle_breakpoint(vim.fn.input("Condition:"))
+				end,
+			},
+			{
 				"<D-\\>",
 				function()
 					require("dap").continue()
@@ -201,7 +207,6 @@ return {
 					request = "attach",
 					type = "ruby",
 					options = { source_filetype = "ruby" },
-					error_on_failure = true,
 					localfs = true,
 					port = 3009,
 					cwd = vim.fn.getcwd(),
@@ -263,7 +268,7 @@ return {
 							-- },
 						},
 						position = "bottom",
-						size = 12,
+						size = 10,
 					},
 				},
 			})
@@ -291,6 +296,11 @@ return {
 				"DapBreakpoint",
 				{ text = icons.dap.Breakpoint, texthl = "DapBreakpoint", numhl = "DapBreakpoint" }
 			)
+			vim.fn.sign_define("DapBreakpointCondition", {
+				text = icons.dap.BreakpointCondition,
+				texthl = "DapBreakpointCondition",
+				numhl = "DapBreakpointCondition",
+			})
 			vim.fn.sign_define(
 				"DapStopped",
 				{ text = icons.dap.Stopped, texthl = "DapStopped", numhl = "DapStopped", linehl = "DapStoppedLine" }

@@ -1,7 +1,7 @@
 -- Better save
-vim.keymap.set("n", "<leader>s", "<CMD>w<CR>", { desc = "Save" })
-vim.keymap.set("n", "<leader>w", "<CMD>w<CR>", { desc = "Save" })
-vim.keymap.set("n", "<leader>S", ":saveas %:h/", { desc = "Save as" })
+vim.keymap.set("n", "<leader>s", "<CMD>silent w<CR>", { desc = "Save", silent = true })
+vim.keymap.set("n", "<leader>w", "<CMD>silent w<CR>", { desc = "Save", silent = true })
+vim.keymap.set("n", "<leader>S", ":saveas %:h/", { desc = "Save as", silent = true })
 
 -- Better paste
 vim.keymap.set("v", "p", '"_dP') -- don't yank into clipboard when pasting

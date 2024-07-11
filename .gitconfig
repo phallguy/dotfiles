@@ -85,6 +85,7 @@
   renames = true
   colorMoved = default
   tool = difftastic
+	algorithm = histogram
 
 [difftool]
   prompt = false

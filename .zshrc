@@ -133,6 +133,7 @@ alias cd='z'
 alias g='git'
 alias lg='lazygit'
 alias man='batman'
+alias ob='cd ~/paul.xheo@gmail.com - Google Drive/My Drive/Obsidian Vault; vi .'
 
 function kan() {
   cd ~/dotfiles;

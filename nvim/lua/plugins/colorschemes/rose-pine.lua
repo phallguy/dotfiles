@@ -82,23 +82,6 @@ return {
 					-- GitSignsChange = { fg = colors.git_change, bg = "none" },
 					-- GitSignsDelete = { fg = colors.git_delete, bg = "none" },
 
-					-- -- -- Tree
-					-- NeoTreeGitUntracked = { fg = "pine" },
-					-- NeoTreeGitUnstaged = { fg = "iris" },
-					-- NeoTreeGitConflict = { fg = "love" },
-					-- NeoTreeGitModified = { fg = "gold" },
-					-- NeoTreeGitAdded = { fg = config.groups.git_add },
-					-- NeoTreeGitDeleted = { fg = config.groups.git_delete },
-					-- NeoTreeGitIgnored = { fg = config.groups.git_ignore },
-					-- NeoTreeGitStaged = { fg = config.groups.git_stage },
-					-- NeoTreeMessage = { fg = "muted" },
-					-- NeoTreeDotfile = { fg = "muted" },
-					-- NeoTreeCursorLine = { bg = "pine", blend = 20 },
-					-- NeoTreeDirectoryName = { fg = "foam", bold = true },
-					-- NeoTreeFloatBorder = { fg = "surface" },
-					-- NeoTreeTitleBar = { fg = "iris", bg = "none", bold = true },
-					-- NeoTreeFloatNormal = { fg = "subtle", bg = "overlay", blend = 40 },
-
 					-- Matchparen
 					MatchParen = { fg = "gold", bg = "pine", blend = 50 },
 
@@ -129,6 +112,7 @@ return {
 
 					-- Dap
 					DapBreakpoint = { fg = "love" },
+					DapBreakpointCondition = { fg = "love" },
 					DapStopped = { fg = "surface", bg = "love" },
 					DapStoppedLine = { bg = "love", blend = 10 },
 					-- DapUiNormal = { bg = "_nc" },

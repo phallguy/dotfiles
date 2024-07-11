@@ -5,10 +5,21 @@ return {
 	"echasnovski/mini.nvim",
 	lazy = false,
 	priority = 1000,
-	-- specs = {
-	-- 	{ "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
-	-- },
 	config = function()
+		require("mini.bufremove").setup({})
+		require("mini.comment").setup()
+		require("mini.diff").setup({
+			view = {
+				style = "sign",
+				signs = {
+					add = "┊",
+					change = "┊",
+					delete = "┄",
+				},
+				priority = 10,
+			},
+		})
+
 		-- Better Around/Inside textobjects
 		--
 		-- Examples:
@@ -48,8 +59,6 @@ return {
 			},
 		})
 
-		require("mini.comment").setup()
-
 		local MiniAlign = require("mini.align")
 		require("mini.align").setup({
 			modifiers = {
@@ -61,8 +70,6 @@ return {
 				end,
 			},
 		})
-
-		require("mini.bufremove").setup({})
 
 		require("mini.icons").setup({
 			default = {

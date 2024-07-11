@@ -49,16 +49,33 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = { { "%{ ' ' } ", draw_empty = true, padding = 0 } },
 				lualine_c = { { "filename", path = 1 } },
-				lualine_x = { { "branch", icon = icons.git.Branch } },
+				lualine_x = {
+					{ "branch", icon = icons.git.Branch },
+				},
 				lualine_y = { { "filetype", padding = 2 }, { "location", padding = { right = 1 } } },
 				lualine_z = {
 					{
 						"diagnostics",
-						sources = { "ale", "nvim_diagnostic" },
+						sources = { "nvim_diagnostic" },
 						colored = false,
 					},
 					{
 						"reg_recording",
+					},
+					{
+						function()
+							local ok, pomo = pcall(require, "pomo")
+							if not ok then
+								return ""
+							end
+
+							local timer = pomo.get_first_to_finish()
+							if timer == nil then
+								return ""
+							end
+
+							return " " .. tostring(timer)
+						end,
 					},
 				},
 			},

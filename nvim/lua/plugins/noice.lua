@@ -16,41 +16,35 @@ return {
 					signature = {
 						enabled = false,
 					},
-					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-					override = {
-						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-						["vim.lsp.util.stylize_markdown"] = true,
-						["cmp.entry.get_documentation"] = true,
-					},
 				},
 				views = {
-					mini = {
-						backend = "mini",
-						relative = "editor",
-						align = "message-right",
-						timeout = 3000,
-						reverse = true,
-						focusable = false,
-						position = {
-							row = -1,
-							col = "100%",
-							-- col = 0,
-						},
-						size = "auto",
-						border = {
-							style = "none",
-						},
-						zindex = 60,
-						win_options = {
-							winblend = 0,
-							winhighlight = {
-								Normal = "NoiceMini",
-								IncSearch = "",
-								CurSearch = "",
-								Search = "",
-							},
-						},
-					},
+					-- mini = {
+					-- 	backend = "mini",
+					-- 	relative = "editor",
+					-- 	align = "message-right",
+					-- 	timeout = 3000,
+					-- 	reverse = true,
+					-- 	focusable = false,
+					-- 	position = {
+					-- 		row = -1,
+					-- 		col = "100%",
+					-- 		-- col = 0,
+					-- 	},
+					-- 	size = "auto",
+					-- 	border = {
+					-- 		style = "none",
+					-- 	},
+					-- 	zindex = 60,
+					-- 	win_options = {
+					-- 		winblend = 0,
+					-- 		winhighlight = {
+					-- 			Normal = "NoiceMini",
+					-- 			IncSearch = "",
+					-- 			CurSearch = "",
+					-- 			Search = "",
+					-- 		},
+					-- 	},
+					-- },
 					cmdline_popup = {
 						backend = "popup",
 						relative = "editor",

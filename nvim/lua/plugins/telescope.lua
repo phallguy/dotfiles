@@ -11,6 +11,7 @@ return {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim" },
 			{ "nvim-telescope/telescope-ui-select.nvim" },
+			{ "ghassan0/telescope-glyph.nvim" },
 		},
 		config = function()
 			-- [[ Configure Telescope ]]
@@ -185,6 +186,8 @@ return {
 			pcall(require("telescope").load_extension, "media_files")
 			pcall(require("telescope").load_extension, "undo")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "pomodori")
+			pcall(require("telescope").load_extension, "glyph")
 		end,
 	},
 
