@@ -48,6 +48,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		"checkhealth",
 		"fugitiveblame",
 		"DiffviewFileHistory",
+		"neotest-output",
+		"neotest-output-panel",
 	},
 	callback = function(event)
 		-- Can't unlist, messes with fugutive G! commands

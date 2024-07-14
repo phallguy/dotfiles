@@ -158,11 +158,11 @@ vim.opt.fillchars = {
 	eob = " ",
 }
 
--- Cheat sheat
-vim.keymap.set("n", "<leader>fh", function()
-	local word = vim.fn.expand("<cword>")
-	vim.cmd("Cheat " .. vim.bo.filetype .. " " .. word)
-end, { desc = "Cheat sheat" })
+-- -- Cheat sheet
+-- vim.keymap.set("n", "<leader>fh", function()
+-- 	local word = vim.fn.expand("<cword>")
+-- 	vim.cmd("Cheat " .. vim.bo.filetype .. " " .. word)
+-- end, { desc = "Cheat sheet" })
 
 -- Alternate files
 vim.api.nvim_create_user_command("ProjectionistDetect", "call projectionist#activate()", {})

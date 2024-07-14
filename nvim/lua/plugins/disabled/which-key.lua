@@ -4,7 +4,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			preset = "modern",
-			delay = 3000,
+			delay = 500,
 		},
 		keys = {
 			{
