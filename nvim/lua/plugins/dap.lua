@@ -1,4 +1,5 @@
 local icons = require("user.icons")
+local util = require("user.util")
 
 return {
 	{
@@ -280,16 +281,22 @@ return {
 			require("nvim-dap-repl-highlights").setup()
 
 			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open({ reset = true })
-				vim.diagnostic.enable(false)
+				util.invoke_cmd_with_cursor(function()
+					dapui.open({ reset = true })
+					vim.diagnostic.enable(false)
+				end)
 			end
 			dap.listeners.before.event_terminated["dapui_config"] = function()
-				dapui.close()
-				vim.diagnostic.enable()
+				util.invoke_cmd_with_cursor(function()
+					dapui.close()
+					vim.diagnostic.enable()
+				end)
 			end
 			dap.listeners.before.event_exited["dapui_config"] = function()
-				dapui.close()
-				vim.diagnostic.enable()
+				util.invoke_cmd_with_cursor(function()
+					dapui.close()
+					vim.diagnostic.enable()
+				end)
 			end
 
 			vim.fn.sign_define(

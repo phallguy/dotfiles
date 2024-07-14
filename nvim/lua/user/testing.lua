@@ -1,13 +1,24 @@
+local util = require("user.util")
+
 vim.keymap.set("n", "<leader>tf", function()
 	require("neotest").run.run(vim.fn.expand("%"))
 end, { desc = "Test File" })
+
 vim.keymap.set("n", "<leader>tc", function()
 	require("neotest").run.run()
 end, { desc = "Test Current" })
 
+vim.keymap.set("n", "<leader>td", function()
+	require("neotest").run.run({ strategy = "dap" })
+end, { desc = "Debug Current" })
+
 vim.keymap.set("n", "<leader>tl", function()
 	require("neotest").run.run_last()
-end, { desc = "ktest Last" })
+end, { desc = "Test Last" })
+
+vim.keymap.set("n", "<leader>tl", function()
+	require("neotest").run.run_last({ strategy = "dap" })
+end, { desc = "Debug Last" })
 
 -- vim.keymap.set("n", "<leader>tt", "<CMD>TestVisit<CR>", { desc = "Goto last test" })
 vim.keymap.set("n", "<leader>tr", function()

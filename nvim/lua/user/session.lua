@@ -50,6 +50,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"DiffviewFileHistory",
 		"neotest-output",
 		"neotest-output-panel",
+		"neotest-summary",
 	},
 	callback = function(event)
 		-- Can't unlist, messes with fugutive G! commands
