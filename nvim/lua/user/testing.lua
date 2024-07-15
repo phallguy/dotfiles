@@ -1,33 +1,50 @@
 local util = require("user.util")
 
+local function invoke_test_cmd(fn)
+	vim.cmd.write({ mods = { silent = true } })
+	fn()
+end
+
 vim.keymap.set("n", "<leader>tf", function()
-	require("neotest").run.run(vim.fn.expand("%"))
+	invoke_test_cmd(function()
+		require("neotest").run.run(vim.fn.expand("%"))
+	end)
 end, { desc = "Test File" })
 
 vim.keymap.set("n", "<leader>tc", function()
-	require("neotest").run.run()
+	invoke_test_cmd(function()
+		require("neotest").run.run()
+	end)
 end, { desc = "Test Current" })
 
 vim.keymap.set("n", "<leader>td", function()
-	require("neotest").run.run({ strategy = "dap" })
+	invoke_test_cmd(function()
+		require("neotest").run.run({ strategy = "dap" })
+	end)
 end, { desc = "Debug Current" })
 
 vim.keymap.set("n", "<leader>tl", function()
-	require("neotest").run.run_last()
+	invoke_test_cmd(function()
+		require("neotest").run.run_last()
+	end)
 end, { desc = "Test Last" })
 
-vim.keymap.set("n", "<leader>tl", function()
-	require("neotest").run.run_last({ strategy = "dap" })
+vim.keymap.set("n", "<leader>tL", function()
+	invoke_test_cmd(function()
+		require("neotest").run.run_last({ strategy = "dap" })
+	end)
 end, { desc = "Debug Last" })
 
 -- vim.keymap.set("n", "<leader>tt", "<CMD>TestVisit<CR>", { desc = "Goto last test" })
 vim.keymap.set("n", "<leader>tr", function()
-	require("neotest").output_panel.toggle({ enter = true })
-end, { desc = "Last test results" })
+	util.invoke_cmd_with_cursor(function()
+		require("neotest").output_panel.toggle()
+	end)
+end, { desc = "Last output" })
 
 vim.keymap.set("n", "<leader>th", function()
 	require("neotest").output.open({ short = true, auto_close = true })
-end, { desc = "Last test results" })
+end, { desc = "Test results" })
 
 vim.keymap.set("n", "<leader>tq", function()
 	require("neotest").run.stop()
@@ -35,4 +52,20 @@ end, { desc = "Test quit" })
 
 vim.keymap.set("n", "<leader>to", function()
 	require("neotest").summary.toggle()
+end, { desc = "Test outline" })
+
+vim.keymap.set("n", "]f", function()
+	require("neotest").jump.next({ status = "failed" })
+end, { desc = "Test outline" })
+
+vim.keymap.set("n", "[f", function()
+	require("neotest").jump.prev({ status = "failed" })
+end, { desc = "Test outline" })
+
+vim.keymap.set("n", "]t", function()
+	require("neotest").jump.next()
+end, { desc = "Test outline" })
+
+vim.keymap.set("n", "[t", function()
+	require("neotest").jump.prev()
 end, { desc = "Test outline" })

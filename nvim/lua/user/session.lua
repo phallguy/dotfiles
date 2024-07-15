@@ -3,7 +3,7 @@ if vim.g.vscode then
 end
 
 local function augroup(name)
-	return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+	return vim.api.nvim_create_augroup("phallguy" .. name, { clear = true })
 end
 
 -- go to last loc when opening a buffer
@@ -51,6 +51,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"neotest-output",
 		"neotest-output-panel",
 		"neotest-summary",
+		"dap-float",
 	},
 	callback = function(event)
 		-- Can't unlist, messes with fugutive G! commands
