@@ -126,7 +126,6 @@ augroup HighlightSyntax
 augroup END
 ]])
 
-vim.keymap.set("n", "<leader>ht", "<CMD>TSCaptureUnderCursor<CR>", { desc = "TS captures under cursor" })
 vim.keymap.set("n", "<leader>hv", "<CMD>call SynStack()<CR>", { desc = "Vim highlights under cursor" })
 vim.keymap.set("n", "<leader>hl", "<CMD>Telescope highlights<CR>", { desc = "All highlights" })
 vim.keymap.set("n", "<leader>hi", "<CMD>Inspect<CR>", { desc = "Inspect highlights" })

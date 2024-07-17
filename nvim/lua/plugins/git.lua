@@ -39,6 +39,10 @@ return {
 				diff_buf_win_enter = function(bufnr)
 					vim.keymap.set("n", "q", "<CMD>DiffviewClose<CR>", { buffer = bufnr })
 				end,
+				diff_buf_read = function(bufnr)
+					-- Change local options in diff buffers
+					vim.opt_local.wrap = true
+				end,
 			},
 			keymaps = {
 				file_panel = {

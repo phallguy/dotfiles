@@ -70,6 +70,7 @@ require("user.git")
 
 require("user.html")
 require("user.ruby")
+require("user.markdown")
 
 require("user.testing")
 require("user.lsp")

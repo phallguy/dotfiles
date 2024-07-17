@@ -9,9 +9,9 @@ return {
 		config = function()
 			require("noice").setup({
 				-- debug = true,
-				-- notify = {
-				-- 	view = "mini",
-				-- },
+				notify = {
+					view = "mini",
+				},
 				lsp = {
 					signature = {
 						enabled = false,
@@ -64,39 +64,16 @@ return {
 							style = "none",
 							padding = { 2, 5 },
 						},
-						win_options = {
-							-- winhighlight = {
-							-- 	Normal = "CmdOverlay",
-							-- 	FloatBorder = "CmdOverlay",
-							-- }
-							-- cursorline = false,
-						},
 					},
 				},
 				routes = {
 					-- {
 					-- 	filter = {
-					-- 		event = "lsp",
-					-- 		kind = "progress",
-					-- 		find = "code_action",
+					-- 		event = "msg_show",
+					-- 		min_height = 10,
 					-- 	},
-					-- 	opts = { stop = true, skip = true },
+					-- 	view = "split",
 					-- },
-					-- {
-					-- 	filter = {
-					-- 		event = "lsp",
-					-- 		kind = "progress",
-					-- 		find = "iagnos",
-					-- 	},
-					-- 	opts = { stop = true, skip = true },
-					-- },
-					{
-						filter = {
-							event = "msg_show",
-							min_height = 10,
-						},
-						view = "split",
-					},
 				},
 			})
 

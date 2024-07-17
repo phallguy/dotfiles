@@ -34,8 +34,29 @@ return {
 		Trace = "",
 	},
 	dap = {
-		Breakpoint = "",
+		-- Breakpoint = "",
+		Breakpoint = "󰏤",
 		BreakpointCondition = "",
 		Stopped = "",
+	},
+	test = {
+		passed = "",
+		failed = "",
+		unknown = "",
+		running = "",
+	},
+	common = {
+		spinner = {
+			"⠋",
+			"⠙",
+			"⠚",
+			"⠞",
+			"⠖",
+			"⠦",
+			"⠴",
+			"⠲",
+			"⠳",
+			"⠓",
+		},
 	},
 }

@@ -23,13 +23,13 @@ return {
 		keys = {
 			-- normal mode is default
 			{
-				"<DM-\\>",
+				"<leader>db",
 				function()
 					require("dap").toggle_breakpoint()
 				end,
 			},
 			{
-				"<DMS-\\>",
+				"<leader>dB",
 				function()
 					require("dap").toggle_breakpoint(vim.fn.input("Condition:"))
 				end,
@@ -50,6 +50,12 @@ return {
 				"<D-;>",
 				function()
 					require("dap").step_into()
+				end,
+			},
+			{
+				"<DS-;>",
+				function()
+					require("dap").run_to_cursor()
 				end,
 			},
 			{
@@ -92,6 +98,7 @@ return {
 				"<leader>dt",
 				function()
 					require("dap").terminate()
+					require("dapui").close()
 				end,
 				desc = "Stop DAP",
 			},
@@ -116,6 +123,7 @@ return {
 
 			dap.defaults.fallback.focus_terminal = true
 			dap.defaults.fallback.terminal_win_cmd = "tabnew"
+			dap.defaults.fallback.stepping_granularity = "instructions"
 
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "dap-repl" },
@@ -203,13 +211,11 @@ return {
 			dap.configurations.ruby = {
 				{
 					name = "Attach Rails",
-					command = "bundle",
-					args = { "exec", "rails", "s" },
 					request = "attach",
 					type = "ruby",
 					options = { source_filetype = "ruby" },
 					localfs = true,
-					port = 3009,
+					port = 38698,
 					cwd = vim.fn.getcwd(),
 				},
 				{
@@ -225,7 +231,16 @@ return {
 					random_port = true,
 					cwd = vim.fn.getcwd(),
 				},
+				{
+					name = "Attach",
+					request = "attach",
+					type = "ruby",
+					options = { source_filetype = "ruby" },
+					localfs = true,
+					cwd = vim.fn.getcwd(),
+				},
 			}
+			dap.configurations.eruby = dap.configurations.ruby
 
 			require("dapui").setup({
 				expand_lines = false,
@@ -283,19 +298,19 @@ return {
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.open({ reset = true })
-					vim.diagnostic.enable(false)
+					-- vim.diagnostic.enable(false)
 				end)
 			end
 			dap.listeners.before.event_terminated["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.close()
-					vim.diagnostic.enable()
+					-- vim.diagnostic.enable()
 				end)
 			end
 			dap.listeners.before.event_exited["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.close()
-					vim.diagnostic.enable()
+					-- vim.diagnostic.enable()
 				end)
 			end
 

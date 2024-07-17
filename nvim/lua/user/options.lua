@@ -26,6 +26,7 @@ opt.sidescrolloff = 8 -- Same but for side scrolling.
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
+opt.tabstop = 2 -- Number of spaces tabs count for
 opt.shortmess = {
 	-- "filnxtToOF"
 	a = true,
@@ -35,9 +36,8 @@ opt.shortmess = {
 	F = true,
 	C = true,
 }
-opt.showmode = true -- Dont show mode since we have a statusline
-opt.sidescrolloff = 8 -- Columns of context
-opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+opt.showmode = false -- Dont show mode since we have a statusline
+opt.signcolumn = "auto:1-4" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.ignorecase = false -- Ignore case
 opt.smartcase = true -- Don't ignore case with capitals
 opt.infercase = true -- Infer cases in keyword completion.
@@ -49,7 +49,6 @@ opt.preserveindent = true -- Preserve indent structure as much as possible.
 opt.spelllang = { "en" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current
-opt.tabstop = 2 -- Number of spaces tabs count for
 opt.textwidth = 100
 opt.termguicolors = true -- True color support
 opt.timeoutlen = 750
@@ -104,6 +103,3 @@ opt.formatoptions:remove({
 if vim.fn.has("nvim-0.9.0") == 1 then
 	opt.splitkeep = "screen"
 end
-
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0

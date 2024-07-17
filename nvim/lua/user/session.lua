@@ -51,11 +51,13 @@ vim.api.nvim_create_autocmd("FileType", {
 		"neotest-output",
 		"neotest-output-panel",
 		"neotest-summary",
+		"neotest-attach",
 		"dap-float",
+		"dap-repl",
 	},
 	callback = function(event)
 		-- Can't unlist, messes with fugutive G! commands
-		-- vim.bo[event.buf].buflisted = false
+		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 	end,
 })

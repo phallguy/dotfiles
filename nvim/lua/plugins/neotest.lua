@@ -1,3 +1,37 @@
+local icons = require("user.icons")
+
+local M = {
+	custom_consumers = {},
+}
+
+function M.custom_consumers.attach_or_output()
+	local self = { name = "attach_or_output" }
+	local neotest = require("neotest")
+
+	---@type neotest.Client
+	local client = nil
+
+	self = setmetatable(self, {
+		__call = function(_, client_)
+			client = client_
+			return self
+		end,
+	})
+
+	-- neotest.attach_or_run.open()
+	function self.open(args)
+		args = args or {}
+		local pos = neotest.run.get_tree_from_args(args)
+		if pos and client:is_running(pos:data().id) then
+			neotest.run.attach()
+		else
+			neotest.output.open()
+		end
+	end
+
+	return self
+end
+
 return {
 	{
 		"nvim-neotest/neotest",
@@ -18,6 +52,19 @@ return {
 
 				if original == nil then
 					return original
+				end
+
+				local position = args.tree:data()
+
+				if position.type == "test" or position.type == "namespace" then
+					local config = require("neotest-minitest.config")
+					local id = string.gmatch(position.id, "%d+")()
+
+					original.command = vim.tbl_flatten({
+						config.get_test_cmd(),
+						position.path .. ":" .. id,
+						"-v",
+					})
 				end
 
 				if args.strategy == "dap" then
@@ -42,6 +89,7 @@ return {
 					RUBY_DEBUG_OPEN = true,
 					RUBY_DEBUG_HOST = "127.0.0.1",
 					DISABLE_SPRING = nil,
+					NOPRIDE = 1,
 				}
 
 				-- vim.notify(vim.inspect(original))
@@ -69,20 +117,11 @@ return {
 					}),
 				},
 				icons = {
-					passed = "",
-					running = "",
-					running_animated = {
-						"⠋",
-						"⠙",
-						"⠚",
-						"⠞",
-						"⠖",
-						"⠦",
-						"⠴",
-						"⠲",
-						"⠳",
-						"⠓",
-					},
+					passed = icons.test.passed,
+					failed = icons.test.failed,
+					unknown = icons.test.unknown,
+					running = icons.test.running,
+					running_animated = icons.common.spinner,
 				},
 				quickfix = {
 					enabled = false,
@@ -96,31 +135,20 @@ return {
 				},
 				summary = {
 					follow = true,
+					animated = false,
 				},
 				output = {
 					open_on_run = false,
 				},
-
-				run = {
-					concurrent = false,
+				output_panel = {
+					enabled = false,
 				},
-				running = {
-					concurrent = false,
+				floating = {
+					max_width = 0.95,
 				},
-			})
-
-			vim.api.nvim_create_autocmd("FileType", {
-				group = vim.api.nvim_create_augroup("phallguy_neotest", { clear = true }),
-				pattern = {
-					"neotest-output-panel",
+				consumers = {
+					attach_or_output = M.custom_consumers.attach_or_output(),
 				},
-				callback = function(event)
-					-- Can't unlist, messes with fugutive G! commands
-					-- vim.bo[event.buf].buflisted = false
-					vim.keymap.set("n", "<leader>c", function()
-						require("neotest").output_panel.clear()
-					end, { buffer = event.buf, silent = true })
-				end,
 			})
 		end,
 	},

@@ -16,7 +16,7 @@ return {
 			require("rose-pine").setup({
 				-- variant = "dawn",
 				dark_variant = "moon",
-				dim_inactive_windows = true,
+				dim_inactive_windows = false,
 				enable = {
 					migrations = true,
 				},
@@ -35,6 +35,8 @@ return {
 					AbsLineNr = { fg = "highlight_med" },
 					CursorLineNr = { fg = "iris", bg = "highlight_low" },
 					CursorLineSign = { fg = "iris", bg = "highlight_low" },
+					-- Avoid underline in diffview
+					CursorLine = { ctermfg = "white" },
 					IblIndent = { fg = "highlight_low", bold = false },
 					IblScope = { fg = "highlight_high" },
 					Folded = { fg = "highlight_high" },
@@ -71,8 +73,8 @@ return {
 
 					-- Git/Diff
 					DiffViewDiffDeleteDim = { fg = "highlight_low" }, -- Makes the 'empty' slashes in diffs dim
-					-- DiffText = { bg = config.groups.git_change, blend = 30 },
-					-- DiffChange = { bg = config.groups.git_change, blend = 10 },
+					DiffText = { bg = config.groups.git_change, blend = 30 },
+					DiffChange = { bg = config.groups.git_change, blend = 10 },
 					-- DiffViewDiffDelete = { fg = "highlight_med" },
 					-- DiffViewDiffAdd = { bg = config.groups.git_add, blend = 15 },
 					-- ["@text.diff.delete"] = { fg = "text", bg = config.groups.git_delete, blend = 20 },
@@ -95,13 +97,8 @@ return {
 					TelescopePreviewTitle = { fg = "surface", bg = "foam", bold = true },
 					TelescopeResultsTitle = { fg = "surface", bg = "gold", bold = true },
 
-					-- -- Noice
-					-- NoicePopupBorder = { fg = "overlay", bg = "surface" },
+					-- Noice
 					NoiceCmdlinePopup = { bg = "#101010" },
-					-- NoiceCmdlinePopupBorder = { link = "NoicePopupBorder" },
-					-- NoiceCmdlinePopupBorderSearch = { link = "NoicePopupBorder" },
-					-- NoiceConfirm = { fg = "text", bg = "overlay" },
-					-- NoiceConfirmBorder = { fg = "surface", bg = "overlay" },
 
 					-- -- TreesiterContext
 					TreesitterContext = { bg = "_nc", force = true },
@@ -114,9 +111,8 @@ return {
 					-- Dap
 					DapBreakpoint = { fg = "love" },
 					DapBreakpointCondition = { fg = "love" },
-					DapStopped = { fg = "surface", bg = "love" },
-					DapStoppedLine = { bg = "love", blend = 10 },
-					-- DapUiNormal = { bg = "_nc" },
+					DapStopped = { fg = "surface", bg = "gold" },
+					DapStoppedLine = { bg = "gold", blend = 10 },
 					DapUIType = { link = "Comment" },
 					DapUIVariable = { link = "@lsp.type.parameter" },
 					DapUIValue = { link = "Normal" },
@@ -125,6 +121,10 @@ return {
 					DapUIModifiedValue = { link = "@diff.minus" },
 					NvimDapVirtualText = { fg = "highlight_med" },
 					NvimDapVirtualTextChanged = { fg = "love" },
+
+					-- Testing
+					NeoTestDir = { bold = true, fg = "foam" },
+					NeotestPassed = { fg = "#41FF9C" },
 				},
 			})
 		end,

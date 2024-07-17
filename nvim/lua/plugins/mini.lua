@@ -16,7 +16,7 @@ return {
 					change = "┊",
 					delete = "┄",
 				},
-				priority = 10,
+				priority = 300,
 			},
 		})
 
