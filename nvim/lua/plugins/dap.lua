@@ -245,7 +245,7 @@ return {
 			require("dapui").setup({
 				expand_lines = false,
 				floating = {
-					border = "rounded",
+					-- border = "rounded",
 				},
 				layouts = {
 					{

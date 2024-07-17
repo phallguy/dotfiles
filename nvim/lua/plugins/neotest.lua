@@ -23,9 +23,9 @@ function M.custom_consumers.attach_or_output()
 		args = args or {}
 		local pos = neotest.run.get_tree_from_args(args)
 		if pos and client:is_running(pos:data().id) then
-			neotest.run.attach()
+			neotest.run.attach(args)
 		else
-			neotest.output.open()
+			neotest.output.open(args)
 		end
 	end
 
@@ -100,6 +100,15 @@ return {
 				return name ~= "app" and name ~= "node_modules" and name ~= "tmp" and name ~= "log"
 			end
 
+			local group = vim.api.nvim_create_augroup("NeoTestEx", { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				group = group,
+				pattern = { "neotest-attach", "neotest-output", "neotest-output-panel" },
+				callback = function(e)
+					vim.opt_local.wrap = true
+				end,
+			})
+
 			require("neotest").setup({
 				adapters = {
 					require("neotest-vitest")({
@@ -128,7 +137,6 @@ return {
 					open = false,
 				},
 				discovery = {
-					-- concurrent = 1,
 					filter_dir = function(name, rel_path, root)
 						return name ~= "node_modules" and name ~= "tmp" and name ~= "log"
 					end,
@@ -138,16 +146,23 @@ return {
 					animated = false,
 				},
 				output = {
-					open_on_run = false,
+					open_on_run = true,
 				},
 				output_panel = {
 					enabled = false,
 				},
 				floating = {
+					border = "solid",
 					max_width = 0.95,
 				},
 				consumers = {
 					attach_or_output = M.custom_consumers.attach_or_output(),
+				},
+				running = {
+					concurrent = false,
+				},
+				run = {
+					concurrent = false,
 				},
 			})
 		end,

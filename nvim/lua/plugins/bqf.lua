@@ -16,6 +16,7 @@ return {
 					win_vheight = 12,
 					show_title = false,
 					buf_label = false,
+					blend = 5,
 				},
 
 				filter = {

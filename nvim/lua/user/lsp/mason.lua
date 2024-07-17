@@ -7,7 +7,7 @@ local capabilities = require("user.lsp.capabilities")
 require("mason").setup({
 	-- log_level = vim.log.levels.DEBUG,
 	ui = {
-		border = "rounded",
+		-- border = "rounded",
 	},
 })
 

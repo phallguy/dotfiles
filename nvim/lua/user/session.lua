@@ -57,7 +57,11 @@ vim.api.nvim_create_autocmd("FileType", {
 	},
 	callback = function(event)
 		-- Can't unlist, messes with fugutive G! commands
-		vim.bo[event.buf].buflisted = false
+		local buftype = vim.bo[event.buf].buftype
+		if buftype ~= "fugitiveblame" and buftype ~= "git" and buftype ~= "nowrite" then
+			vim.bo[event.buf].buflisted = false
+		end
+
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 	end,
 })
@@ -66,7 +70,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("wrap_spell"),
 	pattern = { "gitcommit", "markdown" },
-	callback = function()
+	callback = function(e)
 		vim.cmd("PencilSoft")
 		vim.opt_local.wrap = true
 		vim.opt_local.spell = true

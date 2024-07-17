@@ -68,7 +68,7 @@ return {
 						["<C-v>"] = "open_vsplit",
 						["/"] = "noop",
 					},
-					popup_border_style = "rounded",
+					-- popup_border_style = "rounded",
 				},
 				filesystem = {
 					window = {

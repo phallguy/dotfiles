@@ -48,7 +48,7 @@ require("lazy").setup({
 		enabled = false,
 	},
 	ui = {
-		border = "rounded",
+		border = "shadow",
 	},
 	checker = {
 		-- Look for plugin updates

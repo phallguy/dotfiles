@@ -17,6 +17,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 
 		vim.opt_local.signcolumn = "no"
+		vim.opt_local.wrap = true
+		vim.opt_local.number = false
 	end,
 })
 

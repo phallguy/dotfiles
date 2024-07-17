@@ -62,11 +62,19 @@ vim.keymap.set("n", "<leader>tk", function()
 end, { desc = "Last output" })
 
 vim.keymap.set("n", "<leader>ti", function()
-	require("neotest").attach_or_output.open({ enter = true, auto_close = true })
+	require("neotest").attach_or_output.open({
+		auto_close = true,
+	})
 end, { desc = "Test results" })
 
 vim.keymap.set("n", "<leader>tr", function()
-	require("neotest").attach_or_output.open({ enter = true, auto_close = true })
+	require("neotest").attach_or_output.open({
+		enter = true,
+		auto_close = true,
+		open_win = function()
+			vim.cmd("split | resize 15")
+		end,
+	})
 end, { desc = "Test results" })
 
 vim.keymap.set("n", "<leader>tq", function()
