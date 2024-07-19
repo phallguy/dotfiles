@@ -54,6 +54,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"neotest-attach",
 		"dap-float",
 		"dap-repl",
+		"dbout",
 	},
 	callback = function(event)
 		-- Can't unlist, messes with fugutive G! commands

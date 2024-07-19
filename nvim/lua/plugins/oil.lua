@@ -1,7 +1,6 @@
 return {
 	{
 		"stevearc/oil.nvim",
-		enabled = false,
 		opts = {
 			delete_to_trash = true,
 			keymaps = {

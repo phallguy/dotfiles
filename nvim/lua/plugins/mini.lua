@@ -16,7 +16,7 @@ return {
 					change = "┊",
 					delete = "┄",
 				},
-				priority = 300,
+				priority = 160,
 			},
 		})
 
@@ -79,6 +79,15 @@ return {
 		})
 		require("mini.icons").mock_nvim_web_devicons()
 
-		require("mini.extra").setup()
+		require("mini.indentscope").setup({
+			symbol = "│",
+			options = {
+				try_as_border = true,
+			},
+			draw = {
+				delay = 50,
+				animation = require("mini.indentscope").gen_animation.none(),
+			},
+		})
 	end,
 }

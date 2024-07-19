@@ -43,7 +43,7 @@ return {
 		passed = "",
 		failed = "",
 		unknown = "",
-		running = "",
+		running = "",
 	},
 	common = {
 		spinner = {

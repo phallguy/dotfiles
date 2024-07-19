@@ -6,8 +6,6 @@ vim.g.no_ruby_maps = 1
 
 vim.g["test#ruby#use_spring_binstub"] = 0
 
-vim.keymap.set("v", "<leader>x", ":Extract ", { desc = "Extract to partial" })
-
 local group = vim.api.nvim_create_augroup("RubyEx", { clear = true })
 local initialized_ruby_syntax = false
 vim.api.nvim_create_autocmd("FileType", {

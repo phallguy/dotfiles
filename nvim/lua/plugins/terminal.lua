@@ -4,7 +4,7 @@ end
 
 return {
 	{
-		-- https://github.com/akinsho/toggleterm.nvi
+		-- https://github.com/akinsho/toggleterm.nvim
 		"akinsho/toggleterm.nvim",
 		lazy = true,
 		config = function()

@@ -7,15 +7,18 @@ return {
 		-- Optional, but highly recommended if you want to use the "Default" timer
 		-- "rcarriga/nvim-notify",
 	},
-	opts = {
-		notifiers = {
-			-- The "Default" notifier uses 'vim.notify' and works best when you have 'nvim-notify' installed.
-			{
-				name = "Default",
-				opts = {
-					sticky = false,
+	opts = function()
+		pcall(require("telescope").load_extension, "pomodori")
+		require("pomo").setup({
+			notifiers = {
+				-- The "Default" notifier uses 'vim.notify' and works best when you have 'nvim-notify' installed.
+				{
+					name = "Default",
+					opts = {
+						sticky = false,
+					},
 				},
 			},
-		},
-	},
+		})
+	end,
 }

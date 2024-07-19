@@ -9,10 +9,6 @@ return {
 			local colors = require("rose-pine.palette")
 			local config = require("rose-pine.config").options
 
-			-- config.groups.git_change = "iris"
-			-- config.groups.git_text = "gold"
-			-- config.groups.git_delete = "rose"
-
 			require("rose-pine").setup({
 				-- variant = "dawn",
 				dark_variant = "moon",
@@ -25,20 +21,16 @@ return {
 					italic = true,
 					transparency = false,
 				},
-				groups = {
-					-- git_text = "gold",
-					-- git_change = "iris",
-					-- git_delete = "rose",
-				},
 				highlight_groups = {
 					LineNr = { fg = "highlight_med" },
 					AbsLineNr = { fg = "highlight_med" },
+					CursorLine = { bg = "surface" },
 					CursorLineNr = { fg = "iris", bg = "highlight_low" },
 					CursorLineSign = { fg = "iris", bg = "highlight_low" },
 					-- Avoid underline in diffview
-					CursorLine = { ctermfg = "white" },
-					IblIndent = { fg = "highlight_low", bold = false },
-					IblScope = { fg = "highlight_high" },
+					-- Breaks hihlight on yank
+					-- CursorLine = { ctermfg = "white" },
+					MiniIndentscopeSymbol = { fg = "highlight_med" },
 					Folded = { fg = "highlight_high" },
 					Visual = { bg = "pine", blend = 50 },
 					WinSeparator = { fg = "highlight_low", bold = true },
@@ -49,19 +41,11 @@ return {
 					SpellLocal = { fg = colors.pine, italic = true, undercurl = true },
 					SpellRare = { fg = colors.gold, italic = true, undercurl = true },
 
-					-- ScrollbarThumb = { bg = "iris", blend = 50 },
-					-- Keyword = { fg = "iris", bold = true },
-					-- Type = { fg = "foam", bold = true },
-					-- -- String = { fg = "love" },
-					-- ["Identifier"] = { fg = "rose" },
-					-- ["@function.call"] = { fg = "foam", italic = true },
-					-- ["@type.qualifier"] = { fg = "pine" },
-					-- ["@variable.member"] = { fg = "foam" },
 					Hlargs = { link = "@parameter", bold = true },
 					HlargsNamedParams = { link = "@parameter", bold = true },
 
 					-- BQF
-					BqfPreviewFloat = { fg = "highlight_low", bg = "#110F1A" },
+					BqfPreviewFloat = { fg = "highlight_low", bg = "surface" },
 					BqfPreviewBorder = { link = "BqfPreviewFloat" },
 
 					-- Quick fix
@@ -98,7 +82,7 @@ return {
 					TelescopeResultsTitle = { fg = "surface", bg = "gold", bold = true },
 
 					-- Noice
-					NoiceCmdlinePopup = { bg = "#101010" },
+					NoiceCmdlinePopup = { bg = "_nc" },
 
 					-- -- TreesiterContext
 					TreesitterContext = { bg = "_nc", force = true },
@@ -124,7 +108,8 @@ return {
 
 					-- Testing
 					NeoTestDir = { bold = true, fg = "foam" },
-					NeotestPassed = { fg = "#41FF9C" },
+					NeotestPassed = { fg = "iris" },
+					NeotestRunning = { fg = "iris" },
 				},
 			})
 		end,

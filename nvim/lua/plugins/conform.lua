@@ -25,6 +25,7 @@ return {
 	},
 	opts = {
 		-- log_level = vim.log.levels.DEBUG,
+		default_format_opts = {},
 		format_on_save = function(bufnr)
 			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 				return
@@ -60,18 +61,18 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			json = { "fixjson" },
-			javascript = { { "prettierd", "prettier" } },
+			jaascript = { { "prettierd", "prettier" } },
 			coffee = { { "prettierd", "prettier" } },
 			typescript = { { "prettierd", "prettier" } },
 			css = { { "prettierd", "prettier" } },
 			sass = { { "prettierd", "prettier" } },
 			scss = { { "prettierd", "prettier" } },
-			html = { { "prettierd", "prettier" }, "htmlbeautifier", { "typos" } },
-			eruby = { { "htmlbeautifier" }, { "typos" } },
-			ruby = { { "rubocop" }, { "typos" } },
-			yaml = { { "yamlfmt" } },
+			html = { { "prettierd", "prettier" }, "htmlbeautifier", "typos" },
+			eruby = { "htmlbeautifier", "typos" },
+			ruby = { "rubocop", "typos" },
+			yaml = { "yamlfmt" },
 			["eruby.yaml"] = { "yamlfmt" },
-			svg = { "xmlformat" },
+			sg = { "xmlformat" },
 		},
 	},
 	init = function()

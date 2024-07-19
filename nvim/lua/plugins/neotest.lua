@@ -1,37 +1,5 @@
 local icons = require("user.icons")
 
-local M = {
-	custom_consumers = {},
-}
-
-function M.custom_consumers.attach_or_output()
-	local self = { name = "attach_or_output" }
-	local neotest = require("neotest")
-
-	---@type neotest.Client
-	local client = nil
-
-	self = setmetatable(self, {
-		__call = function(_, client_)
-			client = client_
-			return self
-		end,
-	})
-
-	-- neotest.attach_or_run.open()
-	function self.open(args)
-		args = args or {}
-		local pos = neotest.run.get_tree_from_args(args)
-		if pos and client:is_running(pos:data().id) then
-			neotest.run.attach(args)
-		else
-			neotest.output.open(args)
-		end
-	end
-
-	return self
-end
-
 return {
 	{
 		"nvim-neotest/neotest",
@@ -42,6 +10,7 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"zidhuss/neotest-minitest",
 			"marilari88/neotest-vitest",
+			"nvim-neotest/neotest-plenary",
 		},
 		config = function()
 			local minitest = require("neotest-minitest")
@@ -67,6 +36,14 @@ return {
 					})
 				end
 
+				original.env = {
+					RUBY_DEBUG_PORT = 3999,
+					RUBY_DEBUG_OPEN = "false",
+					RUBY_DEBUG_HOST = "127.0.0.1",
+					DISABLE_SPRING = nil,
+					NOPRIDE = 1,
+				}
+
 				if args.strategy == "dap" then
 					original.strategy = {
 						name = "Run test",
@@ -78,19 +55,9 @@ return {
 						port = 3999,
 						localfs = true,
 					}
-					-- vim.env.DISABLE_SPRING = 1
-					-- vim.defer_fn(function()
-					-- 	vim.env.DISABLE_SPRING = nil
-					-- end, 5000)
-				end
 
-				original.env = {
-					RUBY_DEBUG_PORT = 3999,
-					RUBY_DEBUG_OPEN = true,
-					RUBY_DEBUG_HOST = "127.0.0.1",
-					DISABLE_SPRING = nil,
-					NOPRIDE = 1,
-				}
+					original.env.RUBY_DEBUG_OPEN = true
+				end
 
 				-- vim.notify(vim.inspect(original))
 				return original
@@ -124,6 +91,7 @@ return {
 							})
 						end,
 					}),
+					require("neotest-plenary"),
 				},
 				icons = {
 					passed = icons.test.passed,
@@ -133,30 +101,36 @@ return {
 					running_animated = icons.common.spinner,
 				},
 				quickfix = {
+					open = function()
+						vim.cmd("Trouble quickfix")
+					end,
 					enabled = false,
-					open = false,
 				},
 				discovery = {
 					filter_dir = function(name, rel_path, root)
 						return name ~= "node_modules" and name ~= "tmp" and name ~= "log"
 					end,
 				},
+				status = {
+					enabled = true,
+					signs = false,
+					virtual_text = true,
+				},
 				summary = {
 					follow = true,
 					animated = false,
 				},
 				output = {
-					open_on_run = true,
+					open_on_run = false,
 				},
 				output_panel = {
 					enabled = false,
 				},
 				floating = {
-					border = "solid",
 					max_width = 0.95,
 				},
 				consumers = {
-					attach_or_output = M.custom_consumers.attach_or_output(),
+					overseer = require("neotest.consumers.overseer"),
 				},
 				running = {
 					concurrent = false,

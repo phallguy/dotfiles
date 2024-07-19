@@ -157,11 +157,6 @@ vim.opt.fillchars = {
 	eob = " ",
 }
 
--- -- Cheat sheet
--- vim.keymap.set("n", "<leader>fh", function()
--- 	local word = vim.fn.expand("<cword>")
--- 	vim.cmd("Cheat " .. vim.bo.filetype .. " " .. word)
--- end, { desc = "Cheat sheet" })
 
 -- Alternate files
 vim.api.nvim_create_user_command("ProjectionistDetect", "call projectionist#activate()", {})
@@ -200,3 +195,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>Y", "<CMD>ProjectionistDetect<CR><CMD>Vstylesheet<CR>", { desc = "Edit styles (V split)" })
 vim.keymap.set("n", "<leader>b", "<CMD>ProjectionistDetect<CR><CMD>Esource<CR>", { desc = "Edit source (Same window)" })
 vim.keymap.set("n", "<leader>B", "<CMD>ProjectionistDetect<CR><CMD>Vsource<CR>", { desc = "Edit source (V split)" })
+
+-- Disable recording macros
+vim.keymap.set("n", "q", "<Nop>")

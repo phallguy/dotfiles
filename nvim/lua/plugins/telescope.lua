@@ -56,17 +56,12 @@ return {
 			vim.keymap.set("n", "<leader>fm", "<CMD>Telescope media_files<CR>", { desc = "Media files" })
 			vim.keymap.set("n", "<leader>fU", "<CMD>Telescope undo<CR>", { desc = "Undo history" })
 			vim.keymap.set("n", "<leader>fd", "<CMD>tab DBUI<CR>", { desc = "Databases" })
-			vim.keymap.set("n", "<leader>fH", builtin.help_tags, { desc = "[F]earch [H]elp" })
+			vim.keymap.set("n", "<leader>fH", builtin.help_tags, { desc = "[F]ind [H]elp" })
+			vim.keymap.set("n", "<leader>fy", "<CMD>Telescope glyph<CR>", { desc = "[F]ind Gl[y]ph" })
 
 			vim.keymap.set("n", "z=", function()
 				require("telescope.builtin").spell_suggest({})
 			end, { desc = "Spell suggest" })
-
-			-- local show_notifications = function()
-			-- 	require("telescope").extensions.notify.notify()
-			-- end
-			--
-			-- vim.keymap.set("n", "<leader>fn", show_notifications, { desc = "Notifications" })
 
 			local ivy = {
 				theme = "ivy",
@@ -83,7 +78,8 @@ return {
 					file_sorter = require("telescope.sorters").get_fuzzy_file,
 					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 					set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-					-- winblend = 10,
+					-- borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+					winblend = 5,
 					mappings = {
 						i = {
 							["<C-n>"] = actions.cycle_history_next,
@@ -186,7 +182,6 @@ return {
 			pcall(require("telescope").load_extension, "media_files")
 			pcall(require("telescope").load_extension, "undo")
 			pcall(require("telescope").load_extension, "ui-select")
-			pcall(require("telescope").load_extension, "pomodori")
 			pcall(require("telescope").load_extension, "glyph")
 		end,
 	},

@@ -7,9 +7,10 @@ return {
 	"lewis6991/gitsigns.nvim",
 	event = { "BufEnter" },
 	opts = {
-		numhl = false,
+		numhl = true,
 		word_diff = false,
-		linehl = false,
+		linehl = true,
+		sign_priority = 600,
 		on_attach = function(bufnr)
 			-- Next/prev diff hunk
 			if not vim.g.vscode then

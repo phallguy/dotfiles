@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
 		vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
 		vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
+		vim.keymap.set("n", "q", "<CMD>close<CR>", opts)
 
 		vim.opt_local.signcolumn = "no"
 		vim.opt_local.wrap = true
@@ -30,6 +31,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "<esc>", "<CMD>ToggleTerm<CR>", opts)
+		vim.keymap.set("n", "q", "<CMD>close<CR>", opts)
 	end,
 })
 

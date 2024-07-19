@@ -12,7 +12,7 @@ return {
 			})
 		end,
 	},
-	{
-		"tpope/vim-bundler",
-	},
+	-- {
+	-- 	"tpope/vim-bundler",
+	-- },
 }

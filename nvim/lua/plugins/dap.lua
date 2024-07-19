@@ -219,6 +219,17 @@ return {
 					cwd = vim.fn.getcwd(),
 				},
 				{
+					name = "Run Rails",
+					request = "launch",
+					type = "ruby",
+					options = { source_filetype = "ruby" },
+					command = "rails",
+					args = { "server" },
+					port = 38698,
+					localfs = true,
+					cwd = vim.fn.getcwd(),
+				},
+				{
 					name = "Run file",
 					command = "bundle",
 					args = { "exec", "ruby", "-rdebug", "-Itest" },
@@ -244,8 +255,9 @@ return {
 
 			require("dapui").setup({
 				expand_lines = false,
-				floating = {
-					-- border = "rounded",
+				render = {
+					max_type_length = 25,
+					max_value_lines = 20,
 				},
 				layouts = {
 					{
@@ -297,6 +309,8 @@ return {
 
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
+					require("neotest").summary.close()
+					require("overseer").close()
 					dapui.open({ reset = true })
 					-- vim.diagnostic.enable(false)
 				end)
@@ -304,13 +318,11 @@ return {
 			dap.listeners.before.event_terminated["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.close()
-					-- vim.diagnostic.enable()
 				end)
 			end
 			dap.listeners.before.event_exited["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.close()
-					-- vim.diagnostic.enable()
 				end)
 			end
 

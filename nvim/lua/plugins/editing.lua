@@ -28,16 +28,6 @@ return {
 	},
 
 	{
-		"brenoprata10/nvim-highlight-colors",
-		event = { "BufEnter" },
-		config = function()
-			require("nvim-highlight-colors").setup({
-				enable_named_colors = false,
-			})
-		end,
-	},
-
-	{
 		"sheerun/vim-polyglot",
 		priority = 500,
 		cond = not vim.g.vscode,
@@ -68,7 +58,6 @@ return {
 
 	{
 		"kjuq/sixelview.nvim",
-		enabled = false,
 		keys = {
 			{
 				"<leader>gp",

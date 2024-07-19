@@ -10,34 +10,6 @@ return {
 	-- See `:help lualine.txt`
 	priority = 1010,
 	config = function()
-		-- local theme = require("lualine.themes.rose-pine")
-		-- local p = require("rose-pine.palette")
-
-		-- Make the line transparent
-		-- theme.normal.c.bg = "none"
-		-- theme.normal.c.fg = p.muted
-		-- theme.normal.b.bg = p.overlay
-		-- theme.normal.y = { fg = p.subtle, bg = p.overlay }
-		-- theme.normal.x = { fg = p.rose, bg = "none" }
-		--
-		-- theme.insert.c.bg = "none"
-		-- theme.insert.c.fg = p.muted
-		-- theme.insert.b.bg = p.overlay
-		-- theme.insert.y = { fg = p.subtle, bg = p.overlay }
-		-- theme.insert.x = { fg = p.rose, bg = "none" }
-		--
-		-- theme.visual.c.bg = "none"
-		-- theme.visual.c.fg = p.muted
-		-- theme.visual.b.bg = p.overlay
-		-- theme.visual.y = { fg = p.subtle, bg = p.overlay }
-		-- theme.visual.x = { fg = p.rose, bg = "none" }
-		--
-		-- theme.command.c.bg = "none"
-		-- theme.command.c.fg = p.muted
-		-- theme.command.b.bg = p.overlay
-		-- theme.command.y = { fg = p.subtle, bg = p.overlay }
-		-- theme.command.x = { fg = p.rose, bg = "none" }
-
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
@@ -46,22 +18,22 @@ return {
 				section_separators = { right = " ", left = "" },
 			},
 			sections = {
-				lualine_a = { "mode" },
-				lualine_b = { { "%{ ' ' } ", draw_empty = true, padding = 0 } },
-				lualine_c = { { "filename", path = 1 } },
-				lualine_x = {
+				lualine_a = {
 					{ "branch", icon = icons.git.Branch },
 				},
-				lualine_y = { { "filetype", padding = 2 }, { "location", padding = { right = 1 } } },
-				lualine_z = {
+				lualine_b = { { "filetype", padding = 1, draw_empty = true } },
+				lualine_c = {
 					{
-						"diagnostics",
-						sources = { "nvim_diagnostic" },
-						colored = false,
+						"filename",
+						path = 1,
+						newfile_status = true,
+						symbols = {
+							modified = "",
+							readonly = "",
+						},
 					},
-					{
-						"reg_recording",
-					},
+				},
+				lualine_x = {
 					{
 						function()
 							local ok, pomo = pcall(require, "pomo")
@@ -74,8 +46,20 @@ return {
 								return ""
 							end
 
-							return " " .. tostring(timer)
+							return tostring(timer) .. " "
 						end,
+						draw_empty = true,
+					},
+				},
+				lualine_y = { { "location", padding = { right = 1 } } },
+				lualine_z = {
+					{
+						"diagnostics",
+						-- sources = { "nvim_diagnostic" },
+						colored = false,
+					},
+					{
+						"reg_recording",
 					},
 				},
 			},
