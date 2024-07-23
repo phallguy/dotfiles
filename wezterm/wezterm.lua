@@ -4,7 +4,7 @@ local wezterm = require("wezterm")
 return {
 	-- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=terminfo
 	term = "wezterm",
-	front_end = "WebGpu",
+	-- front_end = "WebGpu",
 	-- Appearance ===
 	--
 	-- Fonts
@@ -12,7 +12,7 @@ return {
 		{
 			family = "JetBrains Mono",
 			weight = "Light",
-			harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+			-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 		},
 		"JetBrainsMono Nerd Font Mono",
 	}),
@@ -40,11 +40,12 @@ return {
 	},
 	-- font = wezterm.font(font_family, { weight="Medium" }),
 	font_size = 15,
-	line_height = 0.95,
-	cell_width = 0.90,
-	freetype_load_target = "Light",
+	line_height = 0.90,
+	-- cell_width = 0.90,
+	freetype_load_flags = "DEFAULT",
+	-- freetype_load_target = "Light",
 	-- freetype_render_target = "HorizontalLcd",
-	allow_square_glyphs_to_overflow_width = "Always",
+	allow_square_glyphs_to_overflow_width = "Never",
 	-- font_antialias = "Subpixel",
 	-- colors
 	color_scheme = "rose-pine-moon",
@@ -140,4 +141,7 @@ return {
 			action = wezterm.action.PaneSelect,
 		},
 	},
+	-- Allow CMD key in neovim
+	enable_kitty_keyboard = true,
+	enable_csi_u_key_encoding = true,
 }

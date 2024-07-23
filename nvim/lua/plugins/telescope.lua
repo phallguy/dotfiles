@@ -183,6 +183,7 @@ return {
 			pcall(require("telescope").load_extension, "undo")
 			pcall(require("telescope").load_extension, "ui-select")
 			pcall(require("telescope").load_extension, "glyph")
+			pcall(require("telescope").load_extension, "emoji")
 		end,
 	},
 
@@ -207,6 +208,10 @@ return {
 	},
 	{
 		"debugloop/telescope-undo.nvim",
+		lazy = true,
+	},
+	{
+		"xiyaowong/telescope-emoji.nvim",
 		lazy = true,
 	},
 }

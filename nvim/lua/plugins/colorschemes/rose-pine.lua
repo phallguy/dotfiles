@@ -108,8 +108,11 @@ return {
 
 					-- Testing
 					NeoTestDir = { bold = true, fg = "foam" },
-					NeotestPassed = { fg = "iris" },
+					NeotestPassed = { fg = "#0eff7c" },
 					NeotestRunning = { fg = "iris" },
+					NeotestStatusFailed = { fg = "base", bg = "love" },
+					NeotestStatusPassed = { fg = "base", bg = "#0eff7c" },
+					NeotestStatusRunning = { fg = "base", bg = "iris" },
 				},
 			})
 		end,

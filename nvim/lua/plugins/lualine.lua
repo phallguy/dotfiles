@@ -19,19 +19,25 @@ return {
 			},
 			sections = {
 				lualine_a = {
-					{ "branch", icon = icons.git.Branch },
-				},
-				lualine_b = { { "filetype", padding = 1, draw_empty = true } },
-				lualine_c = {
 					{
 						"filename",
-						path = 1,
+						path = 0,
 						newfile_status = true,
+						shorting_target = 150,
 						symbols = {
 							modified = "",
 							readonly = "",
+							new = "",
 						},
 					},
+				},
+				lualine_b = {
+					{
+						"%{expand('%:~:.:h')}",
+					},
+				},
+				lualine_c = {
+					{ "filetype", padding = 1, draw_empty = true },
 				},
 				lualine_x = {
 					{
@@ -48,15 +54,57 @@ return {
 
 							return tostring(timer) .. " "
 						end,
-						draw_empty = true,
 					},
+					{ "branch", icon = icons.git.Branch },
 				},
-				lualine_y = { { "location", padding = { right = 1 } } },
+				lualine_y = {
+					{ "location", padding = { left = 1 } },
+				},
 				lualine_z = {
 					{
 						"diagnostics",
 						-- sources = { "nvim_diagnostic" },
 						colored = false,
+						component_separators = false,
+					},
+					{
+						function()
+							local state = require("neotest.consumers.state")
+							local buffer = vim.fn.bufnr()
+							local total = 0
+							local running = 0
+							local passed = 0
+
+							for _, adapter_id in pairs(state.adapter_ids()) do
+								local counts = state.status_counts(adapter_id, { buffer = buffer })
+								if counts then
+									total = total + counts.total
+									running = running + counts.running
+									passed = passed + counts.passed
+								end
+							end
+
+							if total <= 0 then
+								return ""
+							end
+
+							local status = ""
+
+							if running > 0 then
+								status = status .. "%#NeotestStatusRunning#" .. icons.test.running .. " " .. running
+							end
+
+							if passed > 0 then
+								if string.len(status) > 0 then
+									status = status .. " "
+								end
+
+								status = status .. "%#NeotestStatusPassed#" .. icons.test.passed .. " " .. passed
+							end
+
+							return status
+						end,
+						draw_empty = true,
 					},
 					{
 						"reg_recording",

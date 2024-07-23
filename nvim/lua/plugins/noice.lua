@@ -62,7 +62,7 @@ return {
 						},
 						border = {
 							style = "none",
-							padding = { 1, 2 },
+							padding = { 2, 4 },
 						},
 					},
 				},

@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			{ desc = "Document symbols", buffer = bufnr }
 		)
 
-		vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { buffer = bufnr })
+		vim.keymap.set("n", "<space>lr", vim.lsp.buf.rename, { buffer = bufnr })
 		vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr })
 		vim.keymap.set("n", "<leader>li", function()
 			local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })

@@ -25,15 +25,17 @@ return {
 
 				local position = args.tree:data()
 
-				if position.type == "test" or position.type == "namespace" then
+				if position.type == "test" then
 					local config = require("neotest-minitest.config")
 					local id = string.gmatch(position.id, "%d+")()
 
-					original.command = vim.tbl_flatten({
-						config.get_test_cmd(),
-						position.path .. ":" .. id,
-						"-v",
-					})
+					if id then
+						original.command = vim.tbl_flatten({
+							config.get_test_cmd(),
+							position.path .. ":" .. id,
+							"-v",
+						})
+					end
 				end
 
 				original.env = {

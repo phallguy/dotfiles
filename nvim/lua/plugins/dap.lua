@@ -263,22 +263,21 @@ return {
 					{
 						elements = {
 							{
-								id = "scopes",
-								size = 0.80,
-							},
-
-							{
 								id = "watches",
 								size = 0.05,
 							},
 							{
-								id = "stacks",
-								size = 0.10,
+								id = "scopes",
+								size = 0.55,
 							},
 							{
-								id = "breakpoints",
-								size = 0.05,
+								id = "stacks",
+								size = 0.30,
 							},
+							-- {
+							-- 	id = "breakpoints",
+							-- 	size = 0.05,
+							-- },
 						},
 						position = "right",
 						size = 70,
@@ -312,17 +311,19 @@ return {
 					require("neotest").summary.close()
 					require("overseer").close()
 					dapui.open({ reset = true })
-					-- vim.diagnostic.enable(false)
+					vim.cmd("wincmd =")
 				end)
 			end
 			dap.listeners.before.event_terminated["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.close()
+					vim.cmd("wincmd =")
 				end)
 			end
 			dap.listeners.before.event_exited["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.close()
+					vim.cmd("wincmd =")
 				end)
 			end
 
