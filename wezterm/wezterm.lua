@@ -4,7 +4,7 @@ local wezterm = require("wezterm")
 return {
 	-- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=terminfo
 	term = "wezterm",
-	-- front_end = "WebGpu",
+	front_end = "WebGpu",
 	-- Appearance ===
 	--
 	-- Fonts

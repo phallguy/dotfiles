@@ -38,6 +38,9 @@ symbol = " "
 format = "[$symbol$version]($style) "
 symbol = " "
 
+[character]
+success_symbol = "[❯](bold blue)"
+
 [conda]
 format = "[$symbol$version]($style) "
 symbol = " "
@@ -52,8 +55,12 @@ symbol = " "
 
 [directory]
 read_only = " "
-truncation_length = 3
+truncation_length = 8
 truncation_symbol = '…/'
+truncate_to_repo = false
+before_repo_root_style = "bright-black"
+repo_root_style = "bold purple"
+style = "bold green" 
 
 [direnv]
 disabled = true
@@ -82,6 +89,7 @@ symbol = " "
 [git_branch]
 symbol = " "
 format ="[$symbol$branch(:$remote_branch)]($style) "
+style = "dimmed blue"
 
 [git_commit]
 
@@ -249,6 +257,7 @@ not_found_symbol = ""
 map_symbol = true
 
 [time]
+format = " [$time]($style) "	
 disabled = false
 style = "black"
 use_12hr = true
