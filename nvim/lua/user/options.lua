@@ -104,3 +104,7 @@ opt.formatoptions:remove({
 if vim.fn.has("nvim-0.9.0") == 1 then
 	opt.splitkeep = "screen"
 end
+
+-- https://mise.jdx.dev/ide-integration.html
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH

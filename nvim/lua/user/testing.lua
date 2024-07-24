@@ -1,5 +1,5 @@
 local util = require("user.util")
-local open_overseer = false
+local open_overseer = true
 
 local function invoke_test_cmd(fn)
 	vim.cmd.update({ mods = { silent = true } })
@@ -9,12 +9,14 @@ end
 
 vim.keymap.set("n", "<leader>tf", function()
 	invoke_test_cmd(function()
-		util.invoke_cmd_with_cursor(function()
-			if open_overseer then
+		if open_overseer then
+			util.invoke_cmd_with_cursor(function()
 				require("overseer").open({ enter = false })
-			end
+				require("neotest").run.run(vim.fn.expand("%"))
+			end)
+		else
 			require("neotest").run.run(vim.fn.expand("%"))
-		end)
+		end
 	end)
 end, { desc = "Test File" })
 
@@ -26,12 +28,14 @@ end, { desc = "Debug File" })
 
 vim.keymap.set("n", "<leader>tc", function()
 	invoke_test_cmd(function()
-		util.invoke_cmd_with_cursor(function()
-			if open_overseer then
+		if open_overseer then
+			util.invoke_cmd_with_cursor(function()
 				require("overseer").open({ enter = false })
-			end
+				require("neotest").run.run()
+			end)
+		else
 			require("neotest").run.run()
-		end)
+		end
 	end)
 end, { desc = "Test Current" })
 

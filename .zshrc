@@ -147,7 +147,6 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 export PATH=$PATH:/Users/paulalexander/.spicetify
 
-# eval "$(rbenv init - zsh)"
 eval "$(atuin init zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
 eval "$(starship init zsh)"

@@ -70,6 +70,10 @@ return {
 					{
 						function()
 							local state = require("neotest.consumers.state")
+							if not state then
+								return ""
+							end
+
 							local buffer = vim.fn.bufnr()
 							local total = 0
 							local running = 0

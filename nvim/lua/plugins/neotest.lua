@@ -79,12 +79,9 @@ return {
 			})
 
 			require("neotest").setup({
+				log_level = 1,
 				adapters = {
-					require("neotest-vitest")({
-						filter_dir = function(name, rel_path, root)
-							return name ~= "node_modules"
-						end,
-					}),
+					require("neotest-plenary"),
 					minitest({
 						test_cmd = function()
 							return vim.tbl_flatten({
@@ -93,7 +90,11 @@ return {
 							})
 						end,
 					}),
-					require("neotest-plenary"),
+					require("neotest-vitest")({
+						filter_dir = function(name, rel_path, root)
+							return name ~= "node_modules"
+						end,
+					}),
 				},
 				icons = {
 					passed = icons.test.passed,
@@ -121,6 +122,7 @@ return {
 				summary = {
 					follow = true,
 					animated = false,
+					expand_errors = false,
 				},
 				output = {
 					open_on_run = false,
