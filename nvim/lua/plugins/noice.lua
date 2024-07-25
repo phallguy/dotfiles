@@ -18,33 +18,33 @@ return {
 					},
 				},
 				views = {
-					-- mini = {
-					-- 	backend = "mini",
-					-- 	relative = "editor",
-					-- 	align = "message-right",
-					-- 	timeout = 3000,
-					-- 	reverse = true,
-					-- 	focusable = false,
-					-- 	position = {
-					-- 		row = -1,
-					-- 		col = "100%",
-					-- 		-- col = 0,
-					-- 	},
-					-- 	size = "auto",
-					-- 	border = {
-					-- 		style = "none",
-					-- 	},
-					-- 	zindex = 60,
-					-- 	win_options = {
-					-- 		winblend = 0,
-					-- 		winhighlight = {
-					-- 			Normal = "NoiceMini",
-					-- 			IncSearch = "",
-					-- 			CurSearch = "",
-					-- 			Search = "",
-					-- 		},
-					-- 	},
-					-- },
+					mini = {
+						backend = "mini",
+						relative = "editor",
+						align = "message-right",
+						timeout = 3000,
+						-- reverse = true,
+						focusable = false,
+						position = {
+							row = -1,
+							col = "100%",
+							-- col = 0,
+						},
+						size = "auto",
+						border = {
+							style = "none",
+						},
+						zindex = 60,
+						win_options = {
+							winblend = 0,
+							winhighlight = {
+								Normal = "NoiceMini",
+								IncSearch = "",
+								CurSearch = "",
+								Search = "",
+							},
+						},
+					},
 					cmdline_popup = {
 						backend = "popup",
 						relative = "editor",

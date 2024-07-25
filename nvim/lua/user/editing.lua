@@ -104,8 +104,8 @@ vim.keymap.set(
 )
 
 -- Open url/file in quick preview
-vim.keymap.set("n", "gq", "<CMD>!qlmanage -p <cfile>:p &<CR>")
-vim.keymap.set("n", "gQ", "<CMD>!qlmanage -p %:p &<CR>")
+vim.keymap.set({ "n", "v" }, "gq", "<CMD>!qlmanage -p <cfile>:p &<CR>")
+vim.keymap.set({ "n", "v" }, "gQ", "<CMD>!qlmanage -p %:p &<CR>")
 
 vim.g["qfenter_keymap"] = {
 	vopen = { "<C-v>" },
@@ -156,7 +156,6 @@ vim.opt.fillchars = {
 	verthoriz = "╋",
 	eob = " ",
 }
-
 
 -- Alternate files
 vim.api.nvim_create_user_command("ProjectionistDetect", "call projectionist#activate()", {})

@@ -3,7 +3,7 @@ if vim.g.vscode then
 end
 
 local group = vim.api.nvim_create_augroup("TermEx", { clear = true })
-vim.api.nvim_create_autocmd("TermOpen", {
+vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 	group = group,
 	pattern = { "term://*" },
 	callback = function(event)
@@ -18,12 +18,13 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		vim.keymap.set("n", "q", "<CMD>close<CR>", opts)
 
 		vim.opt_local.signcolumn = "no"
-		vim.opt_local.wrap = true
+		vim.opt_local.wrap = false
 		vim.opt_local.number = false
+		vim.opt_local.textwidth = 3000
 	end,
 })
 
-vim.api.nvim_create_autocmd("TermOpen", {
+vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 	group = group,
 	pattern = { "term://*toggleterm#*" },
 	callback = function(event)
@@ -32,6 +33,10 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "<esc>", "<CMD>ToggleTerm<CR>", opts)
 		vim.keymap.set("n", "q", "<CMD>close<CR>", opts)
+
+		vim.opt_local.wrap = false
+		vim.opt_local.number = false
+		vim.opt_local.textwidth = 3000
 	end,
 })
 

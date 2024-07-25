@@ -27,7 +27,7 @@ opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
 opt.tabstop = 2 -- Number of spaces tabs count for
-opt.cindent = true
+-- opt.cindent = true
 opt.shortmess = {
 	-- "filnxtToOF"
 	a = true,

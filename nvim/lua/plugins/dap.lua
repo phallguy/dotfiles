@@ -88,9 +88,9 @@ return {
 				desc = "Repl",
 			},
 			{
-				"<leader>dc",
+				"<leader>dd",
 				function()
-					require("dapui").close()
+					require("dapui").toggle()
 				end,
 				desc = "Close DAP",
 			},
@@ -121,9 +121,9 @@ return {
 			-- dap.set_log_level("TRACE")
 			--
 
-			dap.defaults.fallback.focus_terminal = true
-			dap.defaults.fallback.terminal_win_cmd = "tabnew"
-			dap.defaults.fallback.stepping_granularity = "instructions"
+			-- dap.defaults.fallback.focus_terminal = true
+			-- dap.defaults.fallback.terminal_win_cmd = "tabnew"
+			-- dap.defaults.fallback.stepping_granularity = "instructions"
 
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "dap-repl" },
@@ -210,22 +210,14 @@ return {
 
 			dap.configurations.ruby = {
 				{
-					name = "Attach Rails",
-					request = "attach",
-					type = "ruby",
-					options = { source_filetype = "ruby" },
-					localfs = true,
-					port = 38698,
-					cwd = vim.fn.getcwd(),
-				},
-				{
 					name = "Run Rails",
+					command = "bundle",
+					args = { "exec", "rails", "server" },
 					request = "launch",
 					type = "ruby",
 					options = { source_filetype = "ruby" },
-					command = "rails",
-					args = { "server" },
-					port = 38698,
+					error_on_failure = true,
+					random_port = true,
 					localfs = true,
 					cwd = vim.fn.getcwd(),
 				},
@@ -274,10 +266,10 @@ return {
 								id = "stacks",
 								size = 0.30,
 							},
-							-- {
-							-- 	id = "breakpoints",
-							-- 	size = 0.05,
-							-- },
+							{
+								id = "breakpoints",
+								size = 0.00,
+							},
 						},
 						position = "right",
 						size = 70,

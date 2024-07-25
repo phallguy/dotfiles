@@ -17,6 +17,11 @@ return {
 				component_separators = { left = "  ", right = "" },
 				section_separators = { right = " ", left = "" },
 			},
+			extensions = {
+				"quickfix",
+				"nvim-dap-ui",
+				"overseer",
+			},
 			sections = {
 				lualine_a = {
 					{
@@ -38,6 +43,7 @@ return {
 				},
 				lualine_c = {
 					{ "filetype", padding = 1, draw_empty = true },
+					{ "OverseerList" },
 				},
 				lualine_x = {
 					{

@@ -14,6 +14,7 @@ return {
 				-- shading_factor = -15,
 				shell = "zsh -il",
 				shade_terminals = false,
+				persist_size = false,
 				highlights = {
 					Normal = { guibg = colors.surface },
 					NormalFloat = { guibg = colors.surface },

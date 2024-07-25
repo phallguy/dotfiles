@@ -79,7 +79,7 @@ return {
 			})
 
 			require("neotest").setup({
-				log_level = 1,
+				-- log_level = 1,
 				adapters = {
 					require("neotest-plenary"),
 					minitest({
@@ -120,7 +120,7 @@ return {
 					virtual_text = true,
 				},
 				summary = {
-					follow = true,
+					follow = false,
 					animated = false,
 					expand_errors = false,
 				},

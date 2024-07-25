@@ -14,11 +14,19 @@ return {
 			},
 		},
 		opts = {
+			auto_detect_success_color = false,
 			strategy = {
 				"toggleterm",
 				close_on_exit = false,
 				open_on_start = false,
+				start_in_insert = false,
 				hidden = true,
+				size = 1500,
+				on_create = function(terminal)
+					vim.notify("overseer terminal created")
+					vim.cmd("stopinsert!")
+					terminal.start_in_insert = false
+				end,
 			},
 			task_list = {
 				bindings = {
@@ -47,6 +55,7 @@ return {
 					"on_exit_set_status",
 					"on_complete_notify",
 					"on_complete_dispose",
+					"on_result_diagnostics",
 				},
 			},
 		},

@@ -20,11 +20,13 @@ cmp.setup({
 	sources = {
 		{
 			name = "luasnip",
+			keyword_length = 2,
 			dup = 0,
 			max_item_count = 5,
 		},
 		{
 			name = "nvim_lsp",
+			keyword_length = 2,
 			max_item_count = 7,
 		},
 		{ name = "path" },
