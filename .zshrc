@@ -1,64 +1,36 @@
+
+# Download Znap, if it's not there yet.
+[[ -r ~/dotfiles/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/dotfiles/znap
+source ~/dotfiles/znap/znap.zsh  # Start Znap
+
 # Use arm or x86 version of brew depending on architecture
 if [[ $(uname -p) == 'arm' ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+  znap eval homebrewarm "/opt/homebrew/bin/brew shellenv"
 else
-  eval "$(/usr/local/bin/brew shellenv)"
+  znap eval homebrewx86 "/usr/local/bin/brew shellenv"
 fi
 
 export DIRENV_LOG_FORMAT=$'\E[30mdirenv: %s\E[0m'
-(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+znap eval direnv "direnv hook zsh"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(
-  git
-  mise
-  zsh-autocomplete
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+znap install zsh-users/zsh-completions
+znap source zsh-users/zsh-syntax-highlighting
+znap source zsh-users/zsh-autosuggestions
+znap source wintermi/zsh-mise
 
 autoload edit-command-line
 zle -N edit-command-line
 
-zstyle ':omz:*' aliases no
 zstyle ':completion:*:*' matcher-list 'm:{[:lower:]-}={[:upper:]_}' '+r:|[.]=**'
 zstyle ':autocomplete:*' min-input 3
 zstyle ':autocomplete:*' delay 0.5  # seconds (float)
-
-source $ZSH/oh-my-zsh.sh
 
 bindkey "^y" autosuggest-accept
 bindkey "^ " autosuggest-accept
@@ -70,21 +42,15 @@ export CLICOLOR=1
 export GPG_TTY=$TTY
 export BAT_THEME="Monokai Extended Origin"
 
-eval "$(batpipe)"
+znap eval batpipe "batpipe"
 
-# if command -v wezterm &> /dev/null; then
-#   eval "$(wezterm shell-completion --shell zsh)"
-# fi
+alias cat="$(which bat)"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 if command -v zoxide &> /dev/null; then
-  eval "$(zoxide init zsh)"
+  znap eval zoxide "zoxide init zsh"
 else
   echo "zoxide not installed"
-fi
-
-if command -v fzy &> /dev/null; then
-else
-  echo "fzy not installed"
 fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -148,8 +114,7 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 export PATH=$PATH:/Users/paulalexander/.spicetify
 
-eval "$(atuin init zsh)"
-eval "$(~/.local/bin/mise activate zsh)"
-eval "$(starship init zsh)"
-
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+znap eval navi "navi widget zsh"
+znap eval mise "~/.local/bin/mise activate zsh"
+znap eval atuin "atuin init zsh"
+znap eval starship "starship init zsh"
