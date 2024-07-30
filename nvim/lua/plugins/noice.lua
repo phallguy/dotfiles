@@ -77,7 +77,7 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>n", "<CMD>NoiceTelescope<CR>", { desc = "Show last notice" })
+			vim.keymap.set("n", "<leader>m", "<CMD>NoiceTelescope<CR>", { desc = "Show last notice" })
 		end,
 		dependencies = {
 			"MunifTanjim/nui.nvim",

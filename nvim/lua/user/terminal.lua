@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 		vim.keymap.set("n", "q", "<CMD>close<CR>", opts)
 
 		vim.opt_local.signcolumn = "no"
-		vim.opt_local.wrap = false
+		vim.opt_local.wrap = true
 		vim.opt_local.number = false
 		vim.opt_local.textwidth = 3000
 	end,
@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 		vim.keymap.set("n", "<esc>", "<CMD>ToggleTerm<CR>", opts)
 		vim.keymap.set("n", "q", "<CMD>close<CR>", opts)
 
-		vim.opt_local.wrap = false
+		vim.opt_local.wrap = true
 		vim.opt_local.number = false
 		vim.opt_local.textwidth = 3000
 	end,

@@ -23,9 +23,11 @@ return {
 				hidden = true,
 				size = 1500,
 				on_create = function(terminal)
-					vim.notify("overseer terminal created")
-					vim.cmd("stopinsert!")
-					terminal.start_in_insert = false
+					terminal.on_open = function(term)
+						vim.cmd("stopinsert!")
+						vim.cmd("setlocal wrap")
+						vim.cmd("setlocal textwidth=3000")
+					end
 				end,
 			},
 			task_list = {

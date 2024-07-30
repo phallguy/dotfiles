@@ -24,7 +24,7 @@ return {
 				highlight_groups = {
 					LineNr = { fg = "highlight_med" },
 					AbsLineNr = { fg = "highlight_med" },
-					CursorLine = { bg = "surface" },
+					CursorLine = { bg = "#2f2b4a" },
 					CursorLineNr = { fg = "iris", bg = "highlight_low" },
 					CursorLineSign = { fg = "iris", bg = "highlight_low" },
 					-- Avoid underline in diffview

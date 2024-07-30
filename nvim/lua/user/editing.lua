@@ -104,8 +104,8 @@ vim.keymap.set(
 )
 
 -- Open url/file in quick preview
-vim.keymap.set({ "n", "v" }, "gq", "<CMD>!qlmanage -p <cfile>:p &<CR>")
-vim.keymap.set({ "n", "v" }, "gQ", "<CMD>!qlmanage -p %:p &<CR>")
+vim.keymap.set({ "n", "v" }, "gq", "<CMD>!qlmanage -p '<cfile>:p' &<CR>")
+vim.keymap.set({ "n", "v" }, "gQ", "<CMD>!qlmanage -p '%:p' &<CR>")
 
 vim.g["qfenter_keymap"] = {
 	vopen = { "<C-v>" },
@@ -158,42 +158,72 @@ vim.opt.fillchars = {
 }
 
 -- Alternate files
-vim.api.nvim_create_user_command("ProjectionistDetect", "call projectionist#activate()", {})
+vim.api.nvim_create_user_command("ProjectionistPreDetect", "call projectionist#activate()", {})
 
-vim.keymap.set("n", "<leader>r", "<CMD>ProjectionistDetect<CR><CMD>R<CR>", { desc = "Related file (same window)" })
-vim.keymap.set("n", "<leader>R", "<CMD>ProjectionistDetect<CR><CMD>RV<CR>", { desc = "Related file (V split)" })
-vim.keymap.set("n", "<leader>a", "<CMD>ProjectionistDetect<CR><CMD>A<CR>", { desc = "Alternate file (same window)" })
-vim.keymap.set("n", "<leader>A", "<CMD>ProjectionistDetect<CR><CMD>AV<CR>", { desc = "Alternate file (V split)" })
-vim.keymap.set("n", "<leader>v", "<CMD>ProjectionistDetect<CR><CMD>Eview<CR>", { desc = "Edit view (Same window)" })
-vim.keymap.set("n", "<leader>V", "<CMD>ProjectionistDetect<CR><CMD>Vview<CR>", { desc = "Edit view (V split)" })
+vim.keymap.set("n", "<leader>r", "<CMD>ProjectionistPreDetect<CR><CMD>R<CR>", { desc = "Related file (same window)" })
+vim.keymap.set("n", "<leader>R", "<CMD>ProjectionistPreDetect<CR><CMD>RV<CR>", { desc = "Related file (V split)" })
+vim.keymap.set("n", "<leader>a", "<CMD>ProjectionistPreDetect<CR><CMD>A<CR>", { desc = "Alternate file (same window)" })
+vim.keymap.set("n", "<leader>A", "<CMD>ProjectionistPreDetect<CR><CMD>AV<CR>", { desc = "Alternate file (V split)" })
+vim.keymap.set(
+	"n",
+	"<leader>v",
+	"<CMD>ProjectionistPreDetect<CR><CMD>Eprojectedview | Eview<CR>",
+	{ desc = "Edit view (Same window)", silent = true }
+)
+vim.keymap.set(
+	"n",
+	"<leader>V",
+	"<CMD>ProjectionistPreDetect<CR><CMD>Eprojectedview | Vview<CR>",
+	{ desc = "Edit view (V split)", silent = true }
+)
 vim.keymap.set(
 	"n",
 	"<leader>j",
-	"<CMD>ProjectionistDetect<CR><CMD>Ejavascript<CR>",
-	{ desc = "Edit javascript (Same window)" }
+	"<CMD>ProjectionistPreDetect<CR><CMD>Eprojectedjavascript<CR>",
+	{ desc = "Edit javascript (Same window)", silent = true }
 )
 vim.keymap.set(
 	"n",
 	"<leader>J",
-	"<CMD>ProjectionistDetect<CR><CMD>Vjavascript<CR>",
-	{ desc = "Edit javascript (V split)" }
+	"<CMD>ProjectionistPreDetect<CR><CMD>Vprojectedjavascript<CR>",
+	{ desc = "Edit javascript (V split)", silent = true }
 )
 vim.keymap.set(
 	"n",
 	"<leader>p",
-	"<CMD>ProjectionistDetect<CR><CMD>Epreview<CR>",
-	{ desc = "Edit preview (Same window)" }
+	"<CMD>ProjectionistPreDetect<CR><CMD>Eprojectedpreview<CR>",
+	{ desc = "Edit preview (Same window)", silent = true }
 )
-vim.keymap.set("n", "<leader>P", "<CMD>ProjectionistDetect<CR><CMD>Vpreview<CR>", { desc = "Edit preview (V split)" })
+vim.keymap.set(
+	"n",
+	"<leader>P",
+	"<CMD>ProjectionistPreDetect<CR><CMD>Vprojectedpreview<CR>",
+	{ desc = "Edit preview (V split)", silent = true }
+)
 vim.keymap.set(
 	"n",
 	"<leader>y",
-	"<CMD>ProjectionistDetect<CR><CMD>Estylesheet<CR>",
+	"<CMD>ProjectionistPreDetect<CR><CMD>Eprojectedstylesheet<CR>",
 	{ desc = "Edit styles (Same window)" }
 )
-vim.keymap.set("n", "<leader>Y", "<CMD>ProjectionistDetect<CR><CMD>Vstylesheet<CR>", { desc = "Edit styles (V split)" })
-vim.keymap.set("n", "<leader>b", "<CMD>ProjectionistDetect<CR><CMD>Esource<CR>", { desc = "Edit source (Same window)" })
-vim.keymap.set("n", "<leader>B", "<CMD>ProjectionistDetect<CR><CMD>Vsource<CR>", { desc = "Edit source (V split)" })
+vim.keymap.set(
+	"n",
+	"<leader>Y",
+	"<CMD>ProjectionistPreDetect<CR><CMD>Vprojectedstylesheet<CR>",
+	{ desc = "Edit styles (V split)", silent = true }
+)
+vim.keymap.set(
+	"n",
+	"<leader>b",
+	"<CMD>ProjectionistPreDetect<CR><CMD>Eprojectedsource<CR>",
+	{ desc = "Edit source (Same window)", silent = true }
+)
+vim.keymap.set(
+	"n",
+	"<leader>B",
+	"<CMD>ProjectionistPreDetect<CR><CMD>Vprojectedsource<CR>",
+	{ desc = "Edit source (V split)", silent = true }
+)
 
 -- Disable recording macros
 vim.keymap.set("n", "q", "<Nop>")
