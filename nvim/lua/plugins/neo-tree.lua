@@ -12,7 +12,6 @@ return {
 		cmd = { "Neotree" },
 		keys = {
 			{
-
 				"<leader>e",
 				"<CMD>Neotree close<CR>",
 				{ desc = "Show tree" },
@@ -34,6 +33,7 @@ return {
 			require("neo-tree").setup({
 				-- log_level = "debug",
 				close_if_last_window = true,
+				enable_diagnostics = false,
 				name = {
 					trailing_slash = true,
 				},
@@ -112,6 +112,10 @@ return {
 						hide_dotfiles = false,
 						hide_by_name = {
 							".git",
+						},
+						never_show_by_pattern = {
+							".conform.*",
+							".DS_Store",
 						},
 					},
 					commands = {

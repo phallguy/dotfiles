@@ -14,8 +14,8 @@
   autocrlf = false
   excludesfile = /Users/paulalexander/.gitignore_global
   preloadIndex = false
-  ; fsmonitor = false
-  ; untrackedcache = false
+  fsmonitor = true
+  ; untrackedCache = true
   pager = delta
 
 [interactive]

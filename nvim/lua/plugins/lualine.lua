@@ -21,6 +21,7 @@ return {
 				"quickfix",
 				"nvim-dap-ui",
 				"overseer",
+				"neo-tree",
 			},
 			sections = {
 				lualine_a = {

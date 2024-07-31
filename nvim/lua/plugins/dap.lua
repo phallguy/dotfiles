@@ -53,13 +53,13 @@ return {
 				end,
 			},
 			{
-				"<DS-;>",
+				"<DMS-;>",
 				function()
 					require("dap").run_to_cursor()
 				end,
 			},
 			{
-				"<DM-;>",
+				"<DS-;>",
 				function()
 					require("dap").step_out()
 				end,
@@ -298,14 +298,14 @@ return {
 			})
 			require("nvim-dap-repl-highlights").setup()
 
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				util.invoke_cmd_with_cursor(function()
-					require("neotest").summary.close()
-					require("overseer").close()
-					dapui.open({ reset = true })
-					vim.cmd("wincmd =")
-				end)
-			end
+			-- dap.listeners.after.event_initialized["dapui_config"] = function()
+			-- 	util.invoke_cmd_with_cursor(function()
+			-- 		require("neotest").summary.close()
+			-- 		require("overseer").close()
+			-- 		dapui.open({ reset = true })
+			-- 		vim.cmd("wincmd =")
+			-- 	end)
+			-- end
 			dap.listeners.before.event_terminated["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.close()

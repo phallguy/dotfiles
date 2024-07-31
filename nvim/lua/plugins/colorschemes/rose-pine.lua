@@ -113,6 +113,11 @@ return {
 					NeotestStatusFailed = { fg = "base", bg = "love" },
 					NeotestStatusPassed = { fg = "base", bg = "#0eff7c" },
 					NeotestStatusRunning = { fg = "base", bg = "iris" },
+
+					-- Hop
+					HopNextKey = { bg = "gold", fg = "surface", bold = true, blend = 100 },
+					HopNextKey1 = { bg = "gold", fg = "surface", bold = true, blend = 70 },
+					HopNextKey2 = { bg = "gold", fg = "surface", bold = true, blend = 40 },
 				},
 			})
 		end,

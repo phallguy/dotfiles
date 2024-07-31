@@ -64,25 +64,29 @@ vim.keymap.set("n", "<leader>tq", function()
 	require("neotest").run.stop()
 end, { desc = "Test quit" })
 
+vim.keymap.set("n", "<leader>th", function()
+	require("neotest").output.open({ last_run = true, auto_close = true, short = true, quiet = true, enter = true })
+end, { desc = "Test hint" })
+
 vim.keymap.set("n", "<leader>to", function()
 	require("neotest").summary.toggle()
 end, { desc = "Test outline" })
 
 vim.keymap.set("n", "]f", function()
 	require("neotest").jump.next({ status = "failed" })
-end, { desc = "Test outline" })
+end, { desc = "Next failed test" })
 
 vim.keymap.set("n", "[f", function()
 	require("neotest").jump.prev({ status = "failed" })
-end, { desc = "Test outline" })
+end, { desc = "Previous failed test" })
 
 vim.keymap.set("n", "]t", function()
 	require("neotest").jump.next()
-end, { desc = "Test outline" })
+end, { desc = "Next test" })
 
 vim.keymap.set("n", "[t", function()
 	require("neotest").jump.prev()
-end, { desc = "Test outline" })
+end, { desc = "Previous test" })
 
 vim.api.nvim_create_user_command("TestOverseer", function(args)
 	open_overseer = true

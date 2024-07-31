@@ -6,19 +6,15 @@ return {
 	lazy = false,
 	priority = 1000,
 	config = function()
-		require("mini.bufremove").setup({})
-		require("mini.comment").setup()
-		require("mini.diff").setup({
-			view = {
-				style = "sign",
-				signs = {
-					add = "┊",
-					change = "┊",
-					delete = "┄",
-				},
-				priority = 160,
+		require("mini.icons").setup({
+			default = {
+				file = { glyph = "" },
+				-- directory = { glyph = "󰉖" },
 			},
 		})
+		require("mini.icons").mock_nvim_web_devicons()
+		require("mini.bufremove").setup({})
+		require("mini.comment").setup()
 
 		-- Better Around/Inside textobjects
 		--
@@ -71,14 +67,17 @@ return {
 			},
 		})
 
-		require("mini.icons").setup({
-			default = {
-				file = { glyph = "" },
-				-- directory = { glyph = "󰉖" },
+		require("mini.diff").setup({
+			view = {
+				style = "sign",
+				signs = {
+					add = "┊",
+					change = "┊",
+					delete = "┄",
+				},
+				priority = 160,
 			},
 		})
-		require("mini.icons").mock_nvim_web_devicons()
-
 		require("mini.indentscope").setup({
 			symbol = "│",
 			options = {
