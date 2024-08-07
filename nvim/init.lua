@@ -59,6 +59,10 @@ require("lazy").setup({
 	},
 })
 
+if init_debug then
+	require("osv").launch({ port = 8086 })
+end
+
 -- require("user.neovide")
 require("user.colorscheme")
 require("user.editing")

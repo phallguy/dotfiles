@@ -13,6 +13,7 @@ return {
 				-- variant = "dawn",
 				dark_variant = "moon",
 				dim_inactive_windows = false,
+				extend_background_behind_borders = true,
 				enable = {
 					migrations = true,
 				},
@@ -68,6 +69,8 @@ return {
 					-- GitSignsAdd = { fg = "pine", bg = "none" },
 					-- GitSignsChange = { fg = colors.git_change, bg = "none" },
 					-- GitSignsDelete = { fg = colors.git_delete, bg = "none" },
+					--
+					DiffviewNormal = { bg = "_nc" },
 
 					-- Matchparen
 					MatchParen = { fg = "gold", bg = "pine", blend = 50 },
@@ -118,6 +121,10 @@ return {
 					HopNextKey = { bg = "gold", fg = "surface", bold = true, blend = 100 },
 					HopNextKey1 = { bg = "gold", fg = "surface", bold = true, blend = 70 },
 					HopNextKey2 = { bg = "gold", fg = "surface", bold = true, blend = 40 },
+
+					-- Neotree
+					NeoTreeNormal = { bg = "_nc" },
+					NeoTreeNormalNC = { bg = "_nc" },
 				},
 			})
 		end,

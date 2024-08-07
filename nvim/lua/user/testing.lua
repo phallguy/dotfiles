@@ -1,5 +1,5 @@
 local util = require("user.util")
-local open_overseer = true
+local open_overseer = false
 
 local function invoke_test_cmd(fn)
 	vim.cmd.update({ mods = { silent = true } })
@@ -71,6 +71,8 @@ end, { desc = "Test hint" })
 vim.keymap.set("n", "<leader>to", function()
 	require("neotest").summary.toggle()
 end, { desc = "Test outline" })
+
+vim.keymap.set("n", "<leader>tk", "<CMD>!spring stop<CR>", { desc = "Stop spring" })
 
 vim.keymap.set("n", "]f", function()
 	require("neotest").jump.next({ status = "failed" })

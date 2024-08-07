@@ -10,8 +10,8 @@ return {
 			"rcarriga/nvim-dap-ui",
 			"mxsdev/nvim-dap-vscode-js",
 			"nvim-neotest/nvim-nio",
-			"theHamsta/nvim-dap-virtual-text",
 			"LiadOz/nvim-dap-repl-highlights",
+			"jbyuki/one-small-step-for-vimkind",
 			-- build debugger from source
 			{
 				"microsoft/vscode-js-debug",
@@ -27,42 +27,61 @@ return {
 				function()
 					require("dap").toggle_breakpoint()
 				end,
+				desc = "Debug toggle breakpoint",
 			},
 			{
 				"<leader>dB",
 				function()
 					require("dap").toggle_breakpoint(vim.fn.input("Condition:"))
 				end,
+				desc = "Debug toggle breakpoint (condition)",
+			},
+			{
+				"<leader>de",
+				function()
+					require("dap").set_exception_breakpoints()
+				end,
+				desc = "Debug set exceptikon breakponts",
+			},
+			{
+				"<leader>d",
+				"<CMD>DapVirtualTextToggle<CR>",
+				desc = "Debug toggle virtual text",
 			},
 			{
 				"<D-\\>",
 				function()
 					require("dap").continue()
 				end,
+				desc = "Debug continue",
 			},
 			{
 				"<D-'>",
 				function()
 					require("dap").step_over()
 				end,
+				desc = "Debug step over",
 			},
 			{
 				"<D-;>",
 				function()
 					require("dap").step_into()
 				end,
+				desc = "Debug step into",
 			},
 			{
 				"<DMS-;>",
 				function()
 					require("dap").run_to_cursor()
 				end,
+				desc = "Debug run to cursor",
 			},
 			{
-				"<DS-;>",
+				"<DM-;>",
 				function()
 					require("dap").step_out()
 				end,
+				desc = "Debug step out",
 			},
 			{
 				"<leader>dh",
@@ -70,7 +89,7 @@ return {
 					require("dap.ui.widgets").hover()
 				end,
 				mode = { "n", "v" },
-				desc = "Widgets",
+				desc = "Debug Widgets",
 			},
 			{
 				"<leader>di",
@@ -78,21 +97,24 @@ return {
 					require("dapui").eval(nil, { enter = true })
 				end,
 				mode = { "n", "v" },
-				desc = "Inspect",
+				desc = "Debug Inspect",
 			},
 			{
 				"<leader>dr",
 				function()
-					require("dap").repl.toggle()
+					require("dap").repl.toggle({
+						height = 12,
+					})
 				end,
-				desc = "Repl",
+				desc = "Debug Repl",
 			},
 			{
 				"<leader>dd",
 				function()
+					require("dap").repl.close()
 					require("dapui").toggle()
 				end,
-				desc = "Close DAP",
+				desc = "Debug Close DAP",
 			},
 			{
 				"<leader>dt",
@@ -100,13 +122,14 @@ return {
 					require("dap").terminate()
 					require("dapui").close()
 				end,
-				desc = "Stop DAP",
+				desc = "Debug Stop DAP",
 			},
 			{
 				"<leader>dl",
 				function()
 					require("dap").run_last()
 				end,
+				desc = "Debug run last",
 			},
 		},
 		config = function()
@@ -120,10 +143,6 @@ return {
 
 			-- dap.set_log_level("TRACE")
 			--
-
-			-- dap.defaults.fallback.focus_terminal = true
-			-- dap.defaults.fallback.terminal_win_cmd = "tabnew"
-			-- dap.defaults.fallback.stepping_granularity = "instructions"
 
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "dap-repl" },
@@ -244,6 +263,17 @@ return {
 				},
 			}
 			dap.configurations.eruby = dap.configurations.ruby
+			dap.configurations.lua = {
+				{
+					type = "nlua",
+					request = "attach",
+					name = "Attach to running Neovim instance",
+				},
+			}
+
+			dap.adapters.nlua = function(callback, config)
+				callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
+			end
 
 			require("dapui").setup({
 				expand_lines = false,
@@ -291,31 +321,26 @@ return {
 					},
 				},
 			})
-			require("nvim-dap-virtual-text").setup({
-				all_references = true, -- show virtual text on all all references of the variable (not only definitions)
-				clear_on_continue = true, -- clear virtual text on "continue" (might cause flickering when stepping)
-				virt_text_pos = "eol",
-			})
+
 			require("nvim-dap-repl-highlights").setup()
 
-			-- dap.listeners.after.event_initialized["dapui_config"] = function()
-			-- 	util.invoke_cmd_with_cursor(function()
-			-- 		require("neotest").summary.close()
-			-- 		require("overseer").close()
-			-- 		dapui.open({ reset = true })
-			-- 		vim.cmd("wincmd =")
-			-- 	end)
-			-- end
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				util.invoke_cmd_with_cursor(function()
+					-- require("neotest").summary.close()
+					-- require("overseer").close()
+					dap.repl.open({
+						height = 12,
+					})
+				end)
+			end
 			dap.listeners.before.event_terminated["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.close()
-					vim.cmd("wincmd =")
 				end)
 			end
 			dap.listeners.before.event_exited["dapui_config"] = function()
 				util.invoke_cmd_with_cursor(function()
 					dapui.close()
-					vim.cmd("wincmd =")
 				end)
 			end
 
@@ -333,5 +358,16 @@ return {
 				{ text = icons.dap.Stopped, texthl = "DapStopped", numhl = "DapStopped", linehl = "DapStoppedLine" }
 			)
 		end,
+	},
+	{
+		"theHamsta/nvim-dap-virtual-text",
+		lazy = true,
+		cmd = { "DapVirtualTextToggle", "DapVirtualTextDisable", "DapVirtualTextEnable" },
+		opts = {
+
+			all_references = true, -- show virtual text on all all references of the variable (not only definitions)
+			clear_on_continue = true, -- clear virtual text on "continue" (might cause flickering when stepping)
+			virt_text_pos = "eol",
+		},
 	},
 }

@@ -50,6 +50,7 @@ opt.preserveindent = true -- Preserve indent structure as much as possible.
 opt.spelllang = { "en" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current
+opt.splitkeep = "cursor"
 opt.textwidth = 100
 opt.termguicolors = true -- True color support
 opt.timeoutlen = 750
@@ -100,10 +101,6 @@ opt.formatoptions:remove({
 	"t", -- Don't wrap regular text
 	"2", -- Don't use 'second' line of paragraph
 }) -- U
-
-if vim.fn.has("nvim-0.9.0") == 1 then
-	opt.splitkeep = "screen"
-end
 
 -- https://mise.jdx.dev/ide-integration.html
 -- Prepend mise shims to PATH

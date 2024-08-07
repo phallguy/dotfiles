@@ -2,7 +2,6 @@
 -- https://github.com/cappyzawa/trim.nvim
 return {
 	"cappyzawa/trim.nvim",
-	enabled = false,
 	event = "BufWrite",
 	opts = {
 		-- ft_blocklist = {"typescript"},

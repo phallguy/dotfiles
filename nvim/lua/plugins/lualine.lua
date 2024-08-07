@@ -19,7 +19,6 @@ return {
 			},
 			extensions = {
 				"quickfix",
-				"nvim-dap-ui",
 				"overseer",
 				"neo-tree",
 			},
@@ -43,8 +42,8 @@ return {
 					},
 				},
 				lualine_c = {
-					{ "filetype", padding = 1, draw_empty = true },
-					{ "OverseerList" },
+					{ "filetype", padding = 1, draw_empty = false, component_separators = false },
+					{ "overseer", status = { "RUNNING" }, component_separators = false },
 				},
 				lualine_x = {
 					{
@@ -76,6 +75,10 @@ return {
 					},
 					{
 						function()
+							if not require("lazy.core.config").plugins["neotest"]._.loaded then
+								return ""
+							end
+
 							local state = require("neotest.consumers.state")
 							if not state then
 								return ""

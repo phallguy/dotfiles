@@ -3,6 +3,7 @@ local icons = require("user.icons")
 return {
 	{
 		"nvim-neotest/neotest",
+		lazy = true,
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
@@ -10,7 +11,6 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"zidhuss/neotest-minitest",
 			"marilari88/neotest-vitest",
-			"nvim-neotest/neotest-plenary",
 		},
 		config = function()
 			local minitest = require("neotest-minitest")
@@ -81,7 +81,6 @@ return {
 			require("neotest").setup({
 				-- log_level = 1,
 				adapters = {
-					require("neotest-plenary"),
 					minitest({
 						test_cmd = function()
 							return vim.tbl_flatten({
@@ -111,7 +110,7 @@ return {
 				},
 				discovery = {
 					filter_dir = function(name, rel_path, root)
-						return name ~= "node_modules" and name ~= "tmp" and name ~= "log"
+						return name ~= "node_modules" and name ~= "tmp" and name ~= "log" and name ~= "assets"
 					end,
 				},
 				status = {

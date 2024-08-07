@@ -8,6 +8,8 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 	pattern = { "term://*" },
 	callback = function(event)
 		local opts = { buffer = event.buf }
+		-- vim.notify(vim.inspect(event))
+
 		vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
 		vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
 		vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
@@ -17,10 +19,14 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 		vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 		vim.keymap.set("n", "q", "<CMD>close<CR>", opts)
 
-		vim.opt_local.signcolumn = "no"
-		vim.opt_local.wrap = true
-		vim.opt_local.number = false
-		vim.opt_local.textwidth = 3000
+		vim.bo[event.buf].buflisted = false
+		vim.bo[event.buf].textwidth = 1500
+
+		vim.api.nvim_buf_call(event.buf, function()
+			-- vim.opt_local.number = true
+			vim.opt_local.wrap = true
+			vim.opt_local.signcolumn = "no"
+		end)
 	end,
 })
 
@@ -33,10 +39,6 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "<esc>", "<CMD>ToggleTerm<CR>", opts)
 		vim.keymap.set("n", "q", "<CMD>close<CR>", opts)
-
-		vim.opt_local.wrap = true
-		vim.opt_local.number = false
-		vim.opt_local.textwidth = 3000
 	end,
 })
 

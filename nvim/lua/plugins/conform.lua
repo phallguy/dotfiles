@@ -43,7 +43,7 @@ return {
 			end
 
 			return {
-				lsp_format = "fallback",
+				lsp_format = "never",
 				timeout_ms = 500,
 			}
 		end,
@@ -54,23 +54,23 @@ return {
 			erb_format = {
 				prepend_args = { "--print-width", "220" },
 			},
-			yamlfmt = {
-				prepend_args = {},
-			},
+			-- yamlfmt = {
+			-- 	prepend_args = {},
+			-- },
 		},
 		formatters_by_ft = {
 			lua = { "stylua" },
 			json = { "fixjson" },
-			jaascript = { "prettierd", "prettier" },
+			javascript = { "prettierd", "prettier" },
 			typescript = { "prettierd", "prettier" },
 			css = { "prettierd", "prettier" },
 			sass = { "prettierd", "prettier" },
 			scss = { "prettierd", "prettier" },
-			html = { "prettierd", "prettier", "htmlbeautifier", "typos" },
-			eruby = { "htmlbeautifier", "typos" },
-			ruby = { "rubocop", "typos" },
-			yaml = { "yamlfmt" },
-			["eruby.yaml"] = { "yamlfmt" },
+			html = { "prettierd", "prettier", "htmlbeautifier" },
+			eruby = { "htmlbeautifier" },
+			ruby = { "rubocop" },
+			-- yaml = { "yamlfmt" },
+			-- ["eruby.yaml"] = { "yamlfmt" },
 			sg = { "xmlformat" },
 		},
 	},
@@ -103,7 +103,7 @@ return {
 					["end"] = { args.line2, end_line:len() },
 				}
 			end
-			require("conform").format({ async = true, lsp_format = "fallback", range = range })
+			require("conform").format({ async = true, lsp_format = "never", range = range })
 		end, { range = true })
 
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

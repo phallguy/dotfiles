@@ -116,5 +116,5 @@ export PATH=$PATH:/Users/paulalexander/.spicetify
 
 znap eval navi "navi widget zsh"
 znap eval mise "~/.local/bin/mise activate zsh"
-znap eval atuin "atuin init zsh"
+znap eval atuin "atuin init zsh --disable-up-arrow"
 znap eval starship "starship init zsh"

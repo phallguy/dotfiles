@@ -46,7 +46,7 @@ return {
 					additional_vim_regex_highlighting = { "gitcommit" },
 					use_languagetree = false,
 				},
-				indent = { enable = true, disable = { "python", "ruby", "eruby" } },
+				indent = { enable = false, "python", "ruby", "eruby", "scss" },
 				incremental_selection = {
 					enable = true,
 					keymaps = {

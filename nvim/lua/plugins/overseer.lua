@@ -15,21 +15,10 @@ return {
 		},
 		opts = {
 			auto_detect_success_color = false,
-			strategy = {
-				"toggleterm",
-				close_on_exit = false,
-				open_on_start = false,
-				start_in_insert = false,
-				hidden = true,
-				size = 1500,
-				on_create = function(terminal)
-					terminal.on_open = function(term)
-						vim.cmd("stopinsert!")
-						vim.cmd("setlocal wrap")
-						vim.cmd("setlocal textwidth=3000")
-					end
-				end,
-			},
+			dap = false,
+			-- strategy = {
+			-- 	"terminal",
+			-- },
 			task_list = {
 				bindings = {
 					["<C-l>"] = false,
@@ -40,6 +29,7 @@ return {
 					["<C-u>"] = "ScrollOutputUp",
 					["o"] = false,
 				},
+				max_width = { 1500, 1.0 },
 				min_width = { 80, 0.50 },
 				default_detail = 2,
 			},

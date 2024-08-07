@@ -9,7 +9,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 		-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
-		vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, { buffer = bufnr })
+		vim.keymap.set("n", "gd", function()
+			require("telescope.builtin").lsp_definitions({
+				trim_text = true,
+				reuse_win = true,
+			})
+		end, { buffer = bufnr })
 
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })

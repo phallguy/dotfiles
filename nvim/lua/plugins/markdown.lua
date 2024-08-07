@@ -1,15 +1,11 @@
 return {
-	-- {
-	-- 	"mzlogin/vim-markdown-toc",
-	-- 	ft = { "markdown" },
-	-- },
+	{
+		"OXY2DEV/markview.nvim",
+		lazy = false, -- Recommended
+		-- ft = "markdown" -- If you decide to lazy-load anyway
 
-	-- {
-	-- 	"OXY2DEV/markview.nvim",
-	-- 	ft = { "markdown" },
-	--
-	-- 	dependencies = {
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 	},
-	-- },
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
 }

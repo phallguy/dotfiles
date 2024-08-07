@@ -15,11 +15,11 @@
   excludesfile = /Users/paulalexander/.gitignore_global
   preloadIndex = false
   fsmonitor = true
-  ; untrackedCache = true
-  pager = delta
+  untrackedCache = true
+  ; pager = delta
 
-[interactive]
-  diffFilter = delta --color-only --features=interactive
+; [interactive]
+;   diffFilter = delta --color-only --features=interactive
 
 [init]
   defaultBranch = master
@@ -84,41 +84,20 @@
 [diff]
   renames = true
   colorMoved = default
-  tool = difftastic
+	tool = vimdiff
 	algorithm = histogram
 
 [difftool]
-  prompt = false
-  trustExitCode = true
-  minimal = true
+  prompt = true
+
+[difftool "vimdiff"]
+	path = nvim
 
 [merge]
   conflictstyle = diff3
 
 [mergetool]
-  prompt = false
-
-# VS Code
-
-[difftool "vscode"]
-  cmd = code --wait --diff $LOCAL $REMOTE
-
-[mergetool "vscode"]
-  cmd = code --wait $MERGED
-
-# NVIM
-#
-[difftool "nvimdiff"]
-  trustExitCode = true
   prompt = true
-
-[mergetool "nvimdiff"]
-  trustExitCode = true
-  prompt = true
-
-# difftastic
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
 
 # Kaleidoscope
 
@@ -144,4 +123,5 @@
   hunk-header-style = omit
 
 [pager]
-  difftool = true
+  difftool = false
+

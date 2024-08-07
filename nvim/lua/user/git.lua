@@ -11,6 +11,8 @@ vim.keymap.set("n", "<leader>gs", "<CMD>DiffviewOpen<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>gS", "<CMD>DiffviewOpen head~<CR>", { desc = "Status (head~)" })
 vim.keymap.set("n", "<leader>gd", "<CMD>DiffviewOpen -- %<CR>", { desc = "Diff buffer" })
 vim.keymap.set("n", "<leader>gD", "<CMD>DiffviewOpen head~ -- %<CR>", { desc = "Diff buffer (head~)" })
+vim.keymap.set("n", "<leader>gm", "<CMD>DiffviewOpen origin/master<CR>", { desc = "Diff master" })
+
 vim.keymap.set("n", "<leader>gh", "<CMD>DiffviewFileHistory %<CR>", { desc = "Diff file history" })
 vim.keymap.set("n", "<leader>gw", "<CMD>G show<CR>", { desc = "Git show" })
 vim.keymap.set("n", "<leader>gb", "<CMD>G blame<CR>", { desc = "Blame" })

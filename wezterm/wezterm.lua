@@ -99,10 +99,9 @@ return {
 	-- window_background_gradient = {
 	-- 	orientation = "Vertical",
 	-- 	colors = {
-	-- 		'#232136',
-	-- 		'#42384D',
-	-- 		'#232136',
-	-- 	}
+	-- 		"#393552",
+	-- 		"#2a273f",
+	-- 	},
 	-- },
 	command_palette_fg_color = "#A6ACCD",
 	initial_cols = 150,

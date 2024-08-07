@@ -1,34 +1,34 @@
 return {
-	{
-		"epwalsh/obsidian.nvim",
-		ft = { "markdown" },
-		cmd = { "ObsidianOpen", "ObsidianNew", "ObsidianTags" },
-		lazy = true,
-		dependencies = {
-			-- Required.
-			"nvim-lua/plenary.nvim",
-		},
-		-- ~/paul.xheo@gmail.com - Google Drive/My Drive/Obsidian Vault 01:12:11 PM
-		opts = {
-			workspaces = {
-				{
-					name = "personal",
-					path = vim.fn.expand("~/paul.xheo@gmail.com - Google Drive/My Drive/Obsidian Vault"),
-				},
-			},
-
-			daily_notes = {
-				folder = "Personal/Daily",
-			},
-
-			follow_url_func = function(url)
-				vim.fn.jobstart({ "open", url }) -- Mac OS
-			end,
-		},
-		keys = {
-			{ "<leader>nt", "<cmd>ObsidianTags<CR>", { desc = "Search note tags" } },
-		},
-	},
+	-- {
+	-- 	"epwalsh/obsidian.nvim",
+	-- 	ft = { "markdown" },
+	-- 	cmd = { "ObsidianOpen", "ObsidianNew", "ObsidianTags" },
+	-- 	lazy = true,
+	-- 	dependencies = {
+	-- 		-- Required.
+	-- 		"nvim-lua/plenary.nvim",
+	-- 	},
+	-- 	-- ~/paul.xheo@gmail.com - Google Drive/My Drive/Obsidian Vault 01:12:11 PM
+	-- 	opts = {
+	-- 		workspaces = {
+	-- 			{
+	-- 				name = "personal",
+	-- 				path = vim.fn.expand("~/paul.xheo@gmail.com - Google Drive/My Drive/Obsidian Vault"),
+	-- 			},
+	-- 		},
+	--
+	-- 		daily_notes = {
+	-- 			folder = "Personal/Daily",
+	-- 		},
+	--
+	-- 		follow_url_func = function(url)
+	-- 			vim.fn.jobstart({ "open", url }) -- Mac OS
+	-- 		end,
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<leader>nt", "<cmd>ObsidianTags<CR>", { desc = "Search note tags" } },
+	-- 	},
+	-- },
 	{
 		"nvim-telekasten/telekasten.nvim",
 		opts = {
