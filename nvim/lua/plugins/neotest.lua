@@ -131,6 +131,9 @@ return {
 				},
 				floating = {
 					max_width = 0.95,
+					options = {
+						winblend = 0,
+					},
 				},
 				consumers = {
 					overseer = require("neotest.consumers.overseer"),

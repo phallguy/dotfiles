@@ -2,7 +2,7 @@ local icons = require("user.icons")
 
 local diagnostics = {
 	underline = true,
-	virtual_text = true,
+	virtual_text = false,
 	severity_sort = true,
 	update_in_insert = false,
 	signs = {

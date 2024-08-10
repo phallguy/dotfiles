@@ -44,7 +44,14 @@ return {
 				desc = "Debug set exceptikon breakponts",
 			},
 			{
-				"<leader>d",
+				"<leader>dc",
+				function()
+					require("dap").clear_breakpoints()
+				end,
+				desc = "Debug clear breakponts",
+			},
+			{
+				"<leader>dv",
 				"<CMD>DapVirtualTextToggle<CR>",
 				desc = "Debug toggle virtual text",
 			},
@@ -111,6 +118,7 @@ return {
 			{
 				"<leader>dd",
 				function()
+					vim.cmd("only")
 					require("dap").repl.close()
 					require("dapui").toggle()
 				end,

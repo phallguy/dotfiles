@@ -14,7 +14,10 @@ return {
 			weight = "Light",
 			-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 		},
-		"JetBrainsMono Nerd Font Mono",
+		{
+			family = "JetBrainsMono Nerd Font Mono",
+			scale = 1.125,
+		},
 	}),
 	font_rules = {
 		{
@@ -26,21 +29,29 @@ return {
 					weight = "Bold",
 					italic = true,
 				},
+				{
+					family = "JetBrainsMono Nerd Font Mono",
+				},
 			}),
 		},
 
 		{
 			intensity = "Bold",
 			italic = false,
-			font = wezterm.font_with_fallback({ {
-				family = "JetBrains Mono",
-				weight = "Bold",
-			} }),
+			font = wezterm.font_with_fallback({
+				{
+					family = "JetBrains Mono",
+					weight = "Bold",
+				},
+				{
+					family = "JetBrainsMono Nerd Font Mono",
+				},
+			}),
 		},
 	},
 	-- font = wezterm.font(font_family, { weight="Medium" }),
 	font_size = 15,
-	line_height = 0.90,
+	line_height = 0.93,
 	-- cell_width = 0.90,
 	freetype_load_flags = "DEFAULT",
 	-- freetype_load_target = "Light",

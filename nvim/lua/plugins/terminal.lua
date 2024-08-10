@@ -15,11 +15,12 @@ return {
 				shell = "zsh -il",
 				shade_terminals = false,
 				persist_size = false,
-				highlights = {
-					Normal = { guibg = colors.surface },
-					NormalFloat = { guibg = colors.surface },
-					FloatBorder = { guibg = colors.surface, guifg = colors.highlight_med },
-				},
+				-- highlights = {
+				-- 	Normal = { guibg = colors.surface },
+				-- 	NormalFloat = { guibg = colors.surface },
+				-- 	FloatBorder = { guibg = colors.surface, guifg = colors.highlight_med },
+				-- },
+				highlights = require("rose-pine.plugins.toggleterm"),
 			})
 		end,
 		cmd = {

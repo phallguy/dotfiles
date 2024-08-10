@@ -32,9 +32,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.keymap.set("n", "<space>lr", vim.lsp.buf.rename, { buffer = bufnr })
 		vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr })
+		vim.keymap.set("n", "<leader>lu", vim.lsp.buf.references, { buffer = bufnr })
 		vim.keymap.set("n", "<leader>li", function()
 			local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
 			vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
 		end, { buffer = bufnr })
+
+		require("better-diagnostic-virtual-text.api").setup_buf(bufnr, {})
 	end,
 })

@@ -13,7 +13,7 @@ return {
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = "auto",
+				theme = "rose-pine",
 				component_separators = { left = "  ", right = "" },
 				section_separators = { right = " ", left = "" },
 			},

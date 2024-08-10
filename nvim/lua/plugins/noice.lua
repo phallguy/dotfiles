@@ -37,12 +37,12 @@ return {
 						zindex = 60,
 						win_options = {
 							winblend = 0,
-							winhighlight = {
-								Normal = "NoiceMini",
-								IncSearch = "",
-								CurSearch = "",
-								Search = "",
-							},
+							-- winhighlight = {
+							-- 	Normal = "NoiceMini",
+							-- 	IncSearch = "",
+							-- 	CurSearch = "",
+							-- 	Search = "",
+							-- },
 						},
 					},
 					cmdline_popup = {
@@ -65,15 +65,6 @@ return {
 							padding = { 2, 4 },
 						},
 					},
-				},
-				routes = {
-					-- {
-					-- 	filter = {
-					-- 		event = "msg_show",
-					-- 		min_height = 10,
-					-- 	},
-					-- 	view = "split",
-					-- },
 				},
 			})
 

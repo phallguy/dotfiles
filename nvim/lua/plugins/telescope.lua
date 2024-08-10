@@ -49,7 +49,7 @@ return {
 			vim.keymap.set("n", "<leader>fb", function()
 				return require("telescope.builtin").live_grep({ grep_open_files = true })
 			end, { desc = "Live grep buffers" })
-			vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume search" })
+			vim.keymap.set("n", "<leader>fr", "<CMD>GrugFar<CR>", { desc = "Search and replace" })
 			vim.keymap.set("n", "<leader>fe", builtin.registers, { desc = "Registers" })
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
 			vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })
@@ -79,7 +79,7 @@ return {
 					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 					set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
 					-- borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
-					winblend = 5,
+					winblend = 0,
 					mappings = {
 						i = {
 							["<C-n>"] = actions.cycle_history_next,

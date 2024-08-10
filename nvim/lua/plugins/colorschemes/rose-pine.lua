@@ -57,7 +57,7 @@ return {
 					QuickFixLine = { bg = "pine", blend = 15 },
 
 					-- Git/Diff
-					DiffViewDiffDeleteDim = { fg = "highlight_low" }, -- Makes the 'empty' slashes in diffs dim
+					DiffvViewDim1 = { fg = "highlight_low" }, -- Makes the 'empty' slashes in diffs dim
 					DiffText = { bg = config.groups.git_change, blend = 30 },
 					DiffChange = { bg = config.groups.git_change, blend = 10 },
 					-- DiffViewDiffDelete = { fg = "highlight_med" },
@@ -66,11 +66,8 @@ return {
 					-- ["@text.diff.add"] = { fg = "text", bg = config.groups.git_add, blend = 20 },
 					-- ["@attribute.diff"] = { fg = "iris" },
 					-- ["@text.title.gitcommit"] = { fg = "foam", bold = true },
-					-- GitSignsAdd = { fg = "pine", bg = "none" },
-					-- GitSignsChange = { fg = colors.git_change, bg = "none" },
-					-- GitSignsDelete = { fg = colors.git_delete, bg = "none" },
-					--
 					DiffviewNormal = { bg = "_nc" },
+					DiffviewFilePanelSelected = { bg = "iris", fg = "gold", blend = 30, bold = true },
 
 					-- Matchparen
 					MatchParen = { fg = "gold", bg = "pine", blend = 50 },
@@ -118,9 +115,9 @@ return {
 					NeotestStatusRunning = { fg = "base", bg = "iris" },
 
 					-- Hop
-					HopNextKey = { bg = "gold", fg = "surface", bold = true, blend = 100 },
-					HopNextKey1 = { bg = "gold", fg = "surface", bold = true, blend = 70 },
-					HopNextKey2 = { bg = "gold", fg = "surface", bold = true, blend = 40 },
+					HopNextKey = { bg = "gold", fg = "_nc", bold = true, blend = 100 },
+					HopNextKey1 = { bg = "gold", fg = "_nc", bold = true, blend = 100 },
+					HopNextKey2 = { bg = "gold", fg = "_nc", bold = true, blend = 80 },
 
 					-- Neotree
 					NeoTreeNormal = { bg = "_nc" },
