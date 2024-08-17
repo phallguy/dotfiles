@@ -44,7 +44,7 @@ return {
 						end
 					end,
 					additional_vim_regex_highlighting = { "gitcommit" },
-					use_languagetree = false,
+					-- use_languagetree = false,
 				},
 				indent = { enable = false, "python", "ruby", "eruby", "scss" },
 				incremental_selection = {

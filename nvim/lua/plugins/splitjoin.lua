@@ -5,12 +5,15 @@ vim.g.splitjoin_normalize_whitespace = 1
 vim.g.splitjoin_align = 1
 vim.g.splitjoin_ruby_options_as_arguments = 1
 vim.g.splitjoin_trailing_comma = 1
+vim.g.splitjoin_split_mapping = "GS"
+vim.g.splitjoin_join_mapping = "GJ"
 
 return {
-	{
-		"AndrewRadev/splitjoin.vim",
-		enabled = false,
-	},
+	-- {
+	-- 	"AndrewRadev/splitjoin.vim",
+	-- 	keys = { "GS", "GJ" },
+	-- 	command = { "SplitjoinSplit", "SplitjoinJoin" },
+	-- },
 	{
 		"Wansmer/treesj",
 		-- keys = { "<space>m", "gJ", "gS" },
@@ -30,18 +33,12 @@ return {
 				end,
 				desc = "Join lines",
 			},
-			{
-				"<leader>m",
-				function()
-					require("treesj").toggle()
-				end,
-				desc = "Toggle lines",
-			},
 		},
 		config = function()
 			require("treesj").setup({ --[[ your config ]]
 				use_default_keymaps = false,
 				check_syntax_error = false,
+				max_join_length = 200,
 			})
 		end,
 	},

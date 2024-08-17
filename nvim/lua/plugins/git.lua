@@ -52,40 +52,38 @@ return {
 			},
 		},
 	},
-	--
-	-- {
-	-- 	"isakbm/gitgraph.nvim",
-	-- 	---@type I.GGConfig
-	-- 	opts = {
-	-- 		symbols = {
-	-- 			merge_commit = "M",
-	-- 			commit = "*",
-	-- 		},
-	-- 		format = {
-	-- 			timestamp = "%H:%M:%S %d-%m-%Y",
-	-- 			fields = { "hash", "timestamp", "author", "branch_name", "tag" },
-	-- 		},
-	-- 		hooks = {
-	-- 			-- Check diff of a commit
-	-- 			on_select_commit = function(commit)
-	-- 				vim.notify("DiffviewOpen " .. commit.hash .. "^!")
-	-- 				vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
-	-- 			end,
-	-- 			-- Check diff from commit a -> commit b
-	-- 			on_select_range_commit = function(from, to)
-	-- 				vim.notify("DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
-	-- 				vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
-	-- 			end,
-	-- 		},
-	-- 	},
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>gl",
-	-- 			function()
-	-- 				require("gitgraph").draw({}, { all = true, max_count = 5000 })
-	-- 			end,
-	-- 			desc = "GitGraph - Draw",
-	-- 		},
-	-- 	},
-	-- },
+
+	{
+		"isakbm/gitgraph.nvim",
+		---@type i.ggconfig
+		cmd = {
+			"GitGraph",
+		},
+		config = function()
+			require("gitgraph").setup({
+				symbols = {
+					merge_commit = "",
+					commit = "",
+				},
+				format = {
+					timestamp = "%h:%m:%s %d-%m-%y",
+					fields = { "hash", "timestamp", "author", "branch_name", "tag" },
+				},
+				hooks = {
+					-- check diff of a commit
+					on_select_commit = function(commit)
+						vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
+					end,
+					-- check diff from commit a -> commit b
+					on_select_range_commit = function(from, to)
+						vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
+					end,
+				},
+			})
+
+			vim.api.nvim_create_user_command("GitGraph", function()
+				require("gitgraph").draw({}, { all = true, max_count = 500 })
+			end, {})
+		end,
+	},
 }

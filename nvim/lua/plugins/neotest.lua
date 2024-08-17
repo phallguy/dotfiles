@@ -109,6 +109,8 @@ return {
 					enabled = false,
 				},
 				discovery = {
+					enabled = false,
+					concurrent = 20,
 					filter_dir = function(name, rel_path, root)
 						return name ~= "node_modules" and name ~= "tmp" and name ~= "log" and name ~= "assets"
 					end,
@@ -119,9 +121,9 @@ return {
 					virtual_text = true,
 				},
 				summary = {
-					follow = false,
+					follow = true,
 					animated = false,
-					expand_errors = false,
+					expand_errors = true,
 				},
 				output = {
 					open_on_run = false,
@@ -138,12 +140,12 @@ return {
 				consumers = {
 					overseer = require("neotest.consumers.overseer"),
 				},
-				running = {
-					concurrent = false,
-				},
-				run = {
-					concurrent = false,
-				},
+				-- running = {
+				-- 	concurrent = false,
+				-- },
+				-- run = {
+				-- 	concurrent = false,
+				-- },
 			})
 		end,
 	},

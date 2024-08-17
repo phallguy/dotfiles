@@ -118,7 +118,6 @@ return {
 			{
 				"<leader>dd",
 				function()
-					vim.cmd("only")
 					require("dap").repl.close()
 					require("dapui").toggle()
 				end,

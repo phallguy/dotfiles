@@ -84,4 +84,11 @@ return {
 		end,
 		dependencies = { "junegunn/fzf", lazy = true },
 	},
+	{
+		"stevearc/quicker.nvim",
+		ft = "qf",
+		---@module "quicker"
+		---@type quicker.SetupOptions
+		opts = {},
+	},
 }
