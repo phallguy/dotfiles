@@ -8,7 +8,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-context",
-			"RRethy/nvim-treesitter-endwise",
 			"m-demare/hlargs.nvim",
 			"windwp/nvim-ts-autotag",
 		},
@@ -57,11 +56,11 @@ return {
 					},
 				},
 				matchup = {
-					enabled = true,
+					enabled = false,
 					enable_quotes = true,
 				},
 				endwise = {
-					enable = true,
+					enable = false,
 				},
 				textobjects = {
 					select = {

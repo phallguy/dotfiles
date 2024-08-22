@@ -2,6 +2,9 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.shortmess:append("c")
 
 local ls = require("luasnip")
+local s, sn = ls.snippet, ls.snippet_node
+local t, i, d = ls.text_node, ls.insert_node, ls.dynamic_node
+
 local lspkind = require("lspkind")
 lspkind.init({})
 
@@ -11,11 +14,13 @@ cmp.setup({
 	experimental = {
 		ghost_text = true,
 	},
-	{
-		matching = {
-			disallow_partial_fuzzy_matching = true,
-			disallow_partial_matching = true,
-		},
+	window = {
+		-- completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	matching = {
+		-- disallow_partial_fuzzy_matching = true,
+		-- disallow_partial_matching = true,
 	},
 	sources = {
 		{
@@ -24,17 +29,17 @@ cmp.setup({
 			dup = 0,
 			max_item_count = 5,
 		},
+		{ name = "path" },
 		{
 			name = "nvim_lsp",
 			keyword_length = 2,
 			max_item_count = 7,
+			dup = 0,
 		},
-		{ name = "path" },
 		{
 			name = "buffer",
 			keyword_length = 3,
 			max_indexed_line_length = 2048,
-			dup = 0,
 			option = {
 				get_bufnrs = function()
 					local bufs = {}
@@ -89,6 +94,32 @@ cmp.setup({
 			require("luasnip").lsp_expand(args.body)
 		end,
 	},
+
+	formatting = {
+		fields = { "kind", "abbr" },
+		format = lspkind.cmp_format({
+			mode = "symbol",
+			maxwidth = 60,
+			show_labelDetails = false,
+		}),
+	},
+})
+
+local function uuid()
+	local id, _ = vim.fn.system("uuidgen"):gsub("\n", "")
+	return id
+end
+
+ls.add_snippets("global", {
+	s({
+		trig = "uuid",
+		name = "UUID",
+		dscr = "Generate a unique UUID",
+	}, {
+		d(1, function()
+			return sn(nil, i(1, uuid()))
+		end),
+	}),
 })
 
 -- Setup up vim-dadbod

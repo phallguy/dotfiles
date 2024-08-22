@@ -10,13 +10,14 @@ return {
 	-- Fonts
 	font = wezterm.font_with_fallback({
 		{
-			family = "JetBrains Mono",
-			weight = "Light",
+			family = "CommitMonoPhallguy",
+			-- family = "JetBrains Mono",
 			-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 		},
 		{
-			family = "JetBrainsMono Nerd Font Mono",
-			scale = 1.125,
+			-- family = "JetBrainsMono Nerd Font Mono",
+			family = "CommitMono Nerd Font Mono",
+			scale = 1,
 		},
 	}),
 	font_rules = {
@@ -25,12 +26,12 @@ return {
 			italic = true,
 			font = wezterm.font_with_fallback({
 				{
-					family = "JetBrains Mono",
+					family = "CommitMonoPhallguy",
 					weight = "Bold",
 					italic = true,
 				},
 				{
-					family = "JetBrainsMono Nerd Font Mono",
+					family = "CommitMono Nerd Font Mono",
 				},
 			}),
 		},
@@ -40,21 +41,21 @@ return {
 			italic = false,
 			font = wezterm.font_with_fallback({
 				{
-					family = "JetBrains Mono",
+					family = "CommitMonoPhallguy",
 					weight = "Bold",
 				},
 				{
-					family = "JetBrainsMono Nerd Font Mono",
+					family = "CommitMono Nerd Font Mono",
 				},
 			}),
 		},
 	},
 	-- font = wezterm.font(font_family, { weight="Medium" }),
-	font_size = 15,
-	line_height = 0.93,
+	font_size = 14,
+	line_height = 1.125,
 	-- cell_width = 0.90,
-	freetype_load_flags = "DEFAULT",
-	-- freetype_load_target = "Light",
+	-- freetype_load_flags = "DEFAULT",
+	freetype_load_target = "Light",
 	-- freetype_render_target = "HorizontalLcd",
 	allow_square_glyphs_to_overflow_width = "Never",
 	-- font_antialias = "Subpixel",
@@ -66,7 +67,7 @@ return {
 			{ family = "Roboto", weight = "Medium" },
 
 			-- /Users/paulalexander/Library/Fonts/JetBrains Mono NL Light Nerd Font Complete Mono.ttf, CoreText
-			{ family = "JetBrainsMono Nerd Font Mono" },
+			{ family = "CommitMono Nerd Font Mono" },
 
 			-- <built-in>, BuiltIn
 			-- Assumed to have Emoji Presentation
@@ -105,13 +106,12 @@ return {
 	webgpu_power_preference = "HighPerformance",
 	window_decorations = "RESIZE",
 	command_palette_bg_color = "#202331",
-	-- macos_window_background_blur = 15,
-	-- window_background_opacity = 0.93,
+	macos_window_background_blur = 35,
+	window_background_opacity = 0.95,
 	-- window_background_gradient = {
 	-- 	orientation = "Vertical",
 	-- 	colors = {
-	-- 		"#393552",
-	-- 		"#2a273f",
+	-- 		"#232136",
 	-- 	},
 	-- },
 	command_palette_fg_color = "#A6ACCD",

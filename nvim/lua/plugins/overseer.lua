@@ -7,7 +7,7 @@ return {
 				function()
 					local util = require("user.util")
 					util.invoke_cmd_with_cursor(function()
-						require("overseer").toggle({ enter = false })
+						require("overseer").toggle({ enter = true })
 					end)
 				end,
 				{ desc = "Toggle overseer" },
@@ -31,6 +31,7 @@ return {
 				},
 				max_width = { 1500, 1.0 },
 				min_width = { 80, 0.50 },
+				min_height = { 15, 0.10 },
 				default_detail = 2,
 			},
 

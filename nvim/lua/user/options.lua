@@ -87,7 +87,8 @@ opt.backup = false
 -- / - # Max search history
 -- s - Max size of data
 -- h - Something about hlsearch
-opt.shada = "!,'30,s10,h"
+-- f0 - don't save marks
+opt.shada = "'30,s10,h,f0"
 
 -- opt.iskeyword:append({ '-' }) -- Kabab case
 

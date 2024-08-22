@@ -1,4 +1,3 @@
--- Better save
 vim.keymap.set("n", "<leader>s", "<CMD>silent w<CR>", { desc = "Save", silent = true })
 vim.keymap.set("n", "<leader>w", "<CMD>silent w<CR>", { desc = "Save", silent = true })
 vim.keymap.set("n", "<leader>S", ":saveas %:h/", { desc = "Save as", silent = true })
@@ -173,7 +172,7 @@ vim.keymap.set(
 vim.keymap.set(
 	"n",
 	"<leader>V",
-	"<CMD>ProjectionistPreDetect<CR><CMD>Eprojectedview | Vview<CR>",
+	"<CMD>ProjectionistPreDetect<CR><CMD>Vprojectedview | Vview<CR>",
 	{ desc = "Edit view (V split)", silent = true }
 )
 vim.keymap.set(
@@ -227,3 +226,4 @@ vim.keymap.set(
 
 -- Disable recording macros
 vim.keymap.set("n", "q", "<Nop>")
+vim.keymap.set("", "<RightMouse>", "<Nop>")

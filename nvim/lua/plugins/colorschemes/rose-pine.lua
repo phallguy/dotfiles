@@ -20,7 +20,7 @@ return {
 				styles = {
 					bold = true,
 					italic = true,
-					transparency = false,
+					transparency = true,
 				},
 				highlight_groups = {
 					LineNr = { fg = "highlight_med" },
@@ -66,7 +66,13 @@ return {
 					-- ["@text.diff.add"] = { fg = "text", bg = config.groups.git_add, blend = 20 },
 					-- ["@attribute.diff"] = { fg = "iris" },
 					-- ["@text.title.gitcommit"] = { fg = "foam", bold = true },
+					["@keyword.ruby"] = { bold = true, fg = "pine" },
+					["@keyword.type.ruby"] = { bold = true, fg = "pine" },
+					["@keyword.function.ruby"] = { bold = true, fg = "pine" },
+					["@keyword.conditional.ruby"] = { bold = true, fg = "pine" },
+					["@keyword.modifier.ruby"] = { bold = true, fg = "iris" },
 					DiffviewNormal = { bg = "_nc" },
+					-- DiffviewNormal = { bg = "surface" },
 					DiffviewFilePanelSelected = { bg = "iris", fg = "gold", blend = 30, bold = true },
 
 					-- Matchparen
@@ -77,7 +83,7 @@ return {
 
 					-- Telescope
 					TelescopeResultsComment = { fg = "muted" },
-					TelescopeBorder = { fg = "overlay" },
+					TelescopeBorder = { fg = "highlight_high" },
 					TelescopePreviewTitle = { fg = "surface", bg = "foam", bold = true },
 					TelescopeResultsTitle = { fg = "surface", bg = "gold", bold = true },
 
@@ -85,12 +91,17 @@ return {
 					NoiceCmdlinePopup = { bg = "_nc" },
 
 					-- -- TreesiterContext
-					TreesitterContext = { bg = "_nc", force = true },
+					-- TreesitterContext = { bg = "_nc", force = true },
+					TreesitterContext = { bg = "surface", force = true },
 					TreesitterContextBottom = { sp = "highlight_high", blend = 0, underline = true },
 
 					-- Diagnostics
 					DiagnosticVirtualTextInfo = { fg = "#2A6077", bg = "foam", blend = 5 },
 					DiagnosticVirtualTextHint = { fg = "#7E6C95", bg = "iris", blend = 5 },
+
+					-- Diagflow
+					DiagnosticFloatingInfo = { fg = "#2A6077", bg = "foam", blend = 5 },
+					DiagnosticFloatingHint = { fg = "#7E6C95", bg = "iris", blend = 5 },
 
 					-- Dap
 					DapBreakpoint = { fg = "love" },
@@ -122,6 +133,8 @@ return {
 					-- Neotree
 					NeoTreeNormal = { bg = "_nc" },
 					NeoTreeNormalNC = { bg = "_nc" },
+					-- NeoTreeNormal = { bg = "surface" },
+					-- NeoTreeNormalNC = { bg = "surface" },
 				},
 			})
 		end,

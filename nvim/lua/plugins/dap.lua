@@ -151,12 +151,12 @@ return {
 			-- dap.set_log_level("TRACE")
 			--
 
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "dap-repl" },
-				callback = function()
-					require("dap.ext.autocompl").attach()
-				end,
-			})
+			-- vim.api.nvim_create_autocmd("FileType", {
+			-- 	pattern = { "dap-repl" },
+			-- 	callback = function()
+			-- 		require("dap.ext.autocompl").attach()
+			-- 	end,
+			-- })
 
 			for _, language in ipairs({ "typescript", "javascript" }) do
 				dap.configurations[language] = {

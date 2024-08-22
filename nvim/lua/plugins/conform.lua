@@ -75,7 +75,7 @@ return {
 		},
 	},
 	init = function()
-		vim.api.nvim_create_user_command("FormatDisable", function(args)
+		vim.api.nvim_create_user_command("FD", function(args)
 			if args.bang then
 				-- FormatDisable! will disable formatting just for this buffer
 				vim.b.disable_autoformat = true
@@ -87,7 +87,7 @@ return {
 			bang = true,
 		})
 
-		vim.api.nvim_create_user_command("FormatEnable", function()
+		vim.api.nvim_create_user_command("FE", function()
 			vim.b.disable_autoformat = false
 			vim.g.disable_autoformat = false
 		end, {

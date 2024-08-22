@@ -38,6 +38,34 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
 		end, { buffer = bufnr })
 
-		require("better-diagnostic-virtual-text.api").setup_buf(bufnr, {})
+		require("lsp_signature").on_attach({
+			bind = true,
+			handler_opts = {
+				border = "rounded",
+			},
+			fix_pos = true,
+			always_trigger = false,
+			hint_prefix = " ",
+			max_height = 6,
+			timer_interval = 2000,
+			toggle_key = "<C-s>",
+		}, bufnr)
+
+		vim.keymap.set({ "n", "i" }, "<C-s>", function()
+			require("lsp_signature").toggle_float_win()
+		end, { silent = true, noremap = true, desc = "toggle signature" })
+
+		-- require("better-diagnostic-virtual-text.api").setup_buf(bufnr, {})
+		--
+		-- Show line diagnostics automatically in hover window
+		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+			callback = function()
+				vim.diagnostic.open_float(nil, { focus = false })
+			end,
+		})
+
+		if client.supports_method("textDocument/completion") then
+			-- vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+		end
 	end,
 })

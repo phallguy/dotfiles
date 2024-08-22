@@ -29,6 +29,7 @@ module Debundle
       hook.source_location.first =~ %r{/bundler/}
     end
 
+    debugger
     ENV.replace(Bundler::EnvironmentPreserver.new(ENV, %w[GEM_PATH]).backup) if defined? Bundler::EnvironmentPreserver
     Gem.clear_paths
 
@@ -43,23 +44,6 @@ end
 ### END debundle.rb ###
 
 
-def enhance!
-  Debundle.debundle!
-
-  [
-    'irb/completion',
-    'irbtools/binding',
-    'irbtools/more',
-    'looksee',
-    'hirb',
-    'bond',
-  ].each do |gem|
-    require gem
-  rescue LoadError => e
-    puts e
-  end
-end
-
 begin
   require 'rails/console/app'
   extend Rails::ConsoleMethods
@@ -69,5 +53,10 @@ end
 begin
   require 'active_support/testing/time_helpers'
   include ActiveSupport::Testing::TimeHelpers
+rescue LoadError
+end
+
+begin
+  require_relative File.join(Dir.pwd, ".irb_local")
 rescue LoadError
 end

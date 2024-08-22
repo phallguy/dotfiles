@@ -37,6 +37,8 @@ config/definitions.rb
 .projections.json
 config/projections.json
 *.bun-build
+bs-config.js
+.irb_local.rb
 
 
 .ctags

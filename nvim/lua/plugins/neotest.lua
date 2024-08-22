@@ -104,7 +104,7 @@ return {
 				},
 				quickfix = {
 					open = function()
-						vim.cmd("Trouble quickfix")
+						vim.cmd("trouble quickfix")
 					end,
 					enabled = false,
 				},
@@ -123,7 +123,8 @@ return {
 				summary = {
 					follow = true,
 					animated = false,
-					expand_errors = true,
+					expand_errors = false,
+					open = "botright vsplit | vertical resize 35",
 				},
 				output = {
 					open_on_run = false,
@@ -140,12 +141,12 @@ return {
 				consumers = {
 					overseer = require("neotest.consumers.overseer"),
 				},
-				-- running = {
-				-- 	concurrent = false,
-				-- },
-				-- run = {
-				-- 	concurrent = false,
-				-- },
+				running = {
+					concurrent = false,
+				},
+				run = {
+					concurrent = false,
+				},
 			})
 		end,
 	},

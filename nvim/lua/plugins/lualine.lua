@@ -46,21 +46,21 @@ return {
 					{ "overseer", status = { "RUNNING" }, component_separators = false },
 				},
 				lualine_x = {
-					{
-						function()
-							local ok, pomo = pcall(require, "pomo")
-							if not ok then
-								return ""
-							end
-
-							local timer = pomo.get_first_to_finish()
-							if timer == nil then
-								return ""
-							end
-
-							return tostring(timer) .. " "
-						end,
-					},
+					-- {
+					-- 	function()
+					-- 		local ok, pomo = pcall(require, "pomo")
+					-- 		if not ok then
+					-- 			return ""
+					-- 		end
+					--
+					-- 		local timer = pomo.get_first_to_finish()
+					-- 		if timer == nil then
+					-- 			return ""
+					-- 		end
+					--
+					-- 		return tostring(timer) .. " "
+					-- 	end,
+					-- },
 					{ "branch", icon = icons.git.Branch },
 				},
 				lualine_y = {

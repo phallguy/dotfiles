@@ -25,6 +25,8 @@ return {
 				},
 				["q"] = "actions.close",
 				["H"] = "actions.toggle_hidden",
+				["<C-l>"] = false,
+				["<C-h>"] = false,
 			},
 		},
 		keys = {

@@ -20,7 +20,6 @@ return {
 			local layout_actions = require("telescope.actions.layout")
 			local lga_actions = require("telescope-live-grep-args.actions")
 			local builtin = require("telescope.builtin")
-			local trouble = require("trouble.providers.telescope")
 
 			vim.keymap.set("n", ",", builtin.buffers, { desc = "Buffers" })
 			vim.keymap.set("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
@@ -127,7 +126,7 @@ return {
 					current_buffer_fuzzy_find = {
 						theme = "ivy",
 						initial_mode = "insert",
-						previewer = false,
+						-- previewer = false,
 						sorting_strategy = "descending",
 						layout_config = {
 							prompt_position = "bottom",
@@ -204,10 +203,6 @@ return {
 	-- refine live grep
 	{
 		"nvim-telescope/telescope-live-grep-args.nvim",
-		lazy = true,
-	},
-	{
-		"debugloop/telescope-undo.nvim",
 		lazy = true,
 	},
 	{
