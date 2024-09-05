@@ -48,6 +48,7 @@
   repo = /Users/paulalexander/workspace/bark/bark-desktop
   repo = /Users/paulalexander/workspace/bark/bark-www
   repo = /Users/paulalexander/workspace/bark/bark-admin
+  repo = /Users/paulalexander/workspace/bark
 
 [rebase]
   updateRefs = true
@@ -60,6 +61,7 @@
   m = merge
   mn = merge --no-ff --no-commit
   rbc = rebase --continue
+  rbi = rebase --interactive
   rbm = !git bam && git rebase -i origin/master
   boom = !git remote prune origin && git fetch origin && git reset --hard origin/$( git rev-parse --abbrev-ref HEAD ) && git submodule update --recursive
   bam = !DEFAULT_BRANCH=$(basename $(git rev-parse --abbrev-ref origin/HEAD)) && git co $DEFAULT_BRANCH && git boom && (git branch --format '%(refname:short)' --merged | egrep -v "^${DEFAULT_BRANCH}" | xargs git branch -d)  && git checkout -

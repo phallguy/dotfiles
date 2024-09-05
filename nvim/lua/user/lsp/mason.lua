@@ -13,7 +13,7 @@ require("mason").setup({
 
 require("user.lsp.servers.rubocop")
 -- require("user.lsp.servers.solargraph")
-require("user.lsp.servers.tsserver")
+require("user.lsp.servers.ts_ls")
 require("user.lsp.servers.rust")
 require("user.lsp.servers.html")
 require("user.lsp.servers.ruby-lsp")
@@ -29,6 +29,9 @@ local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup({
 	handlers = {
 		function(server_name)
+			if server_name == "tsserver" then
+				server_name = "ts_ls"
+			end
 			require("lspconfig")[server_name].setup({
 				capabilities = capabilities,
 			})

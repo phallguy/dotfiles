@@ -1,6 +1,6 @@
 local capabilities = require("user.lsp.capabilities")
 
-require("lspconfig").tsserver.setup({
+require("lspconfig").ts_ls.setup({
 	capabilities = capabilities,
 	init_options = {
 		preferences = {
