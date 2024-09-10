@@ -13,9 +13,28 @@ return {
 					view = "mini",
 				},
 				lsp = {
-					signature = {
-						enabled = false,
+					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+					override = {
+						["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+						["vim.lsp.util.stylize_markdown"] = false,
+						["cmp.entry.get_documentation"] = false, -- requires hrsh7th/nvim-cmp
 					},
+
+					documentation = {
+
+						opts = {
+							border = {
+								style = "rounded",
+							},
+							size = {
+								width = 80,
+								height = 6,
+							},
+						},
+					},
+				},
+				popup = {
+					enabled = true,
 				},
 				views = {
 					mini = {
@@ -73,9 +92,5 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
-	},
-	{
-		"MunifTanjim/nui.nvim",
-		lazy = true,
 	},
 }

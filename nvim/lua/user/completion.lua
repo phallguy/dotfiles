@@ -15,7 +15,7 @@ cmp.setup({
 		ghost_text = true,
 	},
 	window = {
-		-- completion = cmp.config.window.bordered(),
+		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 	matching = {
@@ -100,7 +100,7 @@ cmp.setup({
 		format = lspkind.cmp_format({
 			mode = "symbol",
 			maxwidth = 60,
-			show_labelDetails = false,
+			-- show_labelDetails = false,
 		}),
 	},
 })

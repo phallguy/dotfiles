@@ -3,7 +3,7 @@ return {
 	event = "BufWrite",
 	keys = {
 		{
-			"<leader>lf",
+			"<leader>lF",
 			function()
 				require("conform").format({
 					async = true,
@@ -13,7 +13,7 @@ return {
 			desc = "Format",
 		},
 		{
-			"<leader>lf",
+			"<leader>lF",
 			"<CMD>Format<CR>",
 			mode = "v",
 			desc = "Format selection",
