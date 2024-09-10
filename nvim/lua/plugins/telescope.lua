@@ -31,7 +31,7 @@ return {
 			vim.keymap.set("n", "<CS-P>", oldfiles, { desc = "Recent files" })
 			vim.keymap.set("n", "<MS-P>", oldfiles, { desc = "Recent files" }) -- sloppy keys
 
-			vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Find in buffer" })
+			vim.keymap.set("n", "/", builtin.current_buffer_fuzzy_find, { desc = "Find in buffer" })
 
 			vim.keymap.set(
 				"n",
@@ -48,7 +48,14 @@ return {
 			vim.keymap.set("n", "<leader>fb", function()
 				return require("telescope.builtin").live_grep({ grep_open_files = true })
 			end, { desc = "Live grep buffers" })
-			vim.keymap.set("n", "<leader>fr", "<CMD>GrugFar<CR>", { desc = "Search and replace" })
+			vim.keymap.set("n", "<leader>fr", function()
+				require("grug-far").with_visual_selection({
+					transient = true,
+					prefills = {
+						paths = vim.fn.expand("%:h"),
+					},
+				})
+			end, { desc = "Search and replace" })
 			vim.keymap.set("n", "<leader>fe", builtin.registers, { desc = "Registers" })
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
 			vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Commands" })

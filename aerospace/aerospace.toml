@@ -185,6 +185,10 @@ if.app-name-regex-substring = 'Figma'
 run = ['move-node-to-workspace 5']
 
 [[on-window-detected]]
+if.app-name-regex-substring = 'Adobe'
+run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
 if.app-name-regex-substring = 'Vienna'
 run = ['move-node-to-workspace E']
 

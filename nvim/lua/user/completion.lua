@@ -19,8 +19,8 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 	matching = {
-		-- disallow_partial_fuzzy_matching = true,
-		-- disallow_partial_matching = true,
+		--disallow_partial_fuzzy_matching = true,
+		--disallow_partial_matching = true,
 	},
 	sources = {
 		{
