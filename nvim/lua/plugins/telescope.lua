@@ -31,7 +31,7 @@ return {
 			vim.keymap.set("n", "<CS-P>", oldfiles, { desc = "Recent files" })
 			vim.keymap.set("n", "<MS-P>", oldfiles, { desc = "Recent files" }) -- sloppy keys
 
-			vim.keymap.set("n", "/", builtin.current_buffer_fuzzy_find, { desc = "Find in buffer" })
+			vim.keymap.set("n", "<leader>lf", builtin.current_buffer_fuzzy_find, { desc = "Find in buffer" })
 
 			vim.keymap.set(
 				"n",

@@ -194,5 +194,5 @@ run = ['move-node-to-workspace E']
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Code'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 7']
 

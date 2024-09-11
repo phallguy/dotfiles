@@ -15,27 +15,26 @@ return {
 				lsp = {
 					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 					override = {
-						["vim.lsp.util.convert_input_to_markdown_lines"] = false,
-						["vim.lsp.util.stylize_markdown"] = false,
-						["cmp.entry.get_documentation"] = false, -- requires hrsh7th/nvim-cmp
+						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+						["vim.lsp.util.stylize_markdown"] = true,
+						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 					},
 
 					documentation = {
-
 						opts = {
 							border = {
 								style = "rounded",
+								padding = { 0, 0 },
 							},
 							size = {
-								width = 80,
-								height = 6,
+								width = "auto",
+								height = "auto",
+								max_width = 80,
 							},
 						},
 					},
 				},
-				popup = {
-					enabled = true,
-				},
+				signature = {},
 				views = {
 					mini = {
 						backend = "mini",
@@ -82,6 +81,21 @@ return {
 						border = {
 							style = "none",
 							padding = { 2, 4 },
+						},
+					},
+					popup = {
+						enabled = true,
+						size = {
+							width = "auto",
+						},
+					},
+					hover = {
+						size = {
+							max_width = 80,
+						},
+						position = {
+							row = 3,
+							col = 0,
 						},
 					},
 				},

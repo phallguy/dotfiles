@@ -80,11 +80,15 @@
 [diff]
   renames = true
   colorMoved = default
-	tool = vimdiff
+	tool = difftastic
 	algorithm = histogram
+	external = difft
 
 [difftool]
-  prompt = true
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
 
 [difftool "vimdiff"]
 	path = nvim
@@ -96,14 +100,6 @@
   prompt = true
 
 # Kaleidoscope
-
-[difftool "Kaleidoscope"]
-  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-
-[mergetool "Kaleidoscope"]
-  trustexitcode = true
-  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-  prompt = false
 
 [delta]
   navigate = true    # use n and N to move between diff sections
@@ -119,7 +115,7 @@
   hunk-header-style = omit
 
 [pager]
-  difftool = false
+  difftool = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

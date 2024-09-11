@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>ll", vim.diagnostic.open_float, { desc = "[L]ine diagnostics", buffer = bufnr })
 		vim.keymap.set(
 			"n",
-			"<leader>lf",
+			"lf",
 			require("telescope.builtin").lsp_document_symbols,
 			{ desc = "Document symbols", buffer = bufnr }
 		)

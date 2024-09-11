@@ -97,11 +97,15 @@ cmp.setup({
 
 	formatting = {
 		fields = { "kind", "abbr" },
-		format = lspkind.cmp_format({
-			mode = "symbol",
-			maxwidth = 60,
-			-- show_labelDetails = false,
-		}),
+		format = function(entry, vim_item)
+			vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
+			vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
+			if vim_item.menu then
+				vim_item.menu = string.sub(string.gsub(vim_item.menu, "(^%s*)|(%s*$)", ""), 1, 50)
+			end
+
+			return vim_item
+		end,
 	},
 })
 
