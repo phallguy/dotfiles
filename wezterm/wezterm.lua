@@ -12,7 +12,7 @@ return {
 		{
 			family = "CommitMonoPhallguy",
 			-- family = "JetBrains Mono",
-			-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+			harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 		},
 		{
 			-- family = "JetBrainsMono Nerd Font Mono",
@@ -51,11 +51,11 @@ return {
 		},
 	},
 	-- font = wezterm.font(font_family, { weight="Medium" }),
-	font_size = 14,
+	font_size = 14.5,
 	line_height = 1.125,
 	-- cell_width = 0.90,
 	-- freetype_load_flags = "DEFAULT",
-	freetype_load_target = "Light",
+	-- freetype_load_target = "Light",
 	-- freetype_render_target = "HorizontalLcd",
 	allow_square_glyphs_to_overflow_width = "Never",
 	-- font_antialias = "Subpixel",
