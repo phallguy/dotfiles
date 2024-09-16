@@ -89,8 +89,9 @@ opt.backup = false
 -- h - Something about hlsearch
 -- f0 - don't save marks
 opt.shada = "'30,s10,h,f0"
-
--- opt.iskeyword:append({ '-' }) -- Kabab case
+--
+-- opt.iskeyword:remove({ "-", "_" })
+-- opt.iskeyword:append({ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "S", "T", "U", "V", "W", "X", "Y", "Z" })
 
 -- opt.formatoptions = vim.opt.formatoptions._info.default
 opt.formatoptions:append({

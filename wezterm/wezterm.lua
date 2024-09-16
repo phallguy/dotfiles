@@ -12,7 +12,12 @@ return {
 		{
 			family = "CommitMonoPhallguy",
 			-- family = "JetBrains Mono",
-			harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+			harfbuzz_features = {
+				-- "calt=0",
+				-- "clig=0",
+				-- "liga=0",
+			},
+			-- <=>
 		},
 		{
 			-- family = "JetBrainsMono Nerd Font Mono",

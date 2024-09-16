@@ -24,6 +24,7 @@ chromedriver
 .agignore
 bin/up
 bin/up-*
+bin/rct
 .pryrc
 BqfPreviewBorder
 .vimspector.json
