@@ -88,5 +88,19 @@ return {
 				animation = require("mini.indentscope").gen_animation.none(),
 			},
 		})
+
+		require("mini.move").setup({
+			mappings = {
+				left = "<CA-h>",
+				up = "<CA-k>",
+				down = "<CA-j>",
+				right = "<CA-l>",
+
+				line_left = "<CA-h>",
+				line_up = "<CA-k>",
+				line_down = "<CA-j>",
+				line_right = "<CA-l>",
+			},
+		})
 	end,
 }

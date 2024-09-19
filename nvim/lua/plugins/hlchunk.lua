@@ -9,6 +9,13 @@ return {
 					duration = 0,
 					delay = 0,
 					textobject = "ac",
+					chars = {
+						horizontal_line = "─",
+						vertical_line = "│",
+						left_top = "╭",
+						left_bottom = "╰",
+						right_arrow = ">",
+					},
 				},
 				indent = {
 					-- enable = true,

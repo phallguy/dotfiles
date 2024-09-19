@@ -21,6 +21,7 @@ return {
 		},
 		opts = {
 			consistentOperatorPending = true,
+			skipInsignificantPunctuation = false,
 		},
 	},
 }

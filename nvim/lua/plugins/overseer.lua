@@ -30,7 +30,7 @@ return {
 					["o"] = false,
 				},
 				max_width = { 1500, 1.0 },
-				min_width = { 80, 0.50 },
+				min_width = { 40, 0.150 },
 				min_height = { 15, 0.10 },
 				default_detail = 2,
 			},
