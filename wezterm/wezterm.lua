@@ -56,7 +56,7 @@ return {
 		},
 	},
 	-- font = wezterm.font(font_family, { weight="Medium" }),
-	font_size = 14.5,
+	font_size = 14,
 	line_height = 1.125,
 	-- cell_width = 0.90,
 	-- freetype_load_flags = "DEFAULT",

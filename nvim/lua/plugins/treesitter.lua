@@ -26,6 +26,8 @@ return {
 					"markdown_inline",
 					"regex",
 					"query",
+					"html",
+					"ruby",
 				},
 				-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 				auto_install = true,

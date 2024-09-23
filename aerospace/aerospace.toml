@@ -86,6 +86,7 @@ outer.right =      6
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
+alt-f = 'layout tiling floating'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left'
@@ -99,12 +100,16 @@ alt-shift-j = 'move down'
 alt-shift-k = 'move up'
 alt-shift-l = 'move right'
 
+alt-shift-cmd-h = 'move-node-to-monitor left'
+alt-shift-cmd-l = 'move-node-to-monitor right'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-shift-minus = 'resize smart -200'
 alt-shift-equal = 'resize smart +200'
 alt-shift-cmd-minus = 'resize smart -20'
 alt-shift-cmd-equal = 'resize smart +20'
-alt-shift-tab = 'balance-sizes'
+
+# alt-shift-tab = 'balance-sizes'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-1 = 'workspace 1'
