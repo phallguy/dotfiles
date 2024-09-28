@@ -43,6 +43,7 @@ key-mapping.preset = 'qwerty'
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focus-changed = ['move-mouse window-lazy-center']
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -174,7 +175,7 @@ if.app-name-regex-substring = 'Spotify'
 run = ['move-node-to-workspace M']
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'Pandoara'
+if.app-name-regex-substring = 'Pandora'
 run = ['move-node-to-workspace M']
 
 [[on-window-detected]]
@@ -200,4 +201,3 @@ run = ['move-node-to-workspace E']
 [[on-window-detected]]
 if.app-name-regex-substring = 'Code'
 run = ['move-node-to-workspace 7']
-

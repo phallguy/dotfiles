@@ -7,9 +7,9 @@ source ~/dotfiles/znap/znap.zsh  # Start Znap
 
 # Use arm or x86 version of brew depending on architecture
 if [[ $(uname -p) == 'arm' ]]; then
-  znap eval homebrewarm "/opt/homebrew/bin/brew shellenv"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 else
-  znap eval homebrewx86 "/usr/local/bin/brew shellenv"
+  eval "$(/usr/local/bin/brew shellenv)"
 fi
 
 export DIRENV_LOG_FORMAT=$'\E[30mdirenv: %s\E[0m'

@@ -67,11 +67,12 @@ return {
 			sass = { "prettierd", "prettier" },
 			scss = { "prettierd", "prettier" },
 			html = { "prettierd", "prettier", "htmlbeautifier" },
-			eruby = { "htmlbeautifier" },
+			eruby = { "htmlbeautifier", "rubocop" },
 			ruby = { "rubocop" },
 			-- yaml = { "yamlfmt" },
 			-- ["eruby.yaml"] = { "yamlfmt" },
 			sg = { "xmlformat" },
+			injected = {},
 		},
 	},
 	init = function()

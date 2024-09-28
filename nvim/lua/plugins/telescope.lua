@@ -77,6 +77,20 @@ return {
 				},
 			}
 
+			local focus_preview = function(prompt_bufnr)
+				local action_state = require("telescope.actions.state")
+				local picker = action_state.get_current_picker(prompt_bufnr)
+				local prompt_win = picker.prompt_win
+				local previewer = picker.previewer
+				local winid = previewer.state.winid
+				local bufnr = previewer.state.bufnr
+				vim.keymap.set("n", "<Tab>", function()
+					vim.cmd(string.format("noautocmd lua vim.api.nvim_set_current_win(%s)", prompt_win))
+				end, { buffer = bufnr })
+				vim.cmd(string.format("noautocmd lua vim.api.nvim_set_current_win(%s)", winid))
+				-- api.nvim_set_current_win(winid)
+			end
+
 			require("telescope").setup({
 				defaults = {
 					initial_mode = "insert",
@@ -109,6 +123,7 @@ return {
 							["<C-l>"] = layout_actions.cycle_layout_next,
 							["P"] = layout_actions.toggle_preview,
 							["?"] = actions.which_key,
+							["<Tab>"] = focus_preview,
 						},
 					},
 				},

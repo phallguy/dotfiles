@@ -82,6 +82,9 @@ return {
 							style = "none",
 							padding = { 2, 4 },
 						},
+						win_options = {
+							winblend = 0,
+						},
 					},
 					popup = {
 						enabled = true,
