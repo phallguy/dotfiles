@@ -18,7 +18,6 @@ return {
 	{
 		-- https://github.com/sindrets/diffview.nvim
 		"sindrets/diffview.nvim",
-		lazy = true,
 		cmd = {
 			"DiffviewOpen",
 			"DiffviewFileHistory",
@@ -40,10 +39,6 @@ return {
 				diff_buf_win_enter = function(bufnr)
 					vim.keymap.set("n", "q", "<CMD>DiffviewClose<CR>", { buffer = bufnr })
 				end,
-				diff_buf_read = function(bufnr)
-					-- Change local options in diff buffers
-					-- vim.opt_local.wrap = true
-				end,
 			},
 			keymaps = {
 				file_panel = {
@@ -51,39 +46,5 @@ return {
 				},
 			},
 		},
-	},
-
-	{
-		"isakbm/gitgraph.nvim",
-		---@type i.ggconfig
-		cmd = {
-			"GitGraph",
-		},
-		config = function()
-			require("gitgraph").setup({
-				symbols = {
-					merge_commit = "",
-					commit = "",
-				},
-				format = {
-					timestamp = "%h:%m:%s %d-%m-%y",
-					fields = { "hash", "timestamp", "author", "branch_name", "tag" },
-				},
-				hooks = {
-					-- check diff of a commit
-					on_select_commit = function(commit)
-						vim.cmd(":DiffviewOpen " .. commit.hash .. "^!")
-					end,
-					-- check diff from commit a -> commit b
-					on_select_range_commit = function(from, to)
-						vim.cmd(":DiffviewOpen " .. from.hash .. "~1.." .. to.hash)
-					end,
-				},
-			})
-
-			vim.api.nvim_create_user_command("GitGraph", function()
-				require("gitgraph").draw({}, { all = true, max_count = 500 })
-			end, {})
-		end,
 	},
 }

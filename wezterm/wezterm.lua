@@ -1,6 +1,8 @@
 -- https://wezfurlong.org/wezterm/config/files/
 local wezterm = require("wezterm")
 
+local hyperlinks = wezterm.default_hyperlink_rules()
+
 return {
 	-- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=terminfo
 	term = "wezterm",
@@ -58,9 +60,9 @@ return {
 	-- font = wezterm.font(font_family, { weight="Medium" }),
 	font_size = 14,
 	line_height = 1.125,
-	-- cell_width = 0.90,
+	cell_width = 0.95,
 	-- freetype_load_flags = "DEFAULT",
-	-- freetype_load_target = "Light",
+	freetype_load_target = "Light",
 	-- freetype_render_target = "HorizontalLcd",
 	allow_square_glyphs_to_overflow_width = "Never",
 	-- font_antialias = "Subpixel",
@@ -104,12 +106,12 @@ return {
 	},
 	window_padding = {
 		top = 0,
-		left = 0,
-		right = 0,
+		left = 4,
+		right = 2,
 		bottom = 0,
 	},
 	webgpu_power_preference = "HighPerformance",
-	window_decorations = "RESIZE",
+	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	command_palette_bg_color = "#202331",
 	macos_window_background_blur = 35,
 	window_background_opacity = 0.95,
@@ -156,6 +158,7 @@ return {
 			action = wezterm.action.PaneSelect,
 		},
 	},
+	hyperlink_rules = hyperlinks,
 	-- Allow CMD key in neovim
 	enable_kitty_keyboard = true,
 	enable_csi_u_key_encoding = true,

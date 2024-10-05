@@ -7,7 +7,6 @@ return {
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-context",
 			"m-demare/hlargs.nvim",
 			"windwp/nvim-ts-autotag",
 		},
@@ -28,6 +27,10 @@ return {
 					"query",
 					"html",
 					"ruby",
+					"html",
+					"scss",
+					"javascript",
+					"typescript",
 				},
 				-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 				auto_install = true,
@@ -167,9 +170,8 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		lazy = true,
 		opts = {
-			enable = true,
+			enable = false,
 			max_lines = 4,
 		},
 	}, -- Show function/scope in windowbar

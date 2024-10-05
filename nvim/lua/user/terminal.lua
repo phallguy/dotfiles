@@ -24,8 +24,8 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 
 		vim.api.nvim_buf_call(event.buf, function()
 			-- vim.opt_local.number = true
-			vim.opt_local.wrap = true
-			vim.opt_local.signcolumn = "no"
+			-- vim.opt_local.wrap = true
+			-- vim.opt_local.signcolumn = "no"
 		end)
 	end,
 })

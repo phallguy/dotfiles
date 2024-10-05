@@ -74,7 +74,7 @@ return {
 				group = group,
 				pattern = { "neotest-attach", "neotest-output", "neotest-output-panel" },
 				callback = function(e)
-					vim.opt_local.wrap = true
+					-- vim.opt_local.wrap = true
 				end,
 			})
 
@@ -117,8 +117,8 @@ return {
 				},
 				status = {
 					enabled = true,
-					signs = false,
-					virtual_text = true,
+					signs = true,
+					virtual_text = false,
 				},
 				summary = {
 					follow = true,

@@ -4,5 +4,11 @@
     "body": [
       "tap { |obj| debugger }"
     ]
+  },
+  "Debugger if": {
+    "prefix": "dbgif",
+    "body": [
+      "tap { |obj| debugger if Debug.instance.debug? }"
+    ]
   }
 }
