@@ -8,7 +8,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"m-demare/hlargs.nvim",
-			"windwp/nvim-ts-autotag",
+			"RRethy/nvim-treesitter-endwise",
 		},
 		build = ":TSUpdate",
 		config = function()
@@ -61,11 +61,11 @@ return {
 					},
 				},
 				matchup = {
-					enabled = false,
-					enable_quotes = true,
+					enable = true,
+					include_match_words = true,
 				},
 				endwise = {
-					enable = false,
+					enable = true,
 				},
 				textobjects = {
 					select = {
@@ -147,7 +147,7 @@ return {
 					enable_close_on_slash = true,
 				},
 				aliases = {
-					["eruby"] = "html",
+					-- ["eruby"] = "html",
 				},
 			})
 		end,
@@ -158,23 +158,13 @@ return {
 		lazy = true,
 	},
 
-	{
-		"RRethy/nvim-treesitter-endwise",
-		lazy = true,
-	},
-
 	-- {
-	-- 	"nvim-treesitter/nvim-treesitter-textobjects",
-	-- 	lazy = true
-	-- },
-
-	{
-		"nvim-treesitter/nvim-treesitter-context",
-		opts = {
-			enable = false,
-			max_lines = 4,
-		},
-	}, -- Show function/scope in windowbar
+	-- 	"nvim-treesitter/nvim-treesitter-context",
+	-- 	opts = {
+	-- 		enable = true,
+	-- 		max_lines = 4,
+	-- 	},
+	-- }, -- Show function/scope in windowbar
 
 	{
 		"m-demare/hlargs.nvim",

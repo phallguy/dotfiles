@@ -37,6 +37,7 @@ return {
 					},
 				},
 				lualine_b = {
+					{ "diff" },
 					{
 						"%{expand('%:~:.:h')}",
 					},

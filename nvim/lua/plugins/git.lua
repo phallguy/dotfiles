@@ -28,7 +28,7 @@ return {
 			DiffviewOpen = { "--imply-local" },
 			view = {
 				default = {
-					winbar_info = true,
+					winbar_info = false,
 					disable_diagnostics = true,
 				},
 				merge_tool = {

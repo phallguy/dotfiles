@@ -2,8 +2,6 @@ if vim.g.vscode then
 	return {}
 end
 
-vim.g.loaded_matchit = 1
-
 return {
 	-- Multi cursors
 	{
@@ -40,7 +38,8 @@ return {
 		"andymass/vim-matchup",
 		config = function()
 			vim.g.matchup_matchparen_deferred = 1 -- work async
-			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+			vim.g.matchup_matchparen_offscreen = {}
+			vim.g.matchup_matchparen_stopline = 1000
 		end,
 	},
 
