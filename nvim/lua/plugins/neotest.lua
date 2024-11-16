@@ -10,6 +10,7 @@ return {
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"zidhuss/neotest-minitest",
+			"olimorris/neotest-rspec",
 			"marilari88/neotest-vitest",
 		},
 		config = function()
@@ -94,6 +95,7 @@ return {
 							return name ~= "node_modules"
 						end,
 					}),
+					require("neotest-rspec"),
 				},
 				icons = {
 					passed = icons.test.passed,

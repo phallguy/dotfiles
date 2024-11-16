@@ -1,5 +1,4 @@
 local icons = require("user.icons")
-local util = require("user.util")
 
 return {
 	{
@@ -24,6 +23,13 @@ return {
 			-- normal mode is default
 			{
 				"<leader>db",
+				function()
+					require("dap").toggle_breakpoint()
+				end,
+				desc = "Debug toggle breakpoint",
+			},
+			{
+				"<F9>",
 				function()
 					require("dap").toggle_breakpoint()
 				end,
@@ -56,6 +62,13 @@ return {
 				desc = "Debug toggle virtual text",
 			},
 			{
+				"<F5>",
+				function()
+					require("dap").continue()
+				end,
+				desc = "Debug continue",
+			},
+			{
 				"<D-\\>",
 				function()
 					require("dap").continue()
@@ -70,6 +83,13 @@ return {
 				desc = "Debug step over",
 			},
 			{
+				"<F10>",
+				function()
+					require("dap").step_over()
+				end,
+				desc = "Debug step over",
+			},
+			{
 				"<D-;>",
 				function()
 					require("dap").step_into()
@@ -77,7 +97,21 @@ return {
 				desc = "Debug step into",
 			},
 			{
+				"<F11>",
+				function()
+					require("dap").step_into()
+				end,
+				desc = "Debug step into",
+			},
+			{
 				"<DMS-;>",
+				function()
+					require("dap").run_to_cursor()
+				end,
+				desc = "Debug run to cursor",
+			},
+			{
+				"<S-F5>",
 				function()
 					require("dap").run_to_cursor()
 				end,
@@ -96,7 +130,7 @@ return {
 					require("dap.ui.widgets").hover()
 				end,
 				mode = { "n", "v" },
-				desc = "Debug Widgets",
+				desc = "Debug Hover",
 			},
 			{
 				"<leader>di",
@@ -164,6 +198,20 @@ return {
 					-- `--inspect` for longrunning tasks or `--inspect-brk` for short tasks
 					-- npm script -> `node --inspect-brk ./node_modules/.bin/vite dev`
 					--
+					--
+					language == "javascript"
+							and {
+								-- use nvim-dap-vscode-js's pwa-node debug adapter
+								type = "pwa-node",
+								-- launch a new process to attach the debugger to
+								request = "launch",
+								-- name of the debug action you have to select for this config
+								name = "Run file",
+								-- launch current file
+								program = "${file}",
+								cwd = "${workspaceFolder}",
+							}
+						or nil,
 					{
 						type = "pwa-node",
 						request = "attach",
@@ -178,57 +226,44 @@ return {
 						restart = true,
 						autoAttachChildProcesses = true,
 					},
-					{
-						-- use nvim-dap-vscode-js's pwa-node debug adapter
-						type = "pwa-node",
-						-- attach to an already running node process with --inspect flag
-						-- default port: 9222
-						request = "attach",
-						-- allows us to pick the process using a picker
-						processId = require("dap.utils").pick_process,
-						-- name of the debug action you have to select for this config
-						name = "Attach debugger to existing `node --inspect` process",
-						-- for compiled languages like TypeScript or Svelte.js
-						sourceMaps = true,
-						-- resolve source maps in nested locations while ignoring node_modules
-						resolveSourceMapLocations = {
-							"${workspaceFolder}/**",
-							"!**/node_modules/**",
-						},
-						-- path to src in vite based projects (and most other projects as well)
-						cwd = vim.fn.getcwd(),
-						-- we don't want to debug code inside node_modules, so skip it!
-						skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
-						continueOnAttach = true,
-						restart = true,
-						autoAttachChildProcesses = true,
-					},
-					{
-						type = "pwa-chrome",
-						name = "Launch Chrome to debug client",
-						request = "launch",
-						url = "http://localhost:5173",
-						sourceMaps = true,
-						protocol = "inspector",
-						port = 9222,
-						cwd = vim.fn.getcwd(),
-						-- skip files from vite's hmr
-						skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" },
-					},
+					-- {
+					-- 	-- use nvim-dap-vscode-js's pwa-node debug adapter
+					-- 	type = "pwa-node",
+					-- 	-- attach to an already running node process with --inspect flag
+					-- 	-- default port: 9222
+					-- 	request = "attach",
+					-- 	-- allows us to pick the process using a picker
+					-- 	processId = require("dap.utils").pick_process,
+					-- 	-- name of the debug action you have to select for this config
+					-- 	name = "Attach debugger to existing `node --inspect` process",
+					-- 	-- for compiled languages like TypeScript or Svelte.js
+					-- 	sourceMaps = true,
+					-- 	-- resolve source maps in nested locations while ignoring node_modules
+					-- 	resolveSourceMapLocations = {
+					-- 		"${workspaceFolder}/**",
+					-- 		"!**/node_modules/**",
+					-- 	},
+					-- 	-- path to src in vite based projects (and most other projects as well)
+					-- 	cwd = vim.fn.getcwd(),
+					-- 	-- we don't want to debug code inside node_modules, so skip it!
+					-- 	skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
+					-- 	continueOnAttach = true,
+					-- 	restart = true,
+					-- 	autoAttachChildProcesses = true,
+					-- },
+					-- {
+					-- 	type = "pwa-chrome",
+					-- 	name = "Launch Chrome to debug client",
+					-- 	request = "launch",
+					-- 	url = "http://localhost:5173",
+					-- 	sourceMaps = true,
+					-- 	protocol = "inspector",
+					-- 	port = 9222,
+					-- 	cwd = vim.fn.getcwd(),
+					-- 	-- skip files from vite's hmr
+					-- 	skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" },
+					-- },
 					-- only if language is javascript, offer this debug action
-					language == "javascript"
-							and {
-								-- use nvim-dap-vscode-js's pwa-node debug adapter
-								type = "pwa-node",
-								-- launch a new process to attach the debugger to
-								request = "launch",
-								-- name of the debug action you have to select for this config
-								name = "Launch file in new node process",
-								-- launch current file
-								program = "${file}",
-								cwd = "${workspaceFolder}",
-							}
-						or nil,
 				}
 			end
 
@@ -332,34 +367,27 @@ return {
 			require("nvim-dap-repl-highlights").setup()
 
 			dap.listeners.after.event_initialized["dapui_config"] = function()
-				util.invoke_cmd_with_cursor(function()
-					-- require("neotest").summary.close()
-					-- require("overseer").close()
-					dap.repl.open({
-						height = 12,
-					})
-				end)
+				require("dapui").toggle()
 			end
+
 			dap.listeners.before.event_terminated["dapui_config"] = function()
-				util.invoke_cmd_with_cursor(function()
 					dapui.close()
-				end)
 			end
 			dap.listeners.before.event_exited["dapui_config"] = function()
-				util.invoke_cmd_with_cursor(function()
 					dapui.close()
-				end)
 			end
 
 			vim.fn.sign_define(
 				"DapBreakpoint",
 				{ text = icons.dap.Breakpoint, texthl = "DapBreakpoint", numhl = "DapBreakpoint" }
 			)
+
 			vim.fn.sign_define("DapBreakpointCondition", {
 				text = icons.dap.BreakpointCondition,
 				texthl = "DapBreakpointCondition",
 				numhl = "DapBreakpointCondition",
 			})
+
 			vim.fn.sign_define(
 				"DapStopped",
 				{ text = icons.dap.Stopped, texthl = "DapStopped", numhl = "DapStopped", linehl = "DapStoppedLine" }

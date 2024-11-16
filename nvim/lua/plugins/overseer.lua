@@ -5,10 +5,7 @@ return {
 			{
 				"<leader>k",
 				function()
-					local util = require("user.util")
-					util.invoke_cmd_with_cursor(function()
 						require("overseer").toggle({ enter = true })
-					end)
 				end,
 				{ desc = "Toggle overseer" },
 			},

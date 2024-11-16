@@ -13,9 +13,9 @@
 [core]
   autocrlf = false
   excludesfile = /Users/paulalexander/.gitignore_global
-  preloadIndex = false
-  fsmonitor = true
-  untrackedCache = true
+  ; preloadIndex = false
+  ; fsmonitor = true
+  ; untrackedCache = true
   ; pager = delta
 
 ; [interactive]
@@ -31,6 +31,13 @@
 [filter "hawser"]
   clean = git hawser clean %f
   smudge = git hawser smudge %f
+  required = true
+
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
   required = true
 
 [http]
@@ -57,7 +64,6 @@
   st = status
   co = checkout --recurse-submodules
   br = checkout --no-track -b
-  brd = !git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/heads | column -s '|' -t
   m = merge
   mn = merge --no-ff --no-commit
   rbc = rebase --continue
@@ -73,33 +79,21 @@
   lg = log --graph --decorate
   pushf = push origin HEAD --force-with-lease --no-verify
   pusho = push origin HEAD
-  s = show
   todo = diff head~ -Sfail -STODO
-
 
 [diff]
   renames = true
   colorMoved = default
-	tool = difftastic
-	algorithm = histogram
-	external = difft
+  algorithm = histogram
 
 [difftool]
   prompt = false
-
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
-
-[difftool "vimdiff"]
-	path = nvim
 
 [merge]
   conflictstyle = diff3
 
 [mergetool]
   prompt = true
-
-# Kaleidoscope
 
 [delta]
   navigate = true    # use n and N to move between diff sections
@@ -113,12 +107,3 @@
   hunk-header-file-style = ""
   hunk-header-line-number-style = ""
   hunk-header-style = omit
-
-[pager]
-  difftool = true
-
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true

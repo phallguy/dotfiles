@@ -78,6 +78,7 @@ return {
 				priority = 160,
 			},
 		})
+
 		require("mini.indentscope").setup({
 			symbol = "│",
 			options = {

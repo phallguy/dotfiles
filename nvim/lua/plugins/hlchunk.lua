@@ -1,6 +1,7 @@
 return {
 	{
 		"shellRaining/hlchunk.nvim",
+		-- enabled = false,
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("hlchunk").setup({
@@ -9,6 +10,7 @@ return {
 					duration = 0,
 					delay = 0,
 					textobject = "ac",
+					use_treesitter = true,
 					chars = {
 						horizontal_line = "─",
 						vertical_line = "│",
@@ -17,12 +19,6 @@ return {
 						right_arrow = ">",
 					},
 				},
-				indent = {
-					-- enable = true,
-				},
-				-- line_num = {
-				-- 	enable = true,
-				-- },
 			})
 		end,
 	},

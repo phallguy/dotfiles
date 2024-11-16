@@ -4,6 +4,7 @@ return {
 		dependencies = {
 			"tpope/vim-projectionist",
 		},
+		enabled = false,
 		config = function()
 			-- disable autocmd set filetype=eruby.yaml
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {

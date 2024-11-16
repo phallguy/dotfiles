@@ -12,16 +12,16 @@ require("mason").setup({
 })
 
 -- require("user.lsp.servers.solargraph")
-require("user.lsp.servers.ts_ls")
-require("user.lsp.servers.rust")
-require("user.lsp.servers.html")
+-- require("user.lsp.servers.ts_ls")
+-- require("user.lsp.servers.rust")
+-- require("user.lsp.servers.html")
 require("user.lsp.servers.ruby-lsp")
 -- require("user.lsp.servers.rubocop")
 -- require("user.lsp.servers.typos")
 -- require("user.lsp.servers.markdown")
-require("user.lsp.servers.markdown-oxide")
+-- require("user.lsp.servers.markdown-oxide")
 
-require("mason-tool-installer").setup({})
+-- require("mason-tool-installer").setup({})
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require("mason-lspconfig")

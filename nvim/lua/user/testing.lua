@@ -1,4 +1,3 @@
-local util = require("user.util")
 local open_overseer = false
 
 local function invoke_test_cmd(fn)
@@ -10,10 +9,8 @@ end
 vim.keymap.set("n", "<leader>tf", function()
 	invoke_test_cmd(function()
 		if open_overseer then
-			util.invoke_cmd_with_cursor(function()
 				require("overseer").open({ enter = false })
 				require("neotest").run.run(vim.fn.expand("%"))
-			end)
 		else
 			require("neotest").run.run(vim.fn.expand("%"))
 		end
@@ -29,10 +26,8 @@ end, { desc = "Debug File" })
 vim.keymap.set("n", "<leader>tc", function()
 	invoke_test_cmd(function()
 		if open_overseer then
-			util.invoke_cmd_with_cursor(function()
 				require("overseer").open({ enter = false })
 				require("neotest").run.run()
-			end)
 		else
 			require("neotest").run.run()
 		end

@@ -12,7 +12,7 @@ local cmp = require("cmp")
 
 cmp.setup({
 	experimental = {
-		ghost_text = true,
+		-- ghost_text = true,
 	},
 	window = {
 		completion = cmp.config.window.bordered(),
@@ -135,7 +135,7 @@ cmp.setup.filetype({ "sql" }, {
 })
 
 ls.config.set_config({
-	history = false,
+	-- history = false,
 	updateevents = "TextChanged,TextChangedI",
 })
 -- ls.log.set_loglevel("debug")

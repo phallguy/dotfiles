@@ -8,7 +8,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"m-demare/hlargs.nvim",
-			"RRethy/nvim-treesitter-endwise",
+			-- "RRethy/nvim-treesitter-endwise",
 		},
 		build = ":TSUpdate",
 		config = function()
@@ -25,12 +25,6 @@ return {
 					"markdown_inline",
 					"regex",
 					"query",
-					"html",
-					"ruby",
-					"html",
-					"scss",
-					"javascript",
-					"typescript",
 				},
 				-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 				auto_install = true,
@@ -64,9 +58,9 @@ return {
 					enable = true,
 					include_match_words = true,
 				},
-				endwise = {
-					enable = true,
-				},
+				-- endwise = {
+				-- 	enable = true,
+				-- },
 				textobjects = {
 					select = {
 						enable = true,
@@ -138,7 +132,6 @@ return {
 
 	{
 		"windwp/nvim-ts-autotag",
-		lazy = true,
 		config = function()
 			require("nvim-ts-autotag").setup({
 				opts = {
@@ -147,7 +140,7 @@ return {
 					enable_close_on_slash = true,
 				},
 				aliases = {
-					-- ["eruby"] = "html",
+					["eruby"] = "html",
 				},
 			})
 		end,

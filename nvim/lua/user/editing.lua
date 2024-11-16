@@ -113,19 +113,6 @@ vim.g["qfenter_keymap"] = {
 
 -- Theming
 
-vim.cmd([[
-augroup HighlightSyntax
-	autocmd!
-	function! SynStack()
-		if !exists("*synstack")
-			return
-		endif
-		echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-	endfunc
-augroup END
-]])
-
-vim.keymap.set("n", "<leader>hv", "<CMD>call SynStack()<CR>", { desc = "Vim highlights under cursor" })
 vim.keymap.set("n", "<leader>hl", "<CMD>Telescope highlights<CR>", { desc = "All highlights" })
 vim.keymap.set("n", "<leader>hi", "<CMD>Inspect<CR>", { desc = "Inspect highlights" })
 
