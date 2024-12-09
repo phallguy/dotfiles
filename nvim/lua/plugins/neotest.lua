@@ -48,6 +48,7 @@ return {
 				}
 
 				if args.strategy == "dap" then
+					vim.notify("dap strategy")
 					original.strategy = {
 						name = "Run test",
 						command = original.command[1],

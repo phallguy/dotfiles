@@ -42,7 +42,7 @@ return {
 				},
 				default_component_configs = {
 					container = {
-						enable_character_fade = false,
+						-- enable_character_fade = false,
 					},
 					modified = {
 						symbol = "",
@@ -98,6 +98,7 @@ return {
 							["d"] = "add_directory",
 							["D"] = "delete",
 							["gq"] = "image_preview",
+							["f"] = "noop",
 						},
 					},
 					hijack_netrw_behavior = "open_current",

@@ -20,10 +20,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-	group = augroup("checktime"),
-	command = "checktime",
-})
+-- vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+-- 	group = augroup("checktime"),
+-- 	command = "checktime",
+-- })
 
 -- Auto save on blur
 vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {

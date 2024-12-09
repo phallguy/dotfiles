@@ -7,6 +7,8 @@ return {
 	-- https://wezfurlong.org/wezterm/config/lua/config/term.html?h=terminfo
 	term = "wezterm",
 	front_end = "WebGpu",
+	max_fps = 250,
+	prefer_egl = false,
 	-- Appearance ===
 	--
 	-- Fonts
@@ -58,16 +60,17 @@ return {
 		},
 	},
 	-- font = wezterm.font(font_family, { weight="Medium" }),
-	font_size = 14,
-	line_height = 1.0625,
-	cell_width = 0.90,
+	font_size = 15,
+	-- line_height = 1.125,
+	-- cell_width = 0.90,
 	-- freetype_load_flags = "DEFAULT",
-	freetype_load_target = "Light",
+	-- freetype_load_target = "Light",
 	-- freetype_render_target = "HorizontalLcd",
 	allow_square_glyphs_to_overflow_width = "Never",
 	-- font_antialias = "Subpixel",
 	-- colors
 	color_scheme = "rose-pine-moon",
+	-- color_scheme = "matrix",
 	window_frame = {
 		font = wezterm.font_with_fallback({
 			-- <built-in>, BuiltIn
@@ -88,7 +91,7 @@ return {
 		active_titlebar_bg = "#2a273f",
 	},
 	colors = {
-		selection_bg = "#22385f",
+		selection_bg = "#f040ed",
 		cursor_bg = "#c4a7e7",
 		-- cursor_bg = "#ebbcba",
 		tab_bar = {

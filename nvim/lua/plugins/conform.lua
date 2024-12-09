@@ -57,6 +57,9 @@ return {
 			-- yamlfmt = {
 			-- 	prepend_args = {},
 			-- },
+			injected = {
+				options = { ignore_errors = true },
+			},
 		},
 		formatters_by_ft = {
 			lua = { "stylua" },

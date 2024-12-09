@@ -31,7 +31,7 @@ return {
 			vim.keymap.set("n", "<CS-P>", oldfiles, { desc = "Recent files" })
 			vim.keymap.set("n", "<MS-P>", oldfiles, { desc = "Recent files" }) -- sloppy keys
 
-			vim.keymap.set("n", "<leader>lf", builtin.current_buffer_fuzzy_find, { desc = "Find in buffer" })
+			vim.keymap.set("n", "<leader>fb", builtin.current_buffer_fuzzy_find, { desc = "Find in buffer" })
 
 			vim.keymap.set(
 				"n",
@@ -45,9 +45,6 @@ return {
 				require("telescope-live-grep-args.shortcuts").grep_word_under_cursor,
 				{ desc = "Live grep" }
 			)
-			vim.keymap.set("n", "<leader>fb", function()
-				return require("telescope.builtin").live_grep({ grep_open_files = true })
-			end, { desc = "Live grep buffers" })
 			vim.keymap.set("n", "<leader>fr", function()
 				require("grug-far").with_visual_selection({
 					transient = true,
@@ -215,7 +212,6 @@ return {
 		-- NOTE: If you are having trouble with this installation,
 		--       refer to the README for telescope-fzf-native for more instructions.
 		"nvim-telescope/telescope-fzf-native.nvim",
-		lazy = true,
 		build = "make",
 		cond = function()
 			return vim.fn.executable("make") == 1
@@ -225,10 +221,8 @@ return {
 	-- refine live grep
 	{
 		"nvim-telescope/telescope-live-grep-args.nvim",
-		lazy = true,
 	},
 	{
 		"xiyaowong/telescope-emoji.nvim",
-		lazy = true,
 	},
 }

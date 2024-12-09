@@ -33,7 +33,7 @@ return {
 					-- CursorLine = { ctermfg = "white" },
 					MiniIndentscopeSymbol = { fg = "highlight_med" },
 					Folded = { fg = "highlight_high" },
-					Visual = { bg = "pine", blend = 50 },
+					Visual = { bg = "#f040ed", blend = 60 },
 					WinSeparator = { fg = "highlight_low", bold = true },
 					Comment = { fg = "muted" },
 

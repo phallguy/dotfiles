@@ -2,7 +2,7 @@ return {
 	{
 		"shellRaining/hlchunk.nvim",
 		-- enabled = false,
-		event = { "BufReadPre", "BufNewFile" },
+		-- event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("hlchunk").setup({
 				chunk = {
@@ -18,6 +18,7 @@ return {
 						left_bottom = "╰",
 						right_arrow = ">",
 					},
+					exclude_fileypes = { "*" },
 				},
 			})
 		end,

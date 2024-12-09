@@ -80,19 +80,7 @@ vim.keymap.set("n", "<leader>O", function()
 	end
 end, { desc = "Hard Close all but this", silent = true })
 
--- -- Keep selection after indenting
-vim.keymap.set("v", "<", "<gv", { noremap = true })
-vim.keymap.set("v", ">", ">gv", { noremap = true })
-
 vim.keymap.set({ "n", "v" }, "<C-a>", "ggVGG", { desc = "Select all" })
-
--- Move current line / block with Alt-j/k ala vscode.
--- vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
--- vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
--- vim.keymap.set("n", "<CA-J>", "<CMD>m .+1<CR>==")
--- vim.keymap.set("n", "<CA-K>", "<CMD>m .-2<CR>==")
--- vim.keymap.set("v", "<CA-J>", "<CMD>m '>+1<CR>gv-gv")
--- vim.keymap.set("v", "<CA-K>", "<CMD>m '<-2<CR>gv-gv")
 
 -- Open file in VS Code
 vim.keymap.set(

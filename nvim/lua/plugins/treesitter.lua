@@ -7,8 +7,8 @@ return {
 		-- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"m-demare/hlargs.nvim",
-			-- "RRethy/nvim-treesitter-endwise",
+			-- "m-demare/hlargs.nvim",
+			"andymass/vim-matchup",
 		},
 		build = ":TSUpdate",
 		config = function()
@@ -25,6 +25,7 @@ return {
 					"markdown_inline",
 					"regex",
 					"query",
+					"embedded_template",
 				},
 				-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 				auto_install = true,
@@ -58,9 +59,6 @@ return {
 					enable = true,
 					include_match_words = true,
 				},
-				-- endwise = {
-				-- 	enable = true,
-				-- },
 				textobjects = {
 					select = {
 						enable = true,
@@ -148,7 +146,11 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
-		lazy = true,
+	},
+
+	{
+		"andymass/vim-matchup",
+		setup = function() end,
 	},
 
 	-- {
@@ -159,13 +161,12 @@ return {
 	-- 	},
 	-- }, -- Show function/scope in windowbar
 
-	{
-		"m-demare/hlargs.nvim",
-		lazy = true,
-		opts = {
-			extras = {
-				named_parameters = true,
-			},
-		},
-	}, -- Highlight method args separately
+	-- {
+	-- 	"m-demare/hlargs.nvim",
+	-- 	opts = {
+	-- 		extras = {
+	-- 			named_parameters = true,
+	-- 		},
+	-- 	},
+	-- }, -- Highlight method args separately
 }

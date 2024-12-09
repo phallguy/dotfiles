@@ -7,13 +7,15 @@ return {
 	-- Set lualine as statusline
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
+	dependencies = {
+		"archibate/lualine-time",
+	},
 	-- See `:help lualine.txt`
-	priority = 1010,
 	config = function()
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = "rose-pine",
+				-- theme = "rose-pine",
 				component_separators = { left = "  ", right = "" },
 				section_separators = { right = " ", left = "" },
 			},
@@ -21,6 +23,7 @@ return {
 				"quickfix",
 				"overseer",
 				"neo-tree",
+				"lazy",
 			},
 			sections = {
 				lualine_a = {
@@ -65,6 +68,7 @@ return {
 					{ "branch", icon = icons.git.Branch },
 				},
 				lualine_y = {
+					{ "%{strftime('%I:%M %p')}" },
 					{ "location", padding = { left = 1 } },
 				},
 				lualine_z = {
@@ -135,5 +139,7 @@ return {
 				lualine_z = {},
 			},
 		})
+
+		vim.o.laststatus = vim.g.lualine_laststatus
 	end,
 }

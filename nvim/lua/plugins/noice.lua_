@@ -5,19 +5,28 @@ end
 return {
 	{
 		"folke/noice.nvim",
-		event = "VeryLazy",
+		-- enabled = false,
 		config = function()
 			require("noice").setup({
 				-- debug = true,
 				notify = {
-					view = "mini",
+					-- view = "mini",
+					-- enabled = false,
+				},
+				messages = {
+					-- enabled = false,
 				},
 				lsp = {
+					enabled = false,
 					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 					override = {
 						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 						["vim.lsp.util.stylize_markdown"] = true,
 						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+					},
+
+					signature = {
+						enabled = false,
 					},
 
 					documentation = {
@@ -36,39 +45,39 @@ return {
 				},
 				signature = {},
 				views = {
-					mini = {
-						backend = "mini",
-						relative = "editor",
-						align = "message-right",
-						timeout = 3000,
-						-- reverse = true,
-						focusable = false,
-						position = {
-							row = -1,
-							col = "100%",
-							-- col = 0,
-						},
-						size = "auto",
-						border = {
-							style = "none",
-						},
-						zindex = 60,
-						win_options = {
-							winblend = 0,
-							-- winhighlight = {
-							-- 	Normal = "NoiceMini",
-							-- 	IncSearch = "",
-							-- 	CurSearch = "",
-							-- 	Search = "",
-							-- },
-						},
-					},
+					-- mini = {
+					-- 	backend = "mini",
+					-- 	relative = "editor",
+					-- 	align = "message-right",
+					-- 	timeout = 3000,
+					-- 	-- reverse = true,
+					-- 	focusable = false,
+					-- 	position = {
+					-- 		row = -1,
+					-- 		col = "100%",
+					-- 		-- col = 0,
+					-- 	},
+					-- 	size = "auto",
+					-- 	border = {
+					-- 		style = "none",
+					-- 	},
+					-- 	zindex = 60,
+					-- 	win_options = {
+					-- 		winblend = 0,
+					-- 		-- winhighlight = {
+					-- 		-- 	Normal = "NoiceMini",
+					-- 		-- 	IncSearch = "",
+					-- 		-- 	CurSearch = "",
+					-- 		-- 	Search = "",
+					-- 		-- },
+					-- 	},
+					-- },
 					cmdline_popup = {
-						backend = "popup",
-						relative = "editor",
-						focusable = false,
-						enter = false,
-						zindex = 60,
+						-- backend = "popup",
+						-- relative = "editor",
+						-- focusable = false,
+						-- enter = false,
+						-- zindex = 60,
 						position = {
 							row = "50%",
 							col = "50%",
@@ -82,9 +91,13 @@ return {
 							style = "none",
 							padding = { 2, 4 },
 						},
+						filter_options = {},
 						win_options = {
 							winblend = 0,
 						},
+					},
+					popupmenu = {
+						enabled = true,
 					},
 					popup = {
 						enabled = true,
