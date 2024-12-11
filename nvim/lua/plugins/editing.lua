@@ -19,13 +19,19 @@ return {
 	},
 
 	{
+		"junegunn/goyo.vim",
+		cmd = {
+			"Goyo",
+		},
+	},
+
+	{
 		"sheerun/vim-polyglot",
 		cond = not vim.g.vscode,
 		init = function()
 			vim.g.polyglot_disabled = { "autoindent", "sensible", "ftdetect" }
 		end,
 	},
-
 
 	{
 		"kjuq/sixelview.nvim",

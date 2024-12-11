@@ -212,9 +212,9 @@ return {
 		-- NOTE: If you are having trouble with this installation,
 		--       refer to the README for telescope-fzf-native for more instructions.
 		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "make",
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
 		cond = function()
-			return vim.fn.executable("make") == 1
+			return vim.fn.executable("cmake") == 1
 		end,
 	},
 
@@ -222,6 +222,7 @@ return {
 	{
 		"nvim-telescope/telescope-live-grep-args.nvim",
 	},
+
 	{
 		"xiyaowong/telescope-emoji.nvim",
 	},
