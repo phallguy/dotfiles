@@ -11,37 +11,13 @@ return {
 				-- debug = true,
 				notify = {
 					-- view = "mini",
-					-- enabled = false,
+					enabled = false,
 				},
 				messages = {
-					-- enabled = false,
+					enabled = true,
 				},
 				lsp = {
 					enabled = false,
-					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-					override = {
-						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-						["vim.lsp.util.stylize_markdown"] = true,
-						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-					},
-
-					signature = {
-						enabled = false,
-					},
-
-					documentation = {
-						opts = {
-							border = {
-								style = "rounded",
-								padding = { 0, 0 },
-							},
-							size = {
-								width = "auto",
-								height = "auto",
-								max_width = 80,
-							},
-						},
-					},
 				},
 				signature = {},
 				views = {
@@ -116,8 +92,6 @@ return {
 					},
 				},
 			})
-
-			vim.keymap.set("n", "<leader>m", "<CMD>NoiceTelescope<CR>", { desc = "Show last notice" })
 		end,
 		dependencies = {
 			"MunifTanjim/nui.nvim",
