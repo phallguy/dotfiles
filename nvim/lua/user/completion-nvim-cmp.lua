@@ -1,4 +1,5 @@
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "noselect", "noinsert" }
+-- vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.shortmess:append("c")
 
 local ls = require("luasnip")
@@ -12,15 +13,18 @@ local cmp = require("cmp")
 
 cmp.setup({
 	experimental = {
-		-- ghost_text = true,
+		ghost_text = true,
 	},
+	preselect = cmp.PreselectMode.Item,
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 	matching = {
-		--disallow_partial_fuzzy_matching = true,
-		--disallow_partial_matching = true,
+		-- disallow_partial_fuzzy_matching = true,
+		-- disallow_partial_matching = true,
+		disallow_prefix_unmatching = true,
+		disallow_symbol_nonprefix_matching = true,
 	},
 	sources = {
 		{
@@ -36,6 +40,7 @@ cmp.setup({
 			max_item_count = 7,
 			dup = 0,
 		},
+		{ name = "nvim_lsp_signature_help" },
 		{
 			name = "buffer",
 			keyword_length = 3,
@@ -56,10 +61,10 @@ cmp.setup({
 		},
 	},
 	mapping = {
-		["<C-n>"] = cmp.mapping.select_next_item(), -- { behavior = cmp.SelectBehavior.Insert }),
-		["<C-p>"] = cmp.mapping.select_prev_item(), -- { behavior = cmp.SelectBehavior.Insert }),
-		["<C-j>"] = cmp.mapping.select_next_item(), -- { behavior = cmp.SelectBehavior.Insert }),
-		["<C-k>"] = cmp.mapping.select_prev_item(), -- { behavior = cmp.SelectBehavior.Insert }),
+		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 		["<C-y>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
@@ -69,7 +74,7 @@ cmp.setup({
 			select = true,
 		}),
 		["<tab>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Insert,
+			behavior = cmp.SelectBehavior.Insert,
 			select = true,
 		}),
 		["<C-l>"] = cmp.mapping(function()
@@ -106,6 +111,12 @@ cmp.setup({
 
 			return vim_item
 		end,
+	},
+
+	view = {
+		docs = {
+			auto_open = true,
+		},
 	},
 })
 
@@ -152,17 +163,17 @@ end
 
 ls.filetype_extend("ruby", { "rails", "minitest" })
 
-vim.keymap.set({ "i", "s" }, "<c-k>", function()
-	if ls.expand_or_jumpable() then
-		ls.expand_or_jump()
-	end
-end, { silent = true })
-
-vim.keymap.set({ "i", "s" }, "<c-j>", function()
-	if ls.jumpable(-1) then
-		ls.jump(-1)
-	end
-end, { silent = true })
+-- vim.keymap.set({ "i", "s" }, "<c-k>", function()
+-- 	if ls.expand_or_jumpable() then
+-- 		ls.expand_or_jump()
+-- 	end
+-- end, { silent = true })
+--
+-- vim.keymap.set({ "i", "s" }, "<c-j>", function()
+-- 	if ls.jumpable(-1) then
+-- 		ls.jump(-1)
+-- 	end
+-- end, { silent = true })
 
 vim.keymap.set("n", "<leader>fs", function()
 	require("luasnip.loaders").edit_snippet_files()

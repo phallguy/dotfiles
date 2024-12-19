@@ -12,7 +12,7 @@ require("mason").setup({
 })
 
 -- require("user.lsp.servers.solargraph")
--- require("user.lsp.servers.ts_ls")
+require("user.lsp.servers.ts_ls")
 -- require("user.lsp.servers.rust")
 require("user.lsp.servers.html")
 require("user.lsp.servers.ruby-lsp")

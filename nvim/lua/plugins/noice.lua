@@ -18,8 +18,16 @@ return {
 				},
 				lsp = {
 					enabled = false,
+				  signature = {
+				    enabled = false,
+				  }
 				},
-				signature = {},
+				signature = {
+					enabled = false,
+				},
+				popupmenu = {
+					enabled = false,
+				},
 				views = {
 					-- mini = {
 					-- 	backend = "mini",

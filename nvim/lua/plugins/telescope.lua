@@ -104,7 +104,6 @@ return {
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
 							["<C-l>"] = layout_actions.cycle_layout_next,
-							["?"] = actions.which_key,
 							["<C-r>"] = actions.to_fuzzy_refine,
 							["<C-space>"] = function(prompt_bufnr)
 								require("telescope.actions.generate").refine(prompt_bufnr, {

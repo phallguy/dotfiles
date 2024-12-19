@@ -103,5 +103,10 @@ return {
 				line_right = "<CA-l>",
 			},
 		})
+
+		require("mini.sessions").setup({
+			autoread = false,
+			autowrite = true,
+		})
 	end,
 }

@@ -6,6 +6,18 @@ vim.g.maplocalleader = " "
 vim.g.loaded_matchit = 1
 vim.g.loaded_matchparen = 1
 
+-- THICC borders, here to avoid flash of tilds on start
+vim.opt.fillchars = {
+	horiz = "━",
+	horizup = "┻",
+	horizdown = "┳",
+	vert = "┃",
+	vertleft = "┫",
+	vertright = "┣",
+	verthoriz = "╋",
+	eob = " ",
+}
+
 require("user.options")
 
 -- Install package manager

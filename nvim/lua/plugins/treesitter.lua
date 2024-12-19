@@ -153,13 +153,13 @@ return {
 		setup = function() end,
 	},
 
-	-- {
-	-- 	"nvim-treesitter/nvim-treesitter-context",
-	-- 	opts = {
-	-- 		enable = true,
-	-- 		max_lines = 4,
-	-- 	},
-	-- }, -- Show function/scope in windowbar
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		opts = {
+			enable = true,
+			max_lines = 2,
+		},
+	}, -- Show function/scope in windowbar
 
 	-- {
 	-- 	"m-demare/hlargs.nvim",

@@ -114,7 +114,7 @@ return {
 		bottom = 0,
 	},
 	webgpu_power_preference = "HighPerformance",
-	window_decorations = "RESIZE",
+	window_decorations = "RESIZE | MACOS_FORCE_DISABLE_SHADOW",
 	command_palette_bg_color = "#202331",
 	macos_window_background_blur = 35,
 	-- window_background_opacity = 0.95,

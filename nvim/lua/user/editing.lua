@@ -120,18 +120,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- THICC borders
-vim.opt.fillchars = {
-	horiz = "━",
-	horizup = "┻",
-	horizdown = "┳",
-	vert = "┃",
-	vertleft = "┫",
-	vertright = "┣",
-	verthoriz = "╋",
-	eob = " ",
-}
-
 -- Alternate files
 vim.api.nvim_create_user_command("ProjectionistPreDetect", "call projectionist#activate()", {})
 
