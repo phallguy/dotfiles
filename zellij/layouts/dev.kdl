@@ -1,0 +1,28 @@
+layout {
+    tab name="nvim" {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        pane command="nvim"
+    }
+    // tab name="terminal" {
+    //   pane size=1 borderless=true {
+    //       plugin location="tab-bar"
+    //   }
+    //   pane {
+    //   }
+    //   pane size=1 borderless=true {
+    //       plugin location="status-bar"
+    //   }
+    // }
+    new_tab_template {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        pane
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+    }
+}
+

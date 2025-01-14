@@ -20,7 +20,7 @@ return {
 				styles = {
 					bold = true,
 					italic = true,
-					transparency = false,
+					transparency = true,
 				},
 				highlight_groups = {
 					LineNr = { fg = "highlight_med" },
@@ -74,6 +74,14 @@ return {
 					DiffviewNormal = { bg = "_nc" },
 					-- DiffviewNormal = { bg = "surface" },
 					DiffviewFilePanelSelected = { bg = "iris", fg = "gold", blend = 30, bold = true },
+
+					ConflictMarkerOurs = { bg = config.groups.git_delete, blend = 10, fg = "gold" },
+					ConflictMarkerTheirs = { bg = config.groups.git_add, blend = 10 },
+					ConflictMarkerCommonAncestorsHunk = { bg = config.groups.git_add, blend = 20 },
+					ConflictMarkerCommonAncestors = { bold = true, fg = "gold" },
+					-- ConflictMarkerSeparator = { fg = "gold", bold = true },
+					-- ConflictMarkerBegin = { fg = "gold", bold = true },
+					-- ConflictMarkerEnd = { fg = "gold", bold = true },
 
 					-- Matchparen
 					MatchParen = { fg = "gold", bg = "pine", blend = 50 },
@@ -135,6 +143,22 @@ return {
 					NeoTreeNormalNC = { bg = "_nc" },
 					-- NeoTreeNormal = { bg = "surface" },
 					-- NeoTreeNormalNC = { bg = "surface" },
+					--
+
+					-- Cmp
+					CmpItemKind = { fg = "pine" },
+					CmpNormal = { bg = "surface" },
+					-- CmpItemAbbrMatch = { fg = "iris" },
+					CmpItemAbbrMatchFuzzy = { fg = "iris" },
+
+					-- Markdown
+					MarkviewHeading1 = { fg = "love", bg = "love", blend = 20 },
+					MarkviewHeading2 = { fg = "gold", bg = "gold", blend = 20 },
+					MarkviewHeading3 = { fg = "rose", bg = "rose", blend = 20 },
+					MarkviewHeading4 = { fg = "pine", bg = "pine", blend = 20 },
+					MarkviewHeading5 = { fg = "foam", bg = "foam", blend = 20 },
+					MarkviewHeading6 = { fg = "iris", bg = "iris", blend = 20 },
+					MarkviewCode = { bg = "highlight_low" },
 				},
 			})
 		end,

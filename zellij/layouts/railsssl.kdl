@@ -1,0 +1,62 @@
+layout {
+  tab name="nvim" { 
+    pane size=1 borderless=true {
+        plugin location="tab-bar"
+    }
+    pane  command="nvim"
+    // pane size=1 borderless=true {
+    //     plugin location="status-bar"
+    // }
+  }
+
+  tab name="server" {
+    pane size=1 borderless=true {
+        plugin location="tab-bar"
+    }
+    pane {
+      command "zsh"
+      args "-c" "export HOST=https://www.bark.us; bin/rails s -b 0.0.0.0"
+    }
+    pane size=10 {
+      command "npx"
+      args "local-ssl-proxy" "--source" "443" "--target" "3000" "--hostname" "www.bark.us" "--key" "public/devcert/www.bark.us-key.pem" "--cert" "public/devcert/www.bark.us.pem"
+    }
+    // pane size=1 borderless=true {
+    //     plugin location="status-bar"
+    // }
+  }
+  tab name="jobs" {
+    pane size=1 borderless=true {
+        plugin location="tab-bar"
+    }
+    pane {
+      command "bin/bundle"
+      args "exec" "sidekiq" "-q" "default" "-q" "screen_time" "-q" "priority"
+      // start_suspended true
+    }
+    // pane size=1 borderless=true {
+    //     plugin location="status-bar"
+    // }
+  }
+
+  tab name="terminal" {
+    pane size=1 borderless=true {
+        plugin location="tab-bar"
+    }
+    pane {
+    }
+    pane size=1 borderless=true {
+        plugin location="status-bar"
+    }
+  }
+
+   new_tab_template {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        pane
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+   }
+}

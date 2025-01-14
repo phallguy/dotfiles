@@ -17,8 +17,15 @@ cmp.setup({
 	},
 	preselect = cmp.PreselectMode.Item,
 	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+		completion = {
+			border = "rounded",
+		},
+		documentation = {
+			border = "rounded",
+		},
+		signature = {
+			border = "rounded",
+		},
 	},
 	matching = {
 		-- disallow_partial_fuzzy_matching = true,
@@ -40,7 +47,7 @@ cmp.setup({
 			max_item_count = 7,
 			dup = 0,
 		},
-		{ name = "nvim_lsp_signature_help" },
+		-- { name = "nvim_lsp_signature_help" },
 		{
 			name = "buffer",
 			keyword_length = 3,
@@ -104,9 +111,19 @@ cmp.setup({
 		fields = { "kind", "abbr" },
 		format = function(entry, vim_item)
 			vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
-			vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
-			if vim_item.menu then
-				vim_item.menu = string.sub(string.gsub(vim_item.menu, "(^%s*)|(%s*$)", ""), 1, 50)
+			-- vim_item.abbr = string.sub(vim_item.abbr, 1, 50)
+			-- if vim_item.menu then
+			-- 	vim_item.menu = string.sub(string.gsub(vim_item.menu, "(^%s*)|(%s*$)", ""), 1, 50)
+			-- end
+			--
+			-- return vim_item
+			local highlights_info = require("colorful-menu").cmp_highlights(entry)
+
+			-- if highlight_info==nil, which means missing ts parser, let's fallback to use default `vim_item.abbr`.
+			-- What this plugin offers is two fields: `vim_item.abbr_hl_group` and `vim_item.abbr`.
+			if highlights_info ~= nil then
+				vim_item.abbr_hl_group = highlights_info.highlights
+				vim_item.abbr = highlights_info.text
 			end
 
 			return vim_item
@@ -115,7 +132,7 @@ cmp.setup({
 
 	view = {
 		docs = {
-			auto_open = true,
+			-- auto_open = true,
 		},
 	},
 })

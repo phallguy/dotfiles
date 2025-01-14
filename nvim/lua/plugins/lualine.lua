@@ -68,7 +68,6 @@ return {
 					{ "branch", icon = icons.git.Branch },
 				},
 				lualine_y = {
-					{ "%{strftime('%I:%M %p')}" },
 					{ "location", padding = { left = 1 } },
 				},
 				lualine_z = {

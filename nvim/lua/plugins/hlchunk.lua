@@ -18,7 +18,7 @@ return {
 						left_bottom = "╰",
 						right_arrow = ">",
 					},
-					exclude_fileypes = { "*" },
+					exclude_fileypes = { markdown = true },
 				},
 			})
 		end,

@@ -76,6 +76,7 @@ return {
 			-- ["eruby.yaml"] = { "yamlfmt" },
 			sg = { "xmlformat" },
 			injected = {},
+			kdl = { "kdlfmt" },
 		},
 	},
 	init = function()

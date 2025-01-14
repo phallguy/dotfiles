@@ -22,7 +22,7 @@ return {
 				enabled = true,
 			},
 			dashboard = {
-				enabled = true,
+				enabled = false,
 				width = 120,
 				sections = {
 					{

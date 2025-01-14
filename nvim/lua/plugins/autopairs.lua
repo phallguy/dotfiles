@@ -9,20 +9,20 @@ return {
 			check_ts = true,
 		})
 
-		local cmp_status_ok, cmp = pcall(require, "cmp")
-		if cmp_status_ok then
-			cmp.event:on(
-				"confirm_done",
-				require("nvim-autopairs.completion.cmp").on_confirm_done({
-					tex = false,
-					ruby = {
-						["("] = {
-							kind = {},
-						},
-					},
-				})
-			)
-		end
+		-- local cmp_status_ok, cmp = pcall(require, "cmp")
+		-- if cmp_status_ok then
+		-- 	cmp.event:on(
+		-- 		"confirm_done",
+		-- 		require("nvim-autopairs.completion.cmp").on_confirm_done({
+		-- 			tex = false,
+		-- 			ruby = {
+		-- 				["("] = {
+		-- 					kind = {},
+		-- 				},
+		-- 			},
+		-- 		})
+		-- 	)
+		-- end
 
 		npairs.add_rules(require("nvim-autopairs.rules.endwise-ruby"))
 

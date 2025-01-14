@@ -74,6 +74,7 @@ alias lg='lazygit'
 alias man='batman'
 alias sb='cd ~/paul.xheo@gmail.com - Google Drive/My Drive/Obsidian Vault; vi .'
 alias y='yazi'
+alias zel='zellij'
 
 function kan() {
   cd ~/dotfiles;
@@ -114,7 +115,79 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 export PATH=$PATH:/Users/paulalexander/.spicetify
 
-znap eval navi "navi widget zsh"
+function current_dir() {
+    local current_dir=$PWD
+    if [[ $current_dir == $HOME ]]; then
+        current_dir="~"
+    else
+        current_dir=${current_dir##*/}
+    fi
+    
+    echo $current_dir
+}
+
+function change_tab_title() {
+    local title=$1
+    command nohup zellij action rename-tab $title >/dev/null 2>&1
+}
+
+function set_tab_to_working_dir() {
+    local result=$?
+    local title=$(current_dir)
+    # uncomment the following to show the exit code after a failed command
+    # if [[ $result -gt 0 ]]; then
+    #     title="$title[$result]" 
+    # fi
+
+    change_tab_title $title
+}
+
+function set_tab_to_command_line() {
+    local cmdline=$1
+    change_tab_title $cmdline
+}
+
+if [[ -n $ZELLIJ ]]; then
+    add-zsh-hook precmd set_tab_to_working_dir
+    add-zsh-hook preexec set_tab_to_command_line
+fi
+
+ZELLIJ_AUTO_EXIT=true
+
+fpath=(
+  ~/dotfiles/zellij/completion,
+  "${fpath[@]}"
+)
+
+# znap eval navi "navi widget zsh"
 znap eval mise "~/.local/bin/mise activate zsh"
 znap eval atuin "atuin init zsh --disable-up-arrow"
 znap eval starship "starship init zsh"
+
+function zn () {
+  if [ ! $# -eq 0 ]; then
+    z "$*"
+  fi
+
+  if [ -f ./.zellij-layout ]; then
+    zellij -n $(cat .zellij-layout) -s $(basename $(pwd))
+  else
+    zellij -n dev -s $(basename $(pwd))
+  fi
+}
+function za () { zellij attach "$*"; }
+function zl () { zellij ls;}
+function zw () { zellij -l welcome;}
+function zr () { zellij run --name "$*" -- zsh -ic "$*";}
+function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
+function zri () { zellij run --name "$*" --in-place -- zsh -ic "$*";}
+function ze () { zellij edit "$*";}
+function zef () { zellij edit --floating "$*";}
+function zei () { zellij edit --in-place "$*";}
+function zpipe () { 
+  if [ -z "$1" ]; then
+    zellij pipe;
+  else 
+    zellij pipe -p $1;
+  fi
+}

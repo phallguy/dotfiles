@@ -144,7 +144,8 @@ alt-shift-r = ['move-node-to-workspace R','workspace R']
 
 
 # App launching
-alt-t = 'exec-and-forget open /Applications/WezTerm.app'
+# alt-t = 'exec-and-forget open /Applications/WezTerm.app'
+alt-t = 'exec-and-forget open /Applications/Ghostty.app'
 alt-w = 'exec-and-forget open /Applications/Arc.app'
 alt-i = 'exec-and-forget open /System/Applications/Messages.app'
 alt-s = 'exec-and-forget open /Applications/Slack.app'
