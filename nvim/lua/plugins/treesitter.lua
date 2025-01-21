@@ -60,6 +60,7 @@ return {
 					include_match_words = true,
 				},
 				textobjects = {
+					enable = false,
 					select = {
 						enable = true,
 						lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
@@ -104,15 +105,15 @@ return {
 							["[S"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
 						},
 					},
-					playground = {
-						enable = true,
-						updatetime = 25,
-					},
-					query_linter = {
-						enable = true,
-						use_virtual_text = true,
-						lint_events = { "BufWrite", "CursorHold" },
-					},
+				},
+				playground = {
+					enable = true,
+					updatetime = 25,
+				},
+				query_linter = {
+					enable = true,
+					use_virtual_text = true,
+					lint_events = { "BufWrite", "CursorHold" },
 				},
 			})
 

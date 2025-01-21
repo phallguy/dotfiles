@@ -20,7 +20,7 @@ return {
 				styles = {
 					bold = true,
 					italic = true,
-					transparency = true,
+					transparency = false,
 				},
 				highlight_groups = {
 					LineNr = { fg = "highlight_med" },
@@ -159,6 +159,10 @@ return {
 					MarkviewHeading5 = { fg = "foam", bg = "foam", blend = 20 },
 					MarkviewHeading6 = { fg = "iris", bg = "iris", blend = 20 },
 					MarkviewCode = { bg = "highlight_low" },
+
+					-- Copilot
+					CopilotSuggestion = { fg = "leaf" },
+					CopilotAnnotation = { fg = "#FF00FF" },
 				},
 			})
 		end,

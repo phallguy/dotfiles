@@ -76,10 +76,10 @@ cmp.setup({
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		}),
-		["<C-space>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
+		-- ["<C-space>"] = cmp.mapping.confirm({
+		-- 	behavior = cmp.ConfirmBehavior.Replace,
+		-- 	select = true,
+		-- }),
 		["<tab>"] = cmp.mapping.confirm({
 			behavior = cmp.SelectBehavior.Insert,
 			select = true,

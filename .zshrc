@@ -81,32 +81,9 @@ function kan() {
   sudo kanata -n
 }
 
-function _begin_osc {
-  printf "\033]"
-}
-
-function _end_osc {
-  printf "\007"
-}
-
-function resetTerminalBackground() {
-  _begin_osc
-  printf "104;"
-  _end_osc
-}
-
-function setTerminalBackground() {
-  color=${1:-#31002D}
-  _begin_osc
-  printf "11;${color}"
-  _end_osc
-}
-trap resetTerminalBackground EXIT
-
 function tailf() {
   tail -F $@ | bat -pp -l log
 }
-
 
 if [[ $(uname -p) != 'arm' ]]; then
   setTerminalBackground "#000064"
@@ -171,7 +148,7 @@ function zn () {
   
   local layout="dev"
   if [ -f ./.zellij-layout ]; then
-    layout =  $(cat .zellij-layout)
+    layout=$(cat .zellij-layout)
   fi
 
   local session=$(basename $(pwd))

@@ -91,8 +91,11 @@ vim.keymap.set(
 )
 
 -- Open url/file in quick preview
-vim.keymap.set({ "n", "v" }, "gq", "<CMD>!qlmanage -p '<cfile>:p' 2> /dev/null<CR>", { silent = true })
-vim.keymap.set({ "n", "v" }, "gQ", "<CMD>!qlmanage -p '%:p' 2> /dev/null<CR>", { silent = true })
+-- vim.keymap.set({ "n", "v" }, "gq", "<CMD>!qlmanage -p '<cfile>:p' 2> /dev/null &<CR>", { silent = true })
+-- vim.keymap.set({ "n", "v" }, "gQ", "<CMD>!qlmanage -p '%:p' 2> /dev/null<CR>", { silent = true })
+
+vim.keymap.set({ "n", "v" }, "gq", "<CMD>!open '<cfile>:p' 2> /dev/null &<CR>", { silent = true })
+vim.keymap.set({ "n", "v" }, "gQ", "<CMD>!open '%:p' 2> /dev/null &<CR>", { silent = true })
 
 vim.g["qfenter_keymap"] = {
 	vopen = { "<C-v>" },

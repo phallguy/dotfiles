@@ -52,3 +52,4 @@ tags.lock
 .qfscratch
 .ruby-lsp
 .conform.*
+.zellij-layout

@@ -10,8 +10,7 @@ layout {
             plugin location="tab-bar"
         }
         pane {
-            command "bin/rails"
-            args "s"
+            command "bin/dev"
         }
     }
     tab name="jobs" {

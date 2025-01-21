@@ -107,3 +107,5 @@
   hunk-header-file-style = ""
   hunk-header-line-number-style = ""
   hunk-header-style = omit
+[credential]
+	helper = store

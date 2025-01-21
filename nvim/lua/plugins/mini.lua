@@ -108,5 +108,14 @@ return {
 			autoread = false,
 			autowrite = true,
 		})
+
+		require("mini.splitjoin").setup({
+			mappings = {
+				split = "gS",
+				join = "gJ",
+			},
+		})
+
+		require("mini.pairs").setup({}
 	end,
 }

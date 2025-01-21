@@ -8,7 +8,7 @@ return {
 	{
 		-- https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/lua/neo-tree/defaults.lua
 		"nvim-neo-tree/neo-tree.nvim",
-		lazy = true,
+		lazy = false,
 		cmd = { "Neotree" },
 		keys = {
 			{

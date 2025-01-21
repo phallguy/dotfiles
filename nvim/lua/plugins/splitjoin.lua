@@ -11,9 +11,11 @@ vim.g.splitjoin_join_mapping = "gJ"
 return {
 	{
 		"AndrewRadev/splitjoin.vim",
+		enabled = false,
 	},
 	{
 		"Wansmer/treesj",
+		enabled = false,
 		-- keys = { "<space>m", "gJ", "gS" },
 		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
 		config = function()
@@ -21,6 +23,26 @@ return {
 				use_default_keymaps = false,
 				check_syntax_error = false,
 				max_join_length = 500,
+				langs = {
+					ruby = {
+						module = {
+							both = {
+								no_format_with = {}, -- Need to avoid 'no format with comment'
+								fallback = function(_)
+									vim.cmd("SplitjoinJoin")
+								end,
+							},
+						},
+						class = {
+							both = {
+								no_format_with = {},
+								fallback = function(_)
+									vim.cmd("SplitjoinSplit")
+								end,
+							},
+						},
+					},
+				},
 			})
 
 			local langs = require("treesj.langs")["presets"]
@@ -38,6 +60,9 @@ return {
 					end
 				end,
 			})
+
+			vim.keymap.set("n", "gW", "<Cmd>SplitjoinSplit<CR>", opts)
+			vim.keymap.set("n", "gU", "<Cmd>SplitjoinJoin<CR>", opts)
 		end,
 	},
 }
