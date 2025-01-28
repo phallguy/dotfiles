@@ -397,23 +397,25 @@ plugins {
     // tab-bar location="zellij:tab-bar"
     status-bar location="zellij:status-bar"
     tab-bar location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-        format_left "#[bg=black]{tabs}#[fg=green,bg=black,italic]  {session}"
+        format_left "#[fg=magenta,bg=black,bold]{datetime} #[bg=black]{tabs}#[fg=green,bg=black,italic] #[fg=green,bg=black,italic] {session}"
+        // format_left "#[bg=black]{tabs}#[fg=green,bg=black,italic]  {session}"
         format_center ""
-        format_right "#[fg=magenta,bg=black,bold]{datetime} {mode}"
+        // format_right ""
+        format_right ""
         format_space "#[bg=black]"
-        border_enabled "true"
-        border_char "─"
+        border_enabled false
+        border_char " "
         border_format "#[fg=#6C7086]{char}"
         border_position "top"
-        hide_frame_for_single_pane "true"
+        // hide_frame_for_single_pane "true"
         tab_normal "#[bg=default,fg=black]#[bg=default,fg=magenta] {name} #[fg=black,bg=default]"
         tab_active "#[fg=magenta,bg=black]#[bg=magenta,fg=black] {name} #[fg=magenta,bg=black]"
         command_git_branch_command "git rev-parse --abbrev-ref HEAD"
-        command_git_branch_format "#[fg=blue] {stdout} "
+        command_git_branch_format "#[bg=black,fg=blue]{stdout} "
         command_git_branch_interval "10"
         command_git_branch_rendermode "static"
         datetime "{format} "
-        datetime_format "%b %d %Y %l:%M %P"
+        datetime_format "%m/%d %l:%M %P"
         datetime_timezone "US/Pacific"
         mode_normal ""
         mode_session "#[bg=red,fg=black] {name} "
@@ -437,9 +439,14 @@ plugins {
 }
 // Plugins to load in the background when a new session starts
 load_plugins {
- // "file:/path/to/my-plugin.wasm"
-  // "https://example.com/my-plugin.wasm"
-
+    // "file:/path/to/my-plugin.wasm"
+    // "https://example.com/my-plugin.wasm"
+    "https://github.com/dj95/zjstatus/releases/latest/download/zjframes.wasm" {
+        hide_frame_for_single_pane "true"
+        hide_frame_except_for_search "true"
+        hide_frame_except_for_scroll "true"
+        hide_frame_except_for_fullscreen "true"
+    }
 }
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
 // eg. when terminal window with an active zellij session is closed
@@ -467,7 +474,7 @@ load_plugins {
 //   - true (default)
 //   - false
 //
-pane_frames false
+pane_frames true
 // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
 // Options:
 //   - true (default)

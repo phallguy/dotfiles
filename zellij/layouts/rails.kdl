@@ -1,36 +1,35 @@
 layout {
-    tab name="nvim" {
-        pane size=1 borderless=true {
-            plugin location="tab-bar"
+    pane_template name="tabs" {
+        pane split_direction="vertical" size=1 {
+            pane borderless=true size="60%" {
+                plugin location="tab-bar"
+            }
+            pane borderless=true size="40%" {
+                plugin location="status-bar"
+            }
         }
-        pane command="nvim"
+    }
+    tab name="nvim" {
+        tabs
+        pane command="nvim" borderless=true
     }
     tab name="server" {
-        pane size=1 borderless=true {
-            plugin location="tab-bar"
-        }
-        pane {
+        tabs
+        pane borderless=true {
             command "bin/rails"
             args "s"
         }
     }
     tab name="jobs" {
-        pane size=1 borderless=true {
-            plugin location="tab-bar"
-        }
-        pane {
+        tabs
+        pane borderless=true {
             command "bin/bundle"
             args "exec" "sidekiq" "-q" "default" "-q" "screen_time" "-q" "priority"
         }
     }
     new_tab_template {
-        pane size=1 borderless=true {
-            plugin location="tab-bar"
-        }
-        pane
-        pane size=1 borderless=true {
-            plugin location="status-bar"
-        }
+        tabs
+        pane borderless=true
     }
 }
 

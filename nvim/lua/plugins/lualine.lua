@@ -6,10 +6,6 @@ local icons = require("user.icons")
 return {
 	-- Set lualine as statusline
 	"nvim-lualine/lualine.nvim",
-	event = "VeryLazy",
-	dependencies = {
-		"archibate/lualine-time",
-	},
 	-- See `:help lualine.txt`
 	config = function()
 		require("lualine").setup({

@@ -20,7 +20,7 @@ return {
 				styles = {
 					bold = true,
 					italic = true,
-					transparency = false,
+					transparency = true,
 				},
 				highlight_groups = {
 					LineNr = { fg = "highlight_med" },

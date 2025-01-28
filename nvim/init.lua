@@ -74,6 +74,7 @@ require("lazy").setup({
 	},
 	ui = {
 		-- border = "shadow",
+		backdrop = 0,
 	},
 	checker = {
 		-- Look for plugin updates
@@ -81,6 +82,9 @@ require("lazy").setup({
 	},
 	change_detection = {
 		notify = false,
+	},
+	install = {
+		colorscheme = { "rose-pine" },
 	},
 	performance = {
 		rtp = {

@@ -9,6 +9,9 @@ return {
 		dependencies = {
 			-- "m-demare/hlargs.nvim",
 			"andymass/vim-matchup",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context",
+			"windwp/nvim-ts-autotag",
 		},
 		build = ":TSUpdate",
 		config = function()
@@ -60,7 +63,7 @@ return {
 					include_match_words = true,
 				},
 				textobjects = {
-					enable = false,
+					-- enable = false,
 					select = {
 						enable = true,
 						lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
@@ -76,35 +79,36 @@ return {
 							["ic"] = { query = "@class.inner", desc = "inside class" },
 						},
 					},
-					move = {
-						enable = true,
-						goto_next_start = {
-							["]k"] = { query = "@block.outer", desc = "Next block start" },
-							["]m"] = "@function.outer",
-							["]]"] = { query = "@class.outer", desc = "Next class start" },
-							--
-							["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-						},
-						goto_next_end = {
-							["]K"] = { query = "@block.outer", desc = "Next block end" },
-							["]M"] = "@function.outer",
-							["]["] = "@class.outer",
-						},
-						goto_previous_start = {
-							["[k"] = { query = "@block.outer", desc = "Previous block start" },
-							["[m"] = "@function.outer",
-							["[["] = "@class.outer",
-							--
-							["[s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-						},
-						goto_previous_end = {
-							["[K"] = { query = "@block.outer", desc = "Previous block end" },
-							["[M"] = "@function.outer",
-							["[]"] = "@class.outer",
-							--
-							["[S"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-						},
-					},
+					move = {},
+					-- move = {
+					-- 	enable = true,
+					-- 	goto_next_start = {
+					-- 		["]k"] = { query = "@block.outer", desc = "Next block start" },
+					-- 		["]m"] = "@function.outer",
+					-- 		["]]"] = { query = "@class.outer", desc = "Next class start" },
+					-- 		--
+					-- 		["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+					-- 	},
+					-- 	goto_next_end = {
+					-- 		["]K"] = { query = "@block.outer", desc = "Next block end" },
+					-- 		["]M"] = "@function.outer",
+					-- 		["]["] = "@class.outer",
+					-- 	},
+					-- 	goto_previous_start = {
+					-- 		["[k"] = { query = "@block.outer", desc = "Previous block start" },
+					-- 		["[m"] = "@function.outer",
+					-- 		["[["] = "@class.outer",
+					-- 		--
+					-- 		["[s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+					-- 	},
+					-- 	goto_previous_end = {
+					-- 		["[K"] = { query = "@block.outer", desc = "Previous block end" },
+					-- 		["[M"] = "@function.outer",
+					-- 		["[]"] = "@class.outer",
+					-- 		--
+					-- 		["[S"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+					-- 	},
+					-- },
 				},
 				playground = {
 					enable = true,
@@ -116,12 +120,6 @@ return {
 					lint_events = { "BufWrite", "CursorHold" },
 				},
 			})
-
-			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-
-			-- Repeat movement with ; and ,
-			-- ensure ; goes forward and , goes backward regardless of the last direction
-			vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
 
 			-- require('ts_context_commentstring').setup(
 			-- 	{ enable = true, enable_autocmd = false })   -- Enable commentstring
@@ -143,15 +141,6 @@ return {
 				},
 			})
 		end,
-	},
-
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-	},
-
-	{
-		"andymass/vim-matchup",
-		setup = function() end,
 	},
 
 	{
