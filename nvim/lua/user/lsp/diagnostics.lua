@@ -2,7 +2,13 @@ local icons = require("user.icons")
 
 local diagnostics = {
 	underline = true,
+	-- virtual_text = {
+	-- 	severity = { vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR },
+	-- },
 	virtual_text = false,
+	virtual_lines = {
+		severity = { vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR },
+	},
 	severity_sort = true,
 	update_in_insert = false,
 	signs = {
@@ -18,6 +24,11 @@ local diagnostics = {
 		-- 		[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
 		-- 		[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
 		-- 	},
+	},
+
+	float = {
+		border = "rounded",
+		source = "if_many",
 	},
 }
 

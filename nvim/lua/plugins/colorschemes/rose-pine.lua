@@ -20,7 +20,7 @@ return {
 				styles = {
 					bold = true,
 					italic = true,
-					transparency = true,
+					transparency = false,
 				},
 				highlight_groups = {
 					LineNr = { fg = "highlight_med" },
@@ -107,9 +107,14 @@ return {
 					DiagnosticVirtualTextInfo = { fg = "#2A6077", bg = "foam", blend = 5 },
 					DiagnosticVirtualTextHint = { fg = "#7E6C95", bg = "iris", blend = 5 },
 
+					DiagnosticVirtualLinesHint = { fg = "#7E6C95", bg = "iris" },
+					DiagnosticVirtualLinesInfo = { fg = "#2A6077", bg = "foam" },
+					DiagnosticVirtualLinesWarn = { fg = "gold", bg = "gold", blend = 30, bold = true },
+					DiagnosticVirtualLinesError = { fg = "love", bg = "love", blend = 30, bold = true },
+
 					-- Diagflow
-					DiagnosticFloatingInfo = { fg = "#2A6077", bg = "foam", blend = 5 },
-					DiagnosticFloatingHint = { fg = "#7E6C95", bg = "iris", blend = 5 },
+					-- DiagnosticFloatingInfo = { fg = "#2A6077", bg = "foam", blend = 5 },
+					-- DiagnosticFloatingHint = { fg = "#7E6C95", bg = "iris", blend = 5 },
 
 					-- Dap
 					DapBreakpoint = { fg = "love" },
@@ -161,7 +166,7 @@ return {
 					MarkviewCode = { bg = "highlight_low" },
 
 					-- Copilot
-					CopilotSuggestion = { fg = "leaf" },
+					CopilotSuggestion = { fg = "iris" },
 					CopilotAnnotation = { fg = "#FF00FF" },
 				},
 			})

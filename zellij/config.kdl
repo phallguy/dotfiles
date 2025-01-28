@@ -439,14 +439,15 @@ plugins {
 }
 // Plugins to load in the background when a new session starts
 load_plugins {
-    // "file:/path/to/my-plugin.wasm"
+ // "file:/path/to/my-plugin.wasm"
     // "https://example.com/my-plugin.wasm"
-    "https://github.com/dj95/zjstatus/releases/latest/download/zjframes.wasm" {
-        hide_frame_for_single_pane "true"
-        hide_frame_except_for_search "true"
-        hide_frame_except_for_scroll "true"
-        hide_frame_except_for_fullscreen "true"
-    }
+    // "https://github.com/dj95/zjstatus/releases/latest/download/zjframes.wasm" {
+    //     hide_frame_for_single_pane "true"
+    //     hide_frame_except_for_search "true"
+    //     hide_frame_except_for_scroll "true"
+    //     hide_frame_except_for_fullscreen "true"
+    // }
+
 }
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
 // eg. when terminal window with an active zellij session is closed
