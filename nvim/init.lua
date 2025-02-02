@@ -84,7 +84,7 @@ require("lazy").setup({
 		notify = false,
 	},
 	install = {
-		colorscheme = { "rose-pine" },
+		colorscheme = { "rose-pine", "vague" },
 	},
 	performance = {
 		rtp = {
@@ -106,7 +106,7 @@ require("lazy").setup({
 require("user.colorscheme")
 require("user.editing")
 require("user.session")
-require("user.highlight_on_yank")
+-- require("user.highlight_on_yank")
 require("user.terminal")
 require("user.git")
 

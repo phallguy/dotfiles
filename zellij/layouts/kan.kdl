@@ -1,0 +1,15 @@
+layout {
+    pane {
+        borderless true
+        command "sudo"
+        args "kanata" "-n"
+        cwd "~/dotfiles"
+    }
+    pane {
+        borderless true
+        command "sudo"
+        args "/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon"
+        cwd "~/dotfiles"
+    }
+}
+

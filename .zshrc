@@ -72,7 +72,7 @@ alias cd='z'
 alias g='git'
 alias lg='lazygit'
 alias man='batman'
-alias sb='cd ~/paul.xheo@gmail.com - Google Drive/My Drive/Obsidian Vault; vi .'
+alias sb='cd ~/paul.xheo@gmail.com - Google Drive/My Drive/Obsidian Vault; zn'
 alias y='yazi'
 alias zel='zellij'
 
@@ -151,25 +151,37 @@ function zn () {
     layout=$(cat .zellij-layout)
   fi
 
-  local session=$(basename $(pwd))
+  local session=$(basename $(pwd) | tail -n1)
   local active=$(zellij list-sessions --short 2> /dev/null)
 
   if (($active[(Ie)$session])); then
-    zellij attach $session
+    zellij attach "$session"
   else
-    zellij -n $layout -s $session
+    zellij -n $layout -s "$session"
   fi
 }
 
+function zak() {
+  local session=kan
+  local active=$(zellij list-sessions --short 2> /dev/null)
+
+  if (($active[(Ie)$session])); then
+    # Already running
+  else
+    setopt local_options no_notify no_monitor
+    zel -n kan -s $session
+  fi
+}
+
+function zakk() { zellij kill-session kan; }
+
+
+function zk () { zellij kill-session "$*"; }
 function za () { zellij attach "$*"; }
 function zl () { zellij ls;}
-function zw () { zellij -l welcome;}
 function zr () { zellij run --name "$*" -- zsh -ic "$*";}
 function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
 function zri () { zellij run --name "$*" --in-place -- zsh -ic "$*";}
-function ze () { zellij edit "$*";}
-function zef () { zellij edit --floating "$*";}
-function zei () { zellij edit --in-place "$*";}
 function zpipe () { 
   if [ -z "$1" ]; then
     zellij pipe;
