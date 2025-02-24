@@ -223,3 +223,11 @@ run = ['move-node-to-workspace R']
 [[on-window-detected]]
 if.app-name-regex-substring = 'Preview'
 run = ['move-node-to-workspace P']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Zoom'
+run = ['move-node-to-workspace Z']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Arc'
+run = ['move-node-to-workspace 2']

@@ -8,6 +8,4 @@ export RIPGREP_CONFIG_PATH="/Users/paulalexander/.ripgreprc"
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
-alias imgcat="wezterm imgcat"
 export PATH="$PATH:/Users/paulalexander/.local/bin"
-

@@ -48,6 +48,16 @@ keybinds clear-defaults=true {
         bind "Alt p" {
             SwitchToMode "Normal"
         }
+        bind "z" {
+            TogglePaneFrames
+            SwitchToMode "Normal"
+        }
+        bind "Alt +" "Alt =" {
+            Resize "Increase"
+        }
+        bind "Alt -" {
+            Resize "Decrease"
+        }
         bind "h" "Left" {
             MoveFocus "Left"
         }
@@ -67,24 +77,12 @@ keybinds clear-defaults=true {
             NewPane
             SwitchToMode "Normal"
         }
-        bind "d" {
-            NewPane "Down"
-            SwitchToMode "Normal"
-        }
-        bind "r" {
-            NewPane "Right"
-            SwitchToMode "Normal"
-        }
         bind "x" {
             CloseFocus
             SwitchToMode "Normal"
         }
         bind "f" {
             ToggleFocusFullscreen
-            SwitchToMode "Normal"
-        }
-        bind "z" {
-            TogglePaneFrames
             SwitchToMode "Normal"
         }
         bind "w" {
