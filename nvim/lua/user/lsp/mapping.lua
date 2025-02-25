@@ -10,10 +10,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 		-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 		vim.keymap.set("n", "gd", function()
-			require("telescope.builtin").lsp_definitions({
-				trim_text = true,
-				reuse_win = true,
-			})
+			-- require("telescope.builtin").lsp_definitions({
+			-- 	trim_text = true,
+			-- 	reuse_win = true,
+			-- })
+			--
+			require("snacks").picker.lsp_definitions()
 		end, { buffer = bufnr })
 
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
@@ -23,12 +25,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
 
 		vim.keymap.set("n", "<leader>ll", vim.diagnostic.open_float, { desc = "[L]ine diagnostics", buffer = bufnr })
-		vim.keymap.set(
-			"n",
-			"lf",
-			require("telescope.builtin").lsp_document_symbols,
-			{ desc = "Document symbols", buffer = bufnr }
-		)
+		vim.keymap.set("n", "lf", require("snacks").picker.lsp_symbols, { desc = "Document symbols", buffer = bufnr })
 
 		vim.keymap.set("n", "<space>lr", vim.lsp.buf.rename, { buffer = bufnr })
 		vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr })
