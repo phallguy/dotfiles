@@ -50,7 +50,7 @@ cmp.setup({
 		-- { name = "nvim_lsp_signature_help" },
 		{
 			name = "buffer",
-			keyword_length = 3,
+			keyword_length = 2,
 			max_indexed_line_length = 2048,
 			option = {
 				get_bufnrs = function()

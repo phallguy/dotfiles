@@ -44,7 +44,7 @@ return {
 
 			return {
 				lsp_format = "never",
-				timeout_ms = 500,
+				timeout_ms = 2000,
 			}
 		end,
 		formatters = {

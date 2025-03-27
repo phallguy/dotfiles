@@ -12,7 +12,7 @@
   rapid-event-delay 2
 
   concurrent-tap-hold yes
-  chords-v2-min-idle 100
+  chords-v2-min-idle-experimental 100
 
   delegate-to-first-layer yes
   macos-dev-names-include (
@@ -22,7 +22,7 @@
 (defsrc
   f6 f7 f8 f9
   tab
-  caps a   s   d   f   g   h   j   k   l   ;
+  caps a   s   d   f   h   j   k   l   ;
   lsft ralt
   spc
 )
@@ -30,8 +30,8 @@
   ;; Note: consider using different time values for your different fingers.
   ;; For example, your pinkies might be slower to release keys and index
   ;; fingers faster.
-  tap-time 200
-  hold-time 150
+  tap-time 250
+  hold-time 200
 
   left-hand-keys (
     q w e r t
@@ -49,7 +49,7 @@
 (deflayer base
   f6 f7 f8 f9
   tab
-  esc @a  @s  @d  @f g h @j  @k  @l  @;
+  esc @a  @s  @d  @f h @j  @k  @l  @;
   lsft lrld
   spc
 )
@@ -57,9 +57,17 @@
 (deflayer nomods
   f6 f7 f8 f9
   tab
-  esc a   s   d   f   g   h   j   k   l   ;
+  esc a   s   d   f   h   j   k   l   ;
   lsft ralt
   spc
+)
+
+(deflayer arrows
+  _   _   _   _
+  _
+  _   _   _   _   _   left  down  up  right _
+  _   _
+  _
 )
 
 (deffakekeys
@@ -84,7 +92,7 @@
 
 )
 
-(defchordsv2
+(defchordsv2-experimental
   (k l) S-- 25 first-release ()
   (s d) = 25 first-release ()
 

@@ -102,11 +102,6 @@ vim.g["qfenter_keymap"] = {
 	topen = { "<C-t>" },
 }
 
--- Theming
-
-vim.keymap.set("n", "<leader>hl", "<CMD>Telescope highlights<CR>", { desc = "All highlights" })
-vim.keymap.set("n", "<leader>hi", "<CMD>Inspect<CR>", { desc = "Inspect highlights" })
-vim.keymap.set("n", "<leader>hh", "<CMD>Telescope help_tags<CR>", { desc = "Inspect highlights" })
 
 -- help
 -- Open vert

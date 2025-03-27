@@ -33,9 +33,11 @@ return {
 					-- CursorLine = { ctermfg = "white" },
 					MiniIndentscopeSymbol = { fg = "highlight_med" },
 					Folded = { fg = "highlight_high" },
-					Visual = { bg = "#f040ed", blend = 60 },
+					Visual = { bg = "#740973", blend = 60 },
 					WinSeparator = { fg = "highlight_low", bold = true },
 					Comment = { fg = "muted" },
+
+					FloatBorder = { fg = "highlight_high" },
 
 					SpellBad = { fg = colors.love, italic = true, undercurl = true },
 					SpellCap = { fg = colors.love, italic = true, undercurl = true },
@@ -94,6 +96,12 @@ return {
 					TelescopeBorder = { fg = "highlight_high" },
 					TelescopePreviewTitle = { fg = "surface", bg = "foam", bold = true },
 					TelescopeResultsTitle = { fg = "surface", bg = "gold", bold = true },
+
+					-- Snacks
+					SnacksPickerDir = { fg = "muted" },
+					SnacksPickerRow = { fg = "muted" },
+					SnacksPickerCol = { fg = "muted" },
+					SnacksPickerDelim = { fg = "highlight_high" },
 
 					-- Noice
 					NoiceCmdlinePopup = { bg = "_nc" },

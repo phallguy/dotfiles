@@ -21,40 +21,18 @@ return {
 			input = {
 				enabled = true,
 			},
-			dashboard = require("plugins/snacks/dashboard"),
-			picker = {
-				layout = "mivy",
-				layouts = {
-					mivy = {
-						layout = {
-							box = "vertical",
-							backdrop = false,
-							row = -1,
-							width = 0,
-							height = 0.4,
-							border = "top",
-							title = " {title} {live} {flags}",
-							title_pos = "left",
-							{
-								box = "horizontal",
-								{ win = "list", border = "none" },
-								{ win = "preview", title = "{preview}", width = 0.6, border = "left" },
-							},
-							{ win = "input", height = 1, border = "top" },
-						},
-					},
-				},
-			},
+			dashboard = require("plugins/snacks/dashboard").config,
+			picker = require("plugins/snacks/picker").config,
 		},
 
 		init = function()
 			local snacks = require("snacks")
 
+			require("plugins/snacks/picker").bindings()
+
 			vim.keymap.set("n", "<leader>m", function()
 				snacks.notifier.show_history()
 			end, { desc = "Show last notice" })
-
-			require("plugins/snacks/picker")
 		end,
 	},
 }

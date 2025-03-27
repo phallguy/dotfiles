@@ -6,9 +6,10 @@ local diagnostics = {
 	-- 	severity = { vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR },
 	-- },
 	virtual_text = false,
-	virtual_lines = {
-		severity = { vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR },
-	},
+	-- virtual_lines = {
+	-- 	severity = { vim.diagnostic.severity.WARN, vim.diagnostic.severity.ERROR },
+	-- },
+	virtual_lines = false,
 	severity_sort = true,
 	update_in_insert = false,
 	signs = {
