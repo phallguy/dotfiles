@@ -7,11 +7,9 @@ IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_MULTILINE] = true
 
-ARGV.concat [
-  "--noreadline",
-  "--prompt-mode",
-  "simple",
-]
+# ARGV.concat [
+#   # 'simple'
+# ]
 
 begin
   require 'rails/console/app'
@@ -26,6 +24,6 @@ rescue LoadError
 end
 
 begin
-  require_relative File.join(Dir.pwd, ".irb_local")
+  require_relative File.join(Dir.pwd, '.irb_local')
 rescue LoadError
 end

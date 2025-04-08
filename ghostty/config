@@ -2,13 +2,70 @@ theme=rose-pine
 macos-titlebar-style=hidden
 # background-opacity=0.95
 background-blur-radius=20
+window-padding-balance=true
+window-padding-x=2
+window-padding-y=2
+window-padding-color=extend
+window-vsync=false
+window-inherit-working-directory=true
+window-theme=ghostty
 
-font-family="CommitMono Nerd Font Mono"
+desktop-notifications=true
+
+font-family="CommitMonoPhallguy"
 font-size=15
 adjust-cell-width=-2
+font-feature=+calt, +liga, +dlig
+
+font-codepoint-map=U+E5FA-U+E6AC=CommitMono Nerd Font
+
+# Devicons
+font-codepoint-map=U+E700-U+E7C5=CommitMono Nerd Font
+
+# Font Awesome
+font-codepoint-map=U+F000-U+F2E0=CommitMono Nerd Font
+
+# Font Awesome Extension
+font-codepoint-map=U+E200-U+E2A9=CommitMono Nerd Font
+
+# Material Design Icons
+font-codepoint-map=U+F0001-U+F1AF0=CommitMono Nerd Font
+
+# Weather
+font-codepoint-map=U+E300-U+E3E3=CommitMono Nerd Font
+
+# Octicons
+font-codepoint-map=U+F400-U+F532,U+2665,U+26A1=CommitMono Nerd Font
+
+# Powerline Symbols
+font-codepoint-map=U+E0A0-U+E0A2,U+E0B0-U+E0B3=CommitMono Nerd Font
+
+# Powerline Extra Symbols
+font-codepoint-map=U+E0A3,U+E0B4-U+E0C8,U+E0CA,U+E0CC-U+E0D4=CommitMono Nerd Font
+
+# IEC Power Symbols
+font-codepoint-map=U+23FB-U+23FE,U+2B58=CommitMono Nerd Font
+
+# Font Logos
+font-codepoint-map=U+F300-U+F32F=CommitMono Nerd Font
+
+# Pomicons
+font-codepoint-map=U+E000-U+E00A=CommitMono Nerd Font
+
+# Codicons
+font-codepoint-map=U+EA60-U+EBEB=CommitMono Nerd Font
+
+# Additional sets
+font-codepoint-map=U+E276C-U+E2771=CommitMono Nerd Font # Heavy Angle Brackets
+font-codepoint-map=U+2500-U+259F=CommitMono Nerd Font # Box Drawing
 
 selection-background= "#f040ed"
 
 quit-after-last-window-closed = true
 keybind = super+t=unbind
 cursor-color="#9ccfd8"
+
+
+scrollback-limit=10485760
+
+auto-update-channel=tip

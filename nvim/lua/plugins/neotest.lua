@@ -7,7 +7,6 @@ return {
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
-			"antoinemadec/FixCursorHold.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"zidhuss/neotest-minitest",
 			"olimorris/neotest-rspec",
@@ -40,14 +39,16 @@ return {
 				end
 
 				original.env = {
-					RUBY_DEBUG_PORT = 3999,
-					RUBY_DEBUG_OPEN = "false",
-					RUBY_DEBUG_HOST = "127.0.0.1",
 					DISABLE_SPRING = nil,
 					NOPRIDE = 1,
 				}
 
 				if args.strategy == "dap" then
+					original.env.RUBY_DEBUG_PORT = 3999
+					original.env.RUBY_DEBUG_OPEN = "false"
+					original.env.RUBY_DEBUG_HOST = "127.0.0.1"
+					original.env.RUBY_DEBUG_OPEN = true
+
 					vim.notify("dap strategy")
 					original.strategy = {
 						name = "Run test",
@@ -59,8 +60,6 @@ return {
 						port = 3999,
 						localfs = true,
 					}
-
-					original.env.RUBY_DEBUG_OPEN = true
 				end
 
 				-- vim.notify(vim.inspect(original))
@@ -124,10 +123,11 @@ return {
 					virtual_text = false,
 				},
 				summary = {
-					follow = true,
+					-- follow = true,
 					animated = false,
 					expand_errors = false,
-					open = "botright vsplit | vertical resize 35",
+					count = true,
+					open = "botright vsplit | vertical resize 65",
 				},
 				output = {
 					open_on_run = false,
