@@ -7,9 +7,11 @@ IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_MULTILINE] = true
 
-# ARGV.concat [
-#   # 'simple'
-# ]
+ARGV.concat [
+  '--noreadline',
+  '--prompt-mode',
+  'simple'
+]
 
 begin
   require 'rails/console/app'

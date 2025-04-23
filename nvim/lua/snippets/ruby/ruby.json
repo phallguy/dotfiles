@@ -6,9 +6,17 @@
     ]
   },
   "Debugger if": {
-    "prefix": "dbgif",
+    "prefix": "dbi",
     "body": [
-      "tap { |obj| debugger if Debug.instance.debug? }"
+      "debugger if ${0:Debug.debug?}"
+    ]
+  },
+  "Frozen string literal": {
+    "prefix": "fsl",
+    "body": [
+      "# frozen_string_literal: true",
+      "",
+      "${0}"
     ]
   }
 }

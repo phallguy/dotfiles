@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 		vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
 		vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 		vim.keymap.set("n", "q", "<CMD>close<CR>", opts)
+		vim.keymap.set("n", "gf", "<CMD>top wincmd f <BAR> wincmd L <BAR> vertical resize 140<CR>", opts)
 
 		vim.bo[event.buf].buflisted = false
 		vim.bo[event.buf].textwidth = 1500

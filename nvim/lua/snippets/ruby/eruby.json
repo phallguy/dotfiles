@@ -72,5 +72,11 @@
     "body": [
       "tap { |obj| debugger }"
     ]
+  },
+  "Debugger if": {
+    "prefix": "dbi",
+    "body": [
+      "<% debugger if ${0:Debug.debug?} %>"
+    ]
   }
 }

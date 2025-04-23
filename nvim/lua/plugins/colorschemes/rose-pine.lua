@@ -104,7 +104,7 @@ return {
 					SnacksPickerDelim = { fg = "highlight_high" },
 
 					-- Noice
-					NoiceCmdlinePopup = { bg = "subtle" },
+					NoiceCmdlinePopup = { bg = "#4d346a", fg = "text" },
 
 					-- -- TreesiterContext
 					-- TreesitterContext = { bg = "_nc", force = true },

@@ -73,6 +73,8 @@ return {
 							["im"] = "@function.inner",
 							["as"] = "@scope.outer",
 							["is"] = "@scope.inner",
+							["ii"] = "@conditional.inner",
+							["ai"] = "@conditional.outer",
 							["ak"] = { query = "@block.outer", desc = "around block" },
 							["ik"] = { query = "@block.inner", desc = "inside block" },
 							["ac"] = { query = "@class.outer", desc = "around class" },

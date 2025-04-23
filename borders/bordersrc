@@ -2,10 +2,10 @@
 
 options=(
 	  style=round
-    active_color=0x4feb4372 
-     # active_color=0x00FF00FF
+	  # AARRGGBB 
+    active_color=0x8Fff1ba6
     inactive_color=0x00000000 
-    width=2.0 
+    width=1.0 
     hidpi=on 
     order=above
     )

@@ -153,6 +153,7 @@ alt-i = 'exec-and-forget open /System/Applications/Messages.app'
 alt-s = 'exec-and-forget open /Applications/Slack.app'
 alt-a = 'exec-and-forget open /Applications/Asana.app'
 alt-d = 'exec-and-forget open /Users/paulalexander'
+alt-o = 'exec-and-forget open /Applications/WhatsApp.app'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 # alt-tab = 'workspace-back-and-forth'
@@ -184,6 +185,10 @@ run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Messages'
+run = ['move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'WhatsApp'
 run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
