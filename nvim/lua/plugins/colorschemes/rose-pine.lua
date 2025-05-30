@@ -11,23 +11,49 @@ return {
 
 			require("rose-pine").setup({
 				-- variant = "dawn",
-				-- dark_variant = "moon",
+				dark_variant = "moon",
 				dim_inactive_windows = false,
 				extend_background_behind_borders = true,
 				enable = {
 					migrations = true,
+					legacy_highlights = false,
 				},
+
 				styles = {
 					bold = true,
 					italic = true,
 					transparency = false,
 				},
+
+				palette = {
+					moon = {
+						-- _nc = "#1f1d30",
+						base = "#1d1b2d",
+						-- surface = "#2a273f",
+						-- overlay = "#393552",
+						-- muted = "#6e6a86",
+						-- subtle = "#908caa",
+						-- text = "#e0def4",
+						love = "#f93e72",
+						-- gold = "#f6c177",
+						rose = "#f2928f",
+						pine = "#21b5f1",
+						-- foam = "#9ccfd8",
+						-- iris = "#c4a7e7",
+						-- leaf = "#95b1ac",
+						-- highlight_low = "#2a283e",
+						-- highlight_med = "#44415a",
+						-- highlight_high = "#56526e",
+						-- none = "NONE",
+					},
+				},
+
 				highlight_groups = {
 					LineNr = { fg = "highlight_med" },
 					AbsLineNr = { fg = "highlight_med" },
 					CursorLine = { bg = "#2f2b4a" },
-					CursorLineNr = { fg = "iris", bg = "highlight_low" },
-					CursorLineSign = { fg = "iris", bg = "highlight_low" },
+					CursorLineNr = { fg = "iris" },
+					CursorLineSign = { fg = "iris" },
 					-- Avoid underline in diffview
 					-- Breaks hihlight on yank
 					-- CursorLine = { ctermfg = "white" },

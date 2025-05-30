@@ -1,6 +1,6 @@
 theme=rose-pine
 macos-titlebar-style=hidden
-# background-opacity=0.95
+#background-opacity=0.95
 background-blur-radius=20
 window-padding-balance=true
 window-padding-x=2
@@ -9,12 +9,13 @@ window-padding-color=extend
 window-vsync=false
 window-inherit-working-directory=true
 window-theme=ghostty
+mouse-hide-while-typing=true
 
 desktop-notifications=true
 
 font-family="CommitMonoPhallguy"
-font-size=15
-adjust-cell-width=-2
+font-size=16
+#adjust-cell-width=-2
 font-feature=+calt, +liga, +dlig
 
 font-codepoint-map=U+E5FA-U+E6AC=CommitMono Nerd Font
@@ -68,4 +69,5 @@ cursor-color="#9ccfd8"
 
 scrollback-limit=10485760
 
+auto-update=download
 auto-update-channel=tip

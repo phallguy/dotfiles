@@ -16,19 +16,8 @@ layout {
     tab name="server" {
         tabs
         pane borderless=true {
-            command "zsh"
-            args "-c" "export HOST=https://www.bark.us; bin/rails s -b 0.0.0.0"
-        }
-        pane borderless=true size=10 {
-            command "npx"
-            args "local-ssl-proxy" "--source" "443" "--target" "3000" "--hostname" "www.bark.us" "--key" "public/devcert/www.bark.us-key.pem" "--cert" "public/devcert/www.bark.us.pem"
-        }
-    }
-    tab name="jobs" {
-        tabs
-        pane {
-            command "bin/bundle"
-            args "exec" "sidekiq" "-q" "default" "-q" "screen_time" "-q" "priority"
+            command "bin/rails"
+            args "s"
         }
     }
     new_tab_template {

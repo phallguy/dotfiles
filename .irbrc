@@ -13,17 +13,17 @@ ARGV.concat [
   'simple'
 ]
 
-begin
-  require 'rails/console/app'
-  extend Rails::ConsoleMethods
-rescue LoadError
-end
-
-begin
-  require 'active_support/testing/time_helpers'
-  include ActiveSupport::Testing::TimeHelpers
-rescue LoadError
-end
+# begin
+#   require 'rails/console/app'
+#   extend Rails::ConsoleMethods
+# rescue LoadError
+# end
+#
+# begin
+#   require 'active_support/testing/time_helpers'
+#   include ActiveSupport::Testing::TimeHelpers
+# rescue LoadError
+# end
 
 begin
   require_relative File.join(Dir.pwd, '.irb_local')

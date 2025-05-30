@@ -5,7 +5,7 @@ return {
 			{
 				"<leader>k",
 				function()
-						require("overseer").toggle({ enter = true })
+					require("overseer").toggle({ enter = true })
 				end,
 				{ desc = "Toggle overseer" },
 			},
@@ -28,7 +28,7 @@ return {
 				},
 				max_width = { 1500, 1.0 },
 				min_width = { 40, 0.150 },
-				min_height = { 15, 0.10 },
+				min_height = { 25, 0.25 },
 				default_detail = 2,
 			},
 

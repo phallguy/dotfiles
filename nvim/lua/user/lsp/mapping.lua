@@ -10,16 +10,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 		-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 		vim.keymap.set("n", "gd", function()
-			-- require("telescope.builtin").lsp_definitions({
-			-- 	trim_text = true,
-			-- 	reuse_win = true,
-			-- })
-			--
 			require("snacks").picker.lsp_definitions()
+		end, { buffer = bufnr })
+		-- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
+		vim.keymap.set("n", "gD", function()
+			require("snacks").picker.lsp_definitions({
+				auto_confirm = false,
+			})
 		end, { buffer = bufnr })
 
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
 		vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = bufnr })
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
 		vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = bufnr })
@@ -46,6 +46,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
 		end
 
-		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+		-- vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end,
 })

@@ -4,10 +4,10 @@ return {
 	{
 
 		"mfussenegger/nvim-dap",
-		lazy = true,
+		lazy = false,
+		event = "VeryLazy",
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
-			"mxsdev/nvim-dap-vscode-js",
 			"nvim-neotest/nvim-nio",
 			"LiadOz/nvim-dap-repl-highlights",
 			"jbyuki/one-small-step-for-vimkind",
@@ -174,23 +174,44 @@ return {
 			},
 		},
 		config = function()
-			require("dap-vscode-js").setup({
-				debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
-				adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
-			})
-
 			local dap = require("dap")
 			local dapui = require("dapui")
 
-			-- dap.set_log_level("TRACE")
+			dap.set_log_level("TRACE")
 			--
 
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "dap-repl" },
-				callback = function()
-					require("dap.ext.autocompl").attach()
-				end,
-			})
+			-- vim.api.nvim_create_autocmd("FileType", {
+			-- 	pattern = { "dap-repl" },
+			-- 	callback = function()
+			-- 		require("dap.ext.autocompl").attach()
+			-- 	end,
+			-- })
+
+			--- Gets a path to a package in the Mason registry.
+			--- Prefer this to `get_package`, since the package might not always be
+			--- available yet and trigger errors.
+			---@param pkg string
+			---@param path? string
+			local function get_pkg_path(pkg, path)
+				pcall(require, "mason")
+				local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
+				path = path or ""
+				local ret = root .. "/packages/" .. pkg .. "/" .. path
+				return ret
+			end
+
+			require("dap").adapters["pwa-node"] = {
+				type = "server",
+				host = "localhost",
+				port = "${port}",
+				executable = {
+					command = "node",
+					args = {
+						get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
+						"${port}",
+					},
+				},
+			}
 
 			for _, language in ipairs({ "typescript", "javascript" }) do
 				dap.configurations[language] = {
@@ -210,6 +231,8 @@ return {
 								-- launch current file
 								program = "${file}",
 								cwd = "${workspaceFolder}",
+								skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
+								sourceMaps = false,
 							}
 						or nil,
 					{
@@ -225,6 +248,7 @@ return {
 						continueOnAttach = true,
 						restart = true,
 						autoAttachChildProcesses = true,
+						skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
 					},
 					-- {
 					-- 	-- use nvim-dap-vscode-js's pwa-node debug adapter
@@ -368,7 +392,7 @@ return {
 			require("nvim-dap-repl-highlights").setup()
 
 			dap.listeners.after.event_initialized["dapui_config"] = function()
-				require("dapui").toggle()
+				require("dapui").open()
 			end
 
 			dap.listeners.before.event_terminated["dapui_config"] = function()

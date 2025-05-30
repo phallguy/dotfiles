@@ -23,8 +23,7 @@ return {
 		--  - yinq - [Y]ank [I]nside [N]ext [']quote
 		--  - ci'  - [C]hange [I]nsie [']quote
 		require("mini.ai").setup({
-			n_lines = 500,
-			search_method = "cover_or_next",
+			-- search_method = "cover_or_next",
 		})
 
 		-- Ad/delete/replace surroundings (brackets, quotes, etc.)

@@ -75,7 +75,7 @@ alias man='batman'
 alias sb='cd ~/paul.xheo@gmail.com - Google Drive/My Drive/Obsidian Vault; zn'
 alias y='yazi'
 alias zel='zellij'
-alias upgrade='brew upgrade tree-sitter luajit neovim aerospace zellij starship --greedy-latest --no-quarantine --fetch-HEAD'
+alias upgrade='brew upgrade tree-sitter luajit neovim aerospace zellij starship --greedy-latest --no-quarantine --fetch-HEAD; spicetify update'
 
 function kan() {
   cd ~/dotfiles;

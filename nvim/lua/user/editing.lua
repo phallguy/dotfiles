@@ -102,7 +102,6 @@ vim.g["qfenter_keymap"] = {
 	topen = { "<C-t>" },
 }
 
-
 -- help
 -- Open vert
 vim.cmd.cnoreabbrev("H", "vert", "bo", "h")

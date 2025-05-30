@@ -17,7 +17,6 @@ return {
 				{ desc = "Diagnostics" }
 			)
 			vim.keymap.set("n", "<leader>lD", "<CMD>Trouble diagnostics toggle<CR>", { desc = "Workspace Diagnostics" })
-			vim.keymap.set("n", "<leader>lo", "<CMD>Trouble symbols toggle<CR>", { desc = "Workspace Diagnostics" })
 		end,
 	},
 }

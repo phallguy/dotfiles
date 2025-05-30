@@ -21,8 +21,7 @@ return {
 			local lga_actions = require("telescope-live-grep-args.actions")
 			local builtin = require("telescope.builtin")
 
-			vim.keymap.set("n", ",", builtin.buffers, { desc = "Buffers" })
-			vim.keymap.set("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
+			vim.keymap.set("n", "<C-e>", builtin.buffers, { desc = "Buffers" })
 			vim.keymap.set("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
 
 			local oldfiles = function()

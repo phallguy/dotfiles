@@ -23,6 +23,9 @@ return {
 			},
 			dashboard = require("plugins/snacks/dashboard").config,
 			picker = require("plugins/snacks/picker").config,
+			image = {
+				enabled = false,
+			},
 		},
 
 		init = function()

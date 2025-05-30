@@ -11,24 +11,18 @@ layout {
     }
     tab name="nvim" {
         tabs
-        pane command="nvim" borderless=true close_on_exit=true
+        pane borderless=true command="nvim"
     }
     tab name="server" {
         tabs
         pane borderless=true {
-            command "bin/dev"
-        }
-    }
-    tab name="jobs" {
-        tabs
-        pane borderless=true {
-            command "bin/bundle"
-            args "exec" "sidekiq" "-q" "default" "-q" "screen_time" "-q" "priority"
+            command "npm"
+            args "start"
         }
     }
     new_tab_template {
-      tabs
-        pane borderless=true
+        tabs
+        pane
     }
 }
 

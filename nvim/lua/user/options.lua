@@ -80,6 +80,7 @@ opt.fixendofline = false
 opt.startofline = false -- Keep the cursor on the same column
 opt.history = 20 -- Max 'previous' items in search/command/buffer/etc
 opt.title = true
+--opt.isfname.remove({ ":" }) -- Support gf with line number
 
 opt.backup = false
 

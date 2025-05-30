@@ -11,7 +11,7 @@ layout {
     }
     tab name="nvim" {
         tabs
-        pane command="nvim" borderless=true
+        pane command="nvim" borderless=true close_on_exit=true
     }
     new_tab_template {
         tabs
