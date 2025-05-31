@@ -4,6 +4,7 @@
     git clone --depth 1 -- \
         https://github.com/marlonrichert/zsh-snap.git ~/dotfiles/znap
 source ~/dotfiles/znap/znap.zsh  # Start Znap
+zstyle ':znap:*' repos-dir ~/dotfiles/znap-plugins
 
 # Use arm or x86 version of brew depending on architecture
 if [[ $(uname -p) == 'arm' ]]; then
@@ -20,10 +21,10 @@ znap eval direnv "direnv hook zsh"
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-znap install zsh-users/zsh-completions
+znap source zsh-users/zsh-completions
 znap source zsh-users/zsh-syntax-highlighting
 znap source zsh-users/zsh-autosuggestions
-znap source wintermi/zsh-mise
+# znap source wintermi/zsh-mise
 
 autoload edit-command-line
 zle -N edit-command-line
@@ -42,7 +43,7 @@ export CLICOLOR=1
 export GPG_TTY=$TTY
 export BAT_THEME="Monokai Extended Origin"
 
-znap eval batpipe "batpipe"
+# znap eval batpipe "batpipe"
 
 alias cat="$(which bat)"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -98,8 +99,8 @@ fpath=(
   "${fpath[@]}"
 )
 
-# znap eval navi "navi widget zsh"
-znap eval mise "~/.local/bin/mise activate zsh"
+znap eval mise "/opt/homebrew/bin/mise activate zsh"
 znap eval atuin "atuin init zsh --disable-up-arrow"
 znap eval starship "starship init zsh"
+
 
