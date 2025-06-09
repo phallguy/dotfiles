@@ -17,6 +17,7 @@
   delegate-to-first-layer yes
   macos-dev-names-include (
     "Apple Internal Keyboard / Trackpad"
+    "MX MCHNCL M"
     )
 )
 (defsrc

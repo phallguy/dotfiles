@@ -15,7 +15,8 @@ desktop-notifications=true
 
 font-family="CommitMonoPhallguy"
 font-size=16
-#adjust-cell-width=-2
+adjust-cell-width=-1
+adjust-cell-height=-1
 font-feature=+calt, +liga, +dlig
 
 font-codepoint-map=U+E5FA-U+E6AC=CommitMono Nerd Font

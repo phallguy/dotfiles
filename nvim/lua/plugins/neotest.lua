@@ -23,6 +23,7 @@ return {
 					return original
 				end
 
+				-- vim.notify(vim.inspect(original))
 				local position = args.tree:data()
 
 				if position.type == "test" then
@@ -151,6 +152,10 @@ return {
 					concurrent = false,
 				},
 			})
+
+			-- vim.keymap.set("n", "<leader>k", function()
+			-- 	require("neotest").output_panel.toggle()
+			-- end, { desc = "Toggle test output" })
 		end,
 	},
 }

@@ -9,22 +9,17 @@ layout {
             }
         }
     }
+
+    tab name="server" {
+        tabs
+        pane split_direction="horizontal" close_on_exit=true {
+          command "zellij"
+          args "plugin" "--configuration" "procfile=Procfile.dev" "--" "https://github.com/ursm/zellij-foreman/releases/download/v0.1.2/zellij-foreman.wasm"
+        }
+    }
     tab name="nvim" {
         tabs
         pane command="nvim" borderless=true close_on_exit=true
-    }
-    tab name="server" {
-        tabs
-        pane borderless=true {
-            command "bin/dev"
-        }
-    }
-    tab name="jobs" {
-        tabs
-        pane borderless=true {
-            command "bin/bundle"
-            args "exec" "sidekiq" "-q" "default" "-q" "screen_time" "-q" "priority"
-        }
     }
     new_tab_template {
       tabs

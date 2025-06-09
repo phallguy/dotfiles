@@ -9,3 +9,4 @@ export RIPGREP_CONFIG_PATH="/Users/paulalexander/.ripgreprc"
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 export PATH="$PATH:/Users/paulalexander/.local/bin"
+export GPG_TTY=$(tty)

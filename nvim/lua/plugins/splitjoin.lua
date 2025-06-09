@@ -11,7 +11,7 @@ vim.g.splitjoin_join_mapping = "gJ"
 return {
 	{
 		"AndrewRadev/splitjoin.vim",
-		enabled = false,
+		-- enabled = false,
 	},
 	{
 		"Wansmer/treesj",
