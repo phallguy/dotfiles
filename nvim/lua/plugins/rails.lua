@@ -1,21 +1,35 @@
 return {
 	{
-		"tpope/vim-rails",
+
+		"tpope/vim-projectionist",
 		dependencies = {
-			"tpope/vim-projectionist",
+			"tpope/vim-rails",
 		},
 		config = function()
-			-- disable autocmd set filetype=eruby.yaml
-			vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
-				pattern = { "*.rb", "*.erb" },
-				callback = function()
-					vim.cmd([[
-            if RailsDetect() 
-              call rails#ruby_setup() 
-            endif
-				  ]])
-				end,
-			})
+			vim.g.projectionist_heuristics = {
+				["*"] = {
+					["app/*.rb"] = {
+						alternate = "test/{}_test.rb",
+					},
+					["test/*_test.rb"] = {
+						alternate = "app/{}.rb",
+					},
+					["app/views/*.html.erb"] = {
+						alternate = "app/controllers/{dirname}_controller.rb",
+					},
+					["app/components/*.html.erb"] = {
+						type = "projectedview",
+						alternate = "app/components/{}.rb",
+						path = "app/components",
+					},
+					["app/components/*.rb"] = {
+						type = "projectedsource",
+						related = "app/components/{}.html.erb",
+						path = "app/components",
+					},
+				},
+			}
+
 			vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
 				pattern = { "*.yml" },
 				callback = function()
@@ -24,7 +38,4 @@ return {
 			})
 		end,
 	},
-	-- {
-	-- 	"tpope/vim-bundler",
-	-- },
 }

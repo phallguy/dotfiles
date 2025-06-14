@@ -122,29 +122,9 @@ createTerminal("scratch", {
 	},
 })
 
-createTerminal("server", {
-	command = {
-		name = "Server",
-		binding = "<leader>bs",
-		opts = {
-			direction = "float",
-		},
-	},
-})
-
 createTerminal("console", {
 	command = {
 		name = "Console",
 		binding = "<leader>bc",
-	},
-})
-
-createTerminal("jobs", {
-	command = {
-		name = "Jobs",
-		binding = "<leader>bj",
-		opts = {
-			direction = "float",
-		},
 	},
 })

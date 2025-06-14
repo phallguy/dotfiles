@@ -4,10 +4,6 @@ end
 
 return {
 	{
-		"tpope/vim-projectionist",
-	},
-
-	{
 		"reedes/vim-pencil",
 		cmd = {
 			"Pencil",
