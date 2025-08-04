@@ -66,6 +66,7 @@ return {
 			json = { "fixjson" },
 			javascript = { "prettierd", "prettier" },
 			typescript = { "prettierd", "prettier" },
+			typescriptreact = { "prettierd", "pritter" },
 			css = { "prettierd", "prettier" },
 			sass = { "prettierd", "prettier" },
 			scss = { "prettierd", "prettier" },
@@ -77,6 +78,7 @@ return {
 			sg = { "xmlformat" },
 			injected = {},
 			kdl = { "kdlfmt" },
+			go = { "goimports", "gofmt" },
 		},
 	},
 	init = function()

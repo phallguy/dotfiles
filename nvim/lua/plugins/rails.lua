@@ -36,6 +36,13 @@ return {
 					vim.bo.filetype = "yaml"
 				end,
 			})
+
+			vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
+				pattern = { "*.turbo_stream.erb" },
+				callback = function()
+					vim.bo.filetype = "eruby"
+				end,
+			})
 		end,
 	},
 }

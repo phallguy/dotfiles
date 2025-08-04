@@ -1,0 +1,32 @@
+layout {
+    pane_template name="tabs" {
+        pane split_direction="vertical" size=1 {
+            pane borderless=true size="60%" {
+                plugin location="tab-bar"
+            }
+            pane borderless=true size="40%" {
+                plugin location="status-bar"
+            }
+        }
+    }
+
+    tab name="server" {
+        tabs
+        pane split_direction="horizontal" close_on_exit=true {
+          command "zellij"
+          args "plugin" "--configuration" "procfile=Procfile.dev" "--" "https://github.com/ursm/zellij-foreman/releases/download/v0.1.2/zellij-foreman.wasm"
+        }
+    }
+
+    tab name="nvim" {
+        tabs
+        pane command="nvim" borderless=true close_on_exit=true
+    }
+
+
+    new_tab_template {
+      tabs
+      pane borderless=true
+    }
+}
+
